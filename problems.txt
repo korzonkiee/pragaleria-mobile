@@ -1,7 +1,0 @@
-1.
-
-react-native init <ProjectName> resulted with error:
-Command `yarn add react-native --exact` failed.
-
-Solution:
-yarn config set registry "https://registry.npmjs.org"

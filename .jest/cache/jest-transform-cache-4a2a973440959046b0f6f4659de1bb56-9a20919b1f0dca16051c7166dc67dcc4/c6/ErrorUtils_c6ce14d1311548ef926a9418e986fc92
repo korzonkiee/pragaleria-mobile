@@ -1,0 +1,27 @@
+b8dc996db2363cee5d04798d8f36d40f
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @format
+ * @flow
+ */
+
+/* eslint-disable strict */
+
+/**
+ * The particular require runtime that we are using looks for a global
+ * `ErrorUtils` object and if it exists, then it requires modules with the
+ * error handler specified via ErrorUtils.setGlobalHandler by calling the
+ * require function with applyWithGuard. Since the require module is loaded
+ * before any of the modules, this ErrorUtils must be defined (and the handler
+ * set) globally before requiring anything.
+ *
+ * However, we still want to treat ErrorUtils as a module so that other modules
+ * that use it aren't just using a global variable, so simply export the global
+ * variable here. ErrorUtils is originally defined in a file named error-guard.js.
+ */
+module.exports = global.ErrorUtils;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkVycm9yVXRpbHMuanMiXSwibmFtZXMiOlsibW9kdWxlIiwiZXhwb3J0cyIsImdsb2JhbCIsIkVycm9yVXRpbHMiXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7O0FBVUE7O0FBRUE7Ozs7Ozs7Ozs7OztBQVlBQSxPQUFPQyxPQUFQLEdBQWlCQyxPQUFPQyxVQUF4QiIsImZpbGUiOiJFcnJvclV0aWxzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDb3B5cmlnaHQgKGMpIDIwMTUtcHJlc2VudCwgRmFjZWJvb2ssIEluYy5cbiAqXG4gKiBUaGlzIHNvdXJjZSBjb2RlIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBNSVQgbGljZW5zZSBmb3VuZCBpbiB0aGVcbiAqIExJQ0VOU0UgZmlsZSBpbiB0aGUgcm9vdCBkaXJlY3Rvcnkgb2YgdGhpcyBzb3VyY2UgdHJlZS5cbiAqXG4gKiBAZm9ybWF0XG4gKiBAZmxvd1xuICovXG5cbi8qIGVzbGludC1kaXNhYmxlIHN0cmljdCAqL1xuXG4vKipcbiAqIFRoZSBwYXJ0aWN1bGFyIHJlcXVpcmUgcnVudGltZSB0aGF0IHdlIGFyZSB1c2luZyBsb29rcyBmb3IgYSBnbG9iYWxcbiAqIGBFcnJvclV0aWxzYCBvYmplY3QgYW5kIGlmIGl0IGV4aXN0cywgdGhlbiBpdCByZXF1aXJlcyBtb2R1bGVzIHdpdGggdGhlXG4gKiBlcnJvciBoYW5kbGVyIHNwZWNpZmllZCB2aWEgRXJyb3JVdGlscy5zZXRHbG9iYWxIYW5kbGVyIGJ5IGNhbGxpbmcgdGhlXG4gKiByZXF1aXJlIGZ1bmN0aW9uIHdpdGggYXBwbHlXaXRoR3VhcmQuIFNpbmNlIHRoZSByZXF1aXJlIG1vZHVsZSBpcyBsb2FkZWRcbiAqIGJlZm9yZSBhbnkgb2YgdGhlIG1vZHVsZXMsIHRoaXMgRXJyb3JVdGlscyBtdXN0IGJlIGRlZmluZWQgKGFuZCB0aGUgaGFuZGxlclxuICogc2V0KSBnbG9iYWxseSBiZWZvcmUgcmVxdWlyaW5nIGFueXRoaW5nLlxuICpcbiAqIEhvd2V2ZXIsIHdlIHN0aWxsIHdhbnQgdG8gdHJlYXQgRXJyb3JVdGlscyBhcyBhIG1vZHVsZSBzbyB0aGF0IG90aGVyIG1vZHVsZXNcbiAqIHRoYXQgdXNlIGl0IGFyZW4ndCBqdXN0IHVzaW5nIGEgZ2xvYmFsIHZhcmlhYmxlLCBzbyBzaW1wbHkgZXhwb3J0IHRoZSBnbG9iYWxcbiAqIHZhcmlhYmxlIGhlcmUuIEVycm9yVXRpbHMgaXMgb3JpZ2luYWxseSBkZWZpbmVkIGluIGEgZmlsZSBuYW1lZCBlcnJvci1ndWFyZC5qcy5cbiAqL1xubW9kdWxlLmV4cG9ydHMgPSBnbG9iYWwuRXJyb3JVdGlscztcbiJdfQ==
