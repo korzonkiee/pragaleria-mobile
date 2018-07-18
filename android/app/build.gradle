@@ -71,12 +71,33 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
+// Restore defaults file when React Native gets fixed for AAPT2
+def tempResDir = "$buildDir/react-native-fix/res"
+def tempAssetsDir = "$buildDir/react-native-fix/assets"
 
 project.ext.react = [
-    entryFile: "index.js"
+    bundleAssetName: 'index.android.bundle',
+    entryFile: 'index.js',
+
+    bundleInRelease: true,
+    devDisabledInRelease: true,
+
+    bundleInDebug: false,
+    devDisabledInDebug: false,
+
+    bundleInStaging: true,
+    devDisabledInStaging: false,
+
+    bundleInEnvTestStaging: true,
+    devDisabledInEnvTestStaging: false,
+
+    // This is our extension to `react.gradle`
+    tempResDir: tempResDir,
+    tempAssetsDir: tempAssetsDir
 ]
 
-apply from: "../../node_modules/react-native/react.gradle"
+apply from: '../react.gradle'
+// apply from: '../../node_modules/react-native/react.gradle'
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -97,14 +118,32 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+    sourceSets {
+        main {
+            // React-Native fix
+            res.srcDirs += tempResDir
+            assets.srcDirs += tempAssetsDir
+        }
+    }
+
     defaultConfig {
-        applicationId "com.pragaleria"
+        applicationId 'com.pragaleria'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters 'armeabi-v7a', 'x86'
+        }
+    }
+    signingConfigs {
+        test {
+            if (System.env.TEST_KEYSTORE_LOCATION != null) {
+                storeFile file(System.env.TEST_KEYSTORE_LOCATION)
+                storePassword System.env.TEST_KEYSTORE_PASSWORD
+                keyAlias System.env.TEST_KEYSTORE_KEY_ALIAS
+                keyPassword System.env.TEST_KEYSTORE_KEY_PASSWORD
+            }
         }
     }
     splits {
@@ -112,13 +151,32 @@ android {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false  // If true, also generate a universal APK
-            include "armeabi-v7a", "x86"
+            include 'armeabi-v7a', 'x86'
+        }
+    }
+    flavorDimensions 'env'
+    productFlavors {
+        envProduction {
+            dimension 'env'
+        }
+        envTest {
+            dimension 'env'
+            applicationIdSuffix '.test'
         }
     }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            applicationIdSuffix '.debug'
+        }
+        staging {
+            minifyEnabled false
+            signingConfig signingConfigs.test
+            applicationIdSuffix '.staging'
         }
     }
     // applicationVariants are e.g. debug, release
@@ -126,7 +184,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ['armeabi-v7a':1, 'x86':2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
@@ -137,9 +195,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-    compile "com.facebook.react:react-native:+"  // From node_modules
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}'
+    compile 'com.facebook.react:react-native:+'  // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK

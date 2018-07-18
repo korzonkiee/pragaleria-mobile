@@ -7,30 +7,22 @@ import { appReducer } from "./Modules/Reducers"
 
 declare var window: { __REDUX_DEVTOOLS_EXTENSION__: any };
 export let store: Store<any>;
-store = createStore(
-    appReducer as any,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(
-        thunk,
-        logger
-    )
-);
 
-// if (config.IsDebug) {
-//     store = createStore(
-//         appReducer as any,
-//         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-//         applyMiddleware(
-//             thunk,
-//             logger
-//         )
-//     );
-//
-// else {
-//     store = createStore(
-//         appReducer as any,
-//         applyMiddleware(
-//             thunk
-//         ),
-//     );
-// }
+if (config.IsDebug) {
+    store = createStore(
+        appReducer as any,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+        applyMiddleware(
+            thunk,
+            logger
+        )
+    );
+}
+else {
+    store = createStore(
+        appReducer as any,
+        applyMiddleware(
+            thunk
+        ),
+    );
+}
