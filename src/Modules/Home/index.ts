@@ -2,19 +2,21 @@ import { Dispatch } from "redux";
 import { startTask, endTask } from "../Async";
 import { createAction, ReducerMap } from "redux-actions";
 import { initialState } from "../InitialState";
+import Logger from "../../Services/Logger";
 
 const updateCounterAction = createAction("COUNTER/UPDATE");
 
+const TAG = "UpdateCounter";
+
 export function updateCounter() {
     return async (dispatch: Dispatch<any>) => {
-        console.log("Starting...");
+        Logger.logDebug(TAG, "Update counter started.");
+        Logger.forceSendOnce();
+
         dispatch(startTask());
 
         try {
-            console.log("Waiting...");
             await delay(50);
-            console.log("Waiting finishes...");
-
             dispatch(updateCounterAction());
         }
         catch (e) {

@@ -14,6 +14,7 @@ public class PragaleriaPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> natives = new ArrayList<>();
         natives.add(new ConfigModule(reactContext));
+        natives.add(new BugfenderModule(reactContext));
         return natives;
     }
 

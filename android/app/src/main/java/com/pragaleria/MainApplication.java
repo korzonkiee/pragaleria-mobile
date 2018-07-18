@@ -2,6 +2,7 @@ package com.pragaleria;
 
 import android.app.Application;
 
+import com.bugfender.sdk.Bugfender;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -21,10 +22,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-          new PragaleriaPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new PragaleriaPackage());
     }
 
     @Override
@@ -42,5 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+
+    Bugfender.init(this, "0996ERklnGG9OTj1URFERTBl6EOVKsjK", BuildConfig.DEBUG);
+    Bugfender.enableUIEventLogging(this);
   }
 }
