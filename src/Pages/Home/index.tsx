@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, Button } from 'react-native'
 import { updateCounter } from '../../Modules/Home';
 import styles from './styles';
+import AppContainer from '../../Components/AppContainer';
 
 export interface HomeProps {
     readonly counter: number;
@@ -9,10 +10,8 @@ export interface HomeProps {
 }
 
 export function Home(props: HomeProps) {
-    return <View style={styles.container}>
-        <View style={styles.content}>
-            <Text style={styles.title}>Counter: {props.counter}</Text>
-            <Button onPress={props.updateCounter} title="Increment"></Button>
-        </View>
-    </View >
+    return <AppContainer style={styles.container}>
+        <Text style={styles.title}>Counter: {props.counter}</Text>
+        <Button onPress={props.updateCounter} title="Increment"></Button>
+    </AppContainer >
 }
