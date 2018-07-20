@@ -3,6 +3,7 @@ import { Text, View, Button } from 'react-native'
 import { updateCounter } from '../../Modules/Home';
 import styles from './styles';
 import AppContainer from '../../Components/AppContainer';
+import { NavigationDrawerScreenOptions } from 'react-navigation';
 
 export interface HomeProps {
     readonly counter: number;
