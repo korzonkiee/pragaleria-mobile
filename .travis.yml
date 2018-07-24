@@ -4,8 +4,8 @@ services:
 
 before_script:
   - cd ./docker
-  - ./docker-login.sh
   - source ./common.sh
+  - ./docker-login.sh
 
 script:
   - ./build.sh
