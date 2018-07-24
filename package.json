@@ -29,7 +29,7 @@
     "@types/redux-logger": "^3.0.6",
     "@types/redux-thunk": "^2.1.0",
     "babel-jest": "23.2.0",
-    "babel-preset-react-native": "^5",
+    "babel-preset-react-native": "4.0.0",
     "jest": "23.3.0",
     "react-addons-test-utils": "^15.6.2",
     "react-native-typescript-transformer": "^1.2.10",
