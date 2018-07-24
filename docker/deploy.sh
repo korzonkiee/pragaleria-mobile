@@ -7,4 +7,4 @@ docker run --rm \
     -e COMMIT_SHA=$TRAVIS_COMMIT \
     -e HOCKEY_APP_TOKEN=$HOCKEY_APP_TOKEN \
     -e HOCKEY_APP_ID=$HOCKEY_APP_ID \
-    $TEST_IMAGE
+    $DEPLOY_IMAGE
