@@ -130,10 +130,15 @@ android {
         applicationId 'com.pragaleria'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName '1.0'
         ndk {
             abiFilters 'armeabi-v7a', 'x86'
+        }
+        if (System.env.VERSION_CODE != null) {
+            versionCode System.env.VERSION_CODE.toInteger()
+            versionName '0.1.' + System.env.VERSION_CODE
+        } else {
+            versionCode 1
+            versionName '0.0.1'
         }
     }
     signingConfigs {
