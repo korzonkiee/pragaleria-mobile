@@ -1,0 +1,58 @@
+{
+  "name": "pragaleria",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start --config ../../../../rn-cli.config.js",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android --config ../../../../rn-cli.config.js --variant EnvTestDebug --appIdSuffix test.debug",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "16.4.1",
+    "react-native": "0.56.0",
+    "react-navigation": "^2.8.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.4.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.4",
+    "@types/react": "^16.4.6",
+    "@types/react-native": "^0.55.28",
+    "@types/react-navigation": "^2.0.11",
+    "@types/react-redux": "^6.0.4",
+    "@types/react-test-renderer": "^16.0.1",
+    "@types/redux": "^3.6.0",
+    "@types/redux-actions": "^2.3.0",
+    "@types/redux-logger": "^3.0.6",
+    "@types/redux-thunk": "^2.1.0",
+    "babel-jest": "23.2.0",
+    "babel-preset-react-native": "^5",
+    "jest": "23.3.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-native-typescript-transformer": "^1.2.10",
+    "react-test-renderer": "16.4.1",
+    "ts-jest": "^23.0.0",
+    "typescript": "^2.9.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "./node_modules/babel-jest",
+      "\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/tests/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "./node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  }
+}
