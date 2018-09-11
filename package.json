@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start --config ../../../../rn-cli.config.js",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android --config ../../../../rn-cli.config.js --variant EnvTestDebug",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android --config ../../../../rn-cli.config.js --variant EnvTestDebug --appIdSuffix test.debug",
     "test": "jest"
   },
   "dependencies": {
