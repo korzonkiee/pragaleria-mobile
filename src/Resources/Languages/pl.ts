@@ -1,5 +1,5 @@
 export default {
     "BottomNavigation.Auctions": "Aukcje",
-    "BottomNavigation.Home": "Home",
+    "BottomNavigation.Home": "home",
     "BottomNavigation.Artists": "Artyści"
 }
