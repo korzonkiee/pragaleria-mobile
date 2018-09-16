@@ -2,11 +2,11 @@ import React from 'react'
 import { Text } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
 
-export interface HomeProps {
+export interface ArtistsProps {
 }
 
-export function Home(props: HomeProps) {
+export function Artists(props: ArtistsProps) {
     return <AppContainer>
-        <Text>Home</Text>
+        <Text>Artists</Text>
     </AppContainer >
 }
