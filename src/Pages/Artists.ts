@@ -1,7 +1,7 @@
-import { connect } from "react-redux";
-import { ArtistsProps, Artists } from "./Artists/index";
-import { ThunkDispatch } from "../Helpers/StateHelpers";
-import { getArtists } from "../Modules/Artists";
+import {connect} from "react-redux";
+import {ArtistsProps, Artists} from "./Artists/index";
+import {ThunkDispatch} from "../Helpers/StateHelpers";
+import {getArtists} from "../Modules/Artists";
 import {AppState} from "../Modules/Async/AsyncStat";
 
 export default connect(

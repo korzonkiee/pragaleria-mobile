@@ -23,7 +23,7 @@ export class Artist { // TODO move to other file
 
 type ApiReponseArtists = {
     config: any;
-    data: [Artist];
+    data: Artist[];
     header: any;
     request: any;
 }

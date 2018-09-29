@@ -5,7 +5,7 @@ import {Artist} from "../../Modules/Artists";
 
 
 export interface ArtistsProps {
-    artists: [Artist]
+    artists: Artist[]
     getArtists: Function
 }
 
