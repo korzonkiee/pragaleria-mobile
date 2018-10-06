@@ -19,6 +19,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/jest": "^23.1.4",
     "@types/react": "^16.4.6",
     "@types/react-native": "^0.55.28",

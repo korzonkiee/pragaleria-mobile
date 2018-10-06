@@ -1,37 +1,24 @@
-import {createAction, ReducerMap} from "redux-actions";
-import {Dispatch} from "redux";
-import {endTask, startTask} from "../Async";
-import {AppState} from "../Async/AsyncStat";
-import {api_call_get_artists} from "../../Helpers/RestHelpers";
+import { createAction, ReducerMap } from "redux-actions";
+import { Dispatch } from "redux";
+import { endTask, startTask } from "../Async";
+import { AppState } from "../Async/AsyncStat";
+import Logger from "../../Services/Logger"
+import * as Api from "../../Services/Api";
+
 
 const getArtistsAction = createAction("ARTISTS/GET");
 const TAG = "GetArtists";
 
-export class Artist { // TODO move to other file
-    author: string;
-    thumbnail: string;
-
-    constructor(author: string, thumbnail: string) {
-        this.author = author;
-        this.thumbnail = thumbnail;
-    }
-
-    toString(): string {
-        return `${this.author}:${this.thumbnail}`
-    }
-}
-
 export function getArtists() {
     return async (dispatch: Dispatch<any>) => {
-        console.log("getArtists called");
         dispatch(startTask());
         try {
-            await delay(50);
-            const artists_arr = await api_call_get_artists();
-            dispatch(getArtistsAction(artists_arr));
+            const artists = await Api.getArtists();
+            dispatch(getArtistsAction(artists));
         }
         catch (e) {
-            //TODO: Logger.
+            Logger.logError(TAG, `Couldn't fetch artists. ` +
+                `Error: ${e}`);
         }
         finally {
             dispatch(endTask());
@@ -47,9 +34,3 @@ export const artistsReducers: ReducerMap<AppState, any> = {
         }
     }
 };
-
-function delay(ms: number) {
-    return new Promise<void>(function (resolve) {
-        setTimeout(resolve, ms);
-    });
-}

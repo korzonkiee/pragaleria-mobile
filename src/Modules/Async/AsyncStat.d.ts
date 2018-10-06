@@ -9,5 +9,4 @@ declare interface ArtistsState{
 }
 
 declare interface AppState extends AsyncState, ArtistsState {
-    readonly counter: number;
 }

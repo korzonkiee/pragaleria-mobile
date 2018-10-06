@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {FlatList, Text} from 'react-native'
 import AppContainer from '../../Components/AppContainer';
-import {Artist} from "../../Modules/Artists";
+import { Artist } from "../../Models/Artist";
 
 
 export interface ArtistsProps {
     artists: Artist[]
-    getArtists: Function
+    getArtists: () => Artist[]
 }
 
 export class Artists extends Component<ArtistsProps> {
@@ -20,7 +20,7 @@ export class Artists extends Component<ArtistsProps> {
                 <Text>Artists</Text>
                 <FlatList
                     data={this.props.artists}
-                    renderItem={({item}) => <Text>{item.toString()}</Text>} // TODO nice rendering with styles
+                    renderItem={({item}) => <Text>{item.author}</Text>} // TODO nice rendering with styles
                 />
             </AppContainer>
         )
