@@ -205,4 +205,18 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'  // From node_modules
     implementation 'com.bugfender.sdk:android:1.+'
     implementation 'net.hockeyapp.android:HockeySDK:5.1.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:25.0.0'
+    implementation 'com.facebook.react:react-native:+'
+    implementation project(':arcore_client') // remove this if AR not required
+    implementation project(':gvr_common')
+    implementation project(path: ':viro_renderer')
+    implementation project(path: ':react_viro')
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.1'
+    implementation 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+    implementation 'com.amazonaws:aws-android-sdk-core:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.2.+'
+    implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.2.+'
 }
