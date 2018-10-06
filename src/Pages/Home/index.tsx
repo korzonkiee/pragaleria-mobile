@@ -1,32 +1,21 @@
-import React, {Component} from 'react'
-import { StyleSheet } from 'react-native'
-import {Text} from 'react-native'
-import AppContainer from '../../Components/AppContainer';
-
+import React from 'react'
 import {
-    ViroARScene,
-    ViroText,
-    ViroConstants,
+    ViroARSceneNavigator
 } from 'react-viro';
+import HelloWorldSceneAR from "./arscene";
 
 export interface HomeProps {
 }
 
-export function Home(props: HomeProps) {
-    return <AppContainer>
-            <ViroARScene onTrackingUpdated={console.log("halo")}>
-        <ViroText text={"Siemanko"} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
-      </ViroARScene>
-    </AppContainer>
+var sharedProps = {
+    apiKey: "E5FF3472-E7C0-4653-958B-989F94A7E7A1",
 }
 
+export function Home(props: HomeProps) {
+    return (
+        <ViroARSceneNavigator {...sharedProps}
+                              initialScene={{scene: HelloWorldSceneAR}}/>
+    );
 
-var styles = StyleSheet.create({
-    helloWorldTextStyle: {
-      fontFamily: 'Arial',
-      fontSize: 30,
-      color: '#ffffff',
-      textAlignVertical: 'center',
-      textAlign: 'center',
-    },
-  });
+
+}
