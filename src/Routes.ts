@@ -1,3 +1,3 @@
-export const Home = "Home";
-export const Auctions = "Auctions";
-export const Artists = "Artists";
+export const home = "Home";
+export const auctions = "Auctions";
+export const artists = "Artists";

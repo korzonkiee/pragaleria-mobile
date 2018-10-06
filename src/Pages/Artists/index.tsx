@@ -1,12 +1,28 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React, {Component} from 'react'
+import {FlatList, Text} from 'react-native'
 import AppContainer from '../../Components/AppContainer';
+import { Artist } from "../../Models/Artist";
+
 
 export interface ArtistsProps {
+    artists: Artist[]
+    getArtists: () => Artist[]
 }
 
-export function Artists(props: ArtistsProps) {
-    return <AppContainer>
-        <Text>Artists</Text>
-    </AppContainer >
+export class Artists extends Component<ArtistsProps> {
+    componentDidMount() {
+        this.props.getArtists();
+    }
+
+    render() {
+        return (
+            <AppContainer>
+                <Text>Artists</Text>
+                <FlatList
+                    data={this.props.artists}
+                    renderItem={({item}) => <Text>{item.author}</Text>} // TODO nice rendering with styles
+                />
+            </AppContainer>
+        )
+    }
 }

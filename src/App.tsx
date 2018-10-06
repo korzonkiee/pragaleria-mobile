@@ -12,21 +12,21 @@ import Artists from './Pages/Artists';
 import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
 
 const AppNavigator = createBottomTabNavigator({
-  [Routes.Auctions]: {
+  [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Auctions"),
       // tabBarIcon: BottomIcon("all")
     }
   },
-  [Routes.Home]: {
+  [Routes.home]: {
     screen: Home,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Home"),
       // tabBarIcon: BottomIcon("all")
     }
   },
-  [Routes.Artists]: {
+  [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Artists"),
@@ -34,7 +34,7 @@ const AppNavigator = createBottomTabNavigator({
     }
   },
 }, {
-  initialRouteName: Routes.Home,
+  initialRouteName: Routes.home,
   tabBarOptions: {
       activeTintColor: colors.Main,
       activeBackgroundColor: "white",

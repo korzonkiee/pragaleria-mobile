@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
 import { startTask, endTask } from "../Async";
 import { createAction, ReducerMap } from "redux-actions";
-import { initialState } from "../InitialState";
 import Logger from "../../Services/Logger";
+import {AppState} from "../Async/AsyncStat";
 
 const updateCounterAction = createAction("COUNTER/UPDATE");
 

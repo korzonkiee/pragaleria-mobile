@@ -1,4 +1,5 @@
 import { createAction } from "redux-actions";
+import {AppState, AsyncState} from "./AsyncStat";
 
 export function StartTask(state: AsyncState): AsyncState {
     return { tasksCount: state.tasksCount + 1 };

@@ -21,7 +21,7 @@ export function getStatusBarHeight(safe: boolean) {
 }
 
 export function styleForIOS(styles: ViewStyle | TextStyle | ImageStyle) {
-    if (Platform.OS === "ios") {
+    if (isIOS()) {
         return styles;
     }
     return {};
@@ -32,7 +32,7 @@ export function isAndroid() {
 }
 
 export function styleForAndroid(styles: ViewStyle | TextStyle | ImageStyle) {
-    if (Platform.OS === "android") {
+    if (isAndroid()) {
         return styles;
     }
     return {};
