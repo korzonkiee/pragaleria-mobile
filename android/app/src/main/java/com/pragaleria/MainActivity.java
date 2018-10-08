@@ -1,9 +1,8 @@
 package com.pragaleria;
 
 import android.os.Bundle;
-
 import com.facebook.react.ReactActivity;
-
+import org.devio.rn.splashscreen.SplashScreen;
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.UpdateManager;
 
@@ -21,6 +20,7 @@ public class MainActivity extends ReactActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this, R.style.SplashScreenTheme);
         super.onCreate(savedInstanceState);
         if (!"debug".equals(BuildConfig.BUILD_TYPE)) {
             UpdateManager.register(this);
