@@ -9,6 +9,7 @@ import { l } from './Services/Language';
 import Home from './Pages/Home';
 import Auctions from './Pages/Auctions';
 import Artists from './Pages/Artists';
+import SplashScreen from 'react-native-splash-screen'
 import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
 
 const AppNavigator = createBottomTabNavigator({
@@ -59,6 +60,10 @@ const AppNavigator = createBottomTabNavigator({
 });
 
 export default class App extends Component<{}> {
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   render() {
     return (
       <Provider store={store}>

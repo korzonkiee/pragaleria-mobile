@@ -7,6 +7,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
@@ -22,7 +23,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new PragaleriaPackage());
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(),
+        new PragaleriaPackage(),
+        new SplashScreenReactPackage());
     }
 
     @Override
