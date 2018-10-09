@@ -11,27 +11,29 @@ import Auctions from './Pages/Auctions';
 import Artists from './Pages/Artists';
 import SplashScreen from 'react-native-splash-screen'
 import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
+import Icon from 'react-native-vector-icons/FontAwesome';
+const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color="#000000" />;
 
 const AppNavigator = createBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Auctions"),
-      // tabBarIcon: BottomIcon("all")
+      tabBarIcon: BottomIcon("gavel")
     }
   },
   [Routes.home]: {
     screen: Home,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Home"),
-      // tabBarIcon: BottomIcon("all")
+      tabBarIcon: BottomIcon("home")
     }
   },
   [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
       tabBarLabel: l("BottomNavigation.Artists"),
-      // tabBarIcon: BottomIcon("all")
+      tabBarIcon: BottomIcon("paint-brush")
     }
   },
 }, {
