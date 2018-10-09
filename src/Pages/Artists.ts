@@ -1,8 +1,8 @@
-import {connect} from "react-redux";
-import {ArtistsProps, Artists} from "./Artists/index";
-import {ThunkDispatch} from "../Helpers/StateHelpers";
-import {getArtists} from "../Modules/Artists";
-import {AppState} from "../Modules/Async/AsyncStat";
+import { connect } from "react-redux";
+import { ArtistsProps, Artists } from "./Artists/index";
+import { ThunkDispatch } from "../Helpers/StateHelpers";
+import { getArtists } from "../Modules/Artists";
+import { AppState } from "../Modules/Async/AsyncStat";
 
 export default connect(
     (state: AppState): StateProps<ArtistsProps> => {
@@ -12,7 +12,7 @@ export default connect(
     },
     (dispatch: ThunkDispatch): DispatchProps<ArtistsProps> => {
         return {
-            getArtists() {
+            getArtists () {
                 dispatch(getArtists())
             }
         };

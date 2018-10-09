@@ -555,6 +555,13 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@types/axios-mock-adapter@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@types/axios-mock-adapter/-/axios-mock-adapter-1.10.0.tgz#2db4abb44e46923d2042ac554f1cd34ef4a62a7e"
+  integrity sha512-Govyvy3cr8hsR6DcCoBjVMQhYyzkHdfU/hMgBw6ONOFuTrZTDxdE/rBR7Sz3qsGtVZABSK8/2rDekp5UwZ/V8A==
+  dependencies:
+    axios-mock-adapter "*"
+
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
@@ -958,6 +965,13 @@ aws4@^1.6.0:
   version "1.7.0"
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
   integrity sha512-32NDda82rhwD9/JBCCkB+MRYDp0oSvlo2IL6rQWA10PQi7tDUM3eqMSltXmY+Oyl/7N3P3qNtAlv7X0d9bI28w==
+
+axios-mock-adapter@*, axios-mock-adapter@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.15.0.tgz#fbc06825d8302c95c3334d21023bba996255d45d"
+  integrity sha1-+8BoJdgwLJXDM00hAju6mWJV1F0=
+  dependencies:
+    deep-equal "^1.0.1"
 
 axios@*, axios@^0.18.0:
   version "0.18.0"
@@ -2092,6 +2106,11 @@ deep-diff@^0.3.5:
   version "0.3.8"
   resolved "https://registry.npmjs.org/deep-diff/-/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
   integrity sha1-wB3mPvsO7JeYgB1Ax+Da4ltYLIQ=
+
+deep-equal@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
+  integrity sha1-9dJgKStmDghO/0zbyfCK0yR0SLU=
 
 deep-extend@^0.6.0:
   version "0.6.0"
