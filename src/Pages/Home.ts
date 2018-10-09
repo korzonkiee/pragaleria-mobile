@@ -7,7 +7,6 @@ import {AppState} from "../Modules/Async/AsyncStat";
 export default connect(
     (state: AppState): StateProps<HomeProps> => {
         return {
-            counter: state.counter
         }
     },
     (dispatch: ThunkDispatch): DispatchProps<HomeProps> => {
