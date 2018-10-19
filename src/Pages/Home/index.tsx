@@ -1,12 +1,23 @@
 import React, {Component} from 'react'
+import {Text, Button, View} from 'react-native'
 import AppContainer from '../../Components/AppContainer';
-import AppText from '../../Components/AppText';
+import * as Routes from "../../Routes";
 
 export interface HomeProps {
 }
 
-export function Home(_: HomeProps) {
-    return <AppContainer>
-        <AppText>Home</AppText>
-    </AppContainer>
+
+
+export class Home extends Component<HomeProps> {
+    render() {
+        return (
+            <AppContainer>
+                <Button
+                    onPress={() => this.props.navigation.navigate(Routes.camera)}
+                    title="Camera tests"
+                    color="#ff0000"
+                />
+            </AppContainer>
+        )
+    }
 }

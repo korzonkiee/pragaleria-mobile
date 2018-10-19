@@ -12,6 +12,9 @@ import com.facebook.react.shell.MainReactPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
+import org.reactnative.camera.RNCameraPackage;
+import com.reactlibrary.RNRearCameraCharacteristicsDisplayMetricsPackage;
+import com.github.yamill.orientation.OrientationPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,11 @@ public class MainApplication extends Application implements ReactApplication {
         new MainReactPackage(),
         new VectorIconsPackage(),
         new SplashScreenReactPackage(),
-        new PragaleriaPackage());
+        new RNCameraPackage(),
+        new RNRearCameraCharacteristicsDisplayMetricsPackage(),
+        new OrientationPackage(),
+        new PragaleriaPackage()
+        );
     }
 
     @Override

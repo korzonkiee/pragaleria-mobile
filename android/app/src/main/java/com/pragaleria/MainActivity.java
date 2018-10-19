@@ -5,6 +5,9 @@ import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.UpdateManager;
+import com.reactlibrary.RNRearCameraCharacteristicsDisplayMetricsPackage;
+import android.content.Intent;
+import android.content.res.Configuration;
 
 public class MainActivity extends ReactActivity {
 
@@ -39,5 +42,13 @@ public class MainActivity extends ReactActivity {
         if (!"debug".equals(BuildConfig.BUILD_TYPE)) {
             UpdateManager.unregister();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent = new Intent("onConfigurationChanged");
+        intent.putExtra("newConfig", newConfig);
+        this.sendBroadcast(intent);
     }
 }

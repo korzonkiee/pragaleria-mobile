@@ -1,6 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Component } from 'react'
+import {Provider} from 'react-redux';
+import {Component} from 'react'
 import * as Routes from './Routes';
 import * as colors from './Resources/Colors';
 import { store } from './Store';
@@ -9,8 +9,9 @@ import { l } from './Services/Language';
 import Home from './Pages/Home';
 import Auctions from './Pages/Auctions';
 import Artists from './Pages/Artists';
+import Camera from './Pages/Camera';
 import SplashScreen from 'react-native-splash-screen'
-import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
+import {responsiveFontSize, responsiveHeight} from './Styles/Dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
@@ -49,24 +50,25 @@ const MainStack = createMaterialBottomTabNavigator({
 });
 
 const AppNavigator = createStackNavigator({
-  ["Main"]: MainStack,
-  [Routes.artistDetails]: ArtistDetails,
-  [Routes.artworkDetails]: ArtworkDetails
+    ["Main"]: MainStack,
+    [Routes.artistDetails]: ArtistDetails,
+    [Routes.artworkDetails]: ArtworkDetails,
+    [Routes.camera]: Camera,
 }, {
-  initialRouteName: "Main",
-  headerMode: "none"
+    initialRouteName: "Main",
+    headerMode: "none"
 });
 
 export default class App extends Component<{}> {
-  componentDidMount() {
-    SplashScreen.hide();
-  }
+    componentDidMount() {
+        SplashScreen.hide();
+    }
 
-  render() {
-    return (
-      <Provider store={store}>
-        <AppNavigator />
-      </Provider>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <AppNavigator />
+            </Provider>
+        );
+    }
 }
