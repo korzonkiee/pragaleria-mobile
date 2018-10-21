@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {FlatList, Image, StyleSheet } from 'react-native'
+import {FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
+import styles from "./styles";
 import { Artist } from "../../Models/Artist";
 
 
@@ -8,13 +9,6 @@ export interface ArtistsProps {
     artists: Artist[]
     getArtists: () => void
 }
-
-const styles = StyleSheet.create({
-    stretch: {
-      flex: 1,
-      height: 200
-    }
-  });
 
 export class Artists extends Component<ArtistsProps> {
     componentDidMount() {
@@ -28,9 +22,17 @@ export class Artists extends Component<ArtistsProps> {
             <AppContainer>
                 <FlatList
                     data={this.props.artists}
-                    renderItem={({item}) => <Image
-                        source={{uri: item.thumbnail}}
-                        style={styles.stretch} />}
+                    renderItem={({item}) =>
+                    <TouchableWithoutFeedback
+                        onPress={() => console.log("pressed")}
+                        style={styles.artistContainer}>
+                        <View style={styles.artistContainer}>
+                            <ImageBackground
+                                source={{uri: item.thumbnail}}>
+                                <Text style={styles.artistName}>{item.name}</Text>
+                            </ImageBackground>
+                        </View>
+                    </TouchableWithoutFeedback>}
                     numColumns={2}
                 />
             </AppContainer>
