@@ -28,8 +28,12 @@ export class Artists extends Component<ArtistsProps> {
                         style={styles.artistContainer}>
                         <View style={styles.artistContainer}>
                             <ImageBackground
-                                source={{uri: item.thumbnail}}>
-                                <Text style={styles.artistName}>{item.name}</Text>
+                                source={{uri: item.thumbnail}}
+                                style={styles.artistImage}>
+                                <View
+                                    style={styles.artistNameBackground}>
+                                    <Text style={styles.artistName}>{item.name}</Text>
+                                </View>
                             </ImageBackground>
                         </View>
                     </TouchableWithoutFeedback>}

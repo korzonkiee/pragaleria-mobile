@@ -15,6 +15,8 @@ export default StyleSheet.create({
     },
     artistName: {
         textAlign: 'center'
+    },
+    artistNameBackground: {
+        backgroundColor: "#FFFFFF80"
     }
-
 });
