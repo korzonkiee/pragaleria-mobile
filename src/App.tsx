@@ -4,7 +4,7 @@ import { Component } from 'react'
 import * as Routes from './Routes';
 import * as colors from './Resources/Colors';
 import { store } from './Store';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { l } from './Services/Language';
 import Home from './Pages/Home';
 import Auctions from './Pages/Auctions';
@@ -12,9 +12,10 @@ import Artists from './Pages/Artists';
 import SplashScreen from 'react-native-splash-screen'
 import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ArtistDetails from './Pages/Artists/ArtistDetails';
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color="#000000" />;
 
-const AppNavigator = createBottomTabNavigator({
+const MainStack = createBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
@@ -59,6 +60,14 @@ const AppNavigator = createBottomTabNavigator({
           elevation: 20
       }
   }
+});
+
+const AppNavigator = createStackNavigator({
+  ["Main"]: MainStack,
+  [Routes.artistDetails]: ArtistDetails
+}, {
+  initialRouteName: "Main",
+  headerMode: "none"
 });
 
 export default class App extends Component<{}> {
