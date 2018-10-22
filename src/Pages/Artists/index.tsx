@@ -5,6 +5,7 @@ import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, Imag
 import AppContainer from '../../Components/AppContainer';
 import styles from "./styles";
 import { Artist } from "../../Models/Artist";
+import { ArtistItem } from '../../Components/ArtistItem';
 
 
 export interface ArtistsProps {
@@ -23,26 +24,17 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                 <FlatList
                     data={this.props.artists}
                     keyExtractor={(item, _) => item.id.toString()}
-                    renderItem={({item}) =>
-                    <TouchableWithoutFeedback
-                        onPress={() => this.navigateToArtist(item.id.toString())}
-                        style={styles.artistContainer}>
-                        <View style={styles.artistContainer}>
-                            <ImageBackground
-                                source={{uri: item.thumbnail}}
-                                style={styles.artistImage}>
-                                <View
-                                    style={styles.artistNameBackground}>
-                                    <Text style={styles.artistName}>{item.name}</Text>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </TouchableWithoutFeedback>}
+                    renderItem={this.renderArtist}
                     numColumns={2}
                 />
             </AppContainer>
         )
     }
+
+    private renderArtist = ({ item, index }: { item: Artist, index: number }) =>
+        <ArtistItem
+            artist={item}
+            onPress={() => this.navigateToArtist(item.id.toString())} />
 
     private navigateToArtist = (artistId: string) => {
         this.props.navigation.navigate(Routes.artistDetails, {
