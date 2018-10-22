@@ -34,7 +34,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
         )
     }
 
-    private renderArtist = ({ item, index }: { item: Artist, index: number }) =>
+    private renderArtist = ({ item, index: number }: { item: Artist, index: number }) =>
         <ArtistItem
             artist={item}
             onPress={() => this.navigateToArtist(item.id.toString())} />

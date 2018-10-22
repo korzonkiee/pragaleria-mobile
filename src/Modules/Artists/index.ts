@@ -39,6 +39,25 @@ export function getArtists() {
     }
 }
 
+export function getArtistDetails(id: number) {
+    return async (dispatch: Dispatch<any>) => {
+        dispatch(startTask());
+        dispatch(setArtistDetailsLoading({ id: id, loading: true }));
+        try {
+            const artistDetails = await Api.getArtistDetails(id);
+            dispatch(setArtistDetails(artistDetails));
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't fetch artist details with id ${id} . ` +
+                `Error: ${e}`);
+        }
+        finally {
+            dispatch(setArtistDetailsLoading({ id: id, loading: false }));
+            dispatch(endTask());
+        }
+    }
+}
+
 export const artistsReducers: ReducerMap<AppState, any> = {
     [setArtists.toString()](state, action) {
         if (action.payload) {
@@ -97,4 +116,4 @@ export const artistsReducers: ReducerMap<AppState, any> = {
             };
         }
     }
-};
+}
