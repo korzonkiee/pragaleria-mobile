@@ -2,21 +2,21 @@ import { StyleSheet } from 'react-native'
 import { responsiveHeight } from '../../Styles/Dimensions';
 
 export default StyleSheet.create({
-    artistContainer: {
+    artworkContainer: {
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
         height: responsiveHeight(35)
     },
-    artistImage: {
+    artworkImage: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    artistName: {
+    artworkName: {
         textAlign: 'center'
     },
-    artistNameBackground: {
+    artworkNameBackground: {
         backgroundColor: "#FFFFFF80",
         width: "100%"
     }

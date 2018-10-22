@@ -2,13 +2,16 @@ import Logger from "./Logger";
 import { Artist } from "../Models/Artist";
 import AxiosClient from "./AxiosClient";
 import AxiosMockAdapter from "axios-mock-adapter";
+import { ArtistDetails } from "../Pages/Artists/ArtistsDetails";
 
 const TAG: string = "API";
 
-mock();
-
 export async function getArtists(): Promise<Artist[] | null> {
-    return await get<Artist[]>("artists");
+    return await get<Artist[]>("authors");
+}
+
+export function getArtistDetails(id: number): Promise<ArtistDetails | null> {
+    return get<ArtistDetails>(`authors/${id}`);
 }
 
 export async function getExhibitions(): Promise<Artist[] | null> {
