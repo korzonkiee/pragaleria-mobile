@@ -27,6 +27,7 @@ export function getArtists() {
         try {
             const artists = await Api.getArtists(currentPage);
             dispatch(setArtists(artists));
+            console.log(`Artists for page: ${currentPage} set in store.`);
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artists. ` +
@@ -34,6 +35,25 @@ export function getArtists() {
         }
         finally {
             dispatch(setArtistsLoading(false));
+            dispatch(endTask());
+        }
+    }
+}
+
+export function getArtistDetails(id: number) {
+    return async (dispatch: Dispatch<any>) => {
+        dispatch(startTask());
+        dispatch(setArtistDetailsLoading({ id: id, loading: true }));
+        try {
+            const artistDetails = await Api.getArtistDetails(id);
+            dispatch(setArtistDetails(artistDetails));
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't fetch artist details with id ${id} . ` +
+                `Error: ${e}`);
+        }
+        finally {
+            dispatch(setArtistDetailsLoading({ id: id, loading: false }));
             dispatch(endTask());
         }
     }
@@ -87,14 +107,16 @@ export const artistsReducers: ReducerMap<AppState, any> = {
         if (action.payload) {
             return {
                 ...state,
-                merchantDetails: {
+                artistDetails: {
                     ...state.artistDetails,
                     [action.payload.id]: {
                         ...state.artistDetails[action.payload.id],
-                        loading: action.payload.loading
+                        loading: action.payload.loading,
                     }
                 }
             };
         }
+
+        return state;
     }
-};
+}

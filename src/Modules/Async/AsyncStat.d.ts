@@ -1,4 +1,5 @@
-import {Artist} from "../Artists";
+import { Artist } from "../../Models/Artist";
+import { ArtistDetails } from "../../Models/ArtistDetails";
 
 declare interface AsyncState {
     readonly tasksCount: number;
