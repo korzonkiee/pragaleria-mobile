@@ -3,16 +3,20 @@ import {FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, Image
 import AppContainer from '../../Components/AppContainer';
 import styles from "./styles";
 import { Artist } from "../../Models/Artist";
+import { ArtistsData } from '../../Modules/Async/AsyncStat';
 
 
 export interface ArtistsProps {
-    artists: Artist[]
+    artists: ArtistsData
     getArtists: () => void
+    loadMoreArtists: () => void
 }
 
 export class Artists extends Component<ArtistsProps> {
     componentDidMount() {
-        this.props.getArtists();
+        if (!this.props.artists.loading) {
+            this.props.getArtists();
+        }
     }
 
 
@@ -21,7 +25,7 @@ export class Artists extends Component<ArtistsProps> {
         return (
             <AppContainer>
                 <FlatList
-                    data={this.props.artists}
+                    data={this.props.artists.data}
                     renderItem={({item}) =>
                     <TouchableWithoutFeedback
                         onPress={() => console.log("pressed")}

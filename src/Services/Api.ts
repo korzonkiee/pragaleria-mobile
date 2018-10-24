@@ -5,10 +5,8 @@ import AxiosMockAdapter from "axios-mock-adapter";
 
 const TAG: string = "API";
 
-mock();
-
-export async function getArtists(): Promise<Artist[] | null> {
-    return await get<Artist[]>("artists");
+export async function getArtists(page?: number): Promise<Artist[] | null> {
+    return await get<Artist[]>(`authors?page=${page ? page : 0}`);
 }
 
 export async function getExhibitions(): Promise<Artist[] | null> {
@@ -25,6 +23,7 @@ function mock() {
 }
 
 async function get<TResult>(endpoint: string): Promise<TResult | null> {
+    console.log(endpoint);
     let result = await AxiosClient.get<TResult>(endpoint);
     if (result && wasSuccessfull(result.status)) {
         return result.data;

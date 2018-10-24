@@ -6,31 +6,95 @@ import Logger from "../../Services/Logger"
 import * as Api from "../../Services/Api";
 
 
-const getArtistsAction = createAction("ARTISTS/GET");
-const TAG = "GetArtists";
+const setArtists = createAction("ARTISTS/SET_ARTISTS");
+const setArtistsLoading = createAction("ARTITS/SET_ARTISTS_LOADING");
+const setArtistDetails = createAction("ARTISTS/SET_ARTIST_DETAILS");
+const setArtistDetailsLoading = createAction("ARTISTS/SET_ARTIST_DETAILS_LOADING");
+
+const TAG = "ARTISTS";
 
 export function getArtists() {
-    return async (dispatch: Dispatch<any>) => {
+    return async (dispatch: Dispatch<any>, getState: () => AppState) => {
+        if (getState().artists.loading) {
+            return;
+        }
+
+        const currentPage = getState().artists.page;
+
         dispatch(startTask());
+        dispatch(setArtistsLoading(true));
+
         try {
-            const artists = await Api.getArtists();
-            dispatch(getArtistsAction(artists));
+            const artists = await Api.getArtists(currentPage);
+            dispatch(setArtists(artists));
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artists. ` +
                 `Error: ${e}`);
         }
         finally {
+            dispatch(setArtistsLoading(false));
             dispatch(endTask());
         }
     }
 }
 
 export const artistsReducers: ReducerMap<AppState, any> = {
-    [getArtistsAction.toString()](state, {payload}) {
-        return {
-            ...state,
-            artists: payload
+    [setArtists.toString()](state, action) {
+        if (action.payload) {
+            return {
+                ...state,
+                artists: {
+                    data: [...state.artists.data, ...action.payload],
+                    loading: false,
+                    page: state.artists.page + 1
+                }
+            }
+        }
+
+        return state;
+    },
+    [setArtistsLoading.toString()](state, action) {
+        if (action.payload) {
+            return {
+                ...state,
+                artists: {
+                    ...state.artists,
+                    loading: action.payload
+                }
+            };
+        }
+
+        return state;
+    },
+    [setArtistDetails.toString()](state, action) {
+        if (action.payload) {
+            return {
+                ...state,
+                artistDetails: {
+                    ...state.artistDetails,
+                    [action.payload.id]: {
+                        data: action.payload,
+                        loading: false
+                    }
+                }
+            }
+        }
+
+        return state;
+    },
+    [setArtistDetailsLoading.toString()](state, action) {
+        if (action.payload) {
+            return {
+                ...state,
+                merchantDetails: {
+                    ...state.artistDetails,
+                    [action.payload.id]: {
+                        ...state.artistDetails[action.payload.id],
+                        loading: action.payload.loading
+                    }
+                }
+            };
         }
     }
 };
