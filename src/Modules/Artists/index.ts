@@ -27,6 +27,7 @@ export function getArtists() {
         try {
             const artists = await Api.getArtists(currentPage);
             dispatch(setArtists(artists));
+            console.log(`Artists for page: ${currentPage} set in store.`);
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artists. ` +
@@ -106,14 +107,16 @@ export const artistsReducers: ReducerMap<AppState, any> = {
         if (action.payload) {
             return {
                 ...state,
-                merchantDetails: {
+                artistDetails: {
                     ...state.artistDetails,
                     [action.payload.id]: {
                         ...state.artistDetails[action.payload.id],
-                        loading: action.payload.loading
+                        loading: action.payload.loading,
                     }
                 }
             };
         }
+
+        return state;
     }
 }

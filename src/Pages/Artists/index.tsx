@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
 import * as Routes from '../../Routes';
-import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground } from 'react-native'
+import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
 import { Artist } from "../../Models/Artist";
-import { ArtistsData } from '../../Modules/Async/AsyncStat';
 import { ArtistItem } from '../../Components/ArtistItem';
+import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
+import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
+import { ArtistsData } from '../../Modules/Async/AsyncStat';
 
 
 export interface ArtistsProps {
@@ -22,22 +24,38 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
     }
 
     render() {
-        return (
-            <AppContainer>
-                <FlatList
-                    data={this.props.artists}
-                    keyExtractor={(item, _) => item.id.toString()}
-                    renderItem={this.renderArtist}
-                    numColumns={2}
-                />
-            </AppContainer>
-        )
+        const artistsData = this.props.artists.data;
+        if (this.props.artists.loading && this.props.artists.page === 0) {
+            return (
+                <CenteredActivityIndicator />
+            );
+        } else {
+            return (
+                <AppContainer>
+                    <FlatList
+                        data={artistsData}
+                        keyExtractor={(item, _) => item.id.toString()}
+                        renderItem={this.renderArtist}
+                        numColumns={2}
+                        ListFooterComponent={this.renderFooter}
+                        onEndReached={this.props.getArtists}
+                        onEndReachedThreshold={5}
+                    />
+                </AppContainer>
+            )
+        }
     }
 
     private renderArtist = ({ item, index: number }: { item: Artist, index: number }) =>
         <ArtistItem
             artist={item}
             onPress={() => this.navigateToArtist(item.id.toString())} />
+
+
+
+    private renderFooter = () => (
+        <FooterActivityIndicator />
+    )
 
     private navigateToArtist = (artistId: string) => {
         this.props.navigation.navigate(Routes.artistDetails, {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
-import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground } from 'react-native'
+import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
 import AppContainer from '../../../Components/AppContainer';
 import styles from "./styles";
 import { ArtistDetailsData } from '../../../Modules/Async/AsyncStat';
@@ -30,8 +30,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
                     <FlatList
                         data={artist.artworks}
                         keyExtractor={(item, _) => item.id.toString()}
-                        renderItem={this.renderArtwork}
-                        numColumns={2} />
+                        renderItem={this.renderArtwork} />
                 </View> }
             </AppContainer>
         )
