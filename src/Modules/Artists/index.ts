@@ -27,7 +27,6 @@ export function getArtists() {
         try {
             const artists = await Api.getArtists(currentPage);
             dispatch(setArtists(artists));
-            console.log(`Artists for page: ${currentPage} set in store.`);
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artists. ` +
@@ -59,7 +58,8 @@ export function getArtistDetails(id: number) {
     }
 }
 
-export const artistsReducers: ReducerMap<AppState, any> = {
+export const
+artistsReducers: ReducerMap<AppState, any> = {
     [setArtists.toString()](state, action) {
         if (action.payload) {
             return {
@@ -75,7 +75,7 @@ export const artistsReducers: ReducerMap<AppState, any> = {
         return state;
     },
     [setArtistsLoading.toString()](state, action) {
-        if (action.payload) {
+        if (action.payload !== undefined) {
             return {
                 ...state,
                 artists: {

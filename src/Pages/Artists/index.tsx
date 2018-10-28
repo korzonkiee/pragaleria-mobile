@@ -8,6 +8,8 @@ import { ArtistItem } from '../../Components/ArtistItem';
 import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import { ArtistsData } from '../../Modules/Async/AsyncStat';
+import DataNotFound from '../../Components/DataNotFound';
+import { l } from '../../Services/Language';
 
 
 export interface ArtistsProps {
@@ -29,7 +31,11 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
             return (
                 <CenteredActivityIndicator />
             );
-        } else {
+        }
+        else if (!this.props.artists.loading && this.props.artists.data.length === 0) {
+            return (<DataNotFound message={l("Artists.NotFound")}/>)
+        }
+        else {
             return (
                 <AppContainer>
                     <FlatList
@@ -37,7 +43,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                         keyExtractor={(item, _) => item.id.toString()}
                         renderItem={this.renderArtist}
                         numColumns={2}
-                        ListFooterComponent={this.renderFooter}
+                        ListFooterComponent={this.renderFooter()}
                         onEndReached={this.props.getArtists}
                         onEndReachedThreshold={5}
                     />
@@ -53,9 +59,11 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
 
 
 
-    private renderFooter = () => (
-        <FooterActivityIndicator />
-    )
+    private renderFooter = () => {
+        if (this.props.artists.loading)
+            return <FooterActivityIndicator />;
+        return null;
+    }
 
     private navigateToArtist = (artistId: string) => {
         this.props.navigation.navigate(Routes.artistDetails, {
