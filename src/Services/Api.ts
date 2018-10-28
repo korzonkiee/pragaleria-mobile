@@ -28,7 +28,6 @@ function mock() {
 }
 
 async function get<TResult>(endpoint: string): Promise<TResult | null> {
-    console.log(endpoint);
     let result = await AxiosClient.get<TResult>(endpoint);
     if (result && wasSuccessfull(result.status)) {
         return result.data;
@@ -41,4 +40,10 @@ async function get<TResult>(endpoint: string): Promise<TResult | null> {
 
 function wasSuccessfull(status: number) {
     return status == 200 ? true : false;
+}
+
+function delay(ms: number) {
+    return new Promise<void>(function(resolve) {
+        setTimeout(resolve, ms);
+    });
 }
