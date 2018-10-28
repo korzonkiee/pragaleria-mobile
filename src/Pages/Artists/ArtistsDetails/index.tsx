@@ -4,13 +4,15 @@ import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, Imag
 import AppContainer from '../../../Components/AppContainer';
 import styles from "./styles";
 import { ArtistDetailsData } from '../../../Modules/Async/AsyncStat';
-import { ArtistItem } from '../../../Components/ArtistItem';
 import { Artwork } from '../../../Models/ArtistDetails';
 import { ArtworkItem } from '../../../Components/ArtworkItem';
+import DataNotFound from '../../../Components/DataNotFound';
+import { l } from '../../../Services/Language';
+import CenteredActivityIndicator from '../../../Components/CenteredActivityIndicator';
 
 
 export interface ArtistsDetailsProps {
-    readonly artist: ArtistDetailsData | undefined;
+    readonly artist: ArtistDetailsData;
     readonly getArtistDetails: () => void;
 }
 
@@ -23,17 +25,32 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
 
     render() {
         const artist = this.props.artist && this.props.artist.data;
-        return (
-            <AppContainer>
-                { artist && <View>
-                    <Text style={styles.artistName}>{artist.name}</Text>
-                    <FlatList
-                        data={artist.artworks}
-                        keyExtractor={(item, _) => item.id.toString()}
-                        renderItem={this.renderArtwork} />
-                </View> }
-            </AppContainer>
-        )
+        console.log(this.props.artist);
+        if (!this.props.artist) {
+            return null;
+        }
+
+        if (this.props.artist.loading) {
+            return (
+                <CenteredActivityIndicator />
+            );
+        }
+        else if (!this.props.artist.loading && this.props.artist.data == null) {
+            return (<DataNotFound retry={this.props.getArtistDetails} message={l("Common.GenericErrorMessageWithRetry")}/>)
+        }
+        else {
+            return (
+                <AppContainer>
+                    { artist && <View>
+                        <Text style={styles.artistName}>{artist.name}</Text>
+                        <FlatList
+                            data={artist.artworks}
+                            keyExtractor={(item, _) => item.id.toString()}
+                            renderItem={this.renderArtwork} />
+                    </View> }
+                </AppContainer>
+            )
+        }
     }
 
     private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => (
