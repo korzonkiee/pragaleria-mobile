@@ -20,7 +20,7 @@ declare interface ArtistsData {
 
 declare interface ArtistsState{
     readonly artists: ArtistsData;
-    readonly artistDetails: { readonly [id: number]: ArtistDetailsData | undefined }
+    readonly artistDetails: { readonly [id: number]: ArtistDetailsData}
 }
 
 declare interface AppState extends AsyncState, ArtistsState {

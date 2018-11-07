@@ -33,7 +33,9 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
             );
         }
         else if (!this.props.artists.loading && this.props.artists.data.length === 0) {
-            return (<DataNotFound message={l("Artists.NotFound")}/>)
+            return (<DataNotFound
+                    message={l("Common.GenericErrorMessageWithRetry")}
+                    retry={this.props.getArtists}/>)
         }
         else {
             return (
