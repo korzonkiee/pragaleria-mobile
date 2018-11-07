@@ -20,11 +20,11 @@ export class Artwork {
     initial_price: string;
     price: string;
     year: string;
-    thumbnail: string;
+    thumbnail: { original: string, thumbnail: string };
 
     constructor(id: number, title: string, description: string,
         sold: string, initial_price: string, price: string,
-        year: string, thumbnail: string) {
+        year: string, thumbnail: { original: string, thumbnail: string }) {
         this.id = id;
         this.title = title;
         this.description = description;
