@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, TouchableWithoutFeedback, View, ImageBackground } from "react-native";
+import { Text, Image, View, ImageBackground } from "react-native";
 import styles from "./styles";
-import { Artwork } from "../../Models/ArtistDetails";
+import AppText from "../AppText";
 
 export interface ArtworkItemProps {
     readonly artwork: Artwork;
@@ -10,19 +10,14 @@ export interface ArtworkItemProps {
 
 export class ArtworkItem extends React.PureComponent<ArtworkItemProps> {
     render() {
-        return <TouchableWithoutFeedback
-            onPress={this.props.onPress}
-            style={styles.artworkContainer}>
-            <View style={styles.artworkContainer}>
-                <ImageBackground
-                    source={{uri: this.props.artwork.thumbnail.thumbnail}}
-                    style={styles.artworkImage}>
-                    <View
-                        style={styles.artworkNameBackground}>
-                        <Text style={styles.artworkName}>{this.props.artwork.title}</Text>
-                    </View>
-                </ImageBackground>
+        if (this.props.artwork.thumbnail && this.props.artwork.thumbnail.original) {
+            return <View style={styles.artworkContainer}>
+                <Image style={{flex: 1, height: 150}} source={{uri: this.props.artwork.thumbnail.original}} />
+                <AppText>{this.props.artwork.title}</AppText>
+                <AppText>{this.props.artwork.description}</AppText>
             </View>
-        </TouchableWithoutFeedback>
+        } else {
+            return null;
+        }
     }
 }

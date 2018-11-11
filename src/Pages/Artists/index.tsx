@@ -7,7 +7,7 @@ import { Artist } from "../../Models/Artist";
 import { ArtistItem } from '../../Components/ArtistItem';
 import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
-import { ArtistsData } from '../../Modules/Async/AsyncStat';
+import { ArtistsData } from '../../Modules/Async/AsyncState';
 import DataNotFound from '../../Components/DataNotFound';
 import { l } from '../../Services/Language';
 
@@ -15,7 +15,6 @@ import { l } from '../../Services/Language';
 export interface ArtistsProps {
     artists: ArtistsData
     getArtists: () => void
-    loadMoreArtists: () => void
 }
 
 export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProps> {
@@ -47,7 +46,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                         numColumns={2}
                         ListFooterComponent={this.renderFooter()}
                         onEndReached={this.props.getArtists}
-                        onEndReachedThreshold={5}
+                        onEndReachedThreshold={20}
                     />
                 </AppContainer>
             )

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
-import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
+import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator, WebView } from 'react-native'
 import AppContainer from '../../../Components/AppContainer';
 import styles from "./styles";
-import { ArtistDetailsData } from '../../../Modules/Async/AsyncStat';
-import { Artwork } from '../../../Models/ArtistDetails';
 import { ArtworkItem } from '../../../Components/ArtworkItem';
 import DataNotFound from '../../../Components/DataNotFound';
 import { l } from '../../../Services/Language';
 import CenteredActivityIndicator from '../../../Components/CenteredActivityIndicator';
+import Carousel from 'react-native-snap-carousel';
+import { artists } from '../../../Routes';
+import AppHeader from '../../../Components/AppHeader';
 
 
 export interface ArtistsDetailsProps {
@@ -25,7 +26,6 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
 
     render() {
         const artist = this.props.artist && this.props.artist.data;
-        console.log(this.props.artist);
         if (!this.props.artist) {
             return null;
         }
@@ -42,19 +42,23 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
             return (
                 <AppContainer>
                     { artist && <View>
-                        <Text style={styles.artistName}>{artist.name}</Text>
-                        <FlatList
-                            data={artist.artworks}
-                            keyExtractor={(item, _) => item.id.toString()}
-                            renderItem={this.renderArtwork} />
+                    <AppHeader
+                        title={artist.name}
+                        withBackground />
+                    <FlatList
+                        data={artist.artworks}
+                        keyExtractor={(item, _) => item.id.toString()}
+                        renderItem={this.renderArtwork}
+                        numColumns={1} />
                     </View> }
                 </AppContainer>
             )
         }
     }
 
-    private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => (
-        <ArtworkItem
-            artwork={item} />
-    )
+    private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => {
+        return (<ArtworkItem
+            artwork={item} />)
+        }
+
 }

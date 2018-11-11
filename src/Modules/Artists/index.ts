@@ -1,10 +1,9 @@
 import { createAction, ReducerMap } from "redux-actions";
 import { Dispatch } from "redux";
 import { endTask, startTask } from "../Async";
-import { AppState } from "../Async/AsyncStat";
 import Logger from "../../Services/Logger"
 import * as Api from "../../Services/Api";
-
+import { handleError } from "../Error";
 
 const setArtists = createAction("ARTISTS/SET_ARTISTS");
 const setArtistsLoading = createAction("ARTITS/SET_ARTISTS_LOADING");

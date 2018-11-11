@@ -38,7 +38,7 @@ const MainStack = createBottomTabNavigator({
     }
   },
 }, {
-  initialRouteName: Routes.home,
+  initialRouteName: Routes.artists,
   tabBarOptions: {
       activeTintColor: colors.Main,
       activeBackgroundColor: "white",

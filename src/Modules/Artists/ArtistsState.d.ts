@@ -1,0 +1,44 @@
+declare interface Artwork {
+    readonly id: number;
+    readonly title: string;
+    readonly description: string;
+    readonly sold: string;
+    readonly initial_price: string;
+    readonly price: string;
+    readonly year: string;
+    readonly thumbnail: { original: string, thumbnail: string };
+}
+
+declare interface Artist {
+    readonly id: number;
+    readonly name: string;
+    readonly slug: string;
+    readonly thumbnail: { original: string, thumbnail: string };
+}
+
+declare interface ArtistDetails {
+    readonly id: number;
+    readonly name: string;
+    readonly description: string;
+    readonly slug: string;
+    readonly thumbnail: { original: string, thumbnail: string };
+    readonly artworks: Artwork[];
+}
+
+declare interface ArtistDetailsData {
+    readonly data?: ArtistDetails | null;
+    readonly loading: boolean;
+}
+
+declare interface ArtistsData {
+    readonly data: Artist[];
+    readonly page: number;
+    readonly loading: boolean;
+}
+
+declare interface ArtistsState {
+    readonly artists: ArtistsData;
+    readonly artistDetails: { readonly [id: number]: ArtistDetailsData}
+}
+
+declare interface AppState extends ArtistsState { }
