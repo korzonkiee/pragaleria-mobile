@@ -6,14 +6,15 @@ declare interface Artwork {
     readonly initial_price: string;
     readonly price: string;
     readonly year: string;
-    readonly thumbnail: { original: string, thumbnail: string };
+    readonly image_original: string;
+    readonly image_thumbnail: string;
 }
 
 declare interface Artist {
     readonly id: number;
     readonly name: string;
     readonly slug: string;
-    readonly thumbnail: { original: string, thumbnail: string };
+    readonly thumbnail: string;
 }
 
 declare interface ArtistDetails {
@@ -21,7 +22,7 @@ declare interface ArtistDetails {
     readonly name: string;
     readonly description: string;
     readonly slug: string;
-    readonly thumbnail: { original: string, thumbnail: string };
+    readonly image_thumbnail: string;
     readonly artworks: Artwork[];
 }
 

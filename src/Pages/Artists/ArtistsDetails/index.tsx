@@ -7,8 +7,6 @@ import { ArtworkItem } from '../../../Components/ArtworkItem';
 import DataNotFound from '../../../Components/DataNotFound';
 import { l } from '../../../Services/Language';
 import CenteredActivityIndicator from '../../../Components/CenteredActivityIndicator';
-import Carousel from 'react-native-snap-carousel';
-import { artists } from '../../../Routes';
 import AppHeader from '../../../Components/AppHeader';
 
 
@@ -40,17 +38,18 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
         }
         else {
             return (
-                <AppContainer>
-                    { artist && <View>
+                <AppContainer style={{flex: 1}}>
+                    { artist && <>
                     <AppHeader
                         title={artist.name}
                         withBackground />
                     <FlatList
                         data={artist.artworks}
                         keyExtractor={(item, _) => item.id.toString()}
+                        ListHeaderComponent={this.renderAristDescription()}
                         renderItem={this.renderArtwork}
                         numColumns={1} />
-                    </View> }
+                    </> }
                 </AppContainer>
             )
         }
@@ -59,6 +58,42 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
     private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => {
         return (<ArtworkItem
             artwork={item} />)
-        }
+    }
 
+    private renderAristDescription = () => {
+        if (this.props.artist && this.props.artist.data) {
+            // let html = "<html>" +
+            //     + "<head>" +
+            //     + "<style type=\"text/css\">" +
+            //     + "@font-face {" +
+            //     + "font-family: MyFont;src: url(\"file:///android_asset/font/Poppins-Regular.ttf\")}" +
+            //     + "body {font-family: MyFont;font-size: medium;text-align: justify;}" +
+            //     + "</style>"
+            //     + "</head>" +
+            //     + "<body>" + this.props.artist.data.description + "</body>"
+            //     + "</html>"
+            let html = `<html>
+
+            <head>
+                <style type="text/css">
+                    @font-face {
+                        font-family: MyFont;
+                        src: url("file:///android_asset/fonts/Poppins_Regular.ttf")
+                    }
+
+                    body {
+                        font-family: MyFont;
+                        font-size: medium;
+                    }
+                </style>
+            </head>
+
+            <body>` + this.props.artist.data.description + `</body>
+
+            </html>`
+            return <WebView style={{flex: 1, height: 240}} source={{html: html, baseUrl: ""}} />;
+        } else {
+            return null;
+        }
+    }
 }

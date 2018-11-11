@@ -3,18 +3,16 @@ import * as Nav from "react-navigation";
 import * as Routes from '../../Routes';
 import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
-import { Artist } from "../../Models/Artist";
 import { ArtistItem } from '../../Components/ArtistItem';
 import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
-import { ArtistsData } from '../../Modules/Async/AsyncState';
 import DataNotFound from '../../Components/DataNotFound';
 import { l } from '../../Services/Language';
 
 
 export interface ArtistsProps {
-    artists: ArtistsData
-    getArtists: () => void
+    readonly artists: ArtistsData;
+    readonly getArtists: () => void;
 }
 
 export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProps> {

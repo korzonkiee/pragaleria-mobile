@@ -15,7 +15,7 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
             style={styles.artistContainer}>
             <View style={styles.artistContainer}>
                 <ImageBackground
-                    source={{uri: this.props.artist.thumbnail.thumbnail}}
+                    source={{uri: this.props.artist.thumbnail}}
                     style={styles.artistImage}>
                     <View
                         style={styles.artistNameBackground}>
