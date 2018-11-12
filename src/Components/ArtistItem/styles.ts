@@ -11,13 +11,14 @@ export default StyleSheet.create({
     artistImage: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
     },
     artistName: {
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "#FFFFFF"
     },
     artistNameBackground: {
-        backgroundColor: "#FFFFFF80",
+        backgroundColor: "#000000",
         width: "100%"
     }
 });

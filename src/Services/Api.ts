@@ -9,8 +9,8 @@ export async function getArtists(page?: number): Promise<Artist[] | null> {
     return await get<Artist[]>(`authors?page=${page ? page : 0}`);
 }
 
-export function getArtistDetails(id: number): Promise<ArtistDetails | null> {
-    return get<ArtistDetails>(`authors/${id}`);
+export async function getArtistDetails(id: number): Promise<ArtistDetails | null> {
+    return await get<ArtistDetails>(`authors/${id}`);
 }
 
 export async function getExhibitions(): Promise<Artist[] | null> {
