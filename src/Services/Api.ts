@@ -1,5 +1,4 @@
 import Logger from "./Logger";
-import { Artist } from "../Models/Artist";
 import AxiosClient from "./AxiosClient";
 import AxiosMockAdapter from "axios-mock-adapter";
 import { ArtistDetails } from "../Pages/Artists/ArtistsDetails";

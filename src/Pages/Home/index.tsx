@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
-import {Text} from 'react-native'
 import AppContainer from '../../Components/AppContainer';
+import AppText from '../../Components/AppText';
 
 export interface HomeProps {
 }
 
 export function Home(_: HomeProps) {
     return <AppContainer>
-        <Text>Home</Text>
+        <AppText>Home</AppText>
     </AppContainer>
 }

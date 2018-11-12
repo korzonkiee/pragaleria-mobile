@@ -3,5 +3,9 @@ export default {
     "BottomNavigation.Home": "Home",
     "BottomNavigation.Artists": "Artyści",
 
+    "Artwork.Year": "Rok",
+    "Artwork.Price": "Rok",
+
     "Common.GenericErrorMessageWithRetry": "Wystąpił błąd połączenia. Naciśnij, aby ponowić próbę.",
+    "Common.NetworkError": "Wystąpił błąd połączenia. Spróbuj ponownie",
 }

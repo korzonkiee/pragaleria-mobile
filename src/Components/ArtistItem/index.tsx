@@ -1,7 +1,7 @@
 import React from "react";
-import { Artist } from "../../Models/Artist";
 import { Text, TouchableWithoutFeedback, View, ImageBackground } from "react-native";
 import styles from "./styles";
+import AppText from "../AppText";
 
 export interface ArtistItemProps {
     readonly artist: Artist;
@@ -15,11 +15,11 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
             style={styles.artistContainer}>
             <View style={styles.artistContainer}>
                 <ImageBackground
-                    source={{uri: this.props.artist.thumbnail.thumbnail}}
+                    source={{uri: this.props.artist.thumbnail}}
                     style={styles.artistImage}>
                     <View
                         style={styles.artistNameBackground}>
-                        <Text style={styles.artistName}>{this.props.artist.name}</Text>
+                        <AppText style={styles.artistName}>{this.props.artist.name}</AppText>
                     </View>
                 </ImageBackground>
             </View>

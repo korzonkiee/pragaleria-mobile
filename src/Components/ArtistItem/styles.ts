@@ -6,7 +6,7 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
-        height: responsiveHeight(35)
+        height: responsiveHeight(25)
     },
     artistImage: {
         flex: 1,
