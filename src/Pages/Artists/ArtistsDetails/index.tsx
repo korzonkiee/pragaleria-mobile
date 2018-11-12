@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
-import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator, WebView } from 'react-native'
+import * as Routes from "../../../Routes";
+import { FlatList, WebView } from 'react-native'
 import AppContainer from '../../../Components/AppContainer';
 import styles from "./styles";
 import { ArtworkItem } from '../../../Components/ArtworkItem';
@@ -15,7 +16,9 @@ export interface ArtistsDetailsProps {
     readonly getArtistDetails: () => void;
 }
 
-export class ArtistDetails extends Component<ArtistsDetailsProps> {
+export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.NavigationInjectedProps> {
+    private artistId: number = -1;
+
     componentDidMount() {
         if (!this.props.artist || (this.props.artist.data === undefined && !this.props.artist.loading)) {
             this.props.getArtistDetails();
@@ -26,6 +29,10 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
         const artist = this.props.artist && this.props.artist.data;
         if (!this.props.artist) {
             return null;
+        }
+
+        if (this.props.artist.data != null) {
+            this.artistId = this.props.artist.data.id;
         }
 
         if (this.props.artist.loading) {
@@ -57,21 +64,12 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
 
     private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => {
         return (<ArtworkItem
+            onPress={() => this.navigateToArtwork(this.artistId, item.id)}
             artwork={item} />)
     }
 
     private renderAristDescription = () => {
         if (this.props.artist && this.props.artist.data) {
-            // let html = "<html>" +
-            //     + "<head>" +
-            //     + "<style type=\"text/css\">" +
-            //     + "@font-face {" +
-            //     + "font-family: MyFont;src: url(\"file:///android_asset/font/Poppins-Regular.ttf\")}" +
-            //     + "body {font-family: MyFont;font-size: medium;text-align: justify;}" +
-            //     + "</style>"
-            //     + "</head>" +
-            //     + "<body>" + this.props.artist.data.description + "</body>"
-            //     + "</html>"
             let html = `<html>
 
             <head>
@@ -95,5 +93,14 @@ export class ArtistDetails extends Component<ArtistsDetailsProps> {
         } else {
             return null;
         }
+    }
+
+    private navigateToArtwork = (artistId: number, artworkId: number) => {
+        console.log(`Navigating to artwork ${artworkId} of artist ${artistId}`);
+
+        this.props.navigation.navigate(Routes.artworkDetails, {
+            artistId: artistId,
+            artworkId: artworkId
+        });
     }
 }

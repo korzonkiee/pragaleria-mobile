@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
-import * as Routes from '../../Routes';
 import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
 import { ArtistItem } from '../../Components/ArtistItem';
 import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import DataNotFound from '../../Components/DataNotFound';
+import * as Routes from '../../Routes';
 import { l } from '../../Services/Language';
 
 
@@ -66,7 +66,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
 
     private navigateToArtist = (artistId: string) => {
         this.props.navigation.navigate(Routes.artistDetails, {
-            id: artistId
+            artistId: artistId
         });
     }
 }

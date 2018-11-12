@@ -13,6 +13,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { responsiveFontSize, responsiveHeight } from './Styles/Dimensions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
+import ArtworkDetails from './Pages/ArtworkDetails';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import AppText from './Components/AppText';
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color="#000000" />;
@@ -45,32 +46,12 @@ const MainStack = createMaterialBottomTabNavigator({
   barStyle: {
     backgroundColor: "#FFFFFF",
   }
-  // tabBarOptions: {
-  //     activeTintColor: colors.Main,
-  //     activeBackgroundColor: "white",
-  //     inactiveTintColor: colors.Main,
-  //     inactiveBackgroundColor: "white",
-  //     labelStyle: {
-  //         fontSize: responsiveFontSize(1.3 * 9.5 / 10.3),
-  //         lineHeight: responsiveFontSize(1.3 * 9.5 / 10.3),
-  //         marginBottom: responsiveHeight(1.2 * 5.5 / 10.3)
-  //     },
-  //     style: {
-  //         height: Math.min(responsiveHeight(8.5), 57.5),
-  //         backgroundColor: "white",
-  //         borderTopWidth: 0,
-  //         shadowOpacity: 0.1,
-  //         shadowRadius: 10,
-  //         shadowColor: "black",
-  //         shadowOffset: { height: 3, width: 0 },
-  //         elevation: 20
-  //     }
-  // }
 });
 
 const AppNavigator = createStackNavigator({
   ["Main"]: MainStack,
-  [Routes.artistDetails]: ArtistDetails
+  [Routes.artistDetails]: ArtistDetails,
+  [Routes.artworkDetails]: ArtworkDetails
 }, {
   initialRouteName: "Main",
   headerMode: "none"
