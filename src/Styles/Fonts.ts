@@ -2,7 +2,8 @@ import { Platform } from "react-native";
 import { isIOS } from "../Helpers/PhoneHelpers";
 
 type AppFont = "Poppins";
-export const DefaultAppFont: AppFont = "Poppins";
+export const DefaultFontFamily: AppFont = "Poppins";
+export const DefaultAppFont: string = `${DefaultFontFamily}_Regular`;
 
 type AppFontWeight = "Thin" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "Black";
 type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
@@ -40,7 +41,7 @@ const fonts: Fonts = {
 };
 
 export default function font(options: FontFamilyOptions): FontFamily {
-    let family = options.family ? options.family : DefaultAppFont;
+    let family = options.family ? options.family : DefaultFontFamily;
 
     if (isIOS()) {
         return {

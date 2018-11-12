@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
 import * as Routes from "../../../Routes";
+import { DefaultAppFont } from "../../../Styles/Fonts";
 import { FlatList, WebView } from 'react-native'
 import AppContainer from '../../../Components/AppContainer';
 import styles from "./styles";
@@ -9,6 +10,7 @@ import DataNotFound from '../../../Components/DataNotFound';
 import { l } from '../../../Services/Language';
 import CenteredActivityIndicator from '../../../Components/CenteredActivityIndicator';
 import AppHeader from '../../../Components/AppHeader';
+import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
 
 
 export interface ArtistsDetailsProps {
@@ -70,26 +72,8 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
 
     private renderAristDescription = () => {
         if (this.props.artist && this.props.artist.data) {
-            let html = `<html>
-
-            <head>
-                <style type="text/css">
-                    @font-face {
-                        font-family: MyFont;
-                        src: url("file:///android_asset/fonts/Poppins_Regular.ttf")
-                    }
-
-                    body {
-                        font-family: MyFont;
-                        font-size: medium;
-                    }
-                </style>
-            </head>
-
-            <body>` + this.props.artist.data.description + `</body>
-
-            </html>`
-            return <WebView style={{flex: 1, height: 240}} source={{html: html, baseUrl: ""}} />;
+            return <WebViewCustomized font={DefaultAppFont}
+                style={{flex: 1, height: 240}} innerHtml={this.props.artist.data.description} />;
         } else {
             return null;
         }
