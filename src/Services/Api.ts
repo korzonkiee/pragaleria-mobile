@@ -6,18 +6,22 @@ import { ArtistDetails } from "../Pages/Artists/ArtistsDetails";
 const TAG: string = "API";
 
 export async function getArtists(page?: number): Promise<Artist[] | null> {
+    await delay(2000);
     return await get<Artist[]>(`authors?page=${page ? page : 0}`);
 }
 
-export function getArtistDetails(id: number): Promise<ArtistDetails | null> {
-    return get<ArtistDetails>(`authors/${id}`);
+export async function getArtistDetails(id: number): Promise<ArtistDetails | null> {
+    await delay(2000);
+    return await get<ArtistDetails>(`authors/${id}`);
 }
 
 export async function getExhibitions(): Promise<Artist[] | null> {
+    await delay(2000);
     return await get<Artist[]>("exhibitions");
 }
 
 export async function getAuctions(): Promise<Artist[] | null> {
+    await delay(2000);
     return await get<Artist[]>("auctions");
 }
 

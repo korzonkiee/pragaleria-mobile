@@ -40,6 +40,7 @@ export default class WebViewCustomized extends Component<WebViewCustomizedProps 
         </html>`
         return (
             <WebView
+                {...this.props}
                 source={{html: html, baseUrl: ""}}
                 style={this.props.style}
             />

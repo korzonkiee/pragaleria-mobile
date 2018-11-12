@@ -22,21 +22,21 @@ const MainStack = createMaterialBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
-      tabBarLabel: <AppText>{l("BottomNavigation.Auctions")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}} >{l("BottomNavigation.Auctions")}</AppText>,
       tabBarIcon: BottomIcon("gavel")
     }
   },
   [Routes.home]: {
     screen: Home,
     navigationOptions: {
-      tabBarLabel: <AppText>{l("BottomNavigation.Home")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}} >{l("BottomNavigation.Home")}</AppText>,
       tabBarIcon: BottomIcon("home")
     }
   },
   [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
-      tabBarLabel: <AppText>{l("BottomNavigation.Artists")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}}>{l("BottomNavigation.Artists")}</AppText>,
       tabBarIcon: BottomIcon("paint-brush")
     }
   },

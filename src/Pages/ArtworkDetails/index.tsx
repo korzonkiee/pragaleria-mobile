@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import AppContainer from '../../Components/AppContainer';
-import { Text, Image} from "react-native";
+import { Text, Image, View} from "react-native";
 import styles from "./styles";
 import AppHeader from '../../Components/AppHeader';
 import Logger from '../../Services/Logger';
 import DataNotFound from '../../Components/DataNotFound';
 import { l } from '../../Services/Language';
 import FadeIn from 'react-native-fade-in-image';
+import WebViewCustomized from '../../Components/WebViewCustomized/WebViewCustomized';
+import { DefaultAppFont } from '../../Styles/Fonts';
+import AppText from '../../Components/AppText';
 
 
 export interface ArtworkDetailsProps {
@@ -26,6 +29,11 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps> {
                 )}>
                     <Image style={{flex: 1}} source={{uri: this.props.artwork.image_original}} />
                 </FadeIn>
+                <View style={{margin: 8}}>
+                    {this.props.artwork.year && <AppText>Rok: {this.props.artwork.year}</AppText>}
+                    {/* {this.props.artwork.sold && <AppText>Sprzedano za: {this.props.artwork.sold}</AppText>} */}
+                </View>
+                <WebViewCustomized font={DefaultAppFont} innerHtml={this.props.artwork.description} />
             </AppContainer>
             )
         } else {

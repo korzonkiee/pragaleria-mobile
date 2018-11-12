@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import * as Nav from "react-navigation";
 import * as Routes from "../../../Routes";
 import { DefaultAppFont } from "../../../Styles/Fonts";
-import { FlatList, WebView } from 'react-native'
+import { FlatList, WebView, NavState, View } from 'react-native'
 import AppContainer from '../../../Components/AppContainer';
-import styles from "./styles";
 import { ArtworkItem } from '../../../Components/ArtworkItem';
 import DataNotFound from '../../../Components/DataNotFound';
 import { l } from '../../../Services/Language';
-import CenteredActivityIndicator from '../../../Components/CenteredActivityIndicator';
 import AppHeader from '../../../Components/AppHeader';
 import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
+import Placeholder from 'rn-placeholder'
+import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
+
 
 
 export interface ArtistsDetailsProps {
@@ -18,8 +19,20 @@ export interface ArtistsDetailsProps {
     readonly getArtistDetails: () => void;
 }
 
-export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.NavigationInjectedProps> {
+interface ArtistsDetailsState {
+    readonly descriptionLoaded: boolean;
+}
+
+export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.NavigationInjectedProps, ArtistsDetailsState> {
     private artistId: number = -1;
+
+    constructor(props: ArtistsDetailsProps & Nav.NavigationInjectedProps) {
+        super(props);
+
+        this.state = {
+            descriptionLoaded: false
+        }
+    }
 
     componentDidMount() {
         if (!this.props.artist || (this.props.artist.data === undefined && !this.props.artist.loading)) {
@@ -38,9 +51,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
         }
 
         if (this.props.artist.loading) {
-            return (
-                <CenteredActivityIndicator />
-            );
+            return <ArtistDetailsPlaceholder />
         }
         else if (!this.props.artist.loading && this.props.artist.data == null) {
             return (<DataNotFound retry={this.props.getArtistDetails} message={l("Common.GenericErrorMessageWithRetry")}/>)
@@ -72,8 +83,11 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
 
     private renderAristDescription = () => {
         if (this.props.artist && this.props.artist.data) {
-            return <WebViewCustomized font={DefaultAppFont}
-                style={{flex: 1, height: 240}} innerHtml={this.props.artist.data.description} />;
+            return (
+                <WebViewCustomized
+                    font={DefaultAppFont}
+                    style={{flex: 1, height: 240}}
+                    innerHtml={this.props.artist.data.description} />);
         } else {
             return null;
         }

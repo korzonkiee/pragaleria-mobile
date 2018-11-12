@@ -8,6 +8,7 @@ import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import DataNotFound from '../../Components/DataNotFound';
 import * as Routes from '../../Routes';
 import { l } from '../../Services/Language';
+import ArtistsPlaceholder from '../../Components/Placeholders/AristsPlaceholder';
 
 
 export interface ArtistsProps {
@@ -26,7 +27,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
         const artistsData = this.props.artists.data;
         if (this.props.artists.loading && this.props.artists.page === 0) {
             return (
-                <CenteredActivityIndicator />
+                <ArtistsPlaceholder />
             );
         }
         else if (!this.props.artists.loading && this.props.artists.data.length === 0) {

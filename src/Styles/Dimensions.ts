@@ -3,6 +3,8 @@ import { Dimensions } from "react-native";
 const { height, width } = Dimensions.get("window");
 const maxScreenDiagonal = 750;
 
+export const screenWidth = width;
+
 export const responsiveHeight = (h: number) => {
     return height * (h / 100);
 };
