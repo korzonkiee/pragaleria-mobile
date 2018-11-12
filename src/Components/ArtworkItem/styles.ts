@@ -9,9 +9,10 @@ export default StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center',
         flexDirection: 'row',
-        height: 120,
-        marginTop: 16,
-        marginBottom: 16
+        height: 150,
+        marginTop: 8,
+        marginBottom: 8,
+        marginLeft: 8
     },
     imageFade: {
         backgroundColor: Colors.GreyLight

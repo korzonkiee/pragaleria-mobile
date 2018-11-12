@@ -2,9 +2,9 @@ declare interface Artwork {
     readonly id: number;
     readonly title: string;
     readonly description: string;
-    readonly sold: string;
+    readonly sold: boolean;
     readonly initial_price: string;
-    readonly price: string;
+    readonly sold_price: string;
     readonly year: string;
     readonly image_original: string;
     readonly image_thumbnail: string;

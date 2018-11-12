@@ -19,8 +19,8 @@ export class ArtworkItem extends React.PureComponent<ArtworkItemProps> {
                         <Image style={{flex: 1, alignSelf: 'stretch'}} source={{uri: this.props.artwork.image_thumbnail}} />
                         <View style={styles.artworkDescContainer}>
                             <AppText style={styles.artworkTitle}>{this.props.artwork.title}</AppText>
-                            {this.props.artwork.year && <AppText>{l("Artwork.Year")}: {this.props.artwork.year}</AppText> }
-                            {this.props.artwork.price && <AppText>{l("Artwork.Price")}: {this.props.artwork.price}</AppText> }
+                            {this.props.artwork.year.length > 0 && <AppText>{l("Artwork.Year")}: {this.props.artwork.year}</AppText> }
+                            {this.props.artwork.sold && <AppText>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText> }
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

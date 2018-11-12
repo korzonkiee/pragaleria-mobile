@@ -27,11 +27,13 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps> {
                     <Image style={{flex: 1}} source={{uri: this.props.artwork.image_thumbnail}}
                         blurRadius={2} />
                 )}>
-                    <Image style={{flex: 1}} source={{uri: this.props.artwork.image_original}} />
+                    <Image style={styles.artworkFullImage}
+                           source={{uri: this.props.artwork.image_original}}
+                           resizeMode="contain" />
                 </FadeIn>
                 <View style={{margin: 8}}>
-                    {this.props.artwork.year && <AppText>Rok: {this.props.artwork.year}</AppText>}
-                    {/* {this.props.artwork.sold && <AppText>Sprzedano za: {this.props.artwork.sold}</AppText>} */}
+                    {this.props.artwork.year.length > 0 && <AppText>{l("Artwork.Year")}: {this.props.artwork.year}</AppText>}
+                    {this.props.artwork.sold && <AppText>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText>}
                 </View>
                 <WebViewCustomized font={DefaultAppFont} innerHtml={this.props.artwork.description} />
             </AppContainer>
@@ -41,4 +43,3 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps> {
         }
     }
 }
-
