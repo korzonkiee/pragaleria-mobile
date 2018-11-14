@@ -14,7 +14,7 @@ declare interface Artist {
     readonly id: number;
     readonly name: string;
     readonly slug: string;
-    readonly thumbnail: string;
+    readonly image_thumbnail: string;
 }
 
 declare interface ArtistDetails {
