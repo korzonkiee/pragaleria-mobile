@@ -9,8 +9,8 @@ import Orientation from 'react-native-orientation';
 import Draggable from './Draggable'
 
 export interface CameraProps {
-    image_url: string,
-    dimension: [number, number]
+    imageUrl: string,
+    imageDimension: [number, number]
 }
 
 const PORTRAIT = 'PORTRAIT';
@@ -73,21 +73,21 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             viewHeight = this.viewWidth;
         }
         let pixelCmAvg = (viewHeight / windowHeight + viewWidth / windowWidth) / 2;
-        let imageHeight = this.props.dimension[0] / pixelCmAvg;
-        let imageWidth = this.props.dimension[1] / pixelCmAvg;
+        let imageHeight = this.props.imageDimension[0] / pixelCmAvg;
+        let imageWidth = this.props.imageDimension[1] / pixelCmAvg;
 
         console.log("View height:", viewHeight);
         console.log("View width:", viewWidth);
         console.log("Height:", imageHeight, "/", windowHeight);
         console.log("Width:", imageWidth, "/", windowWidth);
         console.log("Height/Width ratio: ", imageHeight / imageWidth);
-        console.log("Orginial ratio: ", this.props.dimension[0] / this.props.dimension[1])
+        console.log("Orginial ratio: ", this.props.imageDimension[0] / this.props.imageDimension[1])
         console.log("Window width: ", windowWidth);
         console.log("Window height: ", windowHeight);
         console.log("Area: ", imageWidth * imageHeight);
 
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
-                               imageSource={{uri: this.props.image_url}}
+                               imageSource={{uri: this.props.imageUrl}}
                                offsetX={imageWidth / 2} offsetY={imageHeight / 2}
         />
 

@@ -8,3 +8,5 @@ export const artworkDetails = "ArtworkDetails";
 
 export const NavParamAristId = "artistId";
 export const NavParamArtworkId = "artworkId";
+export const NavParamImageUrl = "imageUrl";
+export const NavParamImageDimension = "imageDimension";

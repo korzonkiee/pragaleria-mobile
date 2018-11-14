@@ -53,10 +53,12 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
         }
     }
 
-    private navigateCamera = (image_url: string, dimension: [number, number]) => {
+    private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
+        console.log(imageUrl);
+        console.log(imageDimension);
         this.props.navigation.navigate(Routes.camera, {
-            image_url: image_url,
-            dimension: dimension
+            imageUrl: imageUrl,
+            imageDimension: imageDimension
         });
     }
 }

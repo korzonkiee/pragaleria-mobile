@@ -13,7 +13,10 @@ export class Home extends Component<HomeProps> {
         return (
             <AppContainer>
                 <Button
-                    onPress={() => this.props.navigation.navigate(Routes.camera)}
+                    onPress={() => this.props.navigation.navigate(Routes.camera,{
+                        imageUrl: 'https://i.imgur.com/etjgJ2D.jpg',
+                        imageDimension: [100,100]
+                    })}
                     title="Camera tests"
                     color="#ff0000"
                 />
