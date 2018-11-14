@@ -8,6 +8,7 @@ declare interface Artwork {
     readonly year: string;
     readonly image_original: string;
     readonly image_thumbnail: string;
+    readonly meta: { dimension: [number, number] }
 }
 
 declare interface Artist {
@@ -39,7 +40,8 @@ declare interface ArtistsData {
 
 declare interface ArtistsState {
     readonly artists: ArtistsData;
-    readonly artistDetails: { readonly [id: number]: ArtistDetailsData}
+    readonly artistDetails: { readonly [id: number]: ArtistDetailsData }
 }
 
-declare interface AppState extends ArtistsState { }
+declare interface AppState extends ArtistsState {
+}

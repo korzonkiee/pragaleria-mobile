@@ -2,7 +2,6 @@ import React from "react";
 import { Text, Image, View, ImageBackground, WebView, TouchableWithoutFeedback } from "react-native";
 import styles from "./styles";
 import AppText from "../AppText";
-import { responsiveHeight, responsiveFontSize } from "../../Styles/Dimensions";
 import { l } from "../../Services/Language";
 
 export interface ArtworkItemProps {
