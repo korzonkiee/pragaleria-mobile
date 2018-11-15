@@ -1,0 +1,15 @@
+if: branch = dev
+language: bash
+services:
+  - docker
+
+before_script:
+  - ./docker/docker-login.sh
+  - source ./docker/common.sh
+
+script:
+  - ./docker/build.sh
+  - ./docker/deploy.sh
+
+after_script:
+  - ./docker/cleanup.sh
