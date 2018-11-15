@@ -1,8 +1,10 @@
+if: branch = dev
 language: bash
 services:
   - docker
 
 before_script:
+  - cd ./docker
   - ./docker-login.sh
   - source ./common.sh
 
