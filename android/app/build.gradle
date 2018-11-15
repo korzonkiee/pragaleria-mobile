@@ -189,6 +189,7 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.test
             applicationIdSuffix '.staging'
+            matchingFallbacks = ['debug']
         }
     }
     // applicationVariants are e.g. debug, release
