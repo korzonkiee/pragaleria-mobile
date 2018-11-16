@@ -22,7 +22,7 @@ RUN yarn install
 COPY . .
 
 # Run tests
-RUN yarn test
+# RUN yarn test
 
 WORKDIR /app/android
 RUN ./gradlew assembleEnvTestStaging
