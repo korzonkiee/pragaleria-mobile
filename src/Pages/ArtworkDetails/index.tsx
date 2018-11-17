@@ -39,11 +39,12 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         {this.props.artwork.sold &&
                         <AppText>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText>}
                     </View>
-                    {this.props.artwork.meta.dimension.length < 3 ? <Button
-                        onPress={() => this.navigateCamera(this.props.artwork.image_original, this.props.artwork.meta.dimension)}
-                        title="Przypasuj obraz."
-                        color="#ff0000"
-                    /> : <View/>}
+                    {this.props.artwork.meta.dimension.length < 3 ?
+                        <View style={{width: 200}}><Button
+                            onPress={() => this.navigateCamera(this.props.artwork.image_original, this.props.artwork.meta.dimension)}
+                            title="Przymierz obraz."
+                        /></View>
+                        : <View/>}
                     <WebViewCustomized font={DefaultAppFont} innerHtml={this.props.artwork.description}/>
                 </AppContainer>
             )
