@@ -119,7 +119,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -154,7 +154,7 @@ android {
                 storeFile file(System.env.TEST_KEYSTORE_LOCATION)
                 storePassword System.env.TEST_KEYSTORE_PASSWORD
                 keyAlias System.env.TEST_KEYSTORE_KEY_ALIAS
-                keyPassword System.env.TEST_KEYSTORE_KEY_PASSWORD
+                keyPassword System.env.TEST_KEYSTORE_PASSWORD
             }
         }
     }
@@ -166,30 +166,20 @@ android {
             include 'armeabi-v7a', 'x86'
         }
     }
-    flavorDimensions 'env'
-    productFlavors {
-        envProduction {
-            dimension 'env'
-        }
-        envTest {
-            dimension 'env'
-            applicationIdSuffix '.test'
-        }
-    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-            applicationIdSuffix '.debug'
-        }
         staging {
-            minifyEnabled false
+            minifyEnabled enableProguardInReleaseBuilds
             signingConfig signingConfigs.test
             applicationIdSuffix '.staging'
             matchingFallbacks = ['debug']
+        }
+        debug {
+            minifyEnabled false
+            applicationIdSuffix '.debug'
         }
     }
     // applicationVariants are e.g. debug, release

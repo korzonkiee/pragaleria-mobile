@@ -4,7 +4,7 @@ import axios, { AxiosRequestConfig, AxiosInstance } from "axios"
 
 let axiosRequestConfig: AxiosRequestConfig = {
     baseURL: BaseAddress,
-    timeout: 10_000
+    timeout: 10000
 };
 
 let axiosInstance: AxiosInstance = axios.create(axiosRequestConfig);

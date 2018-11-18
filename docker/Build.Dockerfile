@@ -25,7 +25,7 @@ COPY . .
 # RUN yarn test
 
 WORKDIR /app/android
-RUN ./gradlew assembleEnvTestStaging
+RUN ./gradlew assembleStaging
 
 # Copy to release image with only the images
 FROM alpine
@@ -33,4 +33,4 @@ FROM alpine
 RUN apk add --no-cache curl
 
 WORKDIR /app
-COPY --from=build-env /app/android/app/build/outputs/apk/envTest/staging/app-envTest-staging.apk ./envTest-staging.apk
+COPY --from=build-env /app/android/app/build/outputs/apk/staging/app-staging.apk ./app-staging.apk
