@@ -66,7 +66,7 @@ export default StyleSheet.create({
     errorBarTitle: {
         color: "white",
         fontSize: responsiveFontSize(1.8),
-        ...font({ family: "Poppins" }),
+        ...font({ family: "Montserrat" }),
         includeFontPadding: false
     }
 });

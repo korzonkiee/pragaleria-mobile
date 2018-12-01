@@ -1,9 +1,9 @@
 import { Platform } from "react-native";
 import { isIOS } from "../Helpers/PhoneHelpers";
 
-type AppFont = "Poppins";
-export const DefaultFontFamily: AppFont = "Poppins";
-export const DefaultAppFont: string = `${DefaultFontFamily}_Regular`;
+type AppFont = "Montserrat";
+export const DefaultFontFamily: AppFont = "Montserrat";
+export const DefaultAppFont: string = `${DefaultFontFamily}-Regular`;
 
 type AppFontWeight = "Thin" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "Black";
 type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
@@ -27,7 +27,7 @@ interface FontFamily {
 }
 
 const fonts: Fonts = {
-    Poppins: {
+    Montserrat: {
         weights: {
             Thin: "100",
             Light: "300",
@@ -53,7 +53,7 @@ export default function font(options: FontFamilyOptions): FontFamily {
         const suffix = options.weight || "";
 
         return {
-            fontFamily: family + (suffix.length > 0 ? `_${suffix}` : "_Regular")
+            fontFamily: family + (suffix.length > 0 ? `-${suffix}` : "-Regular")
         };
     }
 }
