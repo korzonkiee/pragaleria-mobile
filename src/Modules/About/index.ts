@@ -28,7 +28,7 @@ export function updateCounter() {
     }
 }
 
-export const homeReducers: ReducerMap<AppState, {}> = {
+export const aboutReducers: ReducerMap<AppState, {}> = {
     [updateCounterAction.toString()](state, _) {
         return {
             ...state,

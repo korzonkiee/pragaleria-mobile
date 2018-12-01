@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
-import { HomeProps, Home } from "./Home/index";
+import { AboutProps, About } from "./About/index";
 import { ThunkDispatch } from "../Helpers/StateHelpers";
-import { updateCounter } from "../Modules/Home";
+import { updateCounter } from "../Modules/About";
 
 export default connect(
-    (state: AppState): StateProps<HomeProps> => {
+    (state: AppState): StateProps<AboutProps> => {
         return {
         }
     },
-    (dispatch: ThunkDispatch): DispatchProps<HomeProps> => {
+    (dispatch: ThunkDispatch): DispatchProps<AboutProps> => {
         return {
             updateCounter() {
                 dispatch(updateCounter());
             }
         };
     }
-)(Home);
+)(About);

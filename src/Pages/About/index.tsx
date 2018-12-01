@@ -4,16 +4,16 @@ import AppContainer from '../../Components/AppContainer';
 import * as Routes from "../../Routes";
 import AppText from "../../Components/AppText";
 
-export interface HomeProps {
+export interface AboutProps {
 }
 
 
 
-export class Home extends Component<HomeProps> {
+export class About extends Component<AboutProps> {
     render() {
         return (
             <AppContainer>
-                <AppText>Home</AppText>
+                <AppText>About</AppText>
             </AppContainer>
         )
     }
