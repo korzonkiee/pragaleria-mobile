@@ -4,49 +4,58 @@ import {Component} from 'react'
 import * as Routes from './Routes';
 import * as colors from './Resources/Colors';
 import { store } from './Store';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { l } from './Services/Language';
-import Home from './Pages/Home';
+import About from './Pages/About';
 import Auctions from './Pages/Auctions';
 import Artists from './Pages/Artists';
 import Camera from './Pages/Camera';
+import Exhibitions from './Pages/Exhibitions';
 import SplashScreen from 'react-native-splash-screen'
-import {responsiveFontSize, responsiveHeight} from './Styles/Dimensions';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {responsiveFontSize} from './Styles/Dimensions';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import AppText from './Components/AppText';
-const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color="#000000" />;
+const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.LightGray} />;
 
 const MainStack = createMaterialBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}} >{l("BottomNavigation.Auctions")}</AppText>,
-      tabBarIcon: BottomIcon("gavel")
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.Auctions")}</AppText>,
+      tabBarIcon: BottomIcon("tag"),
+      tabBarColor: colors.Black
     }
   },
-  [Routes.home]: {
-    screen: Home,
+  [Routes.exhibitions]: {
+    screen: Exhibitions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}} >{l("BottomNavigation.Home")}</AppText>,
-      tabBarIcon: BottomIcon("home")
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.Exhibitions")}</AppText>,
+      tabBarIcon: BottomIcon("event"),
+      tabBarColor: colors.Black
     }
   },
   [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5)}}>{l("BottomNavigation.Artists")}</AppText>,
-      tabBarIcon: BottomIcon("paint-brush")
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}}>{l("BottomNavigation.Artists")}</AppText>,
+      tabBarIcon: BottomIcon("eyeglass"),
+      tabBarColor: colors.Black
+    }
+  },
+  [Routes.about]: {
+    screen: About,
+    navigationOptions: {
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.About")}</AppText>,
+      tabBarIcon: BottomIcon("info"),
+      tabBarColor: colors.Black
     }
   },
 }, {
-  initialRouteName: Routes.artists,
-  labeled: true,
-  barStyle: {
-    backgroundColor: "#FFFFFF",
-  }
+  initialRouteName: Routes.about,
+  labeled: true
 });
 
 const AppNavigator = createStackNavigator({

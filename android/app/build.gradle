@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf' ] // Name of the font files you want to copy
+    iconFontNames: ['SimpleLineIcons.ttf', 'Entypo.ttf'] // Name of the font files you want to copy
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
@@ -198,8 +198,8 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-splash-screen')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-splash-screen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-vector-icons')
@@ -208,11 +208,17 @@ dependencies {
     implementation 'com.bugfender.sdk:android:1.+'
     implementation 'net.hockeyapp.android:HockeySDK:5.1.0'
     implementation (project(':react-native-camera')) {
-            exclude group: "com.android.support"
-        }
+        exclude group: "com.android.support"
+    }
     implementation "com.android.support:exifinterface:+"
     implementation "com.android.support:support-annotations:+"
     implementation "com.android.support:support-v4:+"
     implementation project(':react-native-rear-camera-characteristics-display-metrics')
-    implementation project(':react-native-orientation')
+    implementation project(':react-native-orientation'),
+    implementation (project(':react-native-maps')){
+        exclude group: 'com.google.android.gms', module: 'play-services-base'
+        exclude group: 'com.google.android.gms', module: 'play-services-maps'
+    }
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }

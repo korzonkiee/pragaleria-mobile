@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { responsiveHeight } from '../../Styles/Dimensions';
+import { Black, LightGray } from '../../Resources/Colors';
 
 export default StyleSheet.create({
     artistContainer: {
@@ -15,10 +16,10 @@ export default StyleSheet.create({
     },
     artistName: {
         textAlign: 'center',
-        color: "#FFFFFF"
+        color: LightGray
     },
     artistNameBackground: {
-        backgroundColor: "#000000",
+        backgroundColor: Black,
         width: "100%"
     }
 });

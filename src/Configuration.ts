@@ -6,4 +6,3 @@ export const IsDebug = NativeModules.ConfigModule.IS_DEBUG as boolean;
 export const BaseAddress: string = (IsDebug == true ?
     "http://192.168.0.105/api" :
     "http://167.99.246.28/api");
-

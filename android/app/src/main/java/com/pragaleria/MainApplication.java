@@ -15,6 +15,7 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.reactlibrary.RNRearCameraCharacteristicsDisplayMetricsPackage;
 import com.github.yamill.orientation.OrientationPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
         new RNCameraPackage(),
         new RNRearCameraCharacteristicsDisplayMetricsPackage(),
         new OrientationPackage(),
+        new MapsPackage(),
         new PragaleriaPackage()
         );
     }
