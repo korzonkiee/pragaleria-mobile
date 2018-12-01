@@ -20,3 +20,6 @@ project(':react-native-rear-camera-characteristics-display-metrics').projectDir 
 
 include ':react-native-orientation', ':app'
 project(':react-native-orientation').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-orientation/android')
+
+include ':react-native-maps'
+project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')

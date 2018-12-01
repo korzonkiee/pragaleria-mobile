@@ -71,6 +71,14 @@
 		6A2729A6335C45EC9A2CC104 /* Poppins_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE3D69A7844577A6E48DB2 /* Poppins_Regular.ttf */; };
 		1FB267953F0440AB9A7158C4 /* Poppins_SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7A8B9185A594912A0B374AB /* Poppins_SemiBold.ttf */; };
 		2C11C55A32154B5E8ED48A53 /* Poppins_Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE0F424023704C1D9DF6D191 /* Poppins_Thin.ttf */; };
+		85E7AC9E273E4D80BE4BA422 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A757709EC2A4F2DB3745FF4 /* libAirMaps.a */; };
+		E38724A1D6194C3295E122F2 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E557BCD1C0D9448BB74641CD /* Montserrat-Black.ttf */; };
+		1D6583FA6AA84DB6BFC7A196 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB665B2CB1DC4A38B7DB7C0D /* Montserrat-Bold.ttf */; };
+		C774C6D544284960B520DA4A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */; };
+		9A913A3CE09F4D3F99D32039 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */; };
+		24CA77CD0F944375935A30C6 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0025ADE61F9A49B09BE63338 /* Montserrat-Regular.ttf */; };
+		39BC0A0994654CFFADAF0743 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E979AD62F6DF4BE8B3731D24 /* Montserrat-SemiBold.ttf */; };
+		E1979E96277E41D7A15DA6B3 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,6 +420,15 @@
 		7CEE3D69A7844577A6E48DB2 /* Poppins_Regular.ttf */ = {isa = PBXFileReference; name = "Poppins_Regular.ttf"; path = "../assets/fonts/Poppins_Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A7A8B9185A594912A0B374AB /* Poppins_SemiBold.ttf */ = {isa = PBXFileReference; name = "Poppins_SemiBold.ttf"; path = "../assets/fonts/Poppins_SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		EE0F424023704C1D9DF6D191 /* Poppins_Thin.ttf */ = {isa = PBXFileReference; name = "Poppins_Thin.ttf"; path = "../assets/fonts/Poppins_Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0C0B4D45857344A086F1A4D6 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; name = "AirMaps.xcodeproj"; path = "../node_modules/react-native-maps/lib/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9A757709EC2A4F2DB3745FF4 /* libAirMaps.a */ = {isa = PBXFileReference; name = "libAirMaps.a"; path = "libAirMaps.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		E557BCD1C0D9448BB74641CD /* Montserrat-Black.ttf */ = {isa = PBXFileReference; name = "Montserrat-Black.ttf"; path = "../assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BB665B2CB1DC4A38B7DB7C0D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; name = "Montserrat-Light.ttf"; path = "../assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0025ADE61F9A49B09BE63338 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E979AD62F6DF4BE8B3731D24 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */ = {isa = PBXFileReference; name = "Montserrat-Thin.ttf"; path = "../assets/fonts/Montserrat-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,6 +459,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				8145BE5A3DC442EDB013EB15 /* libSplashScreen.a in Frameworks */,
 				0DE0DFE3B27B488AA5D84738 /* libRNVectorIcons.a in Frameworks */,
+				85E7AC9E273E4D80BE4BA422 /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +649,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				823D4CEFE8734BDF8512CC68 /* SplashScreen.xcodeproj */,
 				C13D8E3E8B9F4DF7BCA52D0A /* RNVectorIcons.xcodeproj */,
+				0C0B4D45857344A086F1A4D6 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -713,6 +732,13 @@
 				7CEE3D69A7844577A6E48DB2 /* Poppins_Regular.ttf */,
 				A7A8B9185A594912A0B374AB /* Poppins_SemiBold.ttf */,
 				EE0F424023704C1D9DF6D191 /* Poppins_Thin.ttf */,
+				E557BCD1C0D9448BB74641CD /* Montserrat-Black.ttf */,
+				BB665B2CB1DC4A38B7DB7C0D /* Montserrat-Bold.ttf */,
+				4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */,
+				DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */,
+				0025ADE61F9A49B09BE63338 /* Montserrat-Regular.ttf */,
+				E979AD62F6DF4BE8B3731D24 /* Montserrat-SemiBold.ttf */,
+				3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1195,6 +1221,13 @@
 				6A2729A6335C45EC9A2CC104 /* Poppins_Regular.ttf in Resources */,
 				1FB267953F0440AB9A7158C4 /* Poppins_SemiBold.ttf in Resources */,
 				2C11C55A32154B5E8ED48A53 /* Poppins_Thin.ttf in Resources */,
+				E38724A1D6194C3295E122F2 /* Montserrat-Black.ttf in Resources */,
+				1D6583FA6AA84DB6BFC7A196 /* Montserrat-Bold.ttf in Resources */,
+				C774C6D544284960B520DA4A /* Montserrat-Light.ttf in Resources */,
+				9A913A3CE09F4D3F99D32039 /* Montserrat-Medium.ttf in Resources */,
+				24CA77CD0F944375935A30C6 /* Montserrat-Regular.ttf in Resources */,
+				39BC0A0994654CFFADAF0743 /* Montserrat-SemiBold.ttf in Resources */,
+				E1979E96277E41D7A15DA6B3 /* Montserrat-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1331,11 +1364,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Debug;
@@ -1359,11 +1394,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Release;
@@ -1387,6 +1424,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Debug;
@@ -1409,6 +1447,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Release;
@@ -1441,11 +1480,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Debug;
@@ -1478,11 +1519,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Release;
@@ -1514,11 +1557,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Debug;
@@ -1550,11 +1595,13 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
 				);
 			};
 			name = Release;

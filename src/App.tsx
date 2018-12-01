@@ -41,7 +41,7 @@ const MainStack = createMaterialBottomTabNavigator({
     screen: Artists,
     navigationOptions: {
       tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}}>{l("BottomNavigation.Artists")}</AppText>,
-      tabBarIcon: BottomIcon("social-instagram"),
+      tabBarIcon: BottomIcon("eyeglass"),
       tabBarColor: colors.Black
     }
   },
@@ -54,7 +54,7 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-  initialRouteName: Routes.artists,
+  initialRouteName: Routes.about,
   labeled: true
 });
 
