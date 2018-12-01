@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import styles from "./styles";
 import {responsiveFontSize} from '../../Styles/Dimensions';
 import { Black } from '../../Resources/Colors';
+import { l } from '../../Services/Language';
 import ViewMoreText from 'react-native-view-more-text';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
@@ -70,31 +71,23 @@ export class About extends Component<AboutProps> {
                 </View>
                 <ScrollView style={styles.content}>
                     {this.subtitleContainer(
-                        "Kontakt",
+                        l("About.Contact"),
                         [
-                            ["Adres: ", "Stalowa 3, 03-425 Warszawa"],
-                            ["Telefon: ", "Mikołaj Konopacki +48 884 79 88 52"],
-                            ["E-mail: ", "info@pragaleria.pl"],
+                            [l("About.Address"), l("About.AddressDescription")],
+                            [l("About.Telephone"), l("About.TelephoneDescription")],
+                            [l("About.Mail"), l("About.MailDescription")],
                         ]
                     )}
                     {this.subtitleContainer(
-                        "Godziny Otwarcia",
+                        l("About.OpeningHours"),
                         [
-                            ["Poniedziałek - piątek: ", "12:00 - 19:00"],
-                            ["Sobota: ", "11:00 - 16:00"],
+                            [l("About.MondayFriday"), l("About.MondayFridayHours")],
+                            [l("About.Saturday"), l("About.SaturdayHours")],
                         ]
                     )}
                     <ViewMoreText numberOfLines={1} renderViewMore={this.renderViewMore}>
                         <AppText style={styles.paragraph}>
-                            Pragaleria działa od marca 2015 roku i znajduje się na warszawskiej Pradze, niedaleko stacji Metro Dworzec Wileński.
-                            Profil galerii koncertuje się na szeroko pojętej sztuce współczesnej, ze szczególnym uwzględnieniem grafiki, zarówno
-                            w jej wydaniu cyfrowym, jak i tradycyjnym. Ten kierunek obrazują jej dwie pierwsze indywidualne wystawy: „1920 +”
-                            Jakuba Różalskiego – przykład malarstwa cyfrowego oraz „Akwaforta towarzyska” Kacpra Bożka – przykład użycia klasycznej
-                            techniki grafiki warsztatowej. W Pragalerii prezentowane są również wystawy malarstwa od streetartu, poprzez malarstwo figuratywne,
-                            aż do abstrakcji.Pragaleria jest miejscem organizacji regularnych aukcji dzieł sztuki współczesnej.
-                            Co dwa miesiące prezentowane są tu wystawy przedaukcyjne z cyklu Młoda Sztuka i Sztuka Aktualna,
-                            a także wystawy tematyczne m.in.: grafika cyfrowa, komiks streetart, ilustracja i fotografia.
-                            To pierwsza i jedyna galeria w Polsce prezentująca prace z kategorii game-development.
+                            {l("About.Description")}
                         </AppText>
                     </ViewMoreText>
                 </ScrollView>
