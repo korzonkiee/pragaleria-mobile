@@ -4,15 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import {
-    Platform,
-    View,
-    Image,
-    PanResponder,
-    Animated,
-    Dimensions,
-    TouchableOpacity
-} from 'react-native';
+import {Animated, Dimensions, Image, PanResponder, Platform, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 
 
@@ -103,26 +95,26 @@ export default class Draggable extends Component {
                 left: x != null ? x : (Window.width / 2 - renderWidth + offsetX)
             },
         });
-    }
+    };
     _dragItemCss = () => {
         const {renderWidth, renderHeight} = this.props;
         return {
             width: renderWidth,
             height: renderHeight
         };
-    }
+    };
     _getTextOrImage = () => {
         const {imageSource} = this.props;
         return (<Image style={this._dragItemCss()} source={imageSource}/>);
 
-    }
+    };
 
     reversePosition = () => {
         Animated.spring(
             this.state.pan,
             {toValue: {x: 0, y: 0}}
         ).start();
-    }
+    };
 
     render() {
         const touchableContent = this._getTextOrImage();

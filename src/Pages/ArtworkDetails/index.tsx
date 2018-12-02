@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import AppContainer from '../../Components/AppContainer';
-import {Text, Image, View, Button} from "react-native";
+import {Button, Image, View} from "react-native";
 import styles from "./styles";
 import AppHeader from '../../Components/AppHeader';
-import Logger from '../../Services/Logger';
 import DataNotFound from '../../Components/DataNotFound';
 import {l} from '../../Services/Language';
 import FadeIn from 'react-native-fade-in-image';
@@ -42,7 +41,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     {this.props.artwork.meta.dimension.length < 3 ?
                         <View style={{width: 200}}><Button
                             onPress={() => this.navigateCamera(this.props.artwork.image_original, this.props.artwork.meta.dimension)}
-                            title="Przymierz obraz."
+                            title={l("Artwork.VirtuallyHang")}
                         /></View>
                         : <View/>}
                     <WebViewCustomized font={DefaultAppFont} innerHtml={this.props.artwork.description}/>
@@ -55,8 +54,6 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
     }
 
     private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
-        console.log(imageUrl);
-        console.log(imageDimension);
         this.props.navigation.navigate(Routes.camera, {
             imageUrl: imageUrl,
             imageDimension: imageDimension

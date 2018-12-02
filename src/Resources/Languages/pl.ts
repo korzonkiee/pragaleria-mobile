@@ -6,6 +6,10 @@ export default {
 
     "Artwork.Year": "Rok",
     "Artwork.Price": "Sprzedano za",
+    "Artwork.VirtuallyHang": "Przymierz obraz",
+
+    "Camera.Hang": "Powieś",
+    "Camera.TakeAgain": "Wstecz",
 
     "Common.GenericErrorMessageWithRetry": "Wystąpił błąd połączenia. Naciśnij, aby ponowić próbę.",
     "Common.NetworkError": "Wystąpił błąd połączenia. Spróbuj ponownie",

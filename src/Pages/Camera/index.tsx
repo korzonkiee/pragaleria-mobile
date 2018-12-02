@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, Image, Modal as RNModal, TouchableOpacity, View, PixelRatio, Dimensions} from 'react-native'
+import {Dimensions, Modal as RNModal, Text, TouchableOpacity, View} from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -7,6 +7,7 @@ import {styles} from "./styles";
 import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import Orientation from 'react-native-orientation';
 import Draggable from './Draggable'
+import {l} from "../../Services/Language";
 
 export interface CameraProps {
     imageUrl: string,
@@ -17,18 +18,18 @@ const PORTRAIT = 'PORTRAIT';
 const LANDSCAPE = 'LANDSCAPE';
 
 export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps> {
-    private _cameraInstance: RNCamera | null;
+    private cameraInstance: RNCamera | null;
     private wallDistance = 200; // 200cm before wall
     private viewWidth: number;
     private viewHeight: number;
     private windowDimension = Dimensions.get('window');
 
-    save_icon = <Icon name="save" size={30} color="#900"/>;
 
     constructor(CameraProps) {
         super(CameraProps);
         this.state = {
-            image: null
+            image: null,
+            displayingCameraPreview: true
         }
     }
 
@@ -36,13 +37,10 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let ratios = this.getRatios();
         this.viewHeight = ratios[0];
         this.viewWidth = ratios[1];
-        Orientation.getOrientation((err, orientation) => {
-            this.setUpImage(orientation);
-        });
-        Orientation.addOrientationListener(this._orientationDidChange);
     }
 
     _orientationDidChange = (orientation: string) => {
+        this.setState({displayingCameraPreview: true});
         this.setUpImage(orientation);
     };
 
@@ -52,8 +50,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         if (orientation === PORTRAIT) {
             windowWidth = Math.min(this.windowDimension.height, this.windowDimension.width)
             windowHeight = Math.max(this.windowDimension.height, this.windowDimension.width)
-        }
-        else {
+        } else {
             windowWidth = Math.max(this.windowDimension.height, this.windowDimension.width)
             windowHeight = Math.min(this.windowDimension.height, this.windowDimension.width)
         }
@@ -81,7 +78,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         console.log("Height:", imageHeight, "/", windowHeight);
         console.log("Width:", imageWidth, "/", windowWidth);
         console.log("Height/Width ratio: ", imageHeight / imageWidth);
-        console.log("Orginial ratio: ", this.props.imageDimension[0] / this.props.imageDimension[1])
+        console.log("Orginial ratio: ", this.props.imageDimension[0] / this.props.imageDimension[1]);
         console.log("Window width: ", windowWidth);
         console.log("Window height: ", windowHeight);
         console.log("Area: ", imageWidth * imageHeight);
@@ -89,12 +86,26 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
                                imageSource={{uri: this.props.imageUrl}}
                                offsetX={imageWidth / 2} offsetY={imageHeight / 2}
-        />
+        />;
 
         this.setState({image: image})
     }
 
     render() {
+        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
+        let takePictureAgainIcon = <Icon name="undo" size={30} color="#ffffff"/>;
+        let takePhotoButton = <TouchableOpacity
+            onPress={this.takePicture.bind(this)}
+        >
+            {takePictureIcon}
+            <Text style={{color: 'white'}}>{l("Camera.Hang")}</Text>
+        </TouchableOpacity>;
+        let goBackButton = <TouchableOpacity
+            onPress={() => this.goBackPreview()}>
+            {takePictureAgainIcon}
+            <Text style={{color: 'white'}}>{l("Camera.TakeAgain")}</Text>
+        </TouchableOpacity>;
+
         return (
             <RNModal
                 animationType="fade"
@@ -103,22 +114,18 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                 onRequestClose={() => this.props.navigation.goBack()}>
                 <RNCamera
                     ref={ref => {
-                        this._cameraInstance = ref;
+                        this.cameraInstance = ref;
                     }}
                     style={styles.preview}
                     type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.on}
+                    flashMode={RNCamera.Constants.FlashMode.auto}
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 >
                 </RNCamera>
-                {this.state.image}
+                {!this.state.displayingCameraPreview && this.state.image}
                 <View style={styles.captureContainer}>
-                    <TouchableOpacity
-                        onPress={() => this.takePicture()}>
-                        {this.save_icon}
-                        <Text style={{color: 'white'}}>Save image</Text>
-                    </TouchableOpacity>
+                    {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
                 </View>
             </RNModal>
         )
@@ -135,10 +142,25 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         return [viewHeight, viewWidth]
     }
 
+    goBackPreview() {
+        this.cameraInstance.resumePreview();
+        this.setState({displayingCameraPreview: true, image: null});
+        Orientation.removeOrientationListener(this._orientationDidChange);
+    }
+
     takePicture = async function () {
-        const options = {quality: 0.5, base64: true}
-        const data = await this._cameraInstance.takePictureAsync(options);
-        console.log(data.uri);
+        const options = {
+            pauseAfterCapture: true,
+            base64: true
+        };
+        this.setState({displayingCameraPreview: false});
+        const image = await this.cameraInstance.takePictureAsync(options);
+        console.log(image);
+        Orientation.getOrientation((_, orientation) => {
+            this.setUpImage(orientation);
+        });
+        Orientation.addOrientationListener(this._orientationDidChange);
+
     };
 
     componentWillUnmount() {
