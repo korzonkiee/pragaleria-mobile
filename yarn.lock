@@ -590,6 +590,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.6.tgz#9c03d3fed70a8d517c191b7734da2879b50ca26c"
   integrity sha512-ZBFR7TROLVzCkswA3Fmqq+IIJt62/T7aY/Dmz+QkU7CaW2QFqAitCE8Ups7IzmGhcN1YWMBT4Qcoc07jU9hOJQ==
 
+"@types/react-native-modal@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-modal/-/react-native-modal-4.1.1.tgz#6621cf072927cdafc2a9cd7a5b951ace352c0cd0"
+  integrity sha512-Synwj+cdwhHOi9SFNmu7voLv3AQM24e3Hy78Qz7nNb6spkftkv0gtaZlIWMJ5G0pywcs08JFX/cve8vCWUX6xw==
+  dependencies:
+    react-native-modal "*"
+
 "@types/react-native-orientation@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-orientation/-/react-native-orientation-5.0.1.tgz#347f7041683249f9ca7386717aa4dd66b394d3fb"
@@ -599,6 +606,14 @@
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-snap-carousel/-/react-native-snap-carousel-3.7.1.tgz#26222d5d23cf1971f40c6b3ae71acdf709589f77"
   integrity sha512-x45p/1OEMZ+XIURCrPDMQmSSnAmrVpEoeH0JePaH6msWWudFeWo+54IFlTSLOcQBW8nThXdeTfAPG058D684hQ==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native-tab-view@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native-tab-view/-/react-native-tab-view-1.0.2.tgz#680c7969b0f5a1b3aaa3177c4ae35aeb81d0b1ff"
+  integrity sha512-SY6DgNZuaQgh/dfrgURe3Z6jzPS006fxvLcELqLNy0qvm0AAhbmyw0cZhx4/vtd9/7Uw0gNXgKkVK+CXixtdjA==
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
@@ -5379,7 +5394,7 @@ prompts@^0.1.9:
     clorox "^1.0.3"
     sisteransi "^0.1.1"
 
-prop-types@15.6.2, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@15.6.2, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -5511,6 +5526,13 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
+react-native-animatable@^1.2.4:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.0.tgz#b5c3940fc758cfd9b2fe54613a457c4b6962b46e"
+  integrity sha512-GGYEYvderfzPZcPnw7xov4nlRmi9d6oqcIzx0fGkUUsMshOQEtq5IEzFp3np0uTB9n8/gZIZcdbUPggVlVydMg==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-camera@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.4.3.tgz#71359ae8efdf372fb1b8b5ec72ecae1c6708da4b"
@@ -5556,6 +5578,14 @@ react-native-maps@^0.22.1:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.22.1.tgz#ce856e71970e872e596e6fa4773279cae2c4dcdd"
   integrity sha512-JjBpAXjzZY8AW4HTcAZxX+cGk6e6i+J5Vd//DViMUe0bRkKKv92ds1W9rqZ+o9PhUqdP++3DvKv0jrB05icqKA==
+
+react-native-modal@*, react-native-modal@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-7.0.1.tgz#120df1966f5da96e9d89bf384f22b79ab6ca97b1"
+  integrity sha512-I/BZ4ZkVLjD/wApvSjqp/w9+J100czFNGB+SNm3oYHKAfPfm5g1OoB9UQT6DvChmG4TiVX8kiDXTm8FNrbkWpQ==
+  dependencies:
+    prop-types "^15.6.1"
+    react-native-animatable "^1.2.4"
 
 react-native-orientation@^3.1.3:
   version "3.1.3"
@@ -5626,6 +5656,13 @@ react-native-tab-view@^1.0.0:
   dependencies:
     prop-types "^15.6.1"
 
+react-native-tab-view@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-1.3.1.tgz#f9932d6bd5ba7dad75ef9335a68f13d85ba5bd56"
+  integrity sha512-QNt6VkEW8SP1UJ7yjD5P4bOTWwHQfoIMD5CqnA06pcubdNwHR1NmjiNZsVnIvp5wAEVbW6yTHjLXOh1fzab4xg==
+  dependencies:
+    prop-types "^15.6.1"
+
 react-native-typescript-transformer@^1.2.10:
   version "1.2.10"
   resolved "https://registry.npmjs.org/react-native-typescript-transformer/-/react-native-typescript-transformer-1.2.10.tgz#6f76c1449028cdeafa184b533301ecd547367ed1"
@@ -5652,6 +5689,11 @@ react-native-view-more-text@^2.0.1:
   integrity sha512-MzFb5+RpCdhm8esf5O6Csw/KrBg6eKqACzv8czYLlewwKE2TvRB9sfb+PhK2K6pyWqJ8jh3KneTjFn3Kndr79Q==
   dependencies:
     prop-types "^15.5.7"
+
+react-native-webview-autoheight@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-webview-autoheight/-/react-native-webview-autoheight-1.0.6.tgz#08d6ece62877f5ef33ef857102193760085afc3a"
+  integrity sha512-M8t2Ccbfr49i3ow6aQq0ou1Hnbq5KGd5Uj0c6sj4iZHYzLYte6o3gjVUMYvQdZ8hQ/ejCtWud6hk5C7CGC5LaQ==
 
 react-native@0.56.1:
   version "0.56.1"

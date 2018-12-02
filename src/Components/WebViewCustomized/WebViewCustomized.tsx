@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import * as Nav from "react-navigation";
-import {WebView, View, Text, WebViewProps, NavState, WebViewHtmlSource} from "react-native";
+import {WebViewProps} from "react-native";
 import { isIOS } from '../../Helpers/PhoneHelpers';
+import WebViewAutoHeight from 'react-native-webview-autoheight';
 
 export interface WebViewCustomizedProps {
+    readonly backgroundColor: string;
     readonly font: string;
     readonly innerHtml: string;
 }
@@ -20,7 +21,6 @@ export default class WebViewCustomized extends Component<WebViewCustomizedProps 
 
         let fontFilePath = `file:///android_asset/fonts/${this.props.font}.ttf`;
         let html = `<html>
-
         <head>
             <style type="text/css">
                 @font-face {
@@ -29,19 +29,19 @@ export default class WebViewCustomized extends Component<WebViewCustomizedProps 
                 }
 
                 body {
+                    background-color: ${this.props.backgroundColor};
                     font-family: MyFont;
                     font-size: medium;
                 }
             </style>
         </head>
+        <body>${this.props.innerHtml}</body></html>`;
 
-        <body>` + this.props.innerHtml + `</body>
-
-        </html>`
         return (
-            <WebView
+            <WebViewAutoHeight
                 {...this.props}
                 source={{html: html, baseUrl: ""}}
+                startInLoadingState={true}
                 style={this.props.style}
             />
         );

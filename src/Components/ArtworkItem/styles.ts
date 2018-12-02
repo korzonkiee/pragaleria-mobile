@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
-import * as Colors from '../../Resources/Colors';
-import { responsiveHeight, responsiveFontSize } from '../../Styles/Dimensions';
+import { responsiveFontSize } from '../../Styles/Dimensions';
 import font from '../../Styles/Fonts';
+import { Black } from '../../Resources/Colors';
 
 export default StyleSheet.create({
     artworkContainer: {
@@ -12,18 +12,16 @@ export default StyleSheet.create({
         height: 150,
         marginTop: 8,
         marginBottom: 8,
-        marginLeft: 8
-    },
-    imageFade: {
-        backgroundColor: Colors.GreyLight
-    },
-    artworkImage: {
-        flex: 1,
-        alignSelf: 'stretch',
+        marginLeft: 8,
+        color: Black
     },
     artworkTitle: {
-        fontSize: responsiveFontSize(2),
-        ...font({ weight: 'SemiBold'}),
+        fontSize: responsiveFontSize(1.8),
+        ...font({ weight: 'Medium'}),
+        color: Black
+    },
+    artworkSubTitle: {
+        color: Black
     },
     artworkDescContainer: {
         flex: 1,

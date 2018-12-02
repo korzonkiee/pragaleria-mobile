@@ -4,6 +4,7 @@ const { height, width } = Dimensions.get("window");
 const maxScreenDiagonal = 750;
 
 export const screenWidth = width;
+export const screenHeight = height;
 
 export const responsiveHeight = (h: number) => {
     return height * (h / 100);

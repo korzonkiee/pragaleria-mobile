@@ -11,6 +11,9 @@ import * as colors from "../../Resources/Colors";
 import styles, { errorBarHeight } from "./styles";
 import AppText from "../AppText";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import SimpleIcon from "react-native-vector-icons/SimpleLineIcons";
+import Modal from "react-native-modal";
+import { White, LightGray, LightBlack } from '../../Resources/Colors';
 
 export interface AppHeaderStateProps {
     readonly isLoading: boolean;
@@ -35,9 +38,11 @@ interface AppHeaderOwnProps {
     readonly disableBackButtonWhenLoading?: boolean;
     readonly toolbarVisible?: boolean; // Visible by default
     readonly progressBarVisible?: boolean; // Visible by default
+    readonly modalContent?: any;
 }
 
 interface AppHeaderState {
+    modalVisible: boolean;
     readonly errorVisible: boolean;
     readonly errorAnimation: Animated.Value;
 }
@@ -49,6 +54,7 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
         super(props);
 
         this.state = {
+            modalVisible: false,
             errorVisible: false,
             errorAnimation: new Animated.Value(0)
         };
@@ -71,12 +77,38 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
         const onPressRight = this.props.onPressRight;
 
         return <View style={styles.headerContainer}>
+            {(this.props.modalContent !== undefined &&
+                <View style={styles.modalContainer}>
+                    <Modal isVisible={this.state.modalVisible} hideModalContentWhileAnimating={true}>
+                        <View style={styles.modalContent}>
+                            {this.props.modalContent}
+                            <View style= {{
+                                backgroundColor: White,
+                                borderTopColor: LightGray,
+                                borderTopWidth: 1,
+                                width: "100%"
+                            }}>
+                                <TouchableWithoutFeedback onPress={this.hideModal} >
+                                    <AppText style={{
+                                        fontSize: responsiveFontSize(2),
+                                        color: LightBlack,
+                                        padding: 16,
+                                        alignSelf: "flex-end"
+                                    }}>
+                                        ZAMKNIJ
+                                    </AppText>
+                                </TouchableWithoutFeedback>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+            )}
             {(this.props.toolbarVisible === undefined || this.props.toolbarVisible === true) &&
-            <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.Main }]}>
+            <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.White }]}>
                 <View style={styles.leftButton}>
                     {!this.props.leftButtonDisabled && <TouchableWithoutFeedback
                         onPress={this.props.disableBackButtonWhenLoading ? (this.props.isLoading ? undefined : onPressLeft) : onPressLeft} >
-                        { <Icon name={"arrow-back"} size={responsiveFontSize(3.5)} style={styles.buttonContent} />}
+                        { <Icon name={"arrow-back"} size={responsiveFontSize(3.3)} style={styles.buttonContent} />}
                     </TouchableWithoutFeedback>}
                 </View>
                 <View style={styles.title}>
@@ -84,8 +116,10 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
                     <AppText style={[styles.titleText, this.props.titleStyle]}>{this.props.title}</AppText>}
                 </View>
                 <View style={styles.rightButton}>
-                    {!this.props.rightButtonDisabled && <TouchableWithoutFeedback onPress={onPressRight}>
-                        <AppText numberOfLines={1} style={[styles.buttonContent, { fontSize: responsiveFontSize(1.8) }]}>{this.props.rightTitle}</AppText>
+                    {!this.props.rightButtonDisabled && <TouchableWithoutFeedback onPress={this.showModal}>
+                        <AppText numberOfLines={1} style={[styles.buttonContent, { fontSize: responsiveFontSize(1.8) }]}>
+                            <SimpleIcon name={"info"} size={responsiveFontSize(3)} style={styles.buttonContent} />
+                        </AppText>
                     </TouchableWithoutFeedback>}
                 </View>
             </View>}
@@ -111,6 +145,14 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
                         style={styles.loadingBar} />}
             </View>
         </View>;
+    }
+
+    private showModal = () => {
+        this.setState({ modalVisible: true });
+    }
+
+    private hideModal = () => {
+        this.setState({ modalVisible: false });
     }
 
     private goBack = () => {
