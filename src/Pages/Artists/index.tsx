@@ -9,6 +9,7 @@ import DataNotFound from '../../Components/DataNotFound';
 import * as Routes from '../../Routes';
 import { l } from '../../Services/Language';
 import ArtistsPlaceholder from '../../Components/Placeholders/AristsPlaceholder';
+import { Black, LightGrayHidden, LightBlack, DirtyWhite } from '../../Resources/Colors';
 
 
 export interface ArtistsProps {
@@ -36,24 +37,33 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                     retry={this.props.getArtists}/>)
         }
         else {
+            let properAuthors = artistsData.filter((artist) => {
+                return artist.image_thumbnail && artist.image_thumbnail !== "";
+            });
             return (
-                <AppContainer>
+                <AppContainer style={{
+                    backgroundColor: DirtyWhite,
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }}
+                    >
                     <FlatList
-                        data={artistsData}
+                        data={properAuthors}
                         keyExtractor={(item, _) => item.id.toString()}
                         renderItem={this.renderArtist}
-                        numColumns={2}
+                        numColumns={3}
                         ListFooterComponent={this.renderFooter()}
                         onEndReached={this.props.getArtists}
-                        onEndReachedThreshold={20}
+                        onEndReachedThreshold={40}
                     />
                 </AppContainer>
             )
         }
     }
 
-    private renderArtist = ({ item, index: number }: { item: Artist, index: number }) =>
+    private renderArtist = ({ item, index } : { item : Artist, index : number }) =>
         <ArtistItem
+            index={index}
             artist={item}
             onPress={() => this.navigateToArtist(item.id.toString())} />
 

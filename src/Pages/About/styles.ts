@@ -1,28 +1,33 @@
 import { StyleSheet } from 'react-native'
 import { responsiveFontSize, responsiveHeight } from '../../Styles/Dimensions';
-import { Black } from '../../Resources/Colors';
+import { Black, DirtyWhite, White } from '../../Resources/Colors';
 
 export default StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: DirtyWhite
     },
     titleContainer: {
+        backgroundColor: White,
         paddingLeft: 16,
         paddingRight: 16,
         borderBottomWidth: 1,
         borderBottomColor: Black,
-        flex: 1,
         flexDirection: "row",
         alignItems: "center",
-        maxHeight: 60
+        padding: 16
     },
     title: {
         color: Black,
         fontSize: responsiveFontSize(4),
-        flex: 5
+        flex: 5,
+        margin: 0,
+        padding: 0
     },
     link: {
         flex: 1,
+        margin: 0,
+        padding: 0
     },
     subtitle: {
         fontSize: responsiveFontSize(3),
@@ -36,19 +41,11 @@ export default StyleSheet.create({
     content: {
         paddingTop: 16,
         paddingLeft: 16,
-        paddingRight: 16,
-        marginBottom: 16
+        paddingRight: 16
     },
     paragraph: {
         color: Black,
         fontSize: responsiveFontSize(2),
         textAlign: "justify"
-    },
-    socialMedia: {
-        maxHeight: 40,
-        flex: 1,
-        justifyContent: "space-evenly",
-        flexDirection: "row"
-
     }
 })

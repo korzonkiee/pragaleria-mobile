@@ -6,7 +6,7 @@ import { ArtistDetails } from "../Pages/Artists/ArtistsDetails";
 const TAG: string = "API";
 
 export async function getArtists(page?: number): Promise<Artist[] | null> {
-    return await get<Artist[]>(`authors?page=${page ? page : 0}`);
+    return await get<Artist[]>(`authors?page=${page ? page : 0}&size=40`);
 }
 
 export async function getArtistDetails(id: number): Promise<ArtistDetails | null> {

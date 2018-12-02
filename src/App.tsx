@@ -18,43 +18,43 @@ import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import AppText from './Components/AppText';
-const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.LightGray} />;
+const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.Auctions")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.Auctions")}</AppText>,
       tabBarIcon: BottomIcon("tag"),
-      tabBarColor: colors.Black
+      tabBarColor: colors.White
     }
   },
   [Routes.exhibitions]: {
     screen: Exhibitions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.Exhibitions")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.Exhibitions")}</AppText>,
       tabBarIcon: BottomIcon("event"),
-      tabBarColor: colors.Black
+      tabBarColor: colors.White
     }
   },
   [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}}>{l("BottomNavigation.Artists")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}}>{l("BottomNavigation.Artists")}</AppText>,
       tabBarIcon: BottomIcon("eyeglass"),
-      tabBarColor: colors.Black
+      tabBarColor: colors.White
     }
   },
   [Routes.about]: {
     screen: About,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.LightGray}} >{l("BottomNavigation.About")}</AppText>,
+      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.About")}</AppText>,
       tabBarIcon: BottomIcon("info"),
-      tabBarColor: colors.Black
+      tabBarColor: colors.White
     }
   },
 }, {
-  initialRouteName: Routes.about,
+  initialRouteName: Routes.artists,
   labeled: true
 });
 
@@ -76,7 +76,10 @@ export default class App extends Component<{}> {
     render() {
         return (
             <Provider store={store}>
-                <AppNavigator />
+                <AppNavigator style={{
+                  borderTopWidth: 2,
+                  borderTopColor: colors.Gray
+                }}/>
             </Provider>
         );
     }
