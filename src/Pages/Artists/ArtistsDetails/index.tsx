@@ -23,8 +23,8 @@ export interface ArtistsDetailsProps {
 
 interface ArtistsDetailsState {
     readonly descriptionLoaded: boolean;
-    index: number;
-    routes: Array<any>;
+    readonly index: number;
+    readonly routes: Array<any>;
 }
 
 export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.NavigationInjectedProps, ArtistsDetailsState> {

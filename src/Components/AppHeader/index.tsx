@@ -42,7 +42,7 @@ interface AppHeaderOwnProps {
 }
 
 interface AppHeaderState {
-    modalVisible: boolean;
+    readonly modalVisible: boolean;
     readonly errorVisible: boolean;
     readonly errorAnimation: Animated.Value;
 }

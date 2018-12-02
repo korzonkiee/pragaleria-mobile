@@ -8,8 +8,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/react-native-modal": "^4.1.1",
-    "@types/react-native-tab-view": "^1.0.2",
     "axios": "^0.18.0",
     "react": "16.4.1",
     "react-native": "0.56.1",
@@ -44,6 +42,8 @@
     "@types/jest": "^23.1.4",
     "@types/react": "^16.4.6",
     "@types/react-native": "^0.57.9",
+    "@types/react-native-modal": "^4.1.1",
+    "@types/react-native-tab-view": "^1.0.2",
     "@types/react-native-orientation": "^5.0.1",
     "@types/react-native-snap-carousel": "^3.7.1",
     "@types/react-native-vector-icons": "^4.6.4",
