@@ -12,8 +12,9 @@ import styles, { errorBarHeight } from "./styles";
 import AppText from "../AppText";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SimpleIcon from "react-native-vector-icons/SimpleLineIcons";
-import Modal from "react-native-modal";
 import { White, LightGray, LightBlack } from '../../Resources/Colors';
+import AppModal from '../AppModal';
+
 
 export interface AppHeaderStateProps {
     readonly isLoading: boolean;
@@ -77,32 +78,7 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
         const onPressRight = this.props.onPressRight;
 
         return <View style={styles.headerContainer}>
-            {(this.props.modalContent !== undefined &&
-                <View style={styles.modalContainer}>
-                    <Modal isVisible={this.state.modalVisible} hideModalContentWhileAnimating={true}>
-                        <View style={styles.modalContent}>
-                            {this.props.modalContent}
-                            <View style= {{
-                                backgroundColor: White,
-                                borderTopColor: LightGray,
-                                borderTopWidth: 1,
-                                width: "100%"
-                            }}>
-                                <TouchableWithoutFeedback onPress={this.hideModal} >
-                                    <AppText style={{
-                                        fontSize: responsiveFontSize(2),
-                                        color: LightBlack,
-                                        padding: 16,
-                                        alignSelf: "flex-end"
-                                    }}>
-                                        {l("Modal.Close")}
-                                    </AppText>
-                                </TouchableWithoutFeedback>
-                            </View>
-                        </View>
-                    </Modal>
-                </View>
-            )}
+            {(this.props.modalContent !== undefined && <AppModal modalContent={this.props.modalContent} modalVisible={this.state.modalVisible} onPress={this.hideModal}/>)}
             {(this.props.toolbarVisible === undefined || this.props.toolbarVisible === true) &&
             <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.White }]}>
                 <View style={styles.leftButton}>
