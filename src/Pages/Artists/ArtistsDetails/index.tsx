@@ -11,8 +11,9 @@ import AppHeader from '../../../Components/AppHeader';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
 import { screenWidth, responsiveWidth } from '../../../Styles/Dimensions';
-import { White, Black, DirtyWhite, Yellow } from '../../../Resources/Colors';
+import { White, Black, DirtyWhite, Yellow, LightBlack } from '../../../Resources/Colors';
 import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
+import AppText from '../../../Components/AppText';
 
 
 export interface ArtistsDetailsProps {
@@ -36,8 +37,8 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             descriptionLoaded: false,
             index: 0,
             routes: [
-                { key: 'available', title: 'Dostępne' },
-                { key: 'sold', title: 'Sprzedane' },
+                { key: 'available', title: l("ArtistDetails.Available") },
+                { key: 'sold', title: l("ArtistDetails.Sold") },
             ],
         }
     }
@@ -112,7 +113,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             <TabBar
                 {...props}
                 indicatorStyle={{...props.indicatorStyle, backgroundColor: Yellow }}
-                labelStyle={{...props.labelStyle, fontFamily: 'Montserrat-Regular', color: Black}}
+                labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
                 style={{...props.style, backgroundColor: White, color: Black}}
                 bounces={false}
                 useNativeDriver={false}
@@ -121,9 +122,9 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
       };
 
     private renderArtworks = (artworks: Array<Artwork>) => {
-        let artworksList = <View />;
-        if (artworks) {
-            artworksList = (<FlatList
+        let viewContent;
+        if (artworks.length > 0) {
+            viewContent = (<FlatList
                 style={{
                     backgroundColor: DirtyWhite
                 }}
@@ -131,6 +132,14 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                 keyExtractor={(item, _) => item.id.toString()}
                 renderItem={this.renderArtwork}
                 numColumns={1} />);
+        } else {
+            viewContent = <AppText style={{
+                marginLeft: 16,
+                marginTop: 16,
+                color: LightBlack
+            }}>
+                {l("ArtistDetails.NoArtworksAvailable")}
+            </AppText>
         }
 
         return (
@@ -138,7 +147,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                 backgroundColor: DirtyWhite,
                 height: "100%"
             }}>
-                {artworksList}
+                {viewContent}
             </View>
         );
     };

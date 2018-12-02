@@ -95,7 +95,7 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
                                         padding: 16,
                                         alignSelf: "flex-end"
                                     }}>
-                                        ZAMKNIJ
+                                        {l("Modal.Close")}
                                     </AppText>
                                 </TouchableWithoutFeedback>
                             </View>
