@@ -6,5 +6,9 @@ export const initialState: AppState = {
         page: 0,
         loading: false
     },
+    auctions: {
+        data: [],
+        loading: false
+    },
     artistDetails: {}
 };

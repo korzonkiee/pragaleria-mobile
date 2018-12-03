@@ -4,6 +4,7 @@ import AppText from "../AppText";
 import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
 
 // import font from "../../Helpers/Fonts";
+import { Black } from '../../Resources/Colors';
 
 interface DataNotFoundProps extends TextProps {
     readonly message: string
@@ -19,6 +20,7 @@ export default class DataNotFound extends React.Component<DataNotFoundProps> {
                 alignItems: 'center',
                 textAlign: 'center',
                 textAlignVertical: 'center',
+                color: Black,
                 margin: responsiveWidth(3),
                 fontSize: responsiveFontSize(3.5)}}>
                     {this.props.message}

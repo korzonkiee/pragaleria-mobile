@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
-import { FlatList, Image, Text, StyleSheet, TouchableWithoutFeedback, View, ImageBackground, ActivityIndicator } from 'react-native'
+import { FlatList } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
 import { ArtistItem } from '../../Components/ArtistItem';
 import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
