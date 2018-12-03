@@ -34,5 +34,13 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         resizeMode: 'contain',
     },
-    captureBtn: {}
+    slider:{
+        position: 'absolute',
+        top:300, //todo for every screen
+        right: -200,
+        width:500,
+        transform: [
+            { rotateZ : '-90deg' },
+        ],
+    }
 });

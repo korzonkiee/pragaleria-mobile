@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Dimensions, Modal as RNModal, Text, TouchableOpacity, View} from 'react-native'
+import {AppState, Dimensions, Modal as RNModal, Slider, Text, TouchableOpacity, View} from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -19,7 +19,6 @@ const LANDSCAPE = 'LANDSCAPE';
 
 export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps> {
     private cameraInstance: RNCamera | null;
-    private wallDistance = 200; // 200cm before wall
     private viewWidth: number;
     private viewHeight: number;
     private windowDimension = Dimensions.get('window');
@@ -29,7 +28,9 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         super(CameraProps);
         this.state = {
             image: null,
-            displayingCameraPreview: true
+            displayingCameraPreview: true,
+            appState: AppState.currentState,
+            wallDistance: 200
         }
     }
 
@@ -58,7 +59,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     setUpImage(orientation: string) {
-        console.log(orientation);
+        // console.log(orientation);
         let windowDimension = this.getWindowSize(orientation);
         let windowHeight = windowDimension[0];
         let windowWidth = windowDimension[1];
@@ -123,6 +124,15 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     permissionDialogMessage={'We need your permission to use your camera phone'}
                 >
                 </RNCamera>
+                <Slider
+                    style={styles.slider}
+                    step={1}
+                    minimumValue={50}
+                    maximumValue={500}
+                    value={200}
+                    onValueChange={val => console.log("val1", val)}
+                    onSlidingComplete={val => console.log("val2", val)}
+                />
                 {!this.state.displayingCameraPreview && this.state.image}
                 <View style={styles.captureContainer}>
                     {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
@@ -137,8 +147,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let sensorHeight = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_HEIGHT; // 3.9334399700164795
         let horizonalAngle = (2 * Math.atan(sensorWidth / (focal * 2)));
         let verticalAngle = (2 * Math.atan(sensorHeight / (focal * 2)));
-        let viewWidth = 2 * Math.tan(horizonalAngle / 2) * this.wallDistance;
-        let viewHeight = 2 * Math.tan(verticalAngle / 2) * this.wallDistance;
+        let viewWidth = 2 * Math.tan(horizonalAngle / 2) * this.state.wallDistance;
+        let viewHeight = 2 * Math.tan(verticalAngle / 2) * this.state.wallDistance;
         return [viewHeight, viewWidth]
     }
 
@@ -146,6 +156,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         this.cameraInstance.resumePreview();
         this.setState({displayingCameraPreview: true, image: null});
         Orientation.removeOrientationListener(this._orientationDidChange);
+        AppState.removeEventListener('change', this._handleAppStateChange);
     }
 
     takePicture = async function () {
@@ -160,7 +171,15 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             this.setUpImage(orientation);
         });
         Orientation.addOrientationListener(this._orientationDidChange);
+        AppState.addEventListener('change', this._handleAppStateChange);
 
+    };
+
+    _handleAppStateChange = (nextAppState) => {
+        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+            this.goBackPreview();
+        }
+        this.setState({appState: nextAppState});
     };
 
     componentWillUnmount() {
