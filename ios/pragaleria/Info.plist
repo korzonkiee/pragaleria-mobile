@@ -39,7 +39,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -53,37 +53,9 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Poppins-Black.ttf</string>
-		<string>Poppins-Bold.ttf</string>
-		<string>Poppins-Light.ttf</string>
-		<string>Poppins-Medium.ttf</string>
-		<string>Poppins-Regular.ttf</string>
-		<string>Poppins-SemiBold.ttf</string>
-		<string>Poppins-Thin.ttf</string>
-		<string>RobinFood.ttf</string>
-		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
-		<string>EvilIcons.ttf</string>
-		<string>Feather.ttf</string>
-		<string>FontAwesome.ttf</string>
-		<string>FontAwesome5_Brands.ttf</string>
-		<string>FontAwesome5_Regular.ttf</string>
-		<string>FontAwesome5_Solid.ttf</string>
-		<string>Foundation.ttf</string>
-		<string>Ionicons.ttf</string>
-		<string>MaterialCommunityIcons.ttf</string>
 		<string>MaterialIcons.ttf</string>
-		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
-		<string>Zocial.ttf</string>
-		<string>Poppins.ttf</string>
-		<string>Poppins_Black.ttf</string>
-		<string>Poppins_Bold.ttf</string>
-		<string>Poppins_Light.ttf</string>
-		<string>Poppins_Medium.ttf</string>
-		<string>Poppins_Regular.ttf</string>
-		<string>Poppins_SemiBold.ttf</string>
-		<string>Poppins_Thin.ttf</string>
 		<string>Montserrat-Black.ttf</string>
 		<string>Montserrat-Bold.ttf</string>
 		<string>Montserrat-Light.ttf</string>
