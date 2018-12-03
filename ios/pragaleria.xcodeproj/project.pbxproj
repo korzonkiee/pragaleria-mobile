@@ -51,7 +51,6 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		C774C6D544284960B520DA4A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */; };
 		E1979E96277E41D7A15DA6B3 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */; };
-<<<<<<< HEAD
 		7C2F69E61BA7486696665B11 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A4BBF18022843FFABA4A2A8 /* libRNGestureHandler.a */; };
 		0DA3240C89DD49EDBFA9298E /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5333E2808C4AACBB46348A /* libRNCamera.a */; };
 		82528878B1024DFBB4AE06F0 /* libRNMail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECD6390040F14E6180D21DEA /* libRNMail.a */; };
@@ -60,9 +59,7 @@
 		4D20521FBAC4422B92F19E3A /* libRNRearCameraCharacteristicsDisplayMetrics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A29FDA89A99C4B478C8B259C /* libRNRearCameraCharacteristicsDisplayMetrics.a */; };
 		FB24A283B86844A1B73C07FC /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE13A8B023A4A0DB279126E /* libRNSVG.a */; };
 		7358EC0103D24D25AF3D119D /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A173D1F5E94867935C141C /* libRNSVG-tvOS.a */; };
-=======
 		E38724A1D6194C3295E122F2 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E557BCD1C0D9448BB74641CD /* Montserrat-Black.ttf */; };
->>>>>>> Refernce smaller set of reicon/font resources
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -407,7 +404,6 @@
 		8A0FA9A8E0E84DF58A2E51DD /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		9A757709EC2A4F2DB3745FF4 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		823D4CEFE8734BDF8512CC68 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; name = "SplashScreen.xcodeproj"; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		3D0F70C9F1E24AF3A7A298B3 /* libSplashScreen.a */ = {isa = PBXFileReference; name = "libSplashScreen.a"; path = "libSplashScreen.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		C13D8E3E8B9F4DF7BCA52D0A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; name = "RNVectorIcons.xcodeproj"; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
@@ -467,14 +463,12 @@
 		8C2ECFBBCA59472F84F855A6 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9BE13A8B023A4A0DB279126E /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		36A173D1F5E94867935C141C /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-=======
 		BB665B2CB1DC4A38B7DB7C0D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		C13D8E3E8B9F4DF7BCA52D0A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		DAEF03CB8B0F4EF38C89E114 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		E557BCD1C0D9448BB74641CD /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
 		E979AD62F6DF4BE8B3731D24 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
->>>>>>> Refernce smaller set of reicon/font resources
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1454,7 +1448,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1466,11 +1459,9 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
-=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
->>>>>>> Refernce smaller set of reicon/font resources
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pragaleria.app/pragaleria";
@@ -1506,7 +1497,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1518,11 +1508,9 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
-=======
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
->>>>>>> Refernce smaller set of reicon/font resources
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pragaleria.app/pragaleria";
@@ -1550,7 +1538,6 @@
 				);
 				PRODUCT_NAME = pragaleria;
 				VERSIONING_SYSTEM = "apple-generic";
-<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1563,8 +1550,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Debug;
 		};
@@ -1588,7 +1573,6 @@
 				);
 				PRODUCT_NAME = pragaleria;
 				VERSIONING_SYSTEM = "apple-generic";
-<<<<<<< HEAD
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1601,8 +1585,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Release;
 		};
@@ -1642,7 +1624,6 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
-<<<<<<< HEAD
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1670,8 +1651,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Debug;
 		};
@@ -1711,7 +1690,6 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
-<<<<<<< HEAD
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1739,8 +1717,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Release;
 		};
@@ -1779,7 +1755,6 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pragaleria-tvOS.app/pragaleria-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-<<<<<<< HEAD
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1807,8 +1782,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Debug;
 		};
@@ -1847,7 +1820,6 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pragaleria-tvOS.app/pragaleria-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
-<<<<<<< HEAD
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1875,8 +1847,6 @@
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
-=======
->>>>>>> Refernce smaller set of reicon/font resources
 			};
 			name = Release;
 		};
