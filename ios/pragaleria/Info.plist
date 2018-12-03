@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>is_debug</key>
-	<true />
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -41,7 +41,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -66,5 +66,7 @@
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>Montserrat-Thin.ttf</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access for the camera</string>
 </dict>
 </plist>
