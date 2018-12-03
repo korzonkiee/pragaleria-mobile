@@ -5690,11 +5690,6 @@ react-native-view-more-text@^2.0.1:
   dependencies:
     prop-types "^15.5.7"
 
-react-native-webview-autoheight@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-native-webview-autoheight/-/react-native-webview-autoheight-1.0.6.tgz#08d6ece62877f5ef33ef857102193760085afc3a"
-  integrity sha512-M8t2Ccbfr49i3ow6aQq0ou1Hnbq5KGd5Uj0c6sj4iZHYzLYte6o3gjVUMYvQdZ8hQ/ejCtWud6hk5C7CGC5LaQ==
-
 react-native@0.56.1:
   version "0.56.1"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.56.1.tgz#8d60e2a989b0a620486a68f5f7e1b451557a0e54"

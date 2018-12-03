@@ -10,9 +10,7 @@ import { l } from '../../../Services/Language';
 import AppHeader from '../../../Components/AppHeader';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
-import { screenWidth, responsiveWidth } from '../../../Styles/Dimensions';
 import { White, Black, DirtyWhite, Yellow, LightBlack } from '../../../Resources/Colors';
-import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
 import AppText from '../../../Components/AppText';
 
 
@@ -83,11 +81,9 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                         title={artist.name}
                         modalContent={
                             <ScrollView>
-                                <WebViewCustomized
-                                backgroundColor={DirtyWhite}
-                                font={DefaultAppFont}
-                                style={{width: screenWidth - responsiveWidth(10)}}
-                                innerHtml={artist.description} />
+                                <AppText style={{color: Black, textAlign: 'justify', margin: 8}}>
+                                    {artist.description}
+                                </AppText>
                             </ScrollView>
                         }
                         withBackground />
