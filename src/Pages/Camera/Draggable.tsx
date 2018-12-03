@@ -100,7 +100,7 @@ export default class Draggable extends Component {
         const {renderWidth, renderHeight} = this.props;
         return {
             width: renderWidth,
-            height: renderHeight
+            height: renderHeight,
         };
     };
     _getTextOrImage = () => {
