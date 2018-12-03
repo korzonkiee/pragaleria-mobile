@@ -29,4 +29,11 @@ export default {
     "About.AddressDescription": "Stalowa 3, 03-425 Warszawa",
     "About.TelephoneDescription": "Mikołaj Konopacki +48 884 79 88 52",
     "About.MailDescription": "info@pragaleria.pl",
+
+    "ArtistDetails.Available": "Dostępne",
+    "ArtistDetails.Sold": "Sprzedane",
+    "ArtistDetails.NoArtworksAvailable": "Brak dostępnych dzieł",
+
+    "Modal.Close": "ZAMKNIJ",
+
 }

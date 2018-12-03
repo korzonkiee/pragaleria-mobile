@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import * as Nav from "react-navigation";
 import * as Routes from "../../../Routes";
 import { DefaultAppFont } from "../../../Styles/Fonts";
-import { FlatList, WebView, NavState, View } from 'react-native'
+import { FlatList, View, ScrollView } from 'react-native';
 import AppContainer from '../../../Components/AppContainer';
 import { ArtworkItem } from '../../../Components/ArtworkItem';
 import DataNotFound from '../../../Components/DataNotFound';
 import { l } from '../../../Services/Language';
 import AppHeader from '../../../Components/AppHeader';
-import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
-import Placeholder from 'rn-placeholder'
+import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
-
+import { screenWidth, responsiveWidth } from '../../../Styles/Dimensions';
+import { White, Black, DirtyWhite, Yellow, LightBlack } from '../../../Resources/Colors';
+import WebViewCustomized from '../../../Components/WebViewCustomized/WebViewCustomized';
+import AppText from '../../../Components/AppText';
 
 
 export interface ArtistsDetailsProps {
@@ -21,6 +23,8 @@ export interface ArtistsDetailsProps {
 
 interface ArtistsDetailsState {
     readonly descriptionLoaded: boolean;
+    readonly index: number;
+    readonly routes: Array<any>;
 }
 
 export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.NavigationInjectedProps, ArtistsDetailsState> {
@@ -30,7 +34,12 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
         super(props);
 
         this.state = {
-            descriptionLoaded: false
+            descriptionLoaded: false,
+            index: 0,
+            routes: [
+                { key: 'available', title: l("ArtistDetails.Available") },
+                { key: 'sold', title: l("ArtistDetails.Sold") },
+            ],
         }
     }
 
@@ -57,40 +66,96 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             return (<DataNotFound retry={this.props.getArtistDetails} message={l("Common.GenericErrorMessageWithRetry")}/>)
         }
         else {
+            let availableArtworks : Array<any>;
+            let soldArtworks : Array<any>;
+            if (artist) {
+                availableArtworks = artist.artworks.filter(artwork => {
+                    return artwork.sold === false;
+                });
+                soldArtworks = artist.artworks.filter(artwork => {
+                    return artwork.sold === true;
+                });
+            }
             return (
                 <AppContainer style={{flex: 1}}>
                     { artist && <>
                     <AppHeader
                         title={artist.name}
+                        modalContent={
+                            <ScrollView>
+                                <WebViewCustomized
+                                backgroundColor={DirtyWhite}
+                                font={DefaultAppFont}
+                                style={{width: screenWidth - responsiveWidth(10)}}
+                                innerHtml={artist.description} />
+                            </ScrollView>
+                        }
                         withBackground />
-                    <FlatList
-                        data={artist.artworks}
-                        keyExtractor={(item, _) => item.id.toString()}
-                        ListHeaderComponent={this.renderAristDescription()}
-                        renderItem={this.renderArtwork}
-                        numColumns={1} />
+                    <TabView
+                        navigationState={this.state}
+                        renderTabBar={this._renderTabBar}
+                        onIndexChange={this._handleIndexChange}
+                        renderScene={SceneMap({
+                            available: () => this.renderArtworks(availableArtworks),
+                            sold: () => this.renderArtworks(soldArtworks),
+                        })}
+                    />
                     </> }
                 </AppContainer>
             )
         }
     }
 
+    private _handleIndexChange = (index: any) => this.setState({ index });
+
+    private _renderTabBar = (props: any) => {
+        return (
+            <TabBar
+                {...props}
+                indicatorStyle={{...props.indicatorStyle, backgroundColor: Yellow }}
+                labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
+                style={{...props.style, backgroundColor: White, color: Black}}
+                bounces={false}
+                useNativeDriver={false}
+            />
+        )
+      };
+
+    private renderArtworks = (artworks: Array<Artwork>) => {
+        let viewContent;
+        if (artworks.length > 0) {
+            viewContent = (<FlatList
+                style={{
+                    backgroundColor: DirtyWhite
+                }}
+                data={artworks}
+                keyExtractor={(item, _) => item.id.toString()}
+                renderItem={this.renderArtwork}
+                numColumns={1} />);
+        } else {
+            viewContent = <AppText style={{
+                marginLeft: 16,
+                marginTop: 16,
+                color: LightBlack
+            }}>
+                {l("ArtistDetails.NoArtworksAvailable")}
+            </AppText>
+        }
+
+        return (
+            <View style={{
+                backgroundColor: DirtyWhite,
+                height: "100%"
+            }}>
+                {viewContent}
+            </View>
+        );
+    };
+
     private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => {
         return (<ArtworkItem
             onPress={() => this.navigateToArtwork(this.artistId, item.id)}
             artwork={item} />)
-    }
-
-    private renderAristDescription = () => {
-        if (this.props.artist && this.props.artist.data) {
-            return (
-                <WebViewCustomized
-                    font={DefaultAppFont}
-                    style={{flex: 1, height: 240}}
-                    innerHtml={this.props.artist.data.description} />);
-        } else {
-            return null;
-        }
     }
 
     private navigateToArtwork = (artistId: number, artworkId: number) => {

@@ -1,25 +1,28 @@
 import { StyleSheet } from 'react-native'
-import { responsiveHeight } from '../../Styles/Dimensions';
-import { Black, LightGray } from '../../Resources/Colors';
+import { responsiveHeight, responsiveFontSize } from '../../Styles/Dimensions';
+import { BlackTransparent, LightGrayVisible, LightGrayHidden, White } from '../../Resources/Colors';
 
 export default StyleSheet.create({
     artistContainer: {
         flex: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
-        height: responsiveHeight(25)
+        marginBottom: 2
     },
     artistImage: {
-        flex: 1,
-        alignItems: 'center',
+        flex:1,
         justifyContent: 'flex-end',
-    },
-    artistName: {
-        textAlign: 'center',
-        color: LightGray
+        alignSelf: 'center',
+        height: responsiveHeight(20),
+        width: "100%",
     },
     artistNameBackground: {
-        backgroundColor: Black,
-        width: "100%"
+        backgroundColor: BlackTransparent
+    },
+    artistName: {
+        color: White,
+        fontSize: responsiveFontSize(1.7),
+        fontWeight: "400",
+        marginLeft: 8
     }
 });

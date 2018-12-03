@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { responsiveHeight, responsiveFontSize } from "../../Styles/Dimensions";
 import { styleForIOS } from "../../Helpers/PhoneHelpers";
 import font from "../../Styles/Fonts";
+import { Black, LightGray, DirtyWhite } from '../../Resources/Colors';
 
 export const headerHeight = Math.min(responsiveHeight(8.5), 56); // 56
 const loaderHeight = 4;
@@ -18,6 +19,8 @@ export default StyleSheet.create({
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: LightGray
     },
     leftButton: {
         flexDirection: "row",
@@ -30,7 +33,7 @@ export default StyleSheet.create({
     },
     buttonContent: {
         paddingHorizontal: 16,
-        color: "white",
+        color: Black,
         alignSelf: "center",
         letterSpacing: 2,
         ...styleForIOS({ lineHeight: headerHeight })
@@ -41,12 +44,11 @@ export default StyleSheet.create({
         alignSelf: "stretch"
     },
     titleIcon: {
-        color: "white",
+        color: Black,
         fontSize: responsiveFontSize(3.3)
     },
     titleText: {
-        color: "white",
-        letterSpacing: 4,
+        color: Black,
         textAlign: "center",
         fontSize: responsiveFontSize(2.3),
         ...styleForIOS({ lineHeight: headerHeight })
@@ -64,9 +66,20 @@ export default StyleSheet.create({
         alignItems: "center"
     },
     errorBarTitle: {
-        color: "white",
+        color: Black,
         fontSize: responsiveFontSize(1.8),
         ...font({ family: "Montserrat" }),
         includeFontPadding: false
-    }
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modalContent: {
+        backgroundColor: DirtyWhite,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: 8
+    },
 });
