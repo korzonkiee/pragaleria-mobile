@@ -54,7 +54,7 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-  initialRouteName: Routes.artists,
+  initialRouteName: Routes.auctions,
   labeled: true
 });
 

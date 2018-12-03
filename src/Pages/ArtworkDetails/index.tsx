@@ -6,11 +6,10 @@ import AppHeader from '../../Components/AppHeader';
 import DataNotFound from '../../Components/DataNotFound';
 import {l} from '../../Services/Language';
 import FadeIn from 'react-native-fade-in-image';
-import WebViewCustomized from '../../Components/WebViewCustomized/WebViewCustomized';
-import {DefaultAppFont} from '../../Styles/Fonts';
 import AppText from '../../Components/AppText';
 import * as Routes from "../../Routes";
 import * as Nav from "react-navigation";
+import { Black } from '../../Resources/Colors';
 
 
 export interface ArtworkDetailsProps {
@@ -44,7 +43,9 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                             title={l("Artwork.VirtuallyHang")}
                         /></View>
                         : <View/>}
-                    <WebViewCustomized font={DefaultAppFont} innerHtml={this.props.artwork.description}/>
+                    <AppText style={{color: Black}}>
+                        {this.props.artwork.description}
+                    </AppText>
                 </AppContainer>
             )
         } else {

@@ -17,8 +17,8 @@ export async function getExhibitions(): Promise<Artist[] | null> {
     return await get<Artist[]>("exhibitions");
 }
 
-export async function getAuctions(): Promise<Artist[] | null> {
-    return await get<Artist[]>("auctions");
+export async function getAuctions(): Promise<Auction[] | null> {
+    return await get<Auction[]>("auctions");
 }
 
 function mock() {
