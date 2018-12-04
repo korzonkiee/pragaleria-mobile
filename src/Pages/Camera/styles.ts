@@ -34,13 +34,19 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         resizeMode: 'contain',
     },
-    slider:{
+    slider: {
         position: 'absolute',
-        top:300, //todo for every screen
-        right: -200,
-        width:500,
+        top: 350, //todo for every screen
+        right: -150,
+        width: 350,
         transform: [
-            { rotateZ : '-90deg' },
+            {rotateZ: '-90deg'},
         ],
+    },
+    distanceText: {
+        position: 'absolute',
+        right: 10,
+        top: 530,
+        color: '#fff'
     }
 });
