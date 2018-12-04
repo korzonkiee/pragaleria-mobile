@@ -1,7 +1,11 @@
 platform :ios, '10.0'
 
 target 'pragaleria' do
+    pod 'react-native-rear-camera-characteristics-display-metrics', path '../node_modules/react-native-rear-camera-characteristics-display-metrics'
+    pod 'react-native-camera', path: '../node_modules/react-native-camera'
+
     pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+    
     pod 'React', path: '../node_modules/react-native', :subspecs => [
         'Core',
         'RCTActionSheet',
