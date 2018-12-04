@@ -19,10 +19,7 @@ const LANDSCAPE = 'LANDSCAPE';
 
 export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps> {
     private cameraInstance: RNCamera | null;
-    private viewWidth: number;
-    private viewHeight: number;
     private windowDimension = Dimensions.get('window');
-
 
     constructor(CameraProps) {
         super(CameraProps);
@@ -37,7 +34,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     componentDidMount() {
         let ratios = this.getRatios();
         this.viewHeight = ratios[0];
-        this.viewWidth = ratios[1];
+        this.viewWidth= ratios[1];
     }
 
     _orientationDidChange = (orientation: string) => {
@@ -70,6 +67,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             viewWidth = this.viewHeight;
             viewHeight = this.viewWidth;
         }
+        viewHeight = this.state.wallDistance * viewHeight;
+        viewWidth = this.state.wallDistance * viewWidth;
         let pixelCmAvg = (viewHeight / windowHeight + viewWidth / windowWidth) / 2;
         let imageHeight = this.props.imageDimension[0] / pixelCmAvg;
         let imageWidth = this.props.imageDimension[1] / pixelCmAvg;
@@ -129,10 +128,10 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     step={1}
                     minimumValue={50}
                     maximumValue={500}
-                    value={200}
-                    onValueChange={val => console.log("val1", val)}
-                    onSlidingComplete={val => console.log("val2", val)}
+                    value={this.state.wallDistance}
+                    onValueChange={val => this.sliderOnValueChange(val)}
                 />
+                <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
                 {!this.state.displayingCameraPreview && this.state.image}
                 <View style={styles.captureContainer}>
                     {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
@@ -141,14 +140,24 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         )
     }
 
+    sliderOnValueChange(val: number) {
+        this.setState({wallDistance: val});
+        if (!this.displayingCameraPreview) {
+            Orientation.getOrientation((_, orientation) => {
+                this.setUpImage(orientation);
+            });
+        }
+    }
+
     getRatios(): [number, number] {
         let focal = RNRearCameraCharacteristicsDisplayMetrics.FOCAL_LENGTH; // 4.260000228881836
         let sensorWidth = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_WIDTH; // 5.232640266418457
         let sensorHeight = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_HEIGHT; // 3.9334399700164795
         let horizonalAngle = (2 * Math.atan(sensorWidth / (focal * 2)));
         let verticalAngle = (2 * Math.atan(sensorHeight / (focal * 2)));
-        let viewWidth = 2 * Math.tan(horizonalAngle / 2) * this.state.wallDistance;
-        let viewHeight = 2 * Math.tan(verticalAngle / 2) * this.state.wallDistance;
+        let viewWidth = 2 * Math.tan(horizonalAngle / 2)
+        let viewHeight = 2 * Math.tan(verticalAngle / 2)
+        // TODO return not multiplied and multiply later by value set in state wall disance.
         return [viewHeight, viewWidth]
     }
 
