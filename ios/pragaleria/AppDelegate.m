@@ -30,6 +30,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [GMSServices provideAPIKey:@"AIzaSyApbUtgXkxuCvR29d7nCYtpeqXeJAsz4G8"];
   [RNSplashScreen show];
   return YES;
 }
