@@ -155,9 +155,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let sensorHeight = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_HEIGHT; // 3.9334399700164795
         let horizonalAngle = (2 * Math.atan(sensorWidth / (focal * 2)));
         let verticalAngle = (2 * Math.atan(sensorHeight / (focal * 2)));
-        let viewWidth = 2 * Math.tan(horizonalAngle / 2)
-        let viewHeight = 2 * Math.tan(verticalAngle / 2)
-        // TODO return not multiplied and multiply later by value set in state wall disance.
+        let viewWidth = 2 * Math.tan(horizonalAngle / 2);
+        let viewHeight = 2 * Math.tan(verticalAngle / 2);
         return [viewHeight, viewWidth]
     }
 
@@ -171,7 +170,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     takePicture = async function () {
         const options = {
             pauseAfterCapture: true,
-            base64: true
+            exif: true
         };
         this.setState({displayingCameraPreview: false});
         const image = await this.cameraInstance.takePictureAsync(options);
