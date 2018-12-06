@@ -146,6 +146,12 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                 }}>
                     {item.title}
                 </AppText>
+                <AppText style={{
+                    fontSize: responsiveFontSize(2),
+                    color: LightBlack
+                }}>
+                    {item.auction_start}
+                </AppText>
                 <ViewMoreText numberOfLines={5} renderViewMore={() => {}}>
                     <AppText style={{
                         fontSize: responsiveFontSize(1.8),
