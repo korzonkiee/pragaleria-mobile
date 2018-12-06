@@ -11,6 +11,7 @@ export default {
 
     "Camera.Hang": "Powieś",
     "Camera.TakeAgain": "Wstecz",
+    "Camera.SelectDistance": "Wybierz dystans przed ścianą",
 
     "Common.GenericErrorMessageWithRetry": "Wystąpił błąd połączenia. Naciśnij, aby ponowić próbę.",
     "Common.NetworkError": "Wystąpił błąd połączenia. Spróbuj ponownie",

@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     },
     slider: {
         position: 'absolute',
-        top: 350, //todo for every screen
+        top: 330, //todo for every screen
         right: -150,
         width: 350,
         transform: [
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     distanceText: {
         position: 'absolute',
         right: 10,
-        top: 530,
-        color: '#fff'
+        top: 500,
+        color: '#000'
     }
 });
