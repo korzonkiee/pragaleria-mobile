@@ -10,6 +10,10 @@ declare interface Auction {
     readonly auction_status: boolean;
     readonly image_original: string;
     readonly image_thumbnail: string;
+    readonly image_large: string;
+    readonly image_medium: string;
+    readonly image_big_thumbnail: string;
+    readonly image_medium_thumbnail: string;
 }
 
 declare interface AuctionsData {

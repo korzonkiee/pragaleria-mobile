@@ -8,6 +8,10 @@ declare interface Artwork {
     readonly year: string;
     readonly image_original: string;
     readonly image_thumbnail: string;
+    readonly image_large: string;
+    readonly image_medium: string;
+    readonly image_big_thumbnail: string;
+    readonly image_medium_thumbnail: string;
     readonly meta: { dimension: [number, number] }
 }
 
@@ -15,7 +19,12 @@ declare interface Artist {
     readonly id: number;
     readonly name: string;
     readonly slug: string;
+    readonly image_original: string;
     readonly image_thumbnail: string;
+    readonly image_large: string;
+    readonly image_medium: string;
+    readonly image_big_thumbnail: string;
+    readonly image_medium_thumbnail: string;
 }
 
 declare interface ArtistDetails {
@@ -23,8 +32,13 @@ declare interface ArtistDetails {
     readonly name: string;
     readonly description: string;
     readonly slug: string;
-    readonly image_thumbnail: string;
     readonly artworks: Artwork[];
+    readonly image_original: string;
+    readonly image_thumbnail: string;
+    readonly image_large: string;
+    readonly image_medium: string;
+    readonly image_big_thumbnail: string;
+    readonly image_medium_thumbnail: string;
 }
 
 declare interface ArtistDetailsData {
