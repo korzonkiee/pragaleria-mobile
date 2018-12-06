@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {AppState, Dimensions, Modal as RNModal, Slider, Text, TouchableOpacity, View} from 'react-native'
+import {AppState, Dimensions, Modal as RNModal, Slider, Image, Text, TouchableOpacity, View, Button} from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -27,14 +27,15 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             image: null,
             displayingCameraPreview: true,
             appState: AppState.currentState,
-            wallDistance: 200
+            wallDistance: 200,
+            tutorial: true
         }
     }
 
     componentDidMount() {
         let ratios = this.getRatios();
         this.viewHeight = ratios[0];
-        this.viewWidth= ratios[1];
+        this.viewWidth = ratios[1];
     }
 
     _orientationDidChange = (orientation: string) => {
@@ -105,39 +106,73 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             {takePictureAgainIcon}
             <Text style={{color: 'white'}}>{l("Camera.TakeAgain")}</Text>
         </TouchableOpacity>;
-
-        return (
-            <RNModal
-                animationType="fade"
-                transparent={false}
-                visible={true}
-                onRequestClose={() => this.props.navigation.goBack()}>
-                <RNCamera
-                    ref={ref => {
-                        this.cameraInstance = ref;
-                    }}
-                    style={styles.preview}
-                    type={RNCamera.Constants.Type.back}
-                    flashMode={RNCamera.Constants.FlashMode.auto}
-                    permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}
-                >
-                </RNCamera>
-                <Slider
-                    style={styles.slider}
-                    step={1}
-                    minimumValue={50}
-                    maximumValue={500}
-                    value={this.state.wallDistance}
-                    onValueChange={val => this.sliderOnValueChange(val)}
-                />
-                <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
-                {!this.state.displayingCameraPreview && this.state.image}
-                <View style={styles.captureContainer}>
-                    {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
-                </View>
-            </RNModal>
-        )
+        if (this.state.tutorial) {
+            return (
+                <RNModal
+                    animationType="fade"
+                    transparent={false}
+                    visible={true}
+                    onRequestClose={() => this.props.navigation.goBack()}>
+                    {<View style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} style={{width: 300, height: 300}}/>
+                        <Text style={{color: 'black'}}>{l("Camera.SelectDistance")}</Text>
+                        <Button title={"Ok"} onPress={() => this.setState({tutorial: false})}/>
+                    </View>
+                    }
+                    <Slider
+                        style={styles.slider}
+                        step={1}
+                        minimumValue={50}
+                        maximumValue={500}
+                        value={this.state.wallDistance}
+                        onValueChange={val => this.setState({wallDistance: val})}
+                    />
+                    <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
+                </RNModal>
+            )
+        }
+        else {
+            return (
+                <RNModal
+                    animationType="fade"
+                    transparent={false}
+                    visible={true}
+                    onRequestClose={() => this.props.navigation.goBack()}>
+                    {<RNCamera
+                        ref={ref => {
+                            this.cameraInstance = ref;
+                        }}
+                        style={styles.preview}
+                        type={RNCamera.Constants.Type.back}
+                        flashMode={RNCamera.Constants.FlashMode.auto}
+                        permissionDialogTitle={'Permission to use camera'}
+                        permissionDialogMessage={'We need your permission to use your camera phone'}
+                    />
+                    }
+                    <Slider
+                        style={styles.slider}
+                        step={1}
+                        minimumValue={50}
+                        maximumValue={500}
+                        value={this.state.wallDistance}
+                        onValueChange={val => this.sliderOnValueChange(val)}
+                    />
+                    <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
+                    {!this.state.displayingCameraPreview && this.state.image}
+                    <View style={styles.captureContainer}>
+                        {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
+                    </View>
+                </RNModal>
+            )
+        }
     }
 
     sliderOnValueChange(val: number) {
