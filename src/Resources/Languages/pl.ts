@@ -6,7 +6,8 @@ export default {
 
     "Artwork.Year": "Rok",
     "Artwork.Price": "Sprzedano za",
-    "Artwork.VirtuallyHang": "Przymierz obraz",
+    "Artwork.ImageHang": "Powieś",
+    "Artwork.ImageBuy": "Kup",
 
     "Camera.Hang": "Powieś",
     "Camera.TakeAgain": "Wstecz",

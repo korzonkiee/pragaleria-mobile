@@ -54,7 +54,7 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-  initialRouteName: Routes.exhibitions,
+  initialRouteName: Routes.artists,
   labeled: true
 });
 

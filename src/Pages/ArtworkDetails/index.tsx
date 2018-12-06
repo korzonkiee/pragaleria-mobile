@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import AppContainer from '../../Components/AppContainer';
-import {Button, Image, View} from "react-native";
+import { Button, Image, View, ScrollView, ImageBackground, TouchableWithoutFeedback, TouchableHighlight, TouchableOpacity } from 'react-native';
 import styles from "./styles";
 import AppHeader from '../../Components/AppHeader';
 import DataNotFound from '../../Components/DataNotFound';
@@ -9,7 +9,9 @@ import FadeIn from 'react-native-fade-in-image';
 import AppText from '../../Components/AppText';
 import * as Routes from "../../Routes";
 import * as Nav from "react-navigation";
-import { Black } from '../../Resources/Colors';
+import { Black, White, LightGrayHidden } from '../../Resources/Colors';
+import Icon from 'react-native-vector-icons/Entypo';
+import {responsiveFontSize} from '../../Styles/Dimensions';
 
 
 export interface ArtworkDetailsProps {
@@ -18,34 +20,93 @@ export interface ArtworkDetailsProps {
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
     render() {
-        if (this.props.artwork) {
+        let { artwork } = this.props;
+        if (artwork) {
             return (<AppContainer style={{flex: 1}}>
                     <AppHeader
-                        title={this.props.artwork.title}
+                        title={artwork.title}
+                        modalContent={
+                            <ScrollView style={{margin: 8}}>
+                                {artwork.year.length > 0 &&
+                                <AppText style={{color: Black}}>
+                                    {l("Artwork.Year")}: {artwork.year}
+                                </AppText>
+                                }
+                                {artwork.sold &&
+                                <AppText style={{color: Black}}>
+                                    {l("Artwork.Price")}: {artwork.sold_price}
+                                </AppText>
+                                }
+                                <AppText style={{color: Black, textAlign: 'justify', margin: 8}}>
+                                    {artwork.description}
+                                </AppText>
+                            </ScrollView>
+                        }
                         withBackground/>
                     <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
-                        <Image style={{flex: 1}} source={{uri: this.props.artwork.image_thumbnail}}
+                        <Image style={{flex: 1}} source={{uri: artwork.image_thumbnail}}
                                blurRadius={2}/>
                     )}>
-                        <Image style={styles.artworkFullImage}
-                               source={{uri: this.props.artwork.image_original}}
-                               resizeMode="contain"/>
+                        <ImageBackground style={styles.artworkFullImage}
+                               source={{
+                                   uri: artwork.image_medium || artwork.image_large || artwork.image_original
+                                }}
+                               resizeMode="contain">
+                            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>
+                                <TouchableOpacity
+                                style={{
+                                    backgroundColor: LightGrayHidden,
+                                    alignSelf: 'flex-end',
+                                    margin: 8,
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 24,
+                                    borderRadius: 10
+                                }}
+                                onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
+                                    <View style={{
+                                        flexDirection: 'row'
+                                    }}>
+                                        <AppText style={{
+                                            color: White,
+                                            fontSize: responsiveFontSize(2),
+                                            textAlign: 'right',
+                                        }}>
+                                            {l("Artwork.ImageHang")}
+                                        </AppText>
+                                        <View style={{marginLeft: 8}}>
+                                            <Icon name="camera" size={responsiveFontSize(2)} color={White}/>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                {artwork.meta.dimension.length < 3 ?
+                                <TouchableOpacity
+                                style={{
+                                    backgroundColor: LightGrayHidden,
+                                    alignSelf: 'flex-end',
+                                    margin: 8,
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 24,
+                                    borderRadius: 10,
+                                }}>
+                                    <View style={{
+                                        flexDirection: 'row'
+                                    }}>
+                                        <AppText style={{
+                                            color: White,
+                                            fontSize: responsiveFontSize(2),
+                                            textAlign: 'right',
+                                        }}>
+                                            {l("Artwork.ImageBuy")}
+                                        </AppText>
+                                        <View style={{marginLeft: 8}}>
+                                            <Icon name="price-tag" size={responsiveFontSize(2)} color={White}/>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                                : <View/>}
+                            </View>
+                        </ImageBackground>
                     </FadeIn>
-                    <View style={{margin: 8}}>
-                        {this.props.artwork.year.length > 0 &&
-                        <AppText>{l("Artwork.Year")}: {this.props.artwork.year}</AppText>}
-                        {this.props.artwork.sold &&
-                        <AppText>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText>}
-                    </View>
-                    {this.props.artwork.meta.dimension.length < 3 ?
-                        <View style={{width: 200}}><Button
-                            onPress={() => this.navigateCamera(this.props.artwork.image_original, this.props.artwork.meta.dimension)}
-                            title={l("Artwork.VirtuallyHang")}
-                        /></View>
-                        : <View/>}
-                    <AppText style={{color: Black}}>
-                        {this.props.artwork.description}
-                    </AppText>
                 </AppContainer>
             )
         } else {
