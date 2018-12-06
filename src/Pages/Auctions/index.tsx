@@ -106,7 +106,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
                 style={{...props.style, backgroundColor: White, color: Black}}
                 bounces={false}
-                useNativeDriver={false}
+                useNativeDriver={true}
             />
         )
     };
@@ -125,7 +125,9 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 marginBottom: 30,
             }}>
             <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{flex: 1}} source={{uri: item.image_thumbnail}}  blurRadius={2}/>)}>
-                <Image style={styles.artworkFullImage} source={{uri: item.image_original}}/>
+                <Image style={styles.artworkFullImage} source={{
+                    uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
+                }}/>
             </FadeIn>
             <View style={{
                 padding: 8
@@ -142,7 +144,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                         fontSize: responsiveFontSize(1.8),
                         color: LightBlack
                     }} >
-                        {item.description_excerpt}
+                        {item.description_content || item.description_excerpt}
                     </AppText>
                 </ViewMoreText>
             </View>

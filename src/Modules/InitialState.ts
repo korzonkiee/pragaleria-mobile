@@ -10,5 +10,9 @@ export const initialState: AppState = {
         data: [],
         loading: false
     },
+    exhibitions: {
+        data: [],
+        loading: false
+    },
     artistDetails: {}
 };

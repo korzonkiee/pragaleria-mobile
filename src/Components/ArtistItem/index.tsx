@@ -26,7 +26,9 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
             style={styles.artistContainer}>
             <View style={[styles.artistContainer, (this.props.index % 3) === 1 ? {marginLeft: 2, marginRight: 2} : {}]}>
                 <ImageBackground
-                    source={{uri: this.props.artist.image_thumbnail}}
+                    source={{
+                        uri: this.props.artist.image_medium_thumbnail || this.props.artist.image_thumbnail
+                    }}
                     style={styles.artistImage}>
                     <View
                         style={styles.artistNameBackground}>
