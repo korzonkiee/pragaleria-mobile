@@ -106,7 +106,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
                 style={{...props.style, backgroundColor: White, color: Black}}
                 bounces={false}
-                useNativeDriver={false}
+                useNativeDriver={true}
             />
         )
     };
@@ -142,7 +142,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                         fontSize: responsiveFontSize(1.8),
                         color: LightBlack
                     }} >
-                        {item.description_excerpt}
+                        {item.description_content || item.description_excerpt}
                     </AppText>
                 </ViewMoreText>
             </View>

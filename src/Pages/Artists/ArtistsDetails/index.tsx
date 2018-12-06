@@ -112,7 +112,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                 labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
                 style={{...props.style, backgroundColor: White, color: Black}}
                 bounces={false}
-                useNativeDriver={false}
+                useNativeDriver={true}
             />
         )
       };
