@@ -48,9 +48,9 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
         }
     }
 
-    shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
-        return nextProps.exhibitions !== this.props.exhibitions;
-    }
+    // shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
+    //     return nextProps.exhibitions !== this.props.exhibitions;
+    // }
 
     render() {
         const exhibitionsData = this.props.exhibitions.data;
@@ -60,12 +60,12 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
             );
         } else if (!this.props.exhibitions.loading && this.props.exhibitions.data.length === 0) {
             return (<DataNotFound
-                    message={l("Common.GenericErrorMessageWithRetry")}
-                    retry={this.props.getExhibitions}/>)
+                message={l("Common.GenericErrorMessageWithRetry")}
+                retry={this.props.getExhibitions} />)
         }
         else {
-            let currentAuctions : Array<any>;
-            let finishedAuctions : Array<any>;
+            let currentAuctions: Array<any>;
+            let finishedAuctions: Array<any>;
             if (exhibitionsData) {
                 exhibitionsData.sort((firstExhibition: Auction, secondExhibition: Auction) => {
                     if (moment(firstExhibition.auction_start, "YYYY/MM/DD HH:mm")
@@ -89,7 +89,7 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                     backgroundColor: DirtyWhite,
                 }}>
                     <TabView
-                        style={{flex: 1}}
+                        style={{ flex: 1 }}
                         navigationState={this.state}
                         renderTabBar={this._renderTabBar}
                         onIndexChange={this._handleIndexChange}
@@ -109,9 +109,9 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
         return (
             <TabBar
                 {...props}
-                indicatorStyle={{...props.indicatorStyle, backgroundColor: Yellow }}
-                labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
-                style={{...props.style, backgroundColor: White, color: Black}}
+                indicatorStyle={{ ...props.indicatorStyle, backgroundColor: Yellow }}
+                labelStyle={{ ...props.labelStyle, fontFamily: DefaultAppFont, color: Black }}
+                style={{ ...props.style, backgroundColor: White, color: Black }}
                 bounces={false}
                 useNativeDriver={true}
             />
@@ -127,14 +127,14 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
         />
     };
 
-    private renderAuction = ({ item, index } : { item : Auction, index : number }) => {
+    private renderAuction = ({ item, index }: { item: Auction, index: number }) => {
         return <View style={{
-                marginBottom: 30,
-            }}>
-            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{flex: 1}} source={{uri: item.image_thumbnail}}  blurRadius={2}/>)}>
+            marginBottom: 30,
+        }}>
+            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
                 <Image style={styles.artworkFullImage} source={{
                     uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
-                }}/>
+                }} />
             </FadeIn>
             <View style={{
                 padding: 8
@@ -152,7 +152,7 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                 }}>
                     {item.auction_start}
                 </AppText>
-                <ViewMoreText numberOfLines={5} renderViewMore={() => {}}>
+                <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
                     <AppText style={{
                         fontSize: responsiveFontSize(1.8),
                         color: LightBlack

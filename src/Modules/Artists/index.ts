@@ -58,64 +58,64 @@ export function getArtistDetails(id: number) {
 }
 
 export const
-artistsReducers: ReducerMap<AppState, any> = {
-    [setArtists.toString()](state, action) {
-        if (action.payload) {
-            return {
-                ...state,
-                artists: {
-                    data: [...state.artists.data, ...action.payload],
-                    loading: false,
-                    page: state.artists.page + 1
-                }
-            }
-        }
-
-        return state;
-    },
-    [setArtistsLoading.toString()](state, action) {
-        if (action.payload !== undefined) {
-            return {
-                ...state,
-                artists: {
-                    ...state.artists,
-                    loading: action.payload
-                }
-            };
-        }
-
-        return state;
-    },
-    [setArtistDetails.toString()](state, action) {
-        if (action.payload) {
-            return {
-                ...state,
-                artistDetails: {
-                    ...state.artistDetails,
-                    [action.payload.id]: {
-                        data: action.payload,
-                        loading: false
+    artistsReducers: ReducerMap<AppState, any> = {
+        [setArtists.toString()](state, action) {
+            if (action.payload) {
+                return {
+                    ...state,
+                    artists: {
+                        data: [...state.artists.data, ...action.payload],
+                        loading: false,
+                        page: state.artists.page + 1
                     }
                 }
             }
-        }
 
-        return state;
-    },
-    [setArtistDetailsLoading.toString()](state, action) {
-        if (action.payload) {
-            return {
-                ...state,
-                artistDetails: {
-                    ...state.artistDetails,
-                    [action.payload.id]: {
-                        ...state.artistDetails[action.payload.id],
-                        loading: action.payload.loading,
+            return state;
+        },
+        [setArtistsLoading.toString()](state, action) {
+            if (action.payload !== undefined) {
+                return {
+                    ...state,
+                    artists: {
+                        ...state.artists,
+                        loading: action.payload
+                    }
+                };
+            }
+
+            return state;
+        },
+        [setArtistDetails.toString()](state, action) {
+            if (action.payload) {
+                return {
+                    ...state,
+                    artistDetails: {
+                        ...state.artistDetails,
+                        [action.payload.id]: {
+                            data: action.payload,
+                            loading: false
+                        }
                     }
                 }
-            };
-        }
+            }
 
-        return state;
+            return state;
+        },
+        [setArtistDetailsLoading.toString()](state, action) {
+            if (action.payload) {
+                return {
+                    ...state,
+                    artistDetails: {
+                        ...state.artistDetails,
+                        [action.payload.id]: {
+                            ...state.artistDetails[action.payload.id],
+                            loading: action.payload.loading,
+                        }
+                    }
+                };
+            }
+
+            return state;
+        }
     }
-}

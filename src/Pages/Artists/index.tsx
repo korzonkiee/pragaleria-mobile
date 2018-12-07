@@ -33,8 +33,8 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
         }
         else if (!this.props.artists.loading && this.props.artists.data.length === 0) {
             return (<DataNotFound
-                    message={l("Common.GenericErrorMessageWithRetry")}
-                    retry={this.props.getArtists}/>)
+                message={l("Common.GenericErrorMessageWithRetry")}
+                retry={this.props.getArtists} />)
         }
         else {
             let properAuthors = artistsData.filter((artist) => {
@@ -46,7 +46,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                     display: 'flex',
                     justifyContent: 'space-between'
                 }}
-                    >
+                >
                     <FlatList
                         data={properAuthors}
                         keyExtractor={(item, _) => item.id.toString()}
@@ -54,14 +54,14 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                         numColumns={3}
                         ListFooterComponent={this.renderFooter()}
                         onEndReached={this.props.getArtists}
-                        onEndReachedThreshold={40}
+                        onEndReachedThreshold={3}
                     />
                 </AppContainer>
             )
         }
     }
 
-    private renderArtist = ({ item, index } : { item : Artist, index : number }) =>
+    private renderArtist = ({ item, index }: { item: Artist, index: number }) =>
         <ArtistItem
             index={index}
             artist={item}

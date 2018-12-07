@@ -1,6 +1,6 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import {Component} from 'react'
+import { Provider } from 'react-redux';
+import { Component } from 'react'
 import * as Routes from './Routes';
 import * as colors from './Resources/Colors';
 import { store } from './Store';
@@ -12,7 +12,7 @@ import Artists from './Pages/Artists';
 import Camera from './Pages/Camera';
 import Exhibitions from './Pages/Exhibitions';
 import SplashScreen from 'react-native-splash-screen'
-import {responsiveFontSize} from './Styles/Dimensions';
+import { responsiveFontSize } from './Styles/Dimensions';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
@@ -24,7 +24,7 @@ const MainStack = createMaterialBottomTabNavigator({
   [Routes.auctions]: {
     screen: Auctions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.Auctions")}</AppText>,
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Auctions")}</AppText>,
       tabBarIcon: BottomIcon("tag"),
       tabBarColor: colors.White
     }
@@ -32,7 +32,7 @@ const MainStack = createMaterialBottomTabNavigator({
   [Routes.exhibitions]: {
     screen: Exhibitions,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.Exhibitions")}</AppText>,
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Exhibitions")}</AppText>,
       tabBarIcon: BottomIcon("event"),
       tabBarColor: colors.White
     }
@@ -40,7 +40,7 @@ const MainStack = createMaterialBottomTabNavigator({
   [Routes.artists]: {
     screen: Artists,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}}>{l("BottomNavigation.Artists")}</AppText>,
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }}>{l("BottomNavigation.Artists")}</AppText>,
       tabBarIcon: BottomIcon("eyeglass"),
       tabBarColor: colors.White
     }
@@ -48,39 +48,39 @@ const MainStack = createMaterialBottomTabNavigator({
   [Routes.about]: {
     screen: About,
     navigationOptions: {
-      tabBarLabel: <AppText style={{fontSize: responsiveFontSize(1.5), color: colors.Black}} >{l("BottomNavigation.About")}</AppText>,
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.About")}</AppText>,
       tabBarIcon: BottomIcon("info"),
       tabBarColor: colors.White
     }
   },
 }, {
-  initialRouteName: Routes.artists,
-  labeled: true
-});
+    initialRouteName: Routes.artists,
+    labeled: true
+  });
 
 const AppNavigator = createStackNavigator({
-    ["Main"]: MainStack,
-    [Routes.artistDetails]: ArtistDetails,
-    [Routes.artworkDetails]: ArtworkDetails,
-    [Routes.camera]: Camera,
+  ["Main"]: MainStack,
+  [Routes.artistDetails]: ArtistDetails,
+  [Routes.artworkDetails]: ArtworkDetails,
+  [Routes.camera]: Camera,
 }, {
     initialRouteName: "Main",
     headerMode: "none"
-});
+  });
 
 export default class App extends Component<{}> {
-    componentDidMount() {
-        SplashScreen.hide();
-    }
+  componentDidMount() {
+    SplashScreen.hide();
+  }
 
-    render() {
-        return (
-            <Provider store={store}>
-                <AppNavigator style={{
-                  borderTopWidth: 2,
-                  borderTopColor: colors.Gray
-                }}/>
-            </Provider>
-        );
-    }
+  render() {
+    return (
+      <Provider store={store}>
+        <AppNavigator style={{
+          borderTopWidth: 2,
+          borderTopColor: colors.Gray
+        }} />
+      </Provider>
+    );
+  }
 }

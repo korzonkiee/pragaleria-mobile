@@ -49,9 +49,9 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
         }
     }
 
-    shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
-        return nextProps.auctions !== this.props.auctions;
-    }
+    // shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
+    //     return nextProps.auctions !== this.props.auctions;
+    // }
 
     render() {
         const auctionsData = this.props.auctions.data;
@@ -61,12 +61,12 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
             );
         } else if (!this.props.auctions.loading && this.props.auctions.data.length === 0) {
             return (<DataNotFound
-                    message={l("Common.GenericErrorMessageWithRetry")}
-                    retry={this.props.getAuctions}/>)
+                message={l("Common.GenericErrorMessageWithRetry")}
+                retry={this.props.getAuctions} />)
         }
         else {
-            let currentAuctions : Array<any>;
-            let finishedAuctions : Array<any>;
+            let currentAuctions: Array<any>;
+            let finishedAuctions: Array<any>;
             if (auctionsData) {
                 let today = moment("2018-05-26", "YYYY-MM-DD");
                 currentAuctions = auctionsData.filter(auction => {
@@ -82,7 +82,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                     backgroundColor: DirtyWhite,
                 }}>
                     <TabView
-                        style={{flex: 1}}
+                        style={{ flex: 1 }}
                         navigationState={this.state}
                         renderTabBar={this._renderTabBar}
                         onIndexChange={this._handleIndexChange}
@@ -102,9 +102,9 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
         return (
             <TabBar
                 {...props}
-                indicatorStyle={{...props.indicatorStyle, backgroundColor: Yellow }}
-                labelStyle={{...props.labelStyle, fontFamily: DefaultAppFont, color: Black}}
-                style={{...props.style, backgroundColor: White, color: Black}}
+                indicatorStyle={{ ...props.indicatorStyle, backgroundColor: Yellow }}
+                labelStyle={{ ...props.labelStyle, fontFamily: DefaultAppFont, color: Black }}
+                style={{ ...props.style, backgroundColor: White, color: Black }}
                 bounces={false}
                 useNativeDriver={true}
             />
@@ -120,14 +120,14 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
         />
     };
 
-    private renderAuction = ({ item, index } : { item : Auction, index : number }) => {
+    private renderAuction = ({ item, index }: { item: Auction, index: number }) => {
         return <View style={{
-                marginBottom: 30,
-            }}>
-            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{flex: 1}} source={{uri: item.image_thumbnail}}  blurRadius={2}/>)}>
+            marginBottom: 30,
+        }}>
+            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
                 <Image style={styles.artworkFullImage} source={{
                     uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
-                }}/>
+                }} />
             </FadeIn>
             <View style={{
                 padding: 8
@@ -139,7 +139,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 }}>
                     {item.title}
                 </AppText>
-                <ViewMoreText numberOfLines={5} renderViewMore={() => {}}>
+                <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
                     <AppText style={{
                         fontSize: responsiveFontSize(1.8),
                         color: LightBlack

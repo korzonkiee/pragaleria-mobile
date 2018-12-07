@@ -27,7 +27,7 @@ declare interface Artist {
     readonly image_medium_thumbnail: string;
 }
 
-declare interface ArtistDetails {
+declare interface ArtistDetailsDTO {
     readonly id: number;
     readonly name: string;
     readonly description: string;
@@ -39,6 +39,11 @@ declare interface ArtistDetails {
     readonly image_medium: string;
     readonly image_big_thumbnail: string;
     readonly image_medium_thumbnail: string;
+}
+
+declare interface ArtistDetails extends ArtistDetailsDTO {
+    readonly soldArtworks: Artwork[];
+    readonly availableArtworks: Artwork[];
 }
 
 declare interface ArtistDetailsData {
