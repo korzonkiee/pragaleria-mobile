@@ -34,7 +34,7 @@ project.ext.react = [
 apply from: '../react.gradle'
 
 def enableSeparateBuildPerCPUArchitecture = false
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
