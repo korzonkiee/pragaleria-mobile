@@ -133,7 +133,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         minimumValue={50}
                         maximumValue={500}
                         value={this.state.wallDistance}
-                        onValueChange={val => this.setState({wallDistance: val})}
+                        onSlidingComplete={val => this.setState({wallDistance: val})}
                     />
                     <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
                 </RNModal>
