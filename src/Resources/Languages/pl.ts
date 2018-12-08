@@ -4,6 +4,9 @@ export default {
     "BottomNavigation.Artists": "Artyści",
     "BottomNavigation.About": "O nas",
 
+    "Auctions.Incoming": "Przyszłe",
+    "Auctions.Closed": "Zamknięte",
+
     "Artwork.Year": "Rok",
     "Artwork.Price": "Sprzedano za",
     "Artwork.ImageHang": "Powieś",
