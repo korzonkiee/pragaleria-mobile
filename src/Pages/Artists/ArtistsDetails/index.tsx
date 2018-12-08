@@ -39,14 +39,6 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
         }
     }
 
-    shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
-        if (this.props.artist && this.props.artist.data && nextProps.artist && nextProps.artist.data) {
-            return this.props.artist.data.id !== nextProps.artist.data.id;
-        }
-
-        return true;
-    }
-
     render() {
         const artist = this.props.artist;
         if (artist == null) {

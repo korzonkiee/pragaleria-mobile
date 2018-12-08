@@ -49,10 +49,6 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
         }
     }
 
-    // shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
-    //     return nextProps.auctions !== this.props.auctions;
-    // }
-
     render() {
         const auctionsData = this.props.auctions.data;
         if (this.props.auctions.loading) {

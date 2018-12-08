@@ -49,9 +49,10 @@ export function getArtistDetails(id: number) {
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artist details with id ${id} . ` +
                 `Error: ${e}`);
+
+            dispatch(setArtistDetailsLoading({ id: id, loading: false }));
         }
         finally {
-            dispatch(setArtistDetailsLoading({ id: id, loading: false }));
             dispatch(endTask());
         }
     }
