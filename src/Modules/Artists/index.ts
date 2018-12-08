@@ -30,9 +30,10 @@ export function getArtists() {
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch artists. ` +
                 `Error: ${e}`);
+
+            dispatch(setArtistsLoading(false));
         }
         finally {
-            dispatch(setArtistsLoading(false));
             dispatch(endTask());
         }
     }

@@ -31,41 +31,39 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                 <ArtistsPlaceholder />
             );
         }
-        else if (!this.props.artists.loading && this.props.artists.data.length === 0) {
+
+        if (!this.props.artists.loading && this.props.artists.data.length === 0) {
             return (<DataNotFound
                 message={l("Common.GenericErrorMessageWithRetry")}
                 retry={this.props.getArtists} />)
         }
-        else {
-            let properAuthors = artistsData.filter((artist) => {
-                return artist.image_thumbnail && artist.image_thumbnail !== "";
-            });
-            return (
-                <AppContainer style={{
-                    backgroundColor: DirtyWhite,
-                    display: 'flex',
-                    justifyContent: 'space-between'
-                }}
-                >
-                    <FlatList
-                        data={properAuthors}
-                        keyExtractor={(item, _) => item.id.toString()}
-                        renderItem={this.renderArtist}
-                        numColumns={3}
-                        ListFooterComponent={this.renderFooter()}
-                        onEndReached={this.props.getArtists}
-                        onEndReachedThreshold={3}
-                    />
-                </AppContainer>
-            )
-        }
+
+        return (
+            <AppContainer style={{
+                backgroundColor: DirtyWhite,
+                display: 'flex',
+                justifyContent: 'space-between'
+            }}
+            >
+                <FlatList
+                    data={artistsData}
+                    keyExtractor={(item, _) => item.id.toString()}
+                    renderItem={this.renderArtist}
+                    numColumns={3}
+
+                    ListFooterComponent={this.renderFooter()}
+                    onEndReached={this.props.getArtists}
+                    onEndReachedThreshold={3}
+                />
+            </AppContainer>
+        )
     }
 
     private renderArtist = ({ item, index }: { item: Artist, index: number }) =>
-        <ArtistItem
+        (<ArtistItem
             index={index}
             artist={item}
-            onPress={() => this.navigateToArtist(item.id.toString())} />
+            onPress={() => this.navigateToArtist(item.id.toString())} />)
 
 
 
