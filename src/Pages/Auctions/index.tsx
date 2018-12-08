@@ -8,6 +8,7 @@ import { DirtyWhite } from '../../Resources/Colors';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import moment from 'moment';
 import { AuctionsTabBar } from '../../Components/AuctionsTabBar';
+import AuctionsPlaceholder from '../../Components/Placeholders/AuctionsPlaceholder';
 
 
 export interface AuctionsProps {
@@ -37,7 +38,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
         // Placeholder
         if (this.props.auctions.loading) {
             return (
-                <View />
+                <AuctionsPlaceholder />
             );
         }
         if (!this.props.auctions.loading && this.props.auctions.data.length === 0) {

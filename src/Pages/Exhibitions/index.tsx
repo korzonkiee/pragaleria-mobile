@@ -18,6 +18,7 @@ import FadeIn from 'react-native-fade-in-image';
 import moment from 'moment';
 import { exhibitions } from '../../Routes';
 import { ExhibitionsTabBar } from '../../Components/ExhibitionsTabBar';
+import ExhibitionsPlaceholder from '../../Components/Placeholders/ExhibitionsPlaceholder';
 
 
 export interface ExhibitionsProps {
@@ -38,12 +39,8 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
 
     render() {
         const exhibitionsData = this.props.exhibitions.data;
-
-        // Place holder
         if (this.props.exhibitions.loading) {
-            return (
-                <View />
-            );
+            return <ExhibitionsPlaceholder />
         }
 
         if (!this.props.exhibitions.loading && this.props.exhibitions.data.length === 0) {

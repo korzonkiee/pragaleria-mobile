@@ -14,42 +14,41 @@ export default function ArtistDetailsPlaceholder() {
     return (
         <>
             <AppHeader
-                withBackground/>
-            <View style={styles.spacing}>
-                <Placeholder.Paragraph
-                    size={150}
+                withBackground />
+            <View style={{
+                marginBottom: 16,
+                marginLeft: 16,
+                marginRight: 16,
+                marginTop: 48
+            }}>
+                <View style={styles.spacing} />
+                <Placeholder.ImageContent
+                    size={size}
                     animate={animate}
-                    lineNumber={4}
-                    lineSpacing={5}
-                    lastLineWidth="30%"/>
+                    lineNumber={lineNumber}
+                    lineSpacing={lineSpacing}
+                    lastLineWidth={lastLineWidth} />
                 <View style={styles.spacing} />
                 <Placeholder.ImageContent
-                        size={size}
-                        animate={animate}
-                        lineNumber={lineNumber}
-                        lineSpacing={lineSpacing}
-                        lastLineWidth={lastLineWidth} />
+                    size={size}
+                    animate={animate}
+                    lineNumber={lineNumber}
+                    lineSpacing={lineSpacing}
+                    lastLineWidth={lastLineWidth} />
                 <View style={styles.spacing} />
                 <Placeholder.ImageContent
-                        size={size}
-                        animate={animate}
-                        lineNumber={lineNumber}
-                        lineSpacing={lineSpacing}
-                        lastLineWidth={lastLineWidth} />
+                    size={size}
+                    animate={animate}
+                    lineNumber={lineNumber}
+                    lineSpacing={lineSpacing}
+                    lastLineWidth={lastLineWidth} />
                 <View style={styles.spacing} />
                 <Placeholder.ImageContent
-                        size={size}
-                        animate={animate}
-                        lineNumber={lineNumber}
-                        lineSpacing={lineSpacing}
-                        lastLineWidth={lastLineWidth} />
-                <View style={styles.spacing} />
-                <Placeholder.ImageContent
-                        size={size}
-                        animate={animate}
-                        lineNumber={lineNumber}
-                        lineSpacing={lineSpacing}
-                        lastLineWidth={lastLineWidth} />
+                    size={size}
+                    animate={animate}
+                    lineNumber={lineNumber}
+                    lineSpacing={lineSpacing}
+                    lastLineWidth={lastLineWidth} />
             </View>
         </>
     )

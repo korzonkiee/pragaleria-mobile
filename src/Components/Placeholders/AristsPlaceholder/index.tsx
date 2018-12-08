@@ -18,8 +18,8 @@ export default function ArtistsPlaceholder() {
                 keyExtractor={(item, _) => item.toString()}
                 renderItem={
                     () => <View style={{ margin: 2 }}>
-                            <Placeholder.Media size={(screenWidth / 3)} />
-                          </View>
+                        <Placeholder.Media size={(screenWidth / 3)} />
+                    </View>
                 }
                 numColumns={3}
             />
