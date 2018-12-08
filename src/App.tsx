@@ -4,7 +4,7 @@ import { Component } from 'react'
 import * as Routes from './Routes';
 import * as colors from './Resources/Colors';
 import { store } from './Store';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation';
 import { l } from './Services/Language';
 import About from './Pages/About';
 import Auctions from './Pages/Auctions';
@@ -58,15 +58,35 @@ const MainStack = createMaterialBottomTabNavigator({
     labeled: true
   });
 
-const AppNavigator = createStackNavigator({
+// const AristDetailsStack = createMaterialTopTabNavigator({
+//   ["A"]: About,
+//   ["B"]: About
+// })
+
+// const AristsStackNavigator = createStackNavigator({
+//   [Routes.artistDetails]: AristDetailsStack,
+//   [Routes.artworkDetails]: ArtworkDetails,
+//   [Routes.camera]: Camera,
+// });
+
+// const MainStackNavigator = createStackNavigator({
+//   ["Main"]: MainStack,
+//   ["ArtistsStackNavigator"]: AristsStackNavigator
+// }, {
+//     initialRouteName: "Main",
+//     headerMode: 'none'
+//   });
+
+const AristsStackNavigator = createStackNavigator({
   ["Main"]: MainStack,
   [Routes.artistDetails]: ArtistDetails,
   [Routes.artworkDetails]: ArtworkDetails,
   [Routes.camera]: Camera,
 }, {
-    initialRouteName: "Main",
-    headerMode: "none"
+    headerMode: 'none'
   });
+
+const AppContainer = createAppContainer(AristsStackNavigator);
 
 export default class App extends Component<{}> {
   componentDidMount() {
@@ -76,10 +96,7 @@ export default class App extends Component<{}> {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator style={{
-          borderTopWidth: 2,
-          borderTopColor: colors.Gray
-        }} />
+        <AppContainer />
       </Provider>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as Nav from "react-navigation";
 import * as Routes from "../../../Routes";
-import { DefaultAppFont } from "../../../Styles/Fonts";
+import font, { DefaultAppFont } from "../../../Styles/Fonts";
 import { FlatList, View, ScrollView } from 'react-native';
 import AppContainer from '../../../Components/AppContainer';
 import { ArtworkItem } from '../../../Components/ArtworkItem';
@@ -10,8 +10,11 @@ import { l } from '../../../Services/Language';
 import AppHeader from '../../../Components/AppHeader';
 import { TabView, TabBar, Scene } from 'react-native-tab-view';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
-import { White, Black, DirtyWhite, Yellow, LightBlack } from '../../../Resources/Colors';
+import { White, Black, DirtyWhite, Yellow, LightBlack, LightGray } from '../../../Resources/Colors';
 import AppText from '../../../Components/AppText';
+import { About } from '../../About/index';
+import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
+import { AristDetailsTabBar } from '../../../Components/AristDetailsTabBar';
 
 
 export interface ArtistsDetailsProps {
@@ -58,7 +61,13 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             return <DataNotFound retry={this.props.getArtistDetails} message={l("Common.GenericErrorMessageWithRetry")} />
         }
 
-        console.log(artist);
+        const availableArtworks = artist.data.artworks.filter(artwork => {
+            return artwork.sold === false;
+        });
+
+        const soldArtworks = artist.data.artworks.filter(artwork => {
+            return artwork.sold === true;
+        });
 
         return (
             <AppContainer style={{ flex: 1 }}>
@@ -73,134 +82,12 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                             </ScrollView>
                         }
                         withBackground />
-                    {}
+                    <AristDetailsTabBar navigation={this.props.navigation}
+                        artistId={artist.data!.id}
+                        availableArtworks={availableArtworks}
+                        soldArtworks={soldArtworks} />
                 </>}
             </AppContainer>
         )
     }
 }
-
-// interface TabViewState {
-//     readonly index: number;
-
-// }
-// class TabViewCompontent extends React.Component<{}, TabViewState> {
-//     constructor(props: any) {
-//         super(props);
-
-//         this.state = {
-//             index: 0,
-//             routes: [
-//                 { key: 'available', title: l("ArtistDetails.Available") },
-//                 { key: 'sold', title: l("ArtistDetails.Sold") },
-//             ]
-//         }
-//     }
-//     render() {
-//         return (<
-//             navigationState={this.state}
-//             renderTabBar={this._renderTabBar}
-//             onIndexChange={this._handleIndexChange}
-//             renderScene={
-//                 (props) => (
-//                     <AppText>Siema</AppText>
-//                     // <ArtistArtworks
-//                     //     navigation={this.props.navigation}
-//                     //     artistId={this.props.artist.data!.id}
-//                     //     artworks={this.props.artist.data!.artworks}
-//                     //     artworksType={props.route.key}
-//                     // />
-//                 )}
-//         />)
-//     }
-
-//     private _handleIndexChange = (index: number) => {
-//         console.log("Index changed");
-//         console.log(index);
-//         this.setState({ index: index })
-//     };
-//     private _renderTabBar = (props: any) => {
-//         return (
-//             <TabBar
-//                 {...props}
-//                 style={{ zIndex: 1 }}
-//                 // indicatorStyle={{ ...props.indicatorStyle, backgroundColor: Yellow }}
-//                 // labelStyle={{ ...props.labelStyle, fontFamily: DefaultAppFont, color: Black }}
-//                 // style={{ ...props.style, backgroundColor: White, color: Black }}
-//                 onTabPress={this.handleTabPress}
-//             // bounces={true}
-//             // useNativeDriver={true}
-//             />
-//         )
-//     };
-
-//     private handleTabPress = (scene: any) => {
-//         console.log(scene);
-//     }
-// }
-
-// export interface ArtistArtworksProps {
-//     readonly artistId: number;
-//     readonly artworks: Array<Artwork>;
-//     readonly artworksType: string;
-// }
-
-// export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Nav.NavigationInjectedProps> {
-//     render() {
-//         const availableArtworks = this.props.artworks.filter(artwork => {
-//             return artwork.sold === false;
-//         });
-
-//         const soldArtworks = this.props.artworks.filter(artwork => {
-//             return artwork.sold === true;
-//         });
-
-//         return this.renderArtworks(availableArtworks);
-//     }
-
-//     private renderArtworks = (artworks: Array<Artwork>) => {
-//         let viewContent;
-//         if (artworks.length > 0) {
-//             viewContent = (<FlatList
-//                 style={{
-//                     backgroundColor: DirtyWhite
-//                 }}
-//                 data={artworks}
-//                 keyExtractor={(item, _) => item.id.toString()}
-//                 renderItem={this.renderArtwork}
-//                 numColumns={1} />);
-//         } else {
-//             viewContent = <AppText style={{
-//                 marginLeft: 16,
-//                 marginTop: 16,
-//                 color: LightBlack
-//             }}>
-//                 {l("ArtistDetails.NoArtworksAvailable")}
-//             </AppText>
-//         }
-
-//         return (
-//             <View style={{
-//                 backgroundColor: DirtyWhite,
-//                 height: "100%"
-//             }}>
-//                 {viewContent}
-//             </View>
-//         );
-//     };
-
-//     private renderArtwork = ({ item, index: number }: { item: Artwork, index: number }) => {
-//         return (<ArtworkItem
-//             onPress={() => this.navigateToArtwork(this.props.artistId, item.id)}
-//             artwork={item} />)
-//     }
-
-//     private navigateToArtwork = (artistId: number, artworkId: number) => {
-//         console.log(`Navigating to artwork ${artworkId} of artist ${artistId}`);
-
-//         this.props.navigation.navigate(Routes.artworkDetails, {
-//             artistId: artistId,
-//             artworkId: artworkId
-//         });
-//     }
-// }

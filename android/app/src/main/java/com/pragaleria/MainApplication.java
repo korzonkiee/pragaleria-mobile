@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.bugfender.sdk.Bugfender;
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.facebook.react.ReactNativeHost;
@@ -30,16 +31,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-        new MainReactPackage(),
-        new VectorIconsPackage(),
-        new SplashScreenReactPackage(),
-        new RNCameraPackage(),
-        new RNRearCameraCharacteristicsDisplayMetricsPackage(),
-        new OrientationPackage(),
-        new MapsPackage(),
-        new PragaleriaPackage()
-        );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNGestureHandlerPackage(), new VectorIconsPackage(),
+          new SplashScreenReactPackage(), new RNCameraPackage(), new RNRearCameraCharacteristicsDisplayMetricsPackage(),
+          new OrientationPackage(), new MapsPackage(), new PragaleriaPackage());
     }
 
     @Override

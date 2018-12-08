@@ -40,7 +40,14 @@ const fonts: Fonts = {
     }
 };
 
-export default function font(options: FontFamilyOptions): FontFamily {
+export default function font(options?: FontFamilyOptions): FontFamily {
+    if (!options) {
+        options = {
+            family: DefaultFontFamily,
+            weight: "Regular"
+        };
+    }
+
     let family = options.family ? options.family : DefaultFontFamily;
 
     if (isIOS()) {
