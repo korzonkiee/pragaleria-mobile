@@ -29,16 +29,16 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         <ScrollView style={{ margin: 8 }}>
                             {artwork.year.length > 0 &&
                                 <AppText style={{ color: Black }}>
-                                    {l("Artwork.Year")}: {artwork.year}
+                                    Wyprodukowano w {artwork.year} roku
                                 </AppText>
                             }
                             {artwork.sold &&
-                                <AppText style={{ color: Black }}>
-                                    {l("Artwork.Price")}: {artwork.sold_price}
+                                <AppText style={{ marginTop: 4, color: Black, }}>
+                                    Sprzedano za {artwork.sold_price} PLN
                                 </AppText>
                             }
-                            <AppText style={{ color: Black, textAlign: 'justify', margin: 8 }}>
-                                {artwork.description}
+                            <AppText style={{ marginTop: 4, color: Black, textAlign: 'justify' }}>
+                                Opis: {artwork.description}
                             </AppText>
                         </ScrollView>
                     }

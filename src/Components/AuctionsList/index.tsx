@@ -10,6 +10,7 @@ import FadeIn from "react-native-fade-in-image";
 import styles from "./styles";
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import ViewMoreText from "react-native-view-more-text";
+import font, { DefaultFontFamily } from "../../Styles/Fonts";
 
 export interface AuctionsListProps {
     readonly artworks: Auction[];
@@ -44,13 +45,12 @@ export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.Na
                 <AppText style={{
                     fontSize: responsiveFontSize(2.3),
                     color: Black,
-                    fontWeight: "500"
+                    ...font({ weight: "Bold" })
                 }}>
                     {item.title}
                 </AppText>
                 <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
                     <AppText style={{
-                        fontSize: responsiveFontSize(1.8),
                         color: LightBlack
                     }} >
                         {item.description_content || item.description_excerpt}
