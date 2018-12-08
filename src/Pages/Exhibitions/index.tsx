@@ -17,6 +17,7 @@ import styles from "./styles";
 import FadeIn from 'react-native-fade-in-image';
 import moment from 'moment';
 import { exhibitions } from '../../Routes';
+import { ExhibitionsTabBar } from '../../Components/ExhibitionsTabBar';
 
 
 export interface ExhibitionsProps {
@@ -24,22 +25,9 @@ export interface ExhibitionsProps {
     readonly getExhibitions: () => void;
 }
 
-interface ExhibitionsState {
-    readonly index: number;
-    readonly routes: Array<any>;
-}
-
-export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInjectedProps, ExhibitionsState> {
+export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInjectedProps> {
     constructor(props: ExhibitionsProps & Nav.NavigationInjectedProps) {
         super(props);
-
-        this.state = {
-            index: 0,
-            routes: [
-                { key: 'current', title: "Przyszłe" },
-                { key: 'finished', title: "Zakończone" },
-            ],
-        }
     }
 
     componentDidMount() {
@@ -48,119 +36,52 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
         }
     }
 
-    // shouldComponentUpdate?(nextProps: any, nextState: any, nextContext: any): boolean {
-    //     return nextProps.exhibitions !== this.props.exhibitions;
-    // }
-
     render() {
         const exhibitionsData = this.props.exhibitions.data;
+
+        // Place holder
         if (this.props.exhibitions.loading) {
             return (
                 <View />
             );
-        } else if (!this.props.exhibitions.loading && this.props.exhibitions.data.length === 0) {
+        }
+
+        if (!this.props.exhibitions.loading && this.props.exhibitions.data.length === 0) {
             return (<DataNotFound
                 message={l("Common.GenericErrorMessageWithRetry")}
                 retry={this.props.getExhibitions} />)
         }
-        else {
-            let currentAuctions: Array<any>;
-            let finishedAuctions: Array<any>;
-            if (exhibitionsData) {
-                exhibitionsData.sort((firstExhibition: Auction, secondExhibition: Auction) => {
-                    if (moment(firstExhibition.auction_start, "YYYY/MM/DD HH:mm")
-                        .isBefore(moment(secondExhibition.auction_start, "YYYY/MM/DD HH:mm"))) {
-                        return 1;
-                    } else {
-                        return -1;
-                    }
-                })
-                let today = moment("2017-09-01", "YYYY-MM-DD");
-                currentAuctions = exhibitionsData.filter(exhibition => {
-                    return !moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
-                });
-                finishedAuctions = exhibitionsData.filter(exhibition => {
-                    return moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
-                });
+
+        // --- --- --- --- This is going to be removed
+        exhibitionsData.sort((firstExhibition: Exhibition, secondExhibition: Exhibition) => {
+            if (moment(firstExhibition.auction_start, "YYYY/MM/DD HH:mm")
+                .isBefore(moment(secondExhibition.auction_start, "YYYY/MM/DD HH:mm"))) {
+                return 1;
+            } else {
+                return -1;
             }
-            return (
-                <AppContainer style={{
-                    flex: 1,
-                    backgroundColor: DirtyWhite,
-                }}>
-                    <TabView
-                        style={{ flex: 1 }}
-                        navigationState={this.state}
-                        renderTabBar={this._renderTabBar}
-                        onIndexChange={this._handleIndexChange}
-                        renderScene={SceneMap({
-                            current: () => this.renderAuctions(currentAuctions),
-                            finished: () => this.renderAuctions(finishedAuctions),
-                        })}
-                    />
-                </AppContainer>
-            )
-        }
-    }
+        })
 
-    private _handleIndexChange = (index: any) => this.setState({ index });
+        let today = moment("2017-09-01", "YYYY-MM-DD");
 
-    private _renderTabBar = (props: any) => {
+        const incomingExhibitions = exhibitionsData.filter(exhibition => {
+            return !moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+        });
+
+        const closedExhibitions = exhibitionsData.filter(exhibition => {
+            return moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+        });
+        // --- --- --- --- --- --- --- --- --- --- ---
+
         return (
-            <TabBar
-                {...props}
-                indicatorStyle={{ ...props.indicatorStyle, backgroundColor: Yellow }}
-                labelStyle={{ ...props.labelStyle, fontFamily: DefaultAppFont, color: Black }}
-                style={{ ...props.style, backgroundColor: White, color: Black }}
-                bounces={false}
-                useNativeDriver={true}
-            />
-        )
-    };
-
-    private renderAuctions = (auctionsData: Auction[]) => {
-        return <FlatList
-            data={auctionsData}
-            keyExtractor={(item, _) => item.id.toString()}
-            renderItem={this.renderAuction}
-            numColumns={1}
-        />
-    };
-
-    private renderAuction = ({ item, index }: { item: Auction, index: number }) => {
-        return <View style={{
-            marginBottom: 30,
-        }}>
-            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
-                <Image style={styles.artworkFullImage} source={{
-                    uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
-                }} />
-            </FadeIn>
-            <View style={{
-                padding: 8
+            <AppContainer style={{
+                flex: 1,
+                backgroundColor: DirtyWhite,
             }}>
-                <AppText style={{
-                    fontSize: responsiveFontSize(2.3),
-                    color: Black,
-                    fontWeight: "500"
-                }}>
-                    {item.title}
-                </AppText>
-                <AppText style={{
-                    fontSize: responsiveFontSize(2),
-                    color: LightBlack
-                }}>
-                    {item.auction_start}
-                </AppText>
-                <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
-                    <AppText style={{
-                        fontSize: responsiveFontSize(1.8),
-                        color: LightBlack
-                    }} >
-                        {item.description_content || item.description_excerpt}
-                    </AppText>
-                </ViewMoreText>
-            </View>
-        </View>
+                <ExhibitionsTabBar navigation={this.props.navigation}
+                    incomingExhibitions={incomingExhibitions}
+                    closedExhibitions={closedExhibitions} />
+            </AppContainer>
+        )
     }
 }

@@ -33,41 +33,41 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
 
     render() {
         const auctionsData = this.props.auctions.data;
+
+        // Placeholder
         if (this.props.auctions.loading) {
             return (
                 <View />
             );
-        } else if (!this.props.auctions.loading && this.props.auctions.data.length === 0) {
+        }
+        if (!this.props.auctions.loading && this.props.auctions.data.length === 0) {
             return (<DataNotFound
                 message={l("Common.GenericErrorMessageWithRetry")}
                 retry={this.props.getAuctions} />)
         }
-        else {
-            let incomingAuctions: Array<Auction>;
-            let closedAuctions: Array<Auction>;
-            if (auctionsData) {
-                let today = moment("2018-05-26", "YYYY-MM-DD");
-                incomingAuctions = auctionsData.filter(auction => {
-                    return !moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
-                });
-                closedAuctions = auctionsData.filter(auction => {
-                    return moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
-                });
 
-                return (
-                    <AppContainer style={{
-                        flex: 1,
-                        backgroundColor: DirtyWhite,
-                    }}>
-                        <AuctionsTabBar navigation={this.props.navigation}
-                            incomingAuctions={incomingAuctions}
-                            closedAuctions={closedAuctions} />
-                    </AppContainer>
-                )
-            }
-        }
+        // --- --- --- --- This is going to be removed
+        let incomingAuctions: Array<Auction>;
+        let closedAuctions: Array<Auction>;
+
+        let today = moment("2018-05-26", "YYYY-MM-DD");
+        incomingAuctions = auctionsData.filter(auction => {
+            return !moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+        });
+        closedAuctions = auctionsData.filter(auction => {
+            return moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+        });
+        // --- --- --- --- --- --- --- --- --- --- ---
+
+        return (
+            <AppContainer style={{
+                flex: 1,
+                backgroundColor: DirtyWhite,
+            }}>
+                <AuctionsTabBar navigation={this.props.navigation}
+                    incomingAuctions={incomingAuctions}
+                    closedAuctions={closedAuctions} />
+            </AppContainer>
+        )
     }
-
-    private _handleIndexChange = (index: any) => this.setState({ index });
-
 }

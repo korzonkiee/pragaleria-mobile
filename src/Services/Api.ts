@@ -12,8 +12,8 @@ export async function getArtistDetails(id: number): Promise<ArtistDetails | null
     return await get<ArtistDetails>(`authors/${id}`);
 }
 
-export async function getExhibitions(): Promise<Auction[] | null> {
-    return await get<Auction[]>("exhibitions");
+export async function getExhibitions(): Promise<Exhibition[] | null> {
+    return await get<Exhibition[]>("exhibitions");
 }
 
 export async function getAuctions(): Promise<Auction[] | null> {

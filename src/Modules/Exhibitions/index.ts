@@ -25,9 +25,10 @@ export function getExhibitions() {
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch exhibitions. ` +
                 `Error: ${e}`);
+
+            dispatch(setExhibitionsLoading(false));
         }
         finally {
-            dispatch(setExhibitionsLoading(false));
             dispatch(endTask());
         }
     }

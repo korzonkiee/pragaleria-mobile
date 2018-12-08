@@ -7,6 +7,9 @@ export default {
     "Auctions.Incoming": "Przyszłe",
     "Auctions.Closed": "Zamknięte",
 
+    "Exhibitions.Incoming": "Przyszłe",
+    "Exhibitions.Closed": "Zamknięte",
+
     "Artwork.Year": "Rok",
     "Artwork.Price": "Sprzedano za",
     "Artwork.ImageHang": "Powieś",
