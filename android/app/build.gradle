@@ -87,6 +87,7 @@ android {
         }
         staging {
             minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.test
             applicationIdSuffix 'staging'
             matchingFallbacks = ['debug']
