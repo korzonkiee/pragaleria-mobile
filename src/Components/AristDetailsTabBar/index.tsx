@@ -16,6 +16,8 @@ interface AristDetailsTabBarProps {
 export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarProps & Nav.NavigationInjectedProps> {
     render() {
         const tabBarStyle = {
+            backBehavior: 'none',
+            optimizationsEnabled: true,
             tabBarOptions: {
                 labelStyle: {
                     ...font(),
