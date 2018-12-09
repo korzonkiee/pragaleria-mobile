@@ -7,6 +7,7 @@ import { TextField } from 'react-native-material-textfield';
 import { View, Button, TouchableWithoutFeedback } from 'react-native';
 import { Black, White } from '../../Resources/Colors';
 import { AppTextField, AppTextFieldComponent } from '../../Components/AppTextField';
+import Mailer from 'react-native-mail';
 
 export interface PurchaseArtworkProps {
     readonly artwork: Artwork;
@@ -82,6 +83,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
                             onChangeText={phoneNumber => this.setState({ phoneNumber })}
                             onBlur={() => this.validate("phoneNumber")}
                             returnKeyType="done"
+                            keyboardType="phone-pad"
                             error={this.state.phoneNumberEmpty}
                         />
                     </View>
@@ -95,13 +97,34 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
     }
 
     private purchaseArtwork = () => {
+        if (!this.validate("firstName", "lastName", "phoneNumber")) {
+            return;
+        }
+
+        Mailer.mail({
+            subject: `Oferta kupna obrazu "${this.props.artwork.title}" ${this.props.author}`,
+            recipients: ['info@pragaleria.pl'],
+            body: `<p>
+                Imię: ${this.state.firstName} <br>
+                Nazwisko: ${this.state.lastName} <br>
+                Numer telefonu: ${this.state.phoneNumber} <br>
+                <br><br>
+                Dodatkowe informacje: <br>
+                Identyfikator dzieła: ${this.props.artwork.id} <br>
+                Tytuł dzieła: ${this.props.artwork.title} <br>
+                Autor dzieła: ${this.props.author} <br>
+            </p>`,
+            isHTML: true
+        }, () => { });
 
     }
 
-    private validate = <K extends keyof PurchaseArtworkState>(...fields: K[]) => {
+    private validate = <K extends keyof PurchaseArtworkState>(...fields: K[]): boolean => {
+        let successfull = true;
         fields.forEach(field => {
             if (field == "firstName") {
                 if (this.state.firstName.length === 0) {
+                    successfull = false;
                     this.setState({ firstNameEmpty: l("PurchaseArtwork.Validation.FirstName.Empty") })
                     return;
                 } else {
@@ -111,6 +134,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
 
             if (field == "lastName") {
                 if (this.state.lastName.length === 0) {
+                    successfull = false;
                     this.setState({ lastNameEmpty: l("PurchaseArtwork.Validation.LastName.Empty") })
                     return;
                 } else {
@@ -120,6 +144,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
 
             if (field == "phoneNumber") {
                 if (this.state.phoneNumber.length === 0) {
+                    successfull = false;
                     this.setState({ phoneNumberEmpty: l("PurchaseArtwork.Validation.PhoneNumber.Empty") })
                     return;
                 } else {
@@ -127,6 +152,8 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
                 }
             }
         });
+
+        return successfull;
     }
 
     private validateAndMove = <K extends keyof PurchaseArtworkState>(nextField: AppTextFieldComponent | null, ...fields: K[]) => {
