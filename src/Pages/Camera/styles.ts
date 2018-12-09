@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {DefaultAppFont} from "../../Styles/Fonts";
 
 
 export const styles = StyleSheet.create({
@@ -36,9 +37,9 @@ export const styles = StyleSheet.create({
     },
     slider: {
         position: 'absolute',
-        top: 330, //todo for every screen
-        right: -150,
-        width: 350,
+        top: 330,
+        right: -70,
+        width: 200,
         transform: [
             {rotateZ: '-90deg'},
         ],

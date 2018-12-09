@@ -5685,6 +5685,11 @@ react-native-searchbar@^1.15.0:
     lodash "^4.16.4"
     react-native-vector-icons "^4.4.2"
 
+react-native-scalable-image@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-scalable-image/-/react-native-scalable-image-0.4.0.tgz#9181b3cf94d4c281638b03dbb8eb8d956c5ae212"
+  integrity sha1-kYGzz5TUwoFjiwPbuOuNlWxa4hI=
+
 react-native-snap-carousel@^3.7.5:
   version "3.7.5"
   resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-3.7.5.tgz#7172456d40ab9161523055eb302f9b03b244240a"
