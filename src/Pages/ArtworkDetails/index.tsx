@@ -16,6 +16,7 @@ import { responsiveFontSize } from '../../Styles/Dimensions';
 
 export interface ArtworkDetailsProps {
     readonly artwork: Artwork | null;
+    readonly author: string;
 }
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
@@ -125,7 +126,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
 
     private purchaseArtwork = () => {
         this.props.navigation.navigate(Routes.PurchaseArtwork, {
-            artistId: this.props.artwork
+            artist: this.props.artwork,
+            author: this.props.author
         })
     }
 }
