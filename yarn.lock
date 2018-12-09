@@ -5598,6 +5598,11 @@ react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.10:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-mail@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-mail/-/react-native-mail-3.0.7.tgz#07e6aca43f6f1f85f3e58e96e7fcd16b31a927b8"
+  integrity sha512-FHe4kKJKAGuCPPWcDwaRSjdUhEE4IWIsVtTZ05dgD/MgOm00isYmM20zuJHla7oiHVQ2HmzGji76g6IuhIrCjw==
+
 react-native-maps@^0.22.1:
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.22.1.tgz#ce856e71970e872e596e6fa4773279cae2c4dcdd"

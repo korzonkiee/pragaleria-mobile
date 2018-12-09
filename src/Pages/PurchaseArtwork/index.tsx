@@ -95,7 +95,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
     }
 
     private purchaseArtwork = () => {
-        console.log("Purchase artwork.")
+
     }
 
     private validate = <K extends keyof PurchaseArtworkState>(...fields: K[]) => {
