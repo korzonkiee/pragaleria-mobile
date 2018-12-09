@@ -74,7 +74,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
     }
 
     private navigateToArtist = (artistId: string) => {
-        this.props.navigation.navigate(Routes.artistDetails, {
+        this.props.navigation.navigate(Routes.ArtistDetails, {
             artistId: artistId
         });
     }

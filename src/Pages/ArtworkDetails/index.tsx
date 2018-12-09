@@ -116,7 +116,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
     }
 
     private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
-        this.props.navigation.navigate(Routes.camera, {
+        this.props.navigation.navigate(Routes.Camera, {
             imageUrl: imageUrl,
             imageDimension: imageDimension
         });

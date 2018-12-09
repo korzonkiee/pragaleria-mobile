@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import styles from "./styles";
 import FadeIn from 'react-native-fade-in-image';
 import moment from 'moment';
-import { exhibitions } from '../../Routes';
+import { Exhibitions } from '../../Routes';
 import { ExhibitionsTabBar } from '../../Components/ExhibitionsTabBar';
 import ExhibitionsPlaceholder from '../../Components/Placeholders/ExhibitionsPlaceholder';
 
