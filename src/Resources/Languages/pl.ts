@@ -15,6 +15,16 @@ export default {
     "Artwork.ImageHang": "Powieś",
     "Artwork.ImageBuy": "Kup",
 
+    "PurchaseArtwork.FirstName": "Imię",
+    "PurchaseArtwork.LastName": "Nazwisko",
+    "PurchaseArtwork.PhoneNumber": "Numer telefonu",
+
+    "PurchaseArtwork.Validation.FirstName.Empty": "Imię nie może być puste",
+    "PurchaseArtwork.Validation.LastName.Empty": "Nazwisko nie może być puste",
+    "PurchaseArtwork.Validation.PhoneNumber.Empty": "Numer telefonu nie może być pusty",
+
+    "PurchaseArtwork.PurchaseButton": "Zgłoś chęc kupna",
+
     "Camera.Hang": "Powieś",
     "Camera.TakeAgain": "Wstecz",
 

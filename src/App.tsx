@@ -18,10 +18,12 @@ import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import AppText from './Components/AppText';
+import PurchaseArtwork from './Pages/PurchaseArtwork';
+
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
-  [Routes.auctions]: {
+  [Routes.Auctions]: {
     screen: Auctions,
     navigationOptions: {
       tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Auctions")}</AppText>,
@@ -29,7 +31,7 @@ const MainStack = createMaterialBottomTabNavigator({
       tabBarColor: colors.White
     }
   },
-  [Routes.exhibitions]: {
+  [Routes.Exhibitions]: {
     screen: Exhibitions,
     navigationOptions: {
       tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Exhibitions")}</AppText>,
@@ -37,7 +39,7 @@ const MainStack = createMaterialBottomTabNavigator({
       tabBarColor: colors.White
     }
   },
-  [Routes.artists]: {
+  [Routes.Artists]: {
     screen: Artists,
     navigationOptions: {
       tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }}>{l("BottomNavigation.Artists")}</AppText>,
@@ -45,7 +47,7 @@ const MainStack = createMaterialBottomTabNavigator({
       tabBarColor: colors.White
     }
   },
-  [Routes.about]: {
+  [Routes.About]: {
     screen: About,
     navigationOptions: {
       tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.About")}</AppText>,
@@ -54,34 +56,16 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-    initialRouteName: Routes.artists,
+    initialRouteName: Routes.Artists,
     labeled: true
   });
 
-// const AristDetailsStack = createMaterialTopTabNavigator({
-//   ["A"]: About,
-//   ["B"]: About
-// })
-
-// const AristsStackNavigator = createStackNavigator({
-//   [Routes.artistDetails]: AristDetailsStack,
-//   [Routes.artworkDetails]: ArtworkDetails,
-//   [Routes.camera]: Camera,
-// });
-
-// const MainStackNavigator = createStackNavigator({
-//   ["Main"]: MainStack,
-//   ["ArtistsStackNavigator"]: AristsStackNavigator
-// }, {
-//     initialRouteName: "Main",
-//     headerMode: 'none'
-//   });
-
 const AristsStackNavigator = createStackNavigator({
   ["Main"]: MainStack,
-  [Routes.artistDetails]: ArtistDetails,
-  [Routes.artworkDetails]: ArtworkDetails,
-  [Routes.camera]: Camera,
+  [Routes.ArtistDetails]: ArtistDetails,
+  [Routes.ArtworkDetails]: ArtworkDetails,
+  [Routes.PurchaseArtwork]: PurchaseArtwork,
+  [Routes.Camera]: Camera,
 }, {
     headerMode: 'none'
   });

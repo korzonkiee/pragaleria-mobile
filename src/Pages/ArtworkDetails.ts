@@ -18,7 +18,8 @@ export default connect(
         }
 
         return {
-            artwork: artwork
+            artwork: artwork,
+            author: artistDetails.data!.name
         }
     }
 )(ArtworkDetails);

@@ -16,6 +16,7 @@ import { responsiveFontSize } from '../../Styles/Dimensions';
 
 export interface ArtworkDetailsProps {
     readonly artwork: Artwork | null;
+    readonly author: string;
 }
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
@@ -87,7 +88,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                         paddingVertical: 8,
                                         paddingHorizontal: 24,
                                         borderRadius: 10,
-                                    }}>
+                                    }}
+                                    onPress={() => this.purchaseArtwork()}>
                                     <View style={{
                                         flexDirection: 'row'
                                     }}>
@@ -116,9 +118,16 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
     }
 
     private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
-        this.props.navigation.navigate(Routes.camera, {
+        this.props.navigation.navigate(Routes.Camera, {
             imageUrl: imageUrl,
             imageDimension: imageDimension
         });
+    }
+
+    private purchaseArtwork = () => {
+        this.props.navigation.navigate(Routes.PurchaseArtwork, {
+            artist: this.props.artwork,
+            author: this.props.author
+        })
     }
 }
