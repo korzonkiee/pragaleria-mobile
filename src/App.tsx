@@ -18,6 +18,8 @@ import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import AppText from './Components/AppText';
+import PurchaseArtwork from './Pages/PurchaseArtwork';
+
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
@@ -62,6 +64,7 @@ const AristsStackNavigator = createStackNavigator({
   ["Main"]: MainStack,
   [Routes.ArtistDetails]: ArtistDetails,
   [Routes.ArtworkDetails]: ArtworkDetails,
+  [Routes.PurchaseArtwork]: PurchaseArtwork,
   [Routes.Camera]: Camera,
 }, {
     headerMode: 'none'

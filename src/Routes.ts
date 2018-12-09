@@ -5,6 +5,7 @@ export const Artists = "Artists";
 export const Camera = "Camera";
 export const ArtistDetails = "ArtistDetails";
 export const ArtworkDetails = "ArtworkDetails";
+export const PurchaseArtwork = "PurchaseArtwork";
 export const Exhibitions = "Exhibitions";
 
 export const NavParamAristId = "artistId";
