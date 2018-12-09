@@ -153,7 +153,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         }}
                         style={styles.preview}
                         type={RNCamera.Constants.Type.back}
-                        flashMode={RNCamera.Constants.FlashMode.auto}
                         permissionDialogTitle={'Permission to use camera'}
                         permissionDialogMessage={'We need your permission to use your camera phone'}
                     />
