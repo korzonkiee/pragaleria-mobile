@@ -4,7 +4,6 @@ import {
     Dimensions,
     Modal as RNModal,
     Slider,
-    Image,
     Text,
     TouchableOpacity,
     View,
@@ -13,12 +12,16 @@ import {
 } from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Entypo";
 import {styles} from "./styles";
 import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import Orientation from 'react-native-orientation';
 import Draggable from './Draggable'
 import {l} from "../../Services/Language";
+import Image from 'react-native-scalable-image';
+import {responsiveFontSize} from "../../Styles/Dimensions";
+import AppText from "../../Components/AppText";
+import {Black, LightGrayHidden, LightGrayVisible, White, Yellow} from "../../Resources/Colors";
 
 export interface CameraProps {
     imageUrl: string,
@@ -51,19 +54,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         this.setState({displayingCameraPreview: true});
         this.setUpImage(orientation);
     };
-
-    getWindowSize(orientation: string) {
-        let windowWidth: number;
-        let windowHeight: number;
-        if (orientation === PORTRAIT) {
-            windowWidth = Math.min(this.windowDimension.height, this.windowDimension.width)
-            windowHeight = Math.max(this.windowDimension.height, this.windowDimension.width)
-        } else {
-            windowWidth = Math.max(this.windowDimension.height, this.windowDimension.width)
-            windowHeight = Math.min(this.windowDimension.height, this.windowDimension.width)
-        }
-        return [windowHeight, windowWidth]
-    }
 
     setUpImage(orientation: string) {
         let windowLonger = this.windowDimension.width;
@@ -100,7 +90,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             onPress={this.takePicture.bind(this)}
         >
             {takePictureIcon}
-            <Text style={{color: 'white'}}>{l("Camera.Hang")}</Text>
         </TouchableOpacity>;
         let goBackButton = <TouchableOpacity
             onPress={() => this.goBackPreview()}>
@@ -123,20 +112,57 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} style={{width: 300, height: 300}}/>
-                        <Text style={{color: 'black'}}>{l("Camera.SelectDistance")}</Text>
-                        <Button title={"Ok"} onPress={() => this.setState({tutorial: false})}/>
+                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} height={200}/>
+                        <AppText style={{
+                            color: Black,
+                            fontSize: responsiveFontSize(2),
+                            textAlign: 'center',
+                        }}>
+                            {l("Camera.SelectDistance")}
+                        </AppText>
+
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: LightGrayVisible,
+                                alignSelf: 'center',
+                                margin: 8,
+                                paddingVertical: 8,
+                                paddingHorizontal: 24,
+                                borderRadius: 10,
+                            }}
+                            onPress={() => this.setState({tutorial: false})}>
+                            <View style={{
+                                flexDirection: 'row'
+                            }}>
+                                <AppText style={{
+                                    color: Black,
+                                    fontSize: responsiveFontSize(2),
+                                    textAlign: 'center',
+                                    width: 70
+                                }}>
+                                    Ok
+                                </AppText>
+                            </View>
+                        </TouchableOpacity>
+
                     </View>
                     }
                     <Slider
                         style={styles.slider}
+                        minimumTrackTintColor={Yellow}
                         step={1}
                         minimumValue={50}
                         maximumValue={500}
                         value={this.state.wallDistance}
                         onValueChange={val => this.setState({wallDistance: val})}
                     />
-                    <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
+                    <AppText style={[styles.distanceText, {
+                        color: Black,
+                        fontSize: responsiveFontSize(2),
+                        textAlign: 'auto',
+                    }]}>
+                        {this.state.wallDistance}cm
+                    </AppText>
                 </RNModal>
             )
         }
@@ -159,13 +185,20 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     }
                     <Slider
                         style={styles.slider}
+                        minimumTrackTintColor={Yellow}
                         step={1}
                         minimumValue={50}
                         maximumValue={500}
                         value={this.state.wallDistance}
                         onValueChange={val => this.sliderOnValueChange(val)}
                     />
-                    <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
+                    <AppText style={[styles.distanceText, {
+                        color: Black,
+                        fontSize: responsiveFontSize(2),
+                        textAlign: 'auto',
+                    }]}>
+                        {this.state.wallDistance}cm
+                    </AppText>
                     {!this.state.displayingCameraPreview && this.state.image}
                     <View style={styles.captureContainer}>
                         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
@@ -217,6 +250,19 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         AppState.addEventListener('change', this._handleAppStateChange);
 
     };
+
+    getWindowSize(orientation: string) {
+        let windowWidth: number;
+        let windowHeight: number;
+        if (orientation === PORTRAIT) {
+            windowWidth = Math.min(this.windowDimension.height, this.windowDimension.width)
+            windowHeight = Math.max(this.windowDimension.height, this.windowDimension.width)
+        } else {
+            windowWidth = Math.max(this.windowDimension.height, this.windowDimension.width)
+            windowHeight = Math.min(this.windowDimension.height, this.windowDimension.width)
+        }
+        return [windowHeight, windowWidth]
+    }
 
     _handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
