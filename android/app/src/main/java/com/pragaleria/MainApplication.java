@@ -17,6 +17,7 @@ import org.reactnative.camera.RNCameraPackage;
 import com.reactlibrary.RNRearCameraCharacteristicsDisplayMetricsPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.airbnb.android.react.maps.MapsPackage;
+import com.chirag.RNMail.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
             new RNGestureHandlerPackage(), new VectorIconsPackage(),
           new SplashScreenReactPackage(), new RNCameraPackage(), new RNRearCameraCharacteristicsDisplayMetricsPackage(),
-          new OrientationPackage(), new MapsPackage(), new PragaleriaPackage());
+          new OrientationPackage(), new MapsPackage(), new PragaleriaPackage(), new RNMail());
     }
 
     @Override
