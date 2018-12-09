@@ -1,5 +1,16 @@
 import React, {Component} from 'react'
-import {AppState, Dimensions, Modal as RNModal, Slider, Image, Text, TouchableOpacity, View, Button} from 'react-native'
+import {
+    AppState,
+    Dimensions,
+    Modal as RNModal,
+    Slider,
+    Image,
+    Text,
+    TouchableOpacity,
+    View,
+    Button,
+    Platform
+} from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -33,9 +44,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     componentDidMount() {
-        let ratios = this.getRatios();
-        this.viewHeight = ratios[0];
-        this.viewWidth = ratios[1];
+        this.oppositePOV = this.getOppositePOV();
     }
 
     _orientationDidChange = (orientation: string) => {
@@ -57,31 +66,23 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     setUpImage(orientation: string) {
-        // console.log(orientation);
-        let windowDimension = this.getWindowSize(orientation);
-        let windowHeight = windowDimension[0];
-        let windowWidth = windowDimension[1];
+        let windowLonger = this.windowDimension.width;
+        let windowShorter = this.windowDimension.height;
 
-        let viewWidth = this.viewWidth;
-        let viewHeight = this.viewHeight;
-        if (orientation === PORTRAIT) {
-            viewWidth = this.viewHeight;
-            viewHeight = this.viewWidth;
-        }
-        viewHeight = this.state.wallDistance * viewHeight;
-        viewWidth = this.state.wallDistance * viewWidth;
-        let pixelCmAvg = (viewHeight / windowHeight + viewWidth / windowWidth) / 2;
-        let imageHeight = this.props.imageDimension[0] / pixelCmAvg;
-        let imageWidth = this.props.imageDimension[1] / pixelCmAvg;
+        let oppositePOVCm = this.oppositePOV * this.state.wallDistance;
+        let imageRatio = this.props.imageDimension[0] / this.props.imageDimension[1];
 
-        console.log("View height:", viewHeight);
-        console.log("View width:", viewWidth);
-        console.log("Height:", imageHeight, "/", windowHeight);
-        console.log("Width:", imageWidth, "/", windowWidth);
-        console.log("Height/Width ratio: ", imageHeight / imageWidth);
-        console.log("Orginial ratio: ", this.props.imageDimension[0] / this.props.imageDimension[1]);
-        console.log("Window width: ", windowWidth);
-        console.log("Window height: ", windowHeight);
+        let imageWidth = windowShorter / oppositePOVCm * this.props.imageDimension[1];
+        let imageHeight = imageWidth * imageRatio;
+
+
+        console.log("Orientation: ", orientation);
+        console.log("Image org px: ", this.props.imageDimension);
+        console.log("oppositePOV: ", oppositePOVCm);
+        console.log("Image height:", imageHeight, "/", windowLonger);
+        console.log("Image width:", imageWidth, "/", windowShorter);
+        console.log("Window width: ", windowShorter);
+        console.log("Window height: ", windowLonger);
         console.log("Area: ", imageWidth * imageHeight);
 
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
@@ -133,7 +134,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         minimumValue={50}
                         maximumValue={500}
                         value={this.state.wallDistance}
-                        onSlidingComplete={val => this.setState({wallDistance: val})}
+                        onValueChange={val => this.setState({wallDistance: val})}
                     />
                     <Text style={styles.distanceText}>{this.state.wallDistance}cm</Text>
                 </RNModal>
@@ -184,15 +185,15 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         }
     }
 
-    getRatios(): [number, number] {
-        let focal = RNRearCameraCharacteristicsDisplayMetrics.FOCAL_LENGTH; // 4.260000228881836
-        let sensorWidth = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_WIDTH; // 5.232640266418457
-        let sensorHeight = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_HEIGHT; // 3.9334399700164795
-        let horizonalAngle = (2 * Math.atan(sensorWidth / (focal * 2)));
-        let verticalAngle = (2 * Math.atan(sensorHeight / (focal * 2)));
-        let viewWidth = 2 * Math.tan(horizonalAngle / 2);
-        let viewHeight = 2 * Math.tan(verticalAngle / 2);
-        return [viewHeight, viewWidth]
+    getOppositePOV(): number {
+        let horizontalAngle = 1.0122909661567112;
+        if (Platform.OS === 'android') {
+            let focal = RNRearCameraCharacteristicsDisplayMetrics.FOCAL_LENGTH; // 4.260000228881836
+            let sensorWidth = RNRearCameraCharacteristicsDisplayMetrics.SENSOR_WIDTH; // 5.232640266418457
+            horizontalAngle = (2 * Math.atan(sensorWidth / (focal * 2)));
+        }
+        let oppositvePOV = 2 * Math.tan(horizontalAngle / 2);
+        return oppositvePOV
     }
 
     goBackPreview() {
@@ -226,6 +227,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     };
 
     componentWillUnmount() {
+        AppState.removeEventListener('change', this._handleAppStateChange);
         Orientation.removeOrientationListener(this._orientationDidChange);
     }
 }
