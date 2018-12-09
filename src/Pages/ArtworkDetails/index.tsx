@@ -87,7 +87,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                         paddingVertical: 8,
                                         paddingHorizontal: 24,
                                         borderRadius: 10,
-                                    }}>
+                                    }}
+                                    onPress={() => this.purchaseArtwork()}>
                                     <View style={{
                                         flexDirection: 'row'
                                     }}>
@@ -120,5 +121,11 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
             imageUrl: imageUrl,
             imageDimension: imageDimension
         });
+    }
+
+    private purchaseArtwork = () => {
+        this.props.navigation.navigate(Routes.PurchaseArtwork, {
+            artistId: this.props.artwork
+        })
     }
 }
