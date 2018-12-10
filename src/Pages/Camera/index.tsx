@@ -1,15 +1,5 @@
 import React, {Component} from 'react'
-import {
-    AppState,
-    Dimensions,
-    Modal as RNModal,
-    Slider,
-    Text,
-    TouchableOpacity,
-    View,
-    Button,
-    Platform
-} from 'react-native'
+import {AppState, Dimensions, Modal as RNModal, Slider, TouchableOpacity, View, Platform} from 'react-native'
 import {RNCamera} from "react-native-camera";
 import * as Nav from "react-navigation";
 import Icon from "react-native-vector-icons/Entypo";
@@ -21,7 +11,7 @@ import {l} from "../../Services/Language";
 import Image from 'react-native-scalable-image';
 import {responsiveFontSize} from "../../Styles/Dimensions";
 import AppText from "../../Components/AppText";
-import {Black, LightGrayHidden, LightGrayVisible, White, Yellow} from "../../Resources/Colors";
+import {Black, DirtyWhite, LightBlack, LightGrayVisible, Yellow} from "../../Resources/Colors";
 
 export interface CameraProps {
     imageUrl: string,
@@ -85,7 +75,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
     render() {
         let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
-        let takePictureAgainIcon = <Icon name="undo" size={30} color="#ffffff"/>;
+        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30} color="#ffffff"/>;
         let takePhotoButton = <TouchableOpacity
             onPress={this.takePicture.bind(this)}
         >
@@ -94,7 +84,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let goBackButton = <TouchableOpacity
             onPress={() => this.goBackPreview()}>
             {takePictureAgainIcon}
-            <Text style={{color: 'white'}}>{l("Camera.TakeAgain")}</Text>
         </TouchableOpacity>;
         if (this.state.tutorial) {
             return (
@@ -119,8 +108,9 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                                     {rotateZ: '-180deg'},
                                 ]
                             }}
-                            minimumTrackTintColor={Yellow}
-                            maximumTrackTintColor={Black}
+                            minimumTrackTintColor={DirtyWhite}
+                            maximumTrackTintColor={Yellow}
+                            thumbTintColor={LightBlack}
                             step={10}
                             minimumValue={50}
                             maximumValue={500}
@@ -188,21 +178,27 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         permissionDialogMessage={'We need your permission to use your camera phone'}
                     />
                     }
-                    <Slider
-                        minimumTrackTintColor={Yellow}
-                        step={1}
-                        minimumValue={50}
-                        maximumValue={500}
-                        value={this.state.wallDistance}
-                        onValueChange={val => this.sliderOnValueChange(val)}
-                    />
-                    <AppText style={[styles.distanceText, {
-                        color: Black,
-                        fontSize: responsiveFontSize(2),
-                        textAlign: 'auto',
-                    }]}>
-                        {this.state.wallDistance}cm
-                    </AppText>
+                    <View style={styles.slider}>
+                        <Slider
+                            style={{width: 255, transform: [{rotateZ: '-180deg'}]}}
+                            minimumTrackTintColor={DirtyWhite}
+                            maximumTrackTintColor={Yellow}
+                            thumbTintColor={LightBlack}
+                            step={10}
+                            minimumValue={50}
+                            maximumValue={500}
+                            value={this.state.wallDistance}
+                            onValueChange={val => this.sliderOnValueChange(val)}
+                        />
+                        <AppText style={{
+                            color: Black,
+                            fontSize: responsiveFontSize(2),
+                            textAlign: 'auto',
+                            marginBottom: 10
+                        }}>
+                            {this.state.wallDistance}cm
+                        </AppText>
+                    </View>
                     {!this.state.displayingCameraPreview && this.state.image}
                     <View style={styles.captureContainer}>
                         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
