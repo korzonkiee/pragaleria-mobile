@@ -120,7 +120,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         }}>
                             {l("Camera.SelectDistance")}
                         </AppText>
-
                         <TouchableOpacity
                             style={{
                                 backgroundColor: LightGrayVisible,
@@ -132,37 +131,35 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                             }}
                             onPress={() => this.setState({tutorial: false})}>
                             <View style={{
-                                flexDirection: 'row'
+                                flexDirection: 'row',
                             }}>
                                 <AppText style={{
                                     color: Black,
                                     fontSize: responsiveFontSize(2),
                                     textAlign: 'center',
-                                    width: 70
+                                    width: 70,
                                 }}>
                                     Ok
                                 </AppText>
                             </View>
                         </TouchableOpacity>
-
                     </View>
                     }
-                    <Slider
-                        style={styles.slider}
-                        minimumTrackTintColor={Yellow}
-                        step={1}
-                        minimumValue={50}
-                        maximumValue={500}
-                        value={this.state.wallDistance}
-                        onValueChange={val => this.setState({wallDistance: val})}
-                    />
-                    <AppText style={[styles.distanceText, {
-                        color: Black,
-                        fontSize: responsiveFontSize(2),
-                        textAlign: 'auto',
-                    }]}>
-                        {this.state.wallDistance}cm
-                    </AppText>
+                    <View style={styles.slider}>
+                        <Slider
+                            style={{width: 250}}
+                            minimumTrackTintColor={Yellow}
+                            maximumTrackTintColor={Black}
+                            step={1}
+                            minimumValue={50}
+                            maximumValue={500}
+                            value={this.state.wallDistance}
+                            onValueChange={val => this.setState({wallDistance: val})}
+                        />
+                        <AppText style={{color: Black, fontSize: responsiveFontSize(2), textAlign: 'auto'}}>
+                            {this.state.wallDistance}cm
+                        </AppText>
+                    </View>
                 </RNModal>
             )
         }
@@ -184,7 +181,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     />
                     }
                     <Slider
-                        style={styles.slider}
                         minimumTrackTintColor={Yellow}
                         step={1}
                         minimumValue={50}
