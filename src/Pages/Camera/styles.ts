@@ -36,13 +36,15 @@ export const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     slider: {
-        position: 'absolute',
-        top: 330,
-        right: -70,
-        width: 200,
-        transform: [
-            {rotateZ: '-90deg'},
-        ],
+        // position: 'absolute',
+        flex:1,
+        bottom: 25,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        // transform: [
+        //     { rotateZ : '-90deg' },
+        // ],
     },
     distanceText: {
         position: 'absolute',
