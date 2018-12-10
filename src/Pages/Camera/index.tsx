@@ -112,7 +112,29 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} height={200}/>
+                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} width={330}/>
+                        <Slider
+                            style={{
+                                width: 255, left: 40, transform: [
+                                    {rotateZ: '-180deg'},
+                                ]
+                            }}
+                            minimumTrackTintColor={Yellow}
+                            maximumTrackTintColor={Black}
+                            step={10}
+                            minimumValue={50}
+                            maximumValue={500}
+                            value={this.state.wallDistance}
+                            onValueChange={val => this.setState({wallDistance: val})}
+                        />
+                        <AppText style={{
+                            color: Black,
+                            fontSize: responsiveFontSize(2),
+                            textAlign: 'auto',
+                            marginBottom: 10
+                        }}>
+                            {this.state.wallDistance}cm
+                        </AppText>
                         <AppText style={{
                             color: Black,
                             fontSize: responsiveFontSize(2),
@@ -128,6 +150,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                                 paddingVertical: 8,
                                 paddingHorizontal: 24,
                                 borderRadius: 10,
+                                marginTop: 30,
                             }}
                             onPress={() => this.setState({tutorial: false})}>
                             <View style={{
@@ -137,7 +160,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                                     color: Black,
                                     fontSize: responsiveFontSize(2),
                                     textAlign: 'center',
-                                    width: 70,
+                                    width: 80,
                                 }}>
                                     Ok
                                 </AppText>
@@ -145,21 +168,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         </TouchableOpacity>
                     </View>
                     }
-                    <View style={styles.slider}>
-                        <Slider
-                            style={{width: 250}}
-                            minimumTrackTintColor={Yellow}
-                            maximumTrackTintColor={Black}
-                            step={1}
-                            minimumValue={50}
-                            maximumValue={500}
-                            value={this.state.wallDistance}
-                            onValueChange={val => this.setState({wallDistance: val})}
-                        />
-                        <AppText style={{color: Black, fontSize: responsiveFontSize(2), textAlign: 'auto'}}>
-                            {this.state.wallDistance}cm
-                        </AppText>
-                    </View>
                 </RNModal>
             )
         }
