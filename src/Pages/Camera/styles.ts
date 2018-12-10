@@ -42,9 +42,9 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // transform: [
-        //     { rotateZ : '-90deg' },
-        // ],
+        transform: [
+            { rotateZ : '-180deg' },
+        ],
     },
     distanceText: {
         position: 'absolute',
