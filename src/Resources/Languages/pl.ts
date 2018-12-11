@@ -11,7 +11,7 @@ export default {
 
     "Camera.Hang": "Powieś",
     "Camera.TakeAgain": "Wstecz",
-    "Camera.SelectDistance": "Nakieruj kamere aparatu prosto na ścianę. Odsuń się od ściany i wybierz dystans od ściany. Następnie kliknij ok.",
+    "Camera.SelectDistance": "Nakieruj kamere aparatu prosto na ścianę. Wybierz odległość która dzieli cię od ściany. Następnie kliknij ok.",
 
     "Common.GenericErrorMessageWithRetry": "Wystąpił błąd połączenia. Naciśnij, aby ponowić próbę.",
     "Common.NetworkError": "Wystąpił błąd połączenia. Spróbuj ponownie",
