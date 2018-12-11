@@ -11,7 +11,8 @@ import {l} from "../../Services/Language";
 import Image from 'react-native-scalable-image';
 import {responsiveFontSize} from "../../Styles/Dimensions";
 import AppText from "../../Components/AppText";
-import {Black, DirtyWhite, LightBlack, LightGrayVisible, Yellow} from "../../Resources/Colors";
+import {Black, DirtyWhite, LightBlack, LightGrayVisible} from "../../Resources/Colors";
+import images from "../../Assets/Images";
 
 export interface CameraProps {
     imageUrl: string,
@@ -75,8 +76,10 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
     render() {
         let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
-        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30} color="#ffffff"/>;
+        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30}
+                                         color="#ffffff"/>;
         let takePhotoButton = <TouchableOpacity
+            hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
             onPress={this.takePicture.bind(this)}
         >
             {takePictureIcon}
@@ -101,21 +104,21 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Image source={{uri: 'https://i.imgur.com/iRyJhfE.png'}} width={330}/>
+                        <Image source={images.tutorialImg} width={330}/>
                         <Slider
                             style={{
-                                width: 255, left: 40, transform: [
+                                width: 260, left: 40, transform: [
                                     {rotateZ: '-180deg'},
                                 ]
                             }}
                             minimumTrackTintColor={DirtyWhite}
-                            maximumTrackTintColor={Yellow}
+                            maximumTrackTintColor={LightBlack}
                             thumbTintColor={LightBlack}
                             step={10}
                             minimumValue={50}
                             maximumValue={500}
                             value={this.state.wallDistance}
-                            onValueChange={val => this.setState({wallDistance: val})}
+                            onSlidingComplete={val => this.setState({wallDistance: val})}
                         />
                         <AppText style={{
                             color: Black,
@@ -129,6 +132,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                             color: Black,
                             fontSize: responsiveFontSize(2),
                             textAlign: 'center',
+                            marginLeft: 20,
+                            marginRight: 20,
                         }}>
                             {l("Camera.SelectDistance")}
                         </AppText>
@@ -182,13 +187,13 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         <Slider
                             style={{width: 255, transform: [{rotateZ: '-180deg'}]}}
                             minimumTrackTintColor={DirtyWhite}
-                            maximumTrackTintColor={Yellow}
+                            maximumTrackTintColor={LightBlack}
                             thumbTintColor={LightBlack}
                             step={10}
                             minimumValue={50}
                             maximumValue={500}
                             value={this.state.wallDistance}
-                            onValueChange={val => this.sliderOnValueChange(val)}
+                            onSlidingComplete={val => this.sliderOnValueChange(val)}
                         />
                         <AppText style={{
                             color: Black,
