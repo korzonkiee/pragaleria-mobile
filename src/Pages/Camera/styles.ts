@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {DefaultAppFont} from "../../Styles/Fonts";
 
 
 export const styles = StyleSheet.create({
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: 10,
+        bottom: 40,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
@@ -34,5 +35,20 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         resizeMode: 'contain',
     },
-    captureBtn: {}
+    slider: {
+        position: 'absolute',
+        top: 20,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+
+    },
+    distanceText: {
+        position: 'absolute',
+        right: 10,
+        top: 500,
+        color: '#000'
+    },
 });
