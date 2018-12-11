@@ -4,13 +4,33 @@ import { endTask, startTask } from "../Async";
 import Logger from "../../Services/Logger"
 import * as Api from "../../Services/Api";
 import { handleError } from "../Error";
+import { ThunkAction } from "redux-thunk";
 
 const setArtists = createAction("ARTISTS/SET_ARTISTS");
+const setFilteredArtists = createAction("ARTISTS/SET_FILTERED_ARTISTS");
 const setArtistsLoading = createAction("ARTITS/SET_ARTISTS_LOADING");
 const setArtistDetails = createAction("ARTISTS/SET_ARTIST_DETAILS");
 const setArtistDetailsLoading = createAction("ARTISTS/SET_ARTIST_DETAILS_LOADING");
 
 const TAG = "ARTISTS";
+
+export function searchArtists(keyword: string) {
+    return async (dispatch: Dispatch<any>, getState: () => AppState) => {
+        dispatch(startTask());
+
+        try {
+            const artists = await Api.searchArtists(keyword);
+            dispatch(setFilteredArtists(artists));
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't search for artists by keyword ${keyword}. ` +
+                `Error: ${e}`);
+        }
+        finally {
+            dispatch(endTask());
+        }
+    }
+}
 
 export function getArtists() {
     return async (dispatch: Dispatch<any>, getState: () => AppState) => {
@@ -70,6 +90,16 @@ export const
                         loading: false,
                         page: state.artists.page + 1
                     }
+                }
+            }
+
+            return state;
+        },
+        [setFilteredArtists.toString()](state, action) {
+            if (action.payload) {
+                return {
+                    ...state,
+                    filteredArtists: action.payload
                 }
             }
 

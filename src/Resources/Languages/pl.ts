@@ -47,6 +47,8 @@ export default {
     "About.TelephoneDescription": "Mikołaj Konopacki +48 884 79 88 52",
     "About.MailDescription": "info@pragaleria.pl",
 
+    "Artists.Search.Placeholder": "Szukaj twórcy...",
+
     "ArtistDetails.Available": "Dostępne",
     "ArtistDetails.Sold": "Sprzedane",
     "ArtistDetails.NoArtworksAvailable": "Brak dostępnych dzieł",

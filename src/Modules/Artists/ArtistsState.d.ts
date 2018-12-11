@@ -54,6 +54,7 @@ declare interface ArtistsData {
 
 declare interface ArtistsState {
     readonly artists: ArtistsData;
+    readonly filteredArtists: Artist[];
     readonly artistDetails: { readonly [id: number]: ArtistDetailsData }
 }
 
