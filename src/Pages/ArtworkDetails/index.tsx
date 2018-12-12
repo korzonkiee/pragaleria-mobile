@@ -79,7 +79,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                     </View>
                                 </View>
                             </TouchableOpacity>
-                            {artwork.meta.dimension.length < 3 ?
+                            {artwork.meta.dimension.length < 3 && !artwork.sold ?
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: LightGrayHidden,
