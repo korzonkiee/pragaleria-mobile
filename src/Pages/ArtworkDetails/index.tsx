@@ -53,33 +53,34 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                             uri: artwork.image_medium || artwork.image_large || artwork.image_original
                         }}
                         resizeMode="contain">
-                            {artwork.meta.dimension.length < 3 && !artwork.sold ?
-                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                    <TouchableOpacity
-                                        style={{
-                                            backgroundColor: LightGrayHidden,
-                                            alignSelf: 'flex-end',
-                                            margin: 8,
-                                            paddingVertical: 8,
-                                            paddingHorizontal: 24,
-                                            borderRadius: 10
-                                        }}
-                                        onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
-                                        <View style={{
-                                            flexDirection: 'row'
-                                        }}>
-                                            <AppText style={{
-                                                color: White,
-                                                fontSize: responsiveFontSize(2),
-                                                textAlign: 'right',
-                                            }}>
-                                                {l("Artwork.ImageHang")}
-                                            </AppText>
-                                            <View style={{ marginLeft: 8 }}>
-                                                <Icon name="camera" size={responsiveFontSize(2)} color={White} />
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+
+                        {artwork.meta.dimension.length < 3 ?<TouchableOpacity
+                            style={{
+                                backgroundColor: LightGrayHidden,
+                                alignSelf: 'flex-end',
+                                margin: 8,
+                                paddingVertical: 8,
+                                paddingHorizontal: 24,
+                                borderRadius: 10
+                            }}
+                            onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
+                            <View style={{
+                                flexDirection: 'row'
+                            }}>
+                                <AppText style={{
+                                    color: White,
+                                    fontSize: responsiveFontSize(2),
+                                    textAlign: 'right',
+                                }}>
+                                    {l("Artwork.ImageHang")}
+                                </AppText>
+                                <View style={{ marginLeft: 8 }}>
+                                    <Icon name="camera" size={responsiveFontSize(2)} color={White} />
+                                </View>
+                            </View>
+                        </TouchableOpacity>:<View/>}
+                            { !artwork.sold ?
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: LightGrayHidden,
@@ -105,8 +106,9 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                         </View>
                                     </View>
                                 </TouchableOpacity>
-                            </View>
                                 : <View />}
+                        </View>
+
                     </ImageBackground>
                 </FadeIn>
             </AppContainer>
