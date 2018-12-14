@@ -15,5 +15,6 @@ export const initialState: AppState = {
         data: [],
         loading: false
     },
-    artistDetails: {}
+    artistDetails: {},
+    catalogs: {},
 };

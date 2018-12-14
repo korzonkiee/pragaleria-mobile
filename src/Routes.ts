@@ -14,3 +14,7 @@ export const NavParamArist = "artist";
 export const NavParamArtworkId = "artworkId";
 export const NavParamImageUrl = "imageUrl";
 export const NavParamImageDimension = "imageDimension";
+
+export const NavParamAuction = "auction";
+
+export const AuctionDetails = "AuctionDetails";

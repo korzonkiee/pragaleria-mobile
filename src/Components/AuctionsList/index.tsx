@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, FlatList, View } from "react-native";
+import { Image, FlatList, View, TouchableWithoutFeedback } from 'react-native';
 import { DirtyWhite, LightBlack, Black } from "../../Resources/Colors";
 import AppText from "../AppText";
 import { ArtworkItem } from "../ArtworkItem";
@@ -11,6 +11,7 @@ import styles from "./styles";
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import ViewMoreText from "react-native-view-more-text";
 import font, { DefaultFontFamily } from "../../Styles/Fonts";
+import { AuctionDetails } from '../../Pages/Auctions/AuctionsDetails/index';
 
 export interface AuctionsListProps {
     readonly artworks: Auction[];
@@ -31,7 +32,8 @@ export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.Na
     };
 
     private renderAuction = ({ item, index }: { item: Auction, index: number }) => {
-        return <View style={{
+        return <TouchableWithoutFeedback onPress={() => this.navigateToAuctionDetails(item)}>
+            <View style={{
             marginBottom: 30,
         }}>
             <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
@@ -58,5 +60,12 @@ export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.Na
                 </ViewMoreText>
             </View>
         </View>
+    </TouchableWithoutFeedback>
+    }
+
+    private navigateToAuctionDetails = (auction: Auction) => {
+        this.props.navigation.navigate(Routes.AuctionDetails, {
+            auction: auction
+        });
     }
 }

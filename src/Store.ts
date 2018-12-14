@@ -13,7 +13,7 @@ if (config.IsDebug) {
         appReducer as any,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
         applyMiddleware(
-            thunk
+            thunk,
         )
     );
 }
