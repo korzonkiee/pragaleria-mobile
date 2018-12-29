@@ -1,15 +1,14 @@
 import React from "react";
-import { Image, ScrollView, View, Dimensions, ImageBackground, FlatList, TouchableWithoutFeedback, TouchableOpacity, TouchableHighlight, TouchableNativeFeedback } from 'react-native';
-import styles from "./styles";
-import * as Nav from "react-navigation";
-import AppText from "../AppText";
-import * as Routes from "../../Routes";
-import FadeIn from "react-native-fade-in-image";
-import { responsiveHeight, responsiveFontSize } from '../../Styles/Dimensions';
-import { LightBlack, Black, Yellow, White, LightGray, Gray, LightGrayHidden, LightGrayVisible } from '../../Resources/Colors';
-import Icon from "react-native-vector-icons/Entypo";
-import { CarouselWrapper } from "./CarouselWrapper";
+import { FlatList, ImageBackground, TouchableOpacity, View } from 'react-native';
 import Checkbox from 'react-native-modest-checkbox';
+import Icon from "react-native-vector-icons/Entypo";
+import * as Nav from "react-navigation";
+import { Black, LightGray } from '../../Resources/Colors';
+import * as Routes from "../../Routes";
+import { responsiveFontSize, responsiveHeight } from '../../Styles/Dimensions';
+import AppText from "../AppText";
+import { CarouselWrapper } from "./CarouselWrapper";
+import styles from "./styles";
 
 
 export interface SwitchGridCarouselProps {
@@ -26,7 +25,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     constructor(props: SwitchGridCarouselProps & Nav.NavigationInjectedProps) {
         super(props);
 
-        const catalogItemsFiltered =  this.props.catalogItems.filter(
+        const catalogItemsFiltered = this.props.catalogItems.filter(
             (catalogItem: CatalogItem) => catalogItem.sold === false
         );
         this.state = {
@@ -65,7 +64,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         const { catalogItems } = this.props;
         const { currentView } = this.state;
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <View style={styles.topContainer}>
                     <Checkbox
                         checked={this.state.isChecked}
@@ -77,16 +76,16 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                     {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
                     {this.renderTopContainerIcon("grid", this.setGridView, (currentView === 'grid'))}
                 </View>
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                     {currentView === 'slides' ?
-                    <CarouselWrapper
-                    catalogItems={this.catalogDataFiltered()}
-                    navigation={this.props.navigation}/>
-                    : <FlatList
-                    data={this.catalogDataFiltered()}
-                    keyExtractor={(item, _) => item.id.toString()}
-                    numColumns={2}
-                    renderItem={this.renderGridItem} />}
+                        <CarouselWrapper
+                            catalogItems={this.catalogDataFiltered()}
+                            navigation={this.props.navigation} />
+                        : <FlatList
+                            data={this.catalogDataFiltered()}
+                            keyExtractor={(item, _) => item.id.toString()}
+                            numColumns={2}
+                            renderItem={this.renderGridItem} />}
                 </View>
             </View>
         )
@@ -96,9 +95,9 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         iconName: string, onPress: any, isActive: boolean
     ) => <TouchableOpacity style={styles.topContainerIcon} onPress={onPress} >
             <Icon
-            name={iconName}
-            size={responsiveFontSize(3.3)}
-            color={isActive ? Black : LightGray}/>
+                name={iconName}
+                size={responsiveFontSize(3.3)}
+                color={isActive ? Black : LightGray} />
         </TouchableOpacity>
 
     private setGridView = () => {
@@ -112,30 +111,30 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     private renderGridItem = (
         { item, index }: { item: CatalogItem, index: number }
     ) => <View key={item.id} style={styles.gridItem}>
-    <TouchableOpacity style={{ flexDirection: 'column', flex: 1 }} onPress={()=> {
-            this.props.navigation.navigate(Routes.ArtworkDetails, {
-                artwork: item
-            });
-        }}>
-        <View style={{flex: 1}}>
-            <ImageBackground style={{ flex: 1, height: responsiveHeight(25) }} source={{
-                uri: item.image_medium_thumbnail || item.image_thumbnail
+            <TouchableOpacity style={{ flexDirection: 'column', flex: 1 }} onPress={() => {
+                this.props.navigation.navigate(Routes.ArtworkDetails, {
+                    artwork: item
+                });
             }}>
-                <View style={{ flexDirection: "row" }}>
-                    <AppText style={styles.imageTopLabel}>{index + 1}.</AppText>
-                    {item.sold === true ? <AppText style={styles.imageTopLabel}>sprzedane</AppText> : <></>}
+                <View style={{ flex: 1 }}>
+                    <ImageBackground style={{ flex: 1, height: responsiveHeight(25) }} source={{
+                        uri: item.image_medium_thumbnail || item.image_thumbnail
+                    }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <AppText style={styles.imageTopLabel}>{index + 1}.</AppText>
+                            {item.sold === true ? <AppText style={styles.imageTopLabel}>sprzedane</AppText> : <></>}
+                        </View>
+                    </ImageBackground>
+                    <View style={styles.imageSubtitle}>
+                        {this.renderTitleBox('Tytuł:', item.title)}
+                        {this.renderTitleBox('Autor:', item.author)}
+                        {item.after_auction_price ?
+                            this.renderTitleBox('Cena poaukcyjna:', item.after_auction_price) :
+                            item.sold === true && item.sold_price ?
+                                this.renderTitleBox('Cena sprzedaży:', item.sold_price) :
+                                this.renderTitleBox('Cena wywoławcza:', `${item.initial_price}`)}
+                    </View>
                 </View>
-            </ImageBackground>
-            <View style={styles.imageSubtitle}>
-                {this.renderTitleBox('Tytuł:', item.title)}
-                {this.renderTitleBox('Autor:', item.author)}
-                    {item.after_auction_price ?
-                    this.renderTitleBox('Cena poaukcyjna:', item.after_auction_price):
-                    item.sold === true && item.sold_price ?
-                    this.renderTitleBox('Cena sprzedaży:', item.sold_price):
-                    this.renderTitleBox('Cena wywoławcza:', `${item.initial_price}`)}
-            </View>
+            </TouchableOpacity>
         </View>
-    </TouchableOpacity>
-</View>
 }
