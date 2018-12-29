@@ -47,11 +47,11 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 retry={this.props.getAuctions} />)
         }
 
-        let incomingAuctions = auctionsData.filter(auction => {
+        const incomingAuctions = auctionsData.filter(auction => {
             return !auction.is_past;
         });
 
-        let closedAuctions = auctionsData.filter(auction => {
+        const closedAuctions = auctionsData.filter(auction => {
             return auction.is_past;
         });
 

@@ -16,7 +16,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import styles from "./styles";
 import FadeIn from 'react-native-fade-in-image';
 import moment from 'moment';
-import { Exhibitions } from '../../Routes';
 import { ExhibitionsTabBar } from '../../Components/ExhibitionsTabBar';
 import ExhibitionsPlaceholder from '../../Components/Placeholders/ExhibitionsPlaceholder';
 
@@ -49,26 +48,13 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                 retry={this.props.getExhibitions} />)
         }
 
-        // --- --- --- --- This is going to be removed
-        exhibitionsData.sort((firstExhibition: Exhibition, secondExhibition: Exhibition) => {
-            if (moment(firstExhibition.auction_start, "YYYY/MM/DD HH:mm")
-                .isBefore(moment(secondExhibition.auction_start, "YYYY/MM/DD HH:mm"))) {
-                return 1;
-            } else {
-                return -1;
-            }
-        })
-
-        let today = moment("2017-09-01", "YYYY-MM-DD");
-
         const incomingExhibitions = exhibitionsData.filter(exhibition => {
-            return !moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+            return !exhibition.is_past;
         });
 
         const closedExhibitions = exhibitionsData.filter(exhibition => {
-            return moment(exhibition.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+            return exhibition.is_past;
         });
-        // --- --- --- --- --- --- --- --- --- --- ---
 
         return (
             <AppContainer style={{
