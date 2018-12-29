@@ -47,18 +47,13 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 retry={this.props.getAuctions} />)
         }
 
-        // --- --- --- --- This is going to be removed
-        let incomingAuctions: Array<Auction>;
-        let closedAuctions: Array<Auction>;
+        let incomingAuctions = auctionsData.filter(auction => {
+            return !auction.is_past;
+        });
 
-        let today = moment("2018-05-26", "YYYY-MM-DD");
-        incomingAuctions = auctionsData.filter(auction => {
-            return !moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
+        let closedAuctions = auctionsData.filter(auction => {
+            return auction.is_past;
         });
-        closedAuctions = auctionsData.filter(auction => {
-            return moment(auction.auction_start, "YYYY/MM/DD HH:mm").isBefore(today);
-        });
-        // --- --- --- --- --- --- --- --- --- --- ---
 
         return (
             <AppContainer style={{
