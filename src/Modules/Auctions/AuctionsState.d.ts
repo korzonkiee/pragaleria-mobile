@@ -5,6 +5,7 @@ declare interface Auction {
     readonly description_excerpt: string;
     readonly guid: string;
     readonly date: string;
+    readonly is_past: boolean;
     readonly auction_start: string;
     readonly auction_end: string;
     readonly auction_status: boolean;
