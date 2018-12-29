@@ -34,9 +34,11 @@ export class AuctionsTabBar extends React.PureComponent<AuctionsTabBarProps & Na
 
         const pages = {
             [l("Auctions.Incoming")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.incomingAuctions} />,
+                artworks={this.props.incomingAuctions}
+                artworksNotFoundMessage={l("Auctions.NoIncomingAuctions")} />,
             [l("Auctions.Closed")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.closedAuctions} />,
+                artworks={this.props.closedAuctions}
+                artworksNotFoundMessage={l("Auctions.NoClosedAuctions")} />,
         };
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));

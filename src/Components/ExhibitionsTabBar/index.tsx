@@ -34,9 +34,11 @@ export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProp
 
         const pages = {
             [l("Exhibitions.Incoming")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.incomingExhibitions} />,
+                artworks={this.props.incomingExhibitions}
+                artworksNotFoundMessage={l("Exhibitions.NoIncomingExhibitions")} />,
             [l("Exhibitions.Closed")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.closedExhibitions} />,
+                artworks={this.props.closedExhibitions}
+                artworksNotFoundMessage={l("Exhibitions.NoClosedExhibitions")} />,
         };
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));

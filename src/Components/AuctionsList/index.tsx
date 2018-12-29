@@ -14,11 +14,16 @@ import font, { DefaultFontFamily } from "../../Styles/Fonts";
 
 export interface AuctionsListProps {
     readonly artworks: Auction[];
+    readonly artworksNotFoundMessage: string;
 }
 
 export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.NavigationInjectedProps> {
     render() {
-        return this.renderAuctions(this.props.artworks);
+        if (this.props.artworks.length === 0) {
+            return (<AppText style={{ color: Black, margin: 16 }}>{this.props.artworksNotFoundMessage}</AppText>)
+        } else {
+            return this.renderAuctions(this.props.artworks);
+        }
     }
 
     private renderAuctions = (auctionsData: Auction[]) => {
