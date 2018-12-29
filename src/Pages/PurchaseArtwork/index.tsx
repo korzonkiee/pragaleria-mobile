@@ -11,7 +11,6 @@ import Mailer from 'react-native-mail';
 
 export interface PurchaseArtworkProps {
     readonly artwork: Artwork;
-    readonly author: string;
 }
 
 interface PurchaseArtworkState {
@@ -102,7 +101,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
         }
 
         Mailer.mail({
-            subject: `Oferta kupna obrazu "${this.props.artwork.title}" ${this.props.author}`,
+            subject: `Oferta kupna obrazu "${this.props.artwork.title}" ${this.props.artwork.author}`,
             recipients: ['info@pragaleria.pl'],
             body: `<p>
                 Imię: ${this.state.firstName} <br>
@@ -112,7 +111,7 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
                 Dodatkowe informacje: <br>
                 Identyfikator dzieła: ${this.props.artwork.id} <br>
                 Tytuł dzieła: ${this.props.artwork.title} <br>
-                Autor dzieła: ${this.props.author} <br>
+                Autor dzieła: ${this.props.artwork.author} <br>
             </p>`,
             isHTML: true
         }, () => { });

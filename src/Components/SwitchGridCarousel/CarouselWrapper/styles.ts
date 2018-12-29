@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import { responsiveHeight, responsiveFontSize } from '../../../Styles/Dimensions';
+import { responsiveHeight, responsiveFontSize, responsiveWidth } from '../../../Styles/Dimensions';
 import { White, DirtyWhite, Black, Yellow, GreyLight, LightBlack } from '../../../Resources/Colors';
 
 export default StyleSheet.create({
     artworkFullResImage: {
         flex: 1,
-        width: '100%',
+        width: responsiveWidth(100),
         height: responsiveHeight(50),
         alignSelf: 'stretch',
         borderWidth: 1,

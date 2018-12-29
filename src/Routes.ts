@@ -9,8 +9,9 @@ export const PurchaseArtwork = "PurchaseArtwork";
 export const Exhibitions = "Exhibitions";
 
 export const NavParamAuthor = "author";
-export const NavParamAristId = "artistId";
 export const NavParamArist = "artist";
+export const NavParamAristId = "artistId";
+export const NavParamArtwork = "artwork";
 export const NavParamArtworkId = "artworkId";
 export const NavParamImageUrl = "imageUrl";
 export const NavParamImageDimension = "imageDimension";

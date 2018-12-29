@@ -16,7 +16,6 @@ export function getCatalog(id: number) {
         dispatch(setCatalogLoading({ id: id, loading: true }));
         try {
             const catalog = await Api.getCatalog(id);
-            console.log(catalog)
             dispatch(setCatalog({id: id, data: catalog}));
         }
         catch (e) {

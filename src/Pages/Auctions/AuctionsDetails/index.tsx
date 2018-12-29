@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, View, Dimensions, ImageBackground, FlatList, TouchableWithoutFeedback } from 'react-native';
 import * as Nav from "react-navigation";
 import AppContainer from '../../../Components/AppContainer';
 import AppHeader from '../../../Components/AppHeader';
@@ -7,9 +7,8 @@ import AppText from '../../../Components/AppText';
 import DataNotFound from '../../../Components/DataNotFound';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
 import { l } from '../../../Services/Language';
-import FadeIn from "react-native-fade-in-image";
-import styles from "./styles";
 import { White, Black, DirtyWhite, Yellow, LightBlack, LightGray } from '../../../Resources/Colors';
+import { SwitchGridCarousel } from '../../../Components/SwitchGridCarousel';
 
 
 export interface AuctionDetailsProps {
@@ -19,16 +18,7 @@ export interface AuctionDetailsProps {
 }
 
 export class AuctionDetails extends Component<AuctionDetailsProps & Nav.NavigationInjectedProps> {
-    private auctionId: number = -1;
-
-    constructor(props: AuctionDetailsProps & Nav.NavigationInjectedProps) {
-        super(props);
-    }
-
     componentDidMount() {
-        console.log(this.props.auction);
-        console.log(this.props.catalog);
-
         if (!this.props.catalog) {
             this.props.getAuctionsDetails();
         }
@@ -54,13 +44,24 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
             {auction && catalog && <>
                 <AppHeader
                     title='Aukcja'
-                    rightButtonDisabled={true}
-                    withBackground />
-                <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: auction.image_thumbnail }} blurRadius={2} />)}>
-                    <Image style={styles.artworkFullImage} source={{
-                        uri: auction.image_big_thumbnail || auction.image_medium || auction.image_large || auction.image_original
-                    }} />
-                </FadeIn>
+                    withBackground
+                    modalContent={
+                        <ScrollView style={{ margin: 8 }}>
+                            <AppText style={{ color: Black }}>
+                                {auction.title}
+                            </AppText>
+                            <AppText style={{ color: Black }}>
+                                Rozpoczęcie: {auction.title}
+                            </AppText>
+                            <AppText style={{ color: Black }}>
+                                Zakończenie: {auction.title}
+                            </AppText>
+                            <AppText style={{ marginTop: 4, color: Black, textAlign: 'justify' }}>
+                                Opis: {auction.description_content || auction.description_excerpt}
+                            </AppText>
+                        </ScrollView>
+                    }/>
+                <SwitchGridCarousel catalogItems={catalog.data} navigation={this.props.navigation}/>
             </>}
             </AppContainer>
         )
