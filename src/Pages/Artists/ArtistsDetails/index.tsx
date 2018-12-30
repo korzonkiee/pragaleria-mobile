@@ -1,20 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 import * as Nav from "react-navigation";
-import * as Routes from "../../../Routes";
-import font, { DefaultAppFont } from "../../../Styles/Fonts";
-import { FlatList, View, ScrollView } from 'react-native';
 import AppContainer from '../../../Components/AppContainer';
-import { ArtworkItem } from '../../../Components/ArtworkItem';
-import DataNotFound from '../../../Components/DataNotFound';
-import { l } from '../../../Services/Language';
 import AppHeader from '../../../Components/AppHeader';
-import { TabView, TabBar, Scene } from 'react-native-tab-view';
-import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
-import { White, Black, DirtyWhite, Yellow, LightBlack, LightGray } from '../../../Resources/Colors';
 import AppText from '../../../Components/AppText';
-import { About } from '../../About/index';
-import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation';
 import { AristDetailsTabBar } from '../../../Components/AristDetailsTabBar';
+import DataNotFound from '../../../Components/DataNotFound';
+import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
+import { Black } from '../../../Resources/Colors';
+import { l } from '../../../Services/Language';
 
 
 export interface ArtistsDetailsProps {
@@ -69,7 +63,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                         modalContent={
                             <ScrollView>
                                 <AppText style={{ color: Black, textAlign: 'justify', margin: 8 }}>
-                                    {artist.data.description}
+                                    {artist.data.description || "Brak opisu artysty"}
                                 </AppText>
                             </ScrollView>
                         }
