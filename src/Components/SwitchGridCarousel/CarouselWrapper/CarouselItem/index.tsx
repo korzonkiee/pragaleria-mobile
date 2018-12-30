@@ -4,6 +4,7 @@ import FadeIn from "react-native-fade-in-image";
 import * as Nav from "react-navigation";
 import getSmallestImageSize from '../../../../Helpers/ImageHelpers';
 import * as Routes from "../../../../Routes";
+import { l } from "../../../../Services/Language";
 import AppText from "../../../AppText";
 import styles from "./styles";
 
@@ -35,13 +36,13 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
                         </ImageBackground>
                     </FadeIn>
                     <View style={styles.imageSubtitle}>
-                        {this.renderTitleBox('Tytuł:', catalogItem.title)}
-                        {this.renderTitleBox('Autor:', catalogItem.author)}
+                        {this.renderTitleBox(l("Auctions.CarouselItem.Title"), catalogItem.title)}
+                        {this.renderTitleBox(l("Auctions.CarouselItem.Author"), catalogItem.author)}
                         {catalogItem.after_auction_price ?
-                            this.renderTitleBox('Cena poaukcyjna:', catalogItem.after_auction_price) :
+                            this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), catalogItem.after_auction_price) :
                             catalogItem.sold === true && catalogItem.sold_price ?
-                                this.renderTitleBox('Cena sprzedaży:', catalogItem.sold_price) :
-                                this.renderTitleBox('Cena wywoławcza:', `${catalogItem.initial_price} PLN`)}
+                                this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${catalogItem.sold_price} PLN`) :
+                                this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${catalogItem.initial_price} PLN`)}
                     </View>
                 </View>
             </TouchableNativeFeedback>
