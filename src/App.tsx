@@ -1,25 +1,25 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { Component } from 'react'
-import * as Routes from './Routes';
-import * as colors from './Resources/Colors';
-import { store } from './Store';
-import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation';
-import { l } from './Services/Language';
-import About from './Pages/About';
-import Auctions from './Pages/Auctions';
-import Artists from './Pages/Artists';
-import Camera from './Pages/Camera';
-import Exhibitions from './Pages/Exhibitions';
-import SplashScreen from 'react-native-splash-screen'
-import { responsiveFontSize } from './Styles/Dimensions';
+import React, { Component } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { Provider } from 'react-redux';
+import AppText from './Components/AppText';
+import About from './Pages/About';
+import Artists from './Pages/Artists';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import AppText from './Components/AppText';
-import PurchaseArtwork from './Pages/PurchaseArtwork';
+import Auctions from './Pages/Auctions';
 import AuctionDetails from './Pages/Auctions/AuctionsDetails';
+import Camera from './Pages/Camera';
+import Exhibitions from './Pages/Exhibitions';
+import ExhibtionDetails from './Pages/Exhibitions/ExhibitionDetails';
+import PurchaseArtwork from './Pages/PurchaseArtwork';
+import * as colors from './Resources/Colors';
+import * as Routes from './Routes';
+import { l } from './Services/Language';
+import { store } from './Store';
+import { responsiveFontSize } from './Styles/Dimensions';
 
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
@@ -65,6 +65,7 @@ const AristsStackNavigator = createStackNavigator({
   ["Main"]: MainStack,
   [Routes.ArtistDetails]: ArtistDetails,
   [Routes.AuctionDetails]: AuctionDetails,
+  [Routes.ExhibitionDetails]: ExhibtionDetails,
   [Routes.ArtworkDetails]: ArtworkDetails,
   [Routes.PurchaseArtwork]: PurchaseArtwork,
   [Routes.Camera]: Camera,

@@ -1,16 +1,14 @@
-import { View, TouchableOpacity } from "react-native";
 import React from "react";
-import { Black, White } from "../../Resources/Colors";
-import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
-import { ArtistArtworks } from "../ArtistArtworks";
 import * as Nav from "react-navigation";
-import font from "../../Styles/Fonts";
+import { createAppContainer, createMaterialTopTabNavigator } from "react-navigation";
+import { Black, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
-import { AuctionsList } from "../AuctionsList";
+import font from "../../Styles/Fonts";
+import { ExihibitionsList } from '../ExhibitionsList';
 
 interface ExhibitionsTabBarProps {
-    readonly incomingExhibitions: Array<Auction>;
-    readonly closedExhibitions: Array<Auction>;
+    readonly incomingExhibitions: Array<Exhibition>;
+    readonly closedExhibitions: Array<Exhibition>;
 }
 
 export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProps & Nav.NavigationInjectedProps> {
@@ -33,11 +31,11 @@ export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProp
         };
 
         const pages = {
-            [l("Exhibitions.Incoming")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.incomingExhibitions}
+            [l("Exhibitions.Incoming")]: () => <ExihibitionsList navigation={this.props.navigation}
+                exhibitions={this.props.incomingExhibitions}
                 artworksNotFoundMessage={l("Exhibitions.NoIncomingExhibitions")} />,
-            [l("Exhibitions.Closed")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.closedExhibitions}
+            [l("Exhibitions.Closed")]: () => <ExihibitionsList navigation={this.props.navigation}
+                exhibitions={this.props.closedExhibitions}
                 artworksNotFoundMessage={l("Exhibitions.NoClosedExhibitions")} />,
         };
 

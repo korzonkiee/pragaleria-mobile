@@ -17,5 +17,7 @@ export const NavParamImageUrl = "imageUrl";
 export const NavParamImageDimension = "imageDimension";
 
 export const NavParamAuction = "auction";
+export const NavParamExhibition = "exhibition";
 
 export const AuctionDetails = "AuctionDetails";
+export const ExhibitionDetails = "ExhibitionDetails";

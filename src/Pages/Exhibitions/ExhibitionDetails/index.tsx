@@ -11,21 +11,21 @@ import { Black } from '../../../Resources/Colors';
 import { l } from '../../../Services/Language';
 
 
-export interface AuctionDetailsProps {
-    readonly auction: Auction;
+export interface ExhibitionDetailsProps {
+    readonly exhibition: Exhibition;
     readonly catalog: CatalogData;
-    readonly getAuctionsDetails: () => void;
+    readonly getExhibitionsDetails: () => void;
 }
 
-export class AuctionDetails extends Component<AuctionDetailsProps & Nav.NavigationInjectedProps> {
+export class ExhibitionDetails extends Component<ExhibitionDetailsProps & Nav.NavigationInjectedProps> {
     componentDidMount() {
         if (!this.props.catalog) {
-            this.props.getAuctionsDetails();
+            this.props.getExhibitionsDetails();
         }
     }
 
     render() {
-        const { auction, catalog } = this.props;
+        const { exhibition, catalog } = this.props;
 
         if (!catalog) {
             return null;
@@ -36,32 +36,37 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
         }
 
         if (catalog.data == null) {
-            return <DataNotFound retry={this.props.getAuctionsDetails} message={l("Common.GenericErrorMessageWithRetry")} />
+            return <DataNotFound retry={this.props.getExhibitionsDetails} message={l("Common.GenericErrorMessageWithRetry")} />
         }
 
         return (
             <AppContainer style={{ flex: 1 }}>
-                {auction && catalog && <>
+                {exhibition && catalog && <>
                     <AppHeader
-                        title='Aukcja'
+                        title='Wystawa'
                         withBackground
                         modalContent={
                             <ScrollView style={{ margin: 8 }}>
                                 <AppText style={{ color: Black }}>
-                                    {auction.title}
+                                    {exhibition.title}
                                 </AppText>
                                 <AppText style={{ color: Black }}>
-                                    Rozpoczęcie: {auction.auction_start}
+                                    Rozpoczęcie: {exhibition.auction_start}
                                 </AppText>
                                 <AppText style={{ color: Black }}>
-                                    Zakończenie: {auction.auction_end}
+                                    Zakończenie: {exhibition.auction_end}
                                 </AppText>
                                 <AppText style={{ marginTop: 4, color: Black, textAlign: 'justify' }}>
-                                    Opis: {auction.description_content || auction.description_excerpt}
+                                    Opis: {exhibition.description_content || exhibition.description_excerpt}
                                 </AppText>
                             </ScrollView>
                         } />
-                    <SwitchGridCarousel catalogItems={catalog.data} navigation={this.props.navigation} />
+                    {catalog.data.length > 0 ?
+                        <SwitchGridCarousel catalogItems={catalog.data} navigation={this.props.navigation} />
+                        : <AppText style={{ color: Black, marginLeft: 10 }}>
+                            Brak dzieł w katalogu tej wystawy, więcej informacji pod przyciskiem w prawym górnym rogu.
+                    </AppText>}
+
                 </>}
             </AppContainer>
         )
