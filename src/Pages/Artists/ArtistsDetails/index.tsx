@@ -61,8 +61,6 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             return artwork.sold === true;
         });
 
-        console.log("Render");
-
         return (
             <AppContainer style={{ flex: 1 }}>
                 {artist && <>

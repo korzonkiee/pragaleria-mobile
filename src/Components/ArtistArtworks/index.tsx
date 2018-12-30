@@ -48,16 +48,15 @@ export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Na
 
     private renderArtwork = ({ item, index }: { item: Artwork, index: number }) => {
         return (<ArtworkItem
-            onPress={() => this.navigateToArtwork(this.props.artistId, item.id)}
+            onPress={() => this.navigateToArtwork(item)}
             artwork={item} />)
     }
 
-    private navigateToArtwork = (artistId: number, artworkId: number) => {
-        console.log(`Navigating to artwork ${artworkId} of artist ${artistId}`);
+    private navigateToArtwork = (artwork: Artwork) => {
+        console.log(`Navigating to artwork ${artwork.id}`);
 
         this.props.navigation.navigate(Routes.ArtworkDetails, {
-            artistId: artistId,
-            artworkId: artworkId
+            artwork: artwork
         });
     }
 }

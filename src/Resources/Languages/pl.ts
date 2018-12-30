@@ -9,6 +9,12 @@ export default {
     "Auctions.NoIncomingAuctions": "Brak nadchodzących aukcji",
     "Auctions.NoClosedAuctions": "Brak zamkniętych aukcji",
 
+    "Auctions.CarouselItem.Title": "Tytuł: ",
+    "Auctions.CarouselItem.Author": "Autor: ",
+    "Auctions.CarouselItem.AfterAuctionPrice": "Cena poaukcyjna: ",
+    "Auctions.CarouselItem.SoldPrice": "Cena sprzedaży: ",
+    "Auctions.CarouselItem.InitialPrice": "Cena wywoławcza: ",
+
     "Exhibitions.Incoming": "Przyszłe",
     "Exhibitions.Closed": "Zamknięte",
     "Exhibitions.NoIncomingExhibitions": "Brak nadchodzących wystaw",

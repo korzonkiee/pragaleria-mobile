@@ -10,5 +10,9 @@
     "android/.build": true,
     ".vscode/.react": true,
   },
-  "java.configuration.updateBuildConfiguration": "disabled"
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
 }

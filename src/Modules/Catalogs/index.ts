@@ -1,8 +1,8 @@
-import { createAction, ReducerMap } from "redux-actions";
 import { Dispatch } from "redux";
-import { endTask, startTask } from "../Async";
-import Logger from "../../Services/Logger"
+import { createAction, ReducerMap } from "redux-actions";
 import * as Api from "../../Services/Api";
+import Logger from "../../Services/Logger";
+import { endTask, startTask } from "../Async";
 
 const setCatalog = createAction("CATALOG/SET_CATALOG");
 const setCatalogLoading = createAction("CATALOG/SET_CATALOG_LOADING");
@@ -16,8 +16,7 @@ export function getCatalog(id: number) {
         dispatch(setCatalogLoading({ id: id, loading: true }));
         try {
             const catalog = await Api.getCatalog(id);
-            console.log(catalog)
-            dispatch(setCatalog({id: id, data: catalog}));
+            dispatch(setCatalog({ id: id, data: catalog }));
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't fetch catalog with id ${id} . ` +

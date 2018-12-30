@@ -1,22 +1,21 @@
-import React, { Component } from 'react'
-import AppContainer from '../../Components/AppContainer';
-import { Button, Image, View, ScrollView, ImageBackground, TouchableWithoutFeedback, TouchableHighlight, TouchableOpacity } from 'react-native';
-import styles from "./styles";
-import AppHeader from '../../Components/AppHeader';
-import DataNotFound from '../../Components/DataNotFound';
-import { l } from '../../Services/Language';
+import React, { Component } from 'react';
+import { Image, ImageBackground, ScrollView, TouchableOpacity, View } from 'react-native';
 import FadeIn from 'react-native-fade-in-image';
-import AppText from '../../Components/AppText';
-import * as Routes from "../../Routes";
-import * as Nav from "react-navigation";
-import { Black, White, LightGrayHidden } from '../../Resources/Colors';
 import Icon from 'react-native-vector-icons/Entypo';
+import * as Nav from "react-navigation";
+import AppContainer from '../../Components/AppContainer';
+import AppHeader from '../../Components/AppHeader';
+import AppText from '../../Components/AppText';
+import DataNotFound from '../../Components/DataNotFound';
+import { Black, LightGrayHidden, White } from '../../Resources/Colors';
+import * as Routes from "../../Routes";
+import { l } from '../../Services/Language';
 import { responsiveFontSize } from '../../Styles/Dimensions';
+import styles from "./styles";
 
 
 export interface ArtworkDetailsProps {
     readonly artwork: Artwork | null;
-    readonly author: string;
 }
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
@@ -28,7 +27,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     title={artwork.title}
                     modalContent={
                         <ScrollView style={{ margin: 8 }}>
-                            {artwork.year.length > 0 &&
+                            {artwork.year && artwork.year.length > 0 &&
                                 <AppText style={{ color: Black }}>
                                     Wyprodukowano w {artwork.year} roku
                                 </AppText>
@@ -55,32 +54,32 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         resizeMode="contain">
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
 
-                        {artwork.meta.dimension.length < 3 ?<TouchableOpacity
-                            style={{
-                                backgroundColor: LightGrayHidden,
-                                alignSelf: 'flex-end',
-                                margin: 8,
-                                paddingVertical: 8,
-                                paddingHorizontal: 24,
-                                borderRadius: 10
-                            }}
-                            onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
-                            <View style={{
-                                flexDirection: 'row'
-                            }}>
-                                <AppText style={{
-                                    color: White,
-                                    fontSize: responsiveFontSize(2),
-                                    textAlign: 'right',
+                            {artwork.meta.dimension.length < 3 ? <TouchableOpacity
+                                style={{
+                                    backgroundColor: LightGrayHidden,
+                                    alignSelf: 'flex-end',
+                                    margin: 8,
+                                    paddingVertical: 8,
+                                    paddingHorizontal: 24,
+                                    borderRadius: 10
+                                }}
+                                onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
+                                <View style={{
+                                    flexDirection: 'row'
                                 }}>
-                                    {l("Artwork.ImageHang")}
-                                </AppText>
-                                <View style={{ marginLeft: 8 }}>
-                                    <Icon name="camera" size={responsiveFontSize(2)} color={White} />
+                                    <AppText style={{
+                                        color: White,
+                                        fontSize: responsiveFontSize(2),
+                                        textAlign: 'right',
+                                    }}>
+                                        {l("Artwork.ImageHang")}
+                                    </AppText>
+                                    <View style={{ marginLeft: 8 }}>
+                                        <Icon name="camera" size={responsiveFontSize(2)} color={White} />
+                                    </View>
                                 </View>
-                            </View>
-                        </TouchableOpacity>:<View/>}
-                            { !artwork.sold ?
+                            </TouchableOpacity> : <View />}
+                            {!artwork.sold ?
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: LightGrayHidden,
@@ -128,8 +127,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
 
     private purchaseArtwork = () => {
         this.props.navigation.navigate(Routes.PurchaseArtwork, {
-            artist: this.props.artwork,
-            author: this.props.author
+            artwork: this.props.artwork
         })
     }
 }

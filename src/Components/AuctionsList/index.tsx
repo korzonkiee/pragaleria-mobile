@@ -1,17 +1,15 @@
-import React from "react";
-import { Image, FlatList, View, TouchableWithoutFeedback } from 'react-native';
-import { DirtyWhite, LightBlack, Black } from "../../Resources/Colors";
-import AppText from "../AppText";
-import { ArtworkItem } from "../ArtworkItem";
-import * as Nav from "react-navigation";
-import * as Routes from "../../Routes";
-import { l } from "../../Services/Language";
-import FadeIn from "react-native-fade-in-image";
-import styles from "./styles";
-import { responsiveFontSize } from "../../Styles/Dimensions";
-import ViewMoreText from "react-native-view-more-text";
-import font, { DefaultFontFamily } from "../../Styles/Fonts";
-import { AuctionDetails } from '../../Pages/Auctions/AuctionsDetails/index';
+import React from 'react';
+import { FlatList, Image, TouchableWithoutFeedback, View } from 'react-native';
+import FadeIn from 'react-native-fade-in-image';
+import ViewMoreText from 'react-native-view-more-text';
+import * as Nav from 'react-navigation';
+import { Black, LightBlack } from '../../Resources/Colors';
+import * as Routes from '../../Routes';
+import { responsiveFontSize } from '../../Styles/Dimensions';
+import font from '../../Styles/Fonts';
+import AppText from '../AppText';
+import styles from './styles';
+
 
 export interface AuctionsListProps {
     readonly artworks: Auction[];
@@ -39,33 +37,33 @@ export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.Na
     private renderAuction = ({ item, index }: { item: Auction, index: number }) => {
         return <TouchableWithoutFeedback onPress={() => this.navigateToAuctionDetails(item)}>
             <View style={{
-            marginBottom: 30,
-        }}>
-            <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
-                <Image style={styles.artworkFullImage} source={{
-                    uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
-                }} />
-            </FadeIn>
-            <View style={{
-                padding: 8
+                marginBottom: 30,
             }}>
-                <AppText style={{
-                    fontSize: responsiveFontSize(2.3),
-                    color: Black,
-                    ...font({ weight: "Bold" })
+                <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
+                    <Image style={styles.artworkFullImage} source={{
+                        uri: item.image_big_thumbnail || item.image_medium || item.image_large || item.image_original
+                    }} />
+                </FadeIn>
+                <View style={{
+                    padding: 8
                 }}>
-                    {item.title}
-                </AppText>
-                <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
                     <AppText style={{
-                        color: LightBlack
-                    }} >
-                        {item.description_content || item.description_excerpt}
+                        fontSize: responsiveFontSize(2.3),
+                        color: Black,
+                        ...font({ weight: "Bold" })
+                    }}>
+                        {item.title}
                     </AppText>
-                </ViewMoreText>
+                    <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
+                        <AppText style={{
+                            color: LightBlack
+                        }} >
+                            {item.description_content || item.description_excerpt}
+                        </AppText>
+                    </ViewMoreText>
+                </View>
             </View>
-        </View>
-    </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
     }
 
     private navigateToAuctionDetails = (auction: Auction) => {

@@ -17,7 +17,6 @@ export class AuctionsTabBar extends React.PureComponent<AuctionsTabBarProps & Na
     render() {
         const tabBarStyle = {
             backBehavior: 'none',
-            optimizationsEnabled: true,
             tabBarOptions: {
                 labelStyle: {
                     ...font(),
