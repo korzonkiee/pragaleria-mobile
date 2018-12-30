@@ -53,7 +53,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     }
 
     private catalogDataFiltered(): CatalogItem[] {
-        if (this.state.isChecked) {
+        if (!this.state.isChecked) {
             return this.state.catalogItemsFiltered;
         } else {
             return this.props.catalogItems;
