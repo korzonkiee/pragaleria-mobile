@@ -1,15 +1,8 @@
 import React from "react";
-import { Image, ScrollView, View, Dimensions, ImageBackground } from 'react-native';
-import styles from "./styles";
-import AppText from "../../AppText";
-import FadeIn from "react-native-fade-in-image";
+import { Dimensions, View } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import * as Nav from "react-navigation";
-import { responsiveHeight } from '../../../Styles/Dimensions';
-import { LightBlack, Black, Yellow } from '../../../Resources/Colors';
-import getSmallestImageSize from '../../../Helpers/ImageHelpers';
 import { CarouselItem } from './CarouselItem';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { any } from "prop-types";
 
 
 export interface CarouselProps {
@@ -33,16 +26,16 @@ export class CarouselWrapper extends React.PureComponent<CarouselProps & Nav.Nav
         const { width } = Dimensions.get('window');
         const itemWidth = width - 50;
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <Carousel
-                style={{justifyContent: "center", flex: 1}}
-                data={this.props.catalogItems}
-                renderItem={({ item, index }: {item: any, index: any}) => {
-                    return <CarouselItem catalogItem={item} itemIndex={index} navigation={this.props.navigation}/>;
-                }}
-                sliderWidth={width}
-                itemWidth={itemWidth}
-                onSnapToItem={(index) => this.setState({ currentIndex: index }) }
+                    style={{ justifyContent: "center", flex: 1 }}
+                    data={this.props.catalogItems}
+                    renderItem={({ item, index }: { item: any, index: any }) => {
+                        return <CarouselItem catalogItem={item} itemIndex={index} navigation={this.props.navigation} />;
+                    }}
+                    sliderWidth={width}
+                    itemWidth={itemWidth}
+                    onSnapToItem={(index) => this.setState({ currentIndex: index })}
                 />
             </View>
         )

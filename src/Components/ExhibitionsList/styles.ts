@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native'
-import { responsiveHeight, responsiveFontSize } from '../../Styles/Dimensions';
-import { White, DirtyWhite, Black, Yellow, GreyLight, LightBlack } from '../../Resources/Colors';
+import { StyleSheet } from 'react-native';
+import { GreyLight } from '../../Resources/Colors';
+import { responsiveHeight } from '../../Styles/Dimensions';
 
 export default StyleSheet.create({
     artworkFullResImage: {

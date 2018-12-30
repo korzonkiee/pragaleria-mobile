@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native'
-import { responsiveHeight, responsiveFontSize, responsiveWidth } from '../../../../Styles/Dimensions';
-import { White, DirtyWhite, Black, Yellow, GreyLight, LightBlack, LightGray } from '../../../../Resources/Colors';
+import { StyleSheet } from 'react-native';
+import { Black, LightBlack, LightGray, White } from '../../../../Resources/Colors';
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from '../../../../Styles/Dimensions';
 import font, { DefaultFontFamily } from '../../../../Styles/Fonts';
 
 export default StyleSheet.create({
