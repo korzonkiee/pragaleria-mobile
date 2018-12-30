@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import * as Nav from "react-navigation";
-import DataNotFound from '../../Components/DataNotFound';
 import AppContainer from '../../Components/AppContainer';
-import { l } from '../../Services/Language';
-import { DirtyWhite } from '../../Resources/Colors';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import moment from 'moment';
 import { AuctionsTabBar } from '../../Components/AuctionsTabBar';
+import DataNotFound from '../../Components/DataNotFound';
 import AuctionsPlaceholder from '../../Components/Placeholders/AuctionsPlaceholder';
+import { DirtyWhite } from '../../Resources/Colors';
+import { l } from '../../Services/Language';
 
 
 export interface AuctionsProps {
@@ -47,12 +44,12 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 retry={this.props.getAuctions} />)
         }
 
-        const incomingAuctions = auctionsData.filter(auction => {
-            return !auction.is_past;
+        const currentAuctions = auctionsData.filter(auction => {
+            return auction.is_current;
         });
 
         const closedAuctions = auctionsData.filter(auction => {
-            return auction.is_past;
+            return !auction.is_current;
         });
 
         return (
@@ -61,7 +58,7 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 backgroundColor: DirtyWhite,
             }}>
                 <AuctionsTabBar navigation={this.props.navigation}
-                    incomingAuctions={incomingAuctions}
+                    incomingAuctions={currentAuctions}
                     closedAuctions={closedAuctions} />
             </AppContainer>
         )

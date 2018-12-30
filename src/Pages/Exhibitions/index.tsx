@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
-import { Image, FlatList, View } from 'react-native';
 import * as Nav from "react-navigation";
-import DataNotFound from '../../Components/DataNotFound';
-import { Text } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
-import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
-import AppText from '../../Components/AppText';
-import { l } from '../../Services/Language';
-import { White, DirtyWhite, Black, Yellow, GreyLight, LightBlack } from '../../Resources/Colors';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { DefaultAppFont } from "../../Styles/Fonts";
-import { responsiveHeight, responsiveFontSize } from '../../Styles/Dimensions';
-import ViewMoreText from 'react-native-view-more-text';
-import Icon from 'react-native-vector-icons/Entypo';
-import styles from "./styles";
-import FadeIn from 'react-native-fade-in-image';
-import moment from 'moment';
+import DataNotFound from '../../Components/DataNotFound';
 import { ExhibitionsTabBar } from '../../Components/ExhibitionsTabBar';
 import ExhibitionsPlaceholder from '../../Components/Placeholders/ExhibitionsPlaceholder';
+import { DirtyWhite } from '../../Resources/Colors';
+import { l } from '../../Services/Language';
 
 
 export interface ExhibitionsProps {
@@ -48,12 +36,12 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                 retry={this.props.getExhibitions} />)
         }
 
-        const incomingExhibitions = exhibitionsData.filter(exhibition => {
-            return !exhibition.is_past;
+        const currentExhibitions = exhibitionsData.filter(exhibition => {
+            return exhibition.is_current;
         });
 
         const closedExhibitions = exhibitionsData.filter(exhibition => {
-            return exhibition.is_past;
+            return !exhibition.is_current;
         });
 
         return (
@@ -62,7 +50,7 @@ export class Exhibitions extends Component<ExhibitionsProps & Nav.NavigationInje
                 backgroundColor: DirtyWhite,
             }}>
                 <ExhibitionsTabBar navigation={this.props.navigation}
-                    incomingExhibitions={incomingExhibitions}
+                    incomingExhibitions={currentExhibitions}
                     closedExhibitions={closedExhibitions} />
             </AppContainer>
         )
