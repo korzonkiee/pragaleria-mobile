@@ -6,6 +6,7 @@ import * as Nav from "react-navigation";
 import { Black, LightBlack } from "../../Resources/Colors";
 import * as Routes from '../../Routes';
 import { responsiveFontSize } from "../../Styles/Dimensions";
+import font from "../../Styles/Fonts";
 import AppText from "../AppText";
 import styles from "./styles";
 
@@ -48,13 +49,12 @@ export class ExihibitionsList extends React.PureComponent<ExihibitionsListProps 
                     <AppText style={{
                         fontSize: responsiveFontSize(2.3),
                         color: Black,
-                        fontWeight: "500"
+                        ...font({ weight: "Bold" })
                     }}>
                         {item.title}
                     </AppText>
                     <ViewMoreText numberOfLines={5} renderViewMore={() => { }}>
                         <AppText style={{
-                            fontSize: responsiveFontSize(1.8),
                             color: LightBlack
                         }} >
                             {item.description_content || item.description_excerpt}

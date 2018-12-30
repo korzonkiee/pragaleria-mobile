@@ -14,8 +14,6 @@ export default StyleSheet.create({
     artworkFullImage: {
         flex: 1,
         width: undefined,
-        height: undefined,
-        borderWidth: 1,
-        borderColor: GreyLight
+        height: undefined
     },
 });
