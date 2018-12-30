@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, TouchableWithoutFeedback, View, ImageBackground } from "react-native";
-import styles from "./styles";
+import { ImageBackground, TouchableWithoutFeedback, View } from "react-native";
 import AppText from "../AppText";
+import styles from "./styles";
 
 export interface ArtistItemProps {
     readonly index: number;
@@ -24,7 +24,7 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
         return <TouchableWithoutFeedback
             onPress={this.props.onPress}
             style={styles.artistContainer}>
-            <View style={[styles.artistContainer, (this.props.index % 3) === 1 ? {marginLeft: 2, marginRight: 2} : {}]}>
+            <View style={[styles.artistContainer, (this.props.index % 3) === 1 ? { marginLeft: 2, marginRight: 2 } : {}]}>
                 <ImageBackground
                     source={{
                         uri: this.props.artist.image_medium_thumbnail || this.props.artist.image_thumbnail
@@ -32,7 +32,9 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
                     style={styles.artistImage}>
                     <View
                         style={styles.artistNameBackground}>
-                        <AppText style={styles.artistName}>{this.getArtistLastName()}</AppText>
+                        <AppText style={styles.artistName} numberOfLines={1}>
+                            {`${this.props.artist.name[0]}. ${this.getArtistLastName()}`}
+                        </AppText>
                     </View>
                 </ImageBackground>
             </View>
