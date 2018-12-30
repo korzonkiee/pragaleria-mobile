@@ -37,6 +37,11 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                     Sprzedano za {artwork.sold_price} PLN
                                 </AppText>
                             }
+                            {!artwork.sold && artwork.initial_price &&
+                                <AppText style={{ marginTop: 4, color: Black, }}>
+                                    Cena wywoławcza: {artwork.initial_price} PLN
+                                </AppText>
+                            }
                             <AppText style={{ marginTop: 4, color: Black, textAlign: 'justify' }}>
                                 Opis: {artwork.description}
                             </AppText>
