@@ -1,9 +1,38 @@
-import { StyleSheet } from 'react-native'
-import { responsiveHeight, responsiveFontSize, responsiveWidth } from '../../Styles/Dimensions';
-import { White, DirtyWhite, Black, Yellow, GreyLight, LightBlack, LightGray } from '../../Resources/Colors';
+import { StyleSheet } from 'react-native';
+import { Black, LightBlack, LightGray, White } from '../../Resources/Colors';
+import { responsiveFontSize } from '../../Styles/Dimensions';
 import font, { DefaultFontFamily } from '../../Styles/Fonts';
 
 export default StyleSheet.create({
+    topLinksContainer: {
+        backgroundColor: White,
+        flexGrow: 0,
+        flexShrink: 0,
+        flexBasis: 'auto',
+        borderBottomColor: LightGray,
+        borderBottomWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    topLinksTouchable: {
+        flex: 1,
+        marginVertical: 12
+    },
+    topLinksContainerText: {
+        flex: 1,
+        color: LightBlack,
+        textAlign: 'center',
+        ...font({ family: DefaultFontFamily, weight: "Regular" }),
+        fontSize: responsiveFontSize(2.2),
+    },
+    topLinksContainerTextLeft: {
+        color: LightBlack,
+        textAlign: 'center',
+        ...font({ family: DefaultFontFamily, weight: "Regular" }),
+        fontSize: responsiveFontSize(2.2),
+        borderRightColor: LightBlack,
+        borderRightWidth: 1
+    },
     itemTitleBox: {
         flexGrow: 0,
         flexShrink: 0,
@@ -53,7 +82,8 @@ export default StyleSheet.create({
         backgroundColor: White,
         borderColor: LightGray,
         borderWidth: 1,
-        margin: 5
+        marginVertical: 10,
+        marginHorizontal: 5,
     },
     imageTopLabel: {
         color: White,

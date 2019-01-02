@@ -61,7 +61,7 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
                                 </AppText>
                             </ScrollView>
                         } />
-                    <SwitchGridCarousel catalogItems={catalog.data} navigation={this.props.navigation} />
+                    <SwitchGridCarousel auction={auction} catalogItems={catalog.data} navigation={this.props.navigation} />
                 </>}
             </AppContainer>
         )

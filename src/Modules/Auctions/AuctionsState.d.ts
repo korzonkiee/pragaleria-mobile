@@ -14,6 +14,10 @@ declare interface Auction {
     readonly image_medium: string;
     readonly image_big_thumbnail: string;
     readonly image_medium_thumbnail: string;
+    readonly urls: {
+        virtual_tour: string,
+        bidding: string,
+    }
 }
 
 declare interface AuctionsData {

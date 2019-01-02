@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, ImageBackground, TouchableOpacity, View } from 'react-native';
+import { FlatList, ImageBackground, Linking, TouchableOpacity, View } from 'react-native';
 import Checkbox from 'react-native-modest-checkbox';
 import Icon from "react-native-vector-icons/Entypo";
 import * as Nav from "react-navigation";
@@ -12,6 +12,7 @@ import styles from "./styles";
 
 
 export interface SwitchGridCarouselProps {
+    readonly auction: Auction;
     readonly catalogItems: CatalogItem[];
 }
 
@@ -35,17 +36,6 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         };
     }
 
-    private renderTitleBox = (textLeft: any, textRight: any) => {
-        return <View style={styles.itemTitleBox}>
-            <AppText style={styles.itemTitleTextLeft}>
-                {textLeft}
-            </AppText>
-            <AppText style={styles.itemTitleTextRight} numberOfLines={1}>
-                {textRight}
-            </AppText>
-        </View>
-    }
-
     private displayAllArtworks() {
         this.setState({
             isChecked: !this.state.isChecked
@@ -61,7 +51,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     }
 
     render() {
-        const { catalogItems } = this.props;
+        const { auction } = this.props;
         const { currentView } = this.state;
         return (
             <View style={{ flex: 1 }}>
@@ -75,6 +65,26 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                     />
                     {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
                     {this.renderTopContainerIcon("grid", this.setGridView, (currentView === 'grid'))}
+                </View>
+                <View style={styles.topLinksContainer}>
+                    <TouchableOpacity
+                        style={styles.topLinksTouchable}
+                        onPress={() => {
+                            auction && auction.urls && auction.urls.bidding && Linking.openURL(auction.urls.bidding);
+                        }}>
+                        <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
+                            LICYTUJ ON-LINE
+                        </AppText>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.topLinksTouchable}
+                        onPress={() => {
+                            auction && auction.urls && auction.urls.virtual_tour && Linking.openURL(auction.urls.virtual_tour);
+                        }}>
+                        <AppText style={styles.topLinksContainerText} numberOfLines={1}>
+                            SPACER 3D
+                        </AppText>
+                    </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1 }}>
                     {currentView === 'slides' ?
@@ -137,4 +147,15 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                 </View>
             </TouchableOpacity>
         </View>
+
+    private renderTitleBox = (textLeft: any, textRight: any) => {
+        return <View style={styles.itemTitleBox}>
+            <AppText style={styles.itemTitleTextLeft}>
+                {textLeft}
+            </AppText>
+            <AppText style={styles.itemTitleTextRight} numberOfLines={1}>
+                {textRight}
+            </AppText>
+        </View>
+    }
 }
