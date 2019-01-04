@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Entypo";
 import * as Nav from "react-navigation";
 import { Black, LightGray } from '../../Resources/Colors';
 import * as Routes from "../../Routes";
+import { l } from "../../Services/Language";
 import { responsiveFontSize, responsiveHeight } from '../../Styles/Dimensions';
 import AppText from "../AppText";
 import { CarouselWrapper } from "./CarouselWrapper";
@@ -136,13 +137,13 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                         </View>
                     </ImageBackground>
                     <View style={styles.imageSubtitle}>
-                        {this.renderTitleBox('Tytuł:', item.title)}
-                        {this.renderTitleBox('Autor:', item.author)}
+                        {console.log(item)}
+                        {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
+                        {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
                         {item.after_auction_price ?
-                            this.renderTitleBox('Cena poaukcyjna:', item.after_auction_price) :
-                            item.sold === true && item.sold_price ?
-                                this.renderTitleBox('Cena sprzedaży:', item.sold_price) :
-                                this.renderTitleBox('Cena wywoławcza:', `${item.initial_price}`)}
+                            this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), item.after_auction_price) :
+                            item.sold === true ? item.sold_price && this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`)
+                                : item.initial_price && this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${item.initial_price} PLN`)}
                     </View>
                 </View>
             </TouchableOpacity>

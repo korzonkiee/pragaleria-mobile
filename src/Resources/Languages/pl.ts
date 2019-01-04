@@ -15,6 +15,12 @@ export default {
     "Auctions.CarouselItem.SoldPrice": "Cena sprzedaży: ",
     "Auctions.CarouselItem.InitialPrice": "Cena wywoławcza: ",
 
+    "Auctions.GridItem.Title": "Tytuł: ",
+    "Auctions.GridItem.Author": "Autor: ",
+    "Auctions.GridItem.AfterAuctionPrice": "Cena poaukcyjna: ",
+    "Auctions.GridItem.SoldPrice": "Cena sprzedaży: ",
+    "Auctions.GridItem.InitialPrice": "Cena wywoławcza: ",
+
     "Exhibitions.Incoming": "Przyszłe",
     "Exhibitions.Closed": "Zamknięte",
     "Exhibitions.NoIncomingExhibitions": "Brak nadchodzących wystaw",
