@@ -19,12 +19,15 @@ export function searchArtists(keyword: string) {
 
         try {
             const artists = await Api.searchArtists(keyword);
-            dispatch(setFilteredArtists(artists));
+            if (artists === null) {
+                dispatch(setFilteredArtistsError(true));
+            } else {
+                dispatch(setFilteredArtists(artists));
+            }
         }
         catch (e) {
             Logger.logError(TAG, `Couldn't search for artists by keyword ${keyword}. ` +
                 `Error: ${e}`);
-            dispatch(setFilteredArtistsError(true));
         }
         finally {
             dispatch(endTask());
