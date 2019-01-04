@@ -8,6 +8,7 @@ import * as Routes from '../../Routes';
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import font from "../../Styles/Fonts";
 import AppText from "../AppText";
+import DataNotFound from "../DataNotFound";
 import styles from "./styles";
 
 export interface ExihibitionsListProps {
@@ -18,7 +19,7 @@ export interface ExihibitionsListProps {
 export class ExihibitionsList extends React.PureComponent<ExihibitionsListProps & Nav.NavigationInjectedProps> {
     render() {
         if (this.props.exhibitions.length === 0) {
-            return (<AppText style={{ color: Black, margin: 16 }}>{this.props.artworksNotFoundMessage}</AppText>)
+            return (<DataNotFound message={this.props.artworksNotFoundMessage} />);
         } else {
             return this.renderAuctions(this.props.exhibitions);
         }

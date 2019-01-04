@@ -8,7 +8,7 @@ import AppText from "../AppText";
 
 interface DataNotFoundProps extends TextProps {
     readonly message: string
-    readonly retry: () => void;
+    readonly retry?: () => void;
 }
 
 export default class DataNotFound extends React.Component<DataNotFoundProps> {
