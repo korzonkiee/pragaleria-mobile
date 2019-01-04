@@ -90,6 +90,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                 <View style={{ flex: 1 }}>
                     {currentView === 'slides' ?
                         <CarouselWrapper
+                            auction={this.props.auction}
                             catalogItems={this.catalogDataFiltered()}
                             navigation={this.props.navigation} />
                         : <FlatList
@@ -137,13 +138,11 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                         </View>
                     </ImageBackground>
                     <View style={styles.imageSubtitle}>
-                        {console.log(item)}
                         {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
                         {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
-                        {item.after_auction_price ?
-                            this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), item.after_auction_price) :
-                            item.sold === true ? item.sold_price && this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`)
-                                : item.initial_price && this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${item.initial_price} PLN`)}
+                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), item.sold_price) :
+                            this.props.auction.is_current ? item.initial_price && this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${item.initial_price} PLN`) :
+                                this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), item.after_auction_price || item.initial_price)}
                     </View>
                 </View>
             </TouchableOpacity>

@@ -6,6 +6,7 @@ import { CarouselItem } from './CarouselItem';
 
 
 export interface CarouselProps {
+    readonly auction: Auction;
     readonly catalogItems: CatalogItem[];
 }
 
@@ -31,7 +32,7 @@ export class CarouselWrapper extends React.PureComponent<CarouselProps & Nav.Nav
                     style={{ justifyContent: "center", flex: 1 }}
                     data={this.props.catalogItems}
                     renderItem={({ item, index }: { item: any, index: any }) => {
-                        return <CarouselItem catalogItem={item} itemIndex={index} navigation={this.props.navigation} />;
+                        return <CarouselItem isAuctionActive={this.props.auction.is_current} catalogItem={item} itemIndex={index} navigation={this.props.navigation} />;
                     }}
                     sliderWidth={width}
                     itemWidth={itemWidth}
