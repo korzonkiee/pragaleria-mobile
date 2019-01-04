@@ -1,5 +1,4 @@
 import { applyMiddleware, createStore, Store } from "redux";
-import logger from "redux-logger";
 import thunk from "redux-thunk";
 import * as config from "./Configuration";
 import { appReducer } from "./Modules/Reducers";
@@ -13,8 +12,7 @@ if (config.IsDebug) {
         appReducer as any,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
         applyMiddleware(
-            thunk,
-            logger
+            thunk
         )
     );
 }
