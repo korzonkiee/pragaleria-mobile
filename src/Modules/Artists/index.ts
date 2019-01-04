@@ -1,13 +1,12 @@
-import { createAction, ReducerMap } from "redux-actions";
 import { Dispatch } from "redux";
-import { endTask, startTask } from "../Async";
-import Logger from "../../Services/Logger"
+import { createAction, ReducerMap } from "redux-actions";
 import * as Api from "../../Services/Api";
-import { handleError } from "../Error";
-import { ThunkAction } from "redux-thunk";
+import Logger from "../../Services/Logger";
+import { endTask, startTask } from "../Async";
 
 const setArtists = createAction("ARTISTS/SET_ARTISTS");
 const setFilteredArtists = createAction("ARTISTS/SET_FILTERED_ARTISTS");
+const setFilteredArtistsError = createAction("ARTISTS/SET_FILTERED_ARTISTS_ERROR");
 const setArtistsLoading = createAction("ARTITS/SET_ARTISTS_LOADING");
 const setArtistDetails = createAction("ARTISTS/SET_ARTIST_DETAILS");
 const setArtistDetailsLoading = createAction("ARTISTS/SET_ARTIST_DETAILS_LOADING");
@@ -25,6 +24,7 @@ export function searchArtists(keyword: string) {
         catch (e) {
             Logger.logError(TAG, `Couldn't search for artists by keyword ${keyword}. ` +
                 `Error: ${e}`);
+            dispatch(setFilteredArtistsError(true));
         }
         finally {
             dispatch(endTask());
@@ -81,25 +81,15 @@ export function getArtistDetails(id: number) {
 
 export const
     artistsReducers: ReducerMap<AppState, any> = {
-        [setArtists.toString()](state, action) {
-            if (action.payload) {
+        [setArtists.toString()](state, { payload }) {
+            if (payload) {
                 return {
                     ...state,
                     artists: {
-                        data: [...state.artists.data, ...action.payload],
+                        data: [...state.artists.data, ...payload],
                         loading: false,
                         page: state.artists.page + 1
                     }
-                }
-            }
-
-            return state;
-        },
-        [setFilteredArtists.toString()](state, action) {
-            if (action.payload) {
-                return {
-                    ...state,
-                    filteredArtists: action.payload
                 }
             }
 
@@ -113,10 +103,45 @@ export const
                         ...state.artists,
                         loading: action.payload
                     }
-                };
+                }
             }
 
             return state;
+        },
+        [setFilteredArtists.toString()](state, { payload }) {
+            if (payload) {
+                return {
+                    ...state,
+                    filteredArtists: {
+                        data: payload,
+                        errorOccured: false
+                    }
+                }
+            }
+
+            return state;
+        },
+        [setFilteredArtists.toString()](state, { payload }) {
+            if (payload) {
+                return {
+                    ...state,
+                    filteredArtists: {
+                        data: payload,
+                        errorOccured: false
+                    }
+                }
+            }
+
+            return state;
+        },
+        [setFilteredArtistsError.toString()](state, { payload }) {
+            return {
+                ...state,
+                filteredArtists: {
+                    data: [],
+                    errorOccured: payload
+                }
+            };
         },
         [setArtistDetails.toString()](state, action) {
             if (action.payload) {

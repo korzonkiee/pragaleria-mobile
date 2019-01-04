@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Text, TextProps, TouchableWithoutFeedback } from "react-native";
-import AppText from "../AppText";
-import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
-
+import { TextProps, TouchableWithoutFeedback } from "react-native";
 // import font from "../../Helpers/Fonts";
 import { Black } from '../../Resources/Colors';
+import { responsiveFontSize } from "../../Styles/Dimensions";
+import AppText from "../AppText";
+
 
 interface DataNotFoundProps extends TextProps {
     readonly message: string
@@ -15,15 +15,13 @@ export default class DataNotFound extends React.Component<DataNotFoundProps> {
     render() {
         return (<TouchableWithoutFeedback onPress={this.props.retry}>
             <AppText style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
+                margin: 16,
                 textAlign: 'center',
                 textAlignVertical: 'center',
                 color: Black,
-                margin: responsiveWidth(3),
-                fontSize: responsiveFontSize(3.5)}}>
-                    {this.props.message}
+                fontSize: responsiveFontSize(2)
+            }}>
+                {this.props.message}
             </AppText>
         </TouchableWithoutFeedback>);
     }

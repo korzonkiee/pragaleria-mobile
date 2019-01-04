@@ -1,30 +1,26 @@
-import React, { Component, ComponentElement } from 'react'
+import React, { Component } from 'react';
+import { FlatList } from 'react-native';
 import * as Nav from "react-navigation";
-import { FlatList, TextInput, View } from 'react-native'
 import AppContainer from '../../Components/AppContainer';
 import { ArtistItem } from '../../Components/ArtistItem';
-import CenteredActivityIndicator from '../../Components/CenteredActivityIndicator';
-import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import DataNotFound from '../../Components/DataNotFound';
-import * as Routes from '../../Routes';
-import { l } from '../../Services/Language';
+import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import ArtistsPlaceholder from '../../Components/Placeholders/AristsPlaceholder';
-import { Black, LightGrayHidden, LightBlack, DirtyWhite, LightGray } from '../../Resources/Colors';
-import font from '../../Styles/Fonts';
-import { responsiveFontSize } from '../../Styles/Dimensions';
-import Icon from 'react-native-vector-icons/Entypo';
 import SearchBar from '../../Components/SearchBar';
+import * as Routes from '../../Routes';
+import { l, lp } from '../../Services/Language';
 
 
 export interface ArtistsProps {
     readonly artists: ArtistsData;
-    readonly filteredArtists: Artist[];
+    readonly filteredArtists: FilteredAristsData;
     readonly getArtists: () => void;
     readonly searchArists: (keyword: string) => void;
 }
 
 interface ArtistsState {
     readonly filtering: boolean;
+    readonly keyword: string;
 }
 
 export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProps, ArtistsState> {
@@ -33,6 +29,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
 
         this.state = {
             filtering: false,
+            keyword: "",
         };
     }
 
@@ -44,42 +41,48 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
 
     render() {
         const artistsData = this.props.artists.data;
+
+        console.log(`Loading: ${this.props.artists.loading}`);
+        console.log(`Page: ${this.props.artists.page}`);
+
         if (this.props.artists.loading && this.props.artists.page === 0) {
             return (
                 <ArtistsPlaceholder />
             );
         }
 
+        let content;
+
         if (!this.props.artists.loading && this.props.artists.data.length === 0) {
-            return (<DataNotFound
+            content = (<DataNotFound
                 message={l("Common.GenericErrorMessageWithRetry")}
-                retry={this.props.getArtists} />)
+                retry={this.props.getArtists} />);
+        } else if (this.state.filtering && this.props.filteredArtists.errorOccured) {
+            content = (<DataNotFound
+                message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)}
+                retry={() => this.searchForArtists(this.state.keyword)} />);
+        } else {
+            content = (<FlatList
+                data={this.state.filtering ? this.props.filteredArtists.data : artistsData}
+                keyExtractor={(item, _) => item.id.toString()}
+                renderItem={this.renderArtist}
+                numColumns={3}
+                ListFooterComponent={this.renderFooter()}
+                onEndReached={this.state.filtering ? undefined : this.props.getArtists}
+                onEndReachedThreshold={3} />);
         }
 
-        return (
-            <AppContainer style={{
-                backgroundColor: DirtyWhite,
-                display: 'flex',
-                justifyContent: 'space-between'
-            }}
-            >
-                <FlatList
-                    data={this.state.filtering ? this.props.filteredArtists : artistsData}
-                    keyExtractor={(item, _) => item.id.toString()}
-                    renderItem={this.renderArtist}
-                    numColumns={3}
-                    ListHeaderComponent={this.renderHeader()}
-                    ListFooterComponent={this.renderFooter()}
-                    onEndReached={this.state.filtering ? undefined : this.props.getArtists}
-                    onEndReachedThreshold={3} />
-            </AppContainer>
-        )
+        return (<AppContainer style={{ flex: 1 }}>
+            <SearchBar onTextChanged={this.searchForArtists} />
+            {content}
+        </AppContainer>)
     }
 
     private searchForArtists = (text: string) => {
         if (text.length > 0) {
             this.setState({
-                filtering: true
+                filtering: true,
+                keyword: text
             });
             this.props.searchArists(text);
         } else {
@@ -94,11 +97,6 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
             index={index}
             artist={item}
             onPress={() => this.navigateToArtist(item.id.toString())} />)
-
-
-    private renderHeader = () => (
-        <SearchBar onTextChanged={this.searchForArtists} />
-    )
 
     private renderFooter = () => {
         if (this.props.artists.loading)

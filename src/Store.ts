@@ -1,9 +1,9 @@
-import * as config from "./Configuration"
-import { Store, createStore, applyMiddleware } from "redux"
+import { applyMiddleware, createStore, Store } from "redux";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import * as config from "./Configuration";
+import { appReducer } from "./Modules/Reducers";
 
-import { appReducer } from "./Modules/Reducers"
 
 declare var window: { __REDUX_DEVTOOLS_EXTENSION__: any };
 export let store: Store<any>;
@@ -14,6 +14,7 @@ if (config.IsDebug) {
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
         applyMiddleware(
             thunk,
+            logger
         )
     );
 }

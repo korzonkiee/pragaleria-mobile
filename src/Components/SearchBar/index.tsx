@@ -1,19 +1,13 @@
 import * as React from "react";
-import * as Nav from "react-navigation";
+import { StyleProp, TextInput, View, ViewStyle } from "react-native";
 import * as Progress from "react-native-progress";
-import { StyleProp, TextStyle, ViewStyle, View, TouchableWithoutFeedback, Animated, TextInput } from "react-native";
-
-import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions"
-import { isIOS } from "../../Helpers/PhoneHelpers"
-import { l } from "../../Services/Language";
-
-import * as colors from "../../Resources/Colors";
-import styles from "./styles";
-import AppText from "../AppText";
 import Icon from "react-native-vector-icons/Entypo";
-import SimpleIcon from "react-native-vector-icons/SimpleLineIcons";
-import { White, LightGray, LightBlack } from '../../Resources/Colors';
-import AppModal from '../AppModal';
+import * as colors from "../../Resources/Colors";
+import { l } from "../../Services/Language";
+import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
+import styles from "./styles";
+
+
 
 export interface SearchBarStateProps {
     readonly isLoading: boolean;
@@ -22,6 +16,7 @@ export interface SearchBarStateProps {
 interface SearchBarOwnProps {
     readonly style?: StyleProp<ViewStyle>;
     readonly textInputStyle?: StyleProp<ViewStyle>;
+    readonly value?: string;
     readonly withBackground?: boolean;
     readonly rightButtonDisabled?: boolean;
     readonly onTextChanged: (text: string) => void;
@@ -43,6 +38,7 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
                     <View style={styles.title}>
                         <TextInput style={[styles.titleText]}
                             onChangeText={this.props.onTextChanged}
+                            value={this.props.value}
                             placeholder={l("Artists.Search.Placeholder")} />
                     </View>
                 </View>}

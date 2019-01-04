@@ -53,9 +53,14 @@ declare interface ArtistsData {
     readonly loading: boolean;
 }
 
+declare interface FilteredAristsData {
+    readonly data: Artist[];
+    readonly errorOccured: boolean;
+}
+
 declare interface ArtistsState {
     readonly artists: ArtistsData;
-    readonly filteredArtists: Artist[];
+    readonly filteredArtists: FilteredAristsData;
     readonly artistDetails: { readonly [id: number]: ArtistDetailsData }
 }
 

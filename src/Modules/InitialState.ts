@@ -1,7 +1,10 @@
 export const initialState: AppState = {
     tasksCount: 0,
     errorVisible: false,
-    filteredArtists: [],
+    filteredArtists: {
+        data: [],
+        errorOccured: false
+    },
     artists: {
         data: [],
         page: 0,
