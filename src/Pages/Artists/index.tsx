@@ -59,8 +59,12 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
                 retry={this.props.getArtists} />);
         } else if (this.state.filtering && this.props.filteredArtists.errorOccured) {
             content = (<DataNotFound
-                message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)}
+                message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
                 retry={() => this.searchForArtists(this.state.keyword)} />);
+        } else if (this.state.filtering && this.props.filteredArtists.data.length === 0) {
+            content = (<DataNotFound
+                message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)}
+                retry={() => { }} />);
         } else {
             content = (<FlatList
                 data={this.state.filtering ? this.props.filteredArtists.data : artistsData}

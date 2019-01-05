@@ -65,7 +65,8 @@ export default {
     "About.MailDescription": "info@pragaleria.pl",
 
     "Artists.Search.Placeholder": "Szukaj twórcy...",
-    "Artists.Search.ErrorForKeyword": "Brak wyników w trybie offline dla zapytania \"{0}\". Przejdź do trybu online i spróbuj ponownie.",
+    "Artists.Search.ErrorForKeyword": "Brak wyników dla zapytania \"{0}\".",
+    "Artists.Search.OfflineErrorForKeyword": "Brak wyników w trybie offline dla zapytania \"{0}\". Przejdź do trybu online i spróbuj ponownie.",
 
     "ArtistDetails.Available": "Dostępne",
     "ArtistDetails.Sold": "Sprzedane",

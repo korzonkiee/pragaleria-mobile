@@ -55,6 +55,8 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             return artwork.sold === true;
         });
 
+        const artistDescription = artist.data.description || "Brak opisu artysty";
+
         return (
             <AppContainer style={{ flex: 1 }}>
                 {artist && <>
@@ -63,7 +65,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                         modalContent={
                             <ScrollView>
                                 <AppText style={{ color: Black, textAlign: 'justify', margin: 8 }}>
-                                    {artist.data.description || "Brak opisu artysty"}
+                                    {artistDescription}
                                 </AppText>
                             </ScrollView>
                         }
