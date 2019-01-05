@@ -34,8 +34,14 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
         };
 
         const pages = {
-            [l("ArtistDetails.Available")]: () => <ArtistArtworks navigation={this.props.navigation} artworks={this.props.availableArtworks} />,
-            [l("ArtistDetails.Sold")]: () => <ArtistArtworks navigation={this.props.navigation} artworks={this.props.soldArtworks} />,
+            [l("ArtistDetails.Available")]: () => <ArtistArtworks
+                artist={this.props.artist}
+                navigation={this.props.navigation}
+                artworks={this.props.availableArtworks} />,
+            [l("ArtistDetails.Sold")]: () => <ArtistArtworks
+                artist={this.props.artist}
+                navigation={this.props.navigation}
+                artworks={this.props.soldArtworks} />,
         };
 
         if (this.props.statisticsArtworks.length > 1) {

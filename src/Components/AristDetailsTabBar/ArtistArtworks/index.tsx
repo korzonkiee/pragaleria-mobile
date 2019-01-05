@@ -9,6 +9,7 @@ import { ArtworkItem } from "./ArtworkItem";
 
 export interface ArtistArtworksProps {
     readonly artworks: Array<Artwork>;
+    readonly artist: Artist;
 }
 
 export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Nav.NavigationInjectedProps> {
@@ -55,7 +56,8 @@ export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Na
         console.log(`Navigating to artwork ${artwork.id}`);
 
         this.props.navigation.navigate(Routes.ArtworkDetails, {
-            artwork: artwork
+            artwork: artwork,
+            artist: this.props.artist
         });
     }
 }

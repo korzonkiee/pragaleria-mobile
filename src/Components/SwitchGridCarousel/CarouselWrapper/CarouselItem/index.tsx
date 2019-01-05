@@ -21,7 +21,7 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
             <TouchableNativeFeedback
                 onPress={() => {
                     this.props.navigation.navigate(Routes.ArtworkDetails, {
-                        artwork: item
+                        artwork: item,
                     });
                 }}>
                 <View style={{ flex: 1, marginVertical: 10 }}>
