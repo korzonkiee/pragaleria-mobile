@@ -76,7 +76,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.bidding) }}>
                                 <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
-                                    LICYTUJ ON-LINE
+                                    {l("Auctions.OnlineBid")}
                                 </AppText>
                             </TouchableOpacity>
                         }
@@ -85,7 +85,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.virtual_tour) }}>
                                 <AppText style={styles.topLinksContainerText} numberOfLines={1}>
-                                    SPACER 3D
+                                    {l("Auctions.VirtualWalk")}
                                 </AppText>
                             </TouchableOpacity>
                         }

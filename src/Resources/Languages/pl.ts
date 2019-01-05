@@ -9,6 +9,8 @@ export default {
     "Auctions.NoIncomingAuctions": "Brak nadchodzących aukcji",
     "Auctions.NoClosedAuctions": "Brak zamkniętych aukcji",
     "Auctions.ShowSold": "Wyświetl sprzedane",
+    "Auctions.OnlineBid": "LICYTUJ ON-LINE",
+    "Auctions.VirtualWalk": "SPACER 3D",
 
     "Auctions.CarouselItem.Title": "Tytuł: ",
     "Auctions.CarouselItem.Author": "Autor: ",
