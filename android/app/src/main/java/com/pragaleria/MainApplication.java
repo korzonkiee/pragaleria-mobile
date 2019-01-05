@@ -34,10 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new SvgPackage(),
-            new RNGestureHandlerPackage(), new VectorIconsPackage(),
-          new SplashScreenReactPackage(), new RNCameraPackage(), new RNRearCameraCharacteristicsDisplayMetricsPackage(),
-          new OrientationPackage(), new MapsPackage(), new PragaleriaPackage(), new RNMail());
+            new SvgPackage(), new RNGestureHandlerPackage(), new VectorIconsPackage(),
+            new RNRearCameraCharacteristicsDisplayMetricsPackage(), new SplashScreenReactPackage(),
+            new RNCameraPackage(),  new OrientationPackage(), new MapsPackage(),
+            new PragaleriaPackage(), new RNMail());
     }
 
     @Override
@@ -57,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
 
     Bugfender.init(this, "0996ERklnGG9OTj1URFERTBl6EOVKsjK", BuildConfig.DEBUG);
+    Bugfender.enableCrashReporting();
     Bugfender.enableUIEventLogging(this);
   }
 }

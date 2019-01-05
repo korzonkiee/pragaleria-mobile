@@ -39,9 +39,9 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
                     <View style={styles.imageSubtitle}>
                         {this.renderTitleBox(l("Auctions.CarouselItem.Title"), item.title)}
                         {this.renderTitleBox(l("Auctions.CarouselItem.Author"), item.author)}
-                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), item.sold_price) :
+                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`) :
                             this.props.isAuctionActive ? item.initial_price && this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${item.initial_price} PLN`) :
-                                this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), item.after_auction_price || item.initial_price)}
+                                this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), `${item.after_auction_price || item.initial_price} PLN`)}
                     </View>
                 </View>
             </TouchableNativeFeedback>

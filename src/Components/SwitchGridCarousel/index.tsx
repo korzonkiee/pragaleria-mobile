@@ -62,7 +62,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                             checked={this.state.isChecked}
                             containerStyle={styles.checkboxStyle}
                             labelStyle={styles.checkboxLabelStyle}
-                            label='Wyświetl sprzedane'
+                            label={l("Auctions.ShowSold")}
                             onChange={this.displayAllArtworks.bind(this)}
                         />
                         {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
@@ -76,7 +76,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.bidding) }}>
                                 <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
-                                    LICYTUJ ON-LINE
+                                    {l("Auctions.OnlineBid")}
                                 </AppText>
                             </TouchableOpacity>
                         }
@@ -85,7 +85,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.virtual_tour) }}>
                                 <AppText style={styles.topLinksContainerText} numberOfLines={1}>
-                                    SPACER 3D
+                                    {l("Auctions.VirtualWalk")}
                                 </AppText>
                             </TouchableOpacity>
                         }
@@ -146,7 +146,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                     <View style={styles.imageSubtitle}>
                         {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
                         {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
-                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), item.sold_price) :
+                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`) :
                             this.props.auction.is_current ? item.initial_price &&
                                 this.renderTitleBox(
                                     l("Auctions.CarouselItem.InitialPrice"),
@@ -154,7 +154,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 ) : (item.after_auction_price || item.initial_price) ?
                                     this.renderTitleBox(
                                         l("Auctions.CarouselItem.AfterAuctionPrice"),
-                                        item.after_auction_price || item.initial_price
+                                        `${item.after_auction_price || item.initial_price} PLN`
                                     ) : <></>}
                     </View>
                 </View>
