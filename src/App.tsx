@@ -24,6 +24,14 @@ import { responsiveFontSize } from './Styles/Dimensions';
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
+  [Routes.Artists]: {
+    screen: Artists,
+    navigationOptions: {
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }}>{l("BottomNavigation.Artists")}</AppText>,
+      tabBarIcon: BottomIcon("eyeglass"),
+      tabBarColor: colors.White
+    }
+  },
   [Routes.Auctions]: {
     screen: Auctions,
     navigationOptions: {
@@ -40,14 +48,6 @@ const MainStack = createMaterialBottomTabNavigator({
       tabBarColor: colors.White
     }
   },
-  [Routes.Artists]: {
-    screen: Artists,
-    navigationOptions: {
-      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }}>{l("BottomNavigation.Artists")}</AppText>,
-      tabBarIcon: BottomIcon("eyeglass"),
-      tabBarColor: colors.White
-    }
-  },
   [Routes.About]: {
     screen: About,
     navigationOptions: {
@@ -57,7 +57,7 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-    initialRouteName: Routes.Auctions,
+    initialRouteName: Routes.Artists,
     labeled: true
   });
 
