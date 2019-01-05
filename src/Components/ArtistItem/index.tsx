@@ -11,14 +11,7 @@ export interface ArtistItemProps {
 
 export class ArtistItem extends React.PureComponent<ArtistItemProps> {
     private getArtistLastName = () => {
-        let nameSplit;
-        let artistName = this.props.artist.name;
-        if (artistName.includes('-')) {
-            nameSplit = artistName.split('-');
-        } else {
-            nameSplit = artistName.split(' ');
-        }
-        return nameSplit[nameSplit.length - 1].replace("/", "");
+        return this.props.artist.name.replace("/", "").split(' ').slice(1).join(' ');
     }
     render() {
         return <TouchableWithoutFeedback
