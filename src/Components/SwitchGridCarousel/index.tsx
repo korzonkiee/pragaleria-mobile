@@ -147,8 +147,15 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                         {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
                         {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
                         {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), item.sold_price) :
-                            this.props.auction.is_current ? item.initial_price && this.renderTitleBox(l("Auctions.CarouselItem.InitialPrice"), `${item.initial_price} PLN`) :
-                                this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), item.after_auction_price || item.initial_price)}
+                            this.props.auction.is_current ? item.initial_price &&
+                                this.renderTitleBox(
+                                    l("Auctions.CarouselItem.InitialPrice"),
+                                    `${item.initial_price} PLN`
+                                ) : (item.after_auction_price || item.initial_price) ?
+                                    this.renderTitleBox(
+                                        l("Auctions.CarouselItem.AfterAuctionPrice"),
+                                        item.after_auction_price || item.initial_price
+                                    ) : <></>}
                     </View>
                 </View>
             </TouchableOpacity>
