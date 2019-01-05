@@ -62,7 +62,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                             checked={this.state.isChecked}
                             containerStyle={styles.checkboxStyle}
                             labelStyle={styles.checkboxLabelStyle}
-                            label='Wyświetl sprzedane'
+                            label={l("Auctions.ShowSold")}
                             onChange={this.displayAllArtworks.bind(this)}
                         />
                         {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}

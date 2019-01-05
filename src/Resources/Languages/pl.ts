@@ -8,6 +8,7 @@ export default {
     "Auctions.Closed": "Zamknięte",
     "Auctions.NoIncomingAuctions": "Brak nadchodzących aukcji",
     "Auctions.NoClosedAuctions": "Brak zamkniętych aukcji",
+    "Auctions.ShowSold": "Wyświetl sprzedane",
 
     "Auctions.CarouselItem.Title": "Tytuł: ",
     "Auctions.CarouselItem.Author": "Autor: ",
