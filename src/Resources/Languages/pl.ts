@@ -70,6 +70,7 @@ export default {
 
     "ArtistDetails.Available": "Dostępne",
     "ArtistDetails.Sold": "Sprzedane",
+    "ArtistDetails.Statistics": "Statystyki",
     "ArtistDetails.NoArtworksAvailable": "Brak dostępnych dzieł",
 
     "Modal.Close": "ZAMKNIJ",

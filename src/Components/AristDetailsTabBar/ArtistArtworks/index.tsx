@@ -1,14 +1,13 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { DirtyWhite, LightBlack } from "../../Resources/Colors";
-import AppText from "../AppText";
-import { ArtworkItem } from "../ArtworkItem";
 import * as Nav from "react-navigation";
-import * as Routes from "../../Routes";
-import { l } from "../../Services/Language";
+import { DirtyWhite, LightBlack } from "../../../Resources/Colors";
+import * as Routes from "../../../Routes";
+import { l } from "../../../Services/Language";
+import AppText from "../../AppText";
+import { ArtworkItem } from "./ArtworkItem";
 
 export interface ArtistArtworksProps {
-    readonly artistId: number;
     readonly artworks: Array<Artwork>;
 }
 

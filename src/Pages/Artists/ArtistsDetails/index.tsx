@@ -71,7 +71,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                         }
                         withBackground />
                     <AristDetailsTabBar navigation={this.props.navigation}
-                        artistId={artist.data!.id}
+                        artist={artist.data}
                         availableArtworks={availableArtworks}
                         soldArtworks={soldArtworks} />
                 </>}

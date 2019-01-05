@@ -1,11 +1,9 @@
-import { View, TouchableOpacity } from "react-native";
 import React from "react";
-import { Black, White } from "../../Resources/Colors";
-import { createMaterialTopTabNavigator, createAppContainer } from "react-navigation";
-import { ArtistArtworks } from "../ArtistArtworks";
 import * as Nav from "react-navigation";
-import font from "../../Styles/Fonts";
+import { createAppContainer, createMaterialTopTabNavigator } from "react-navigation";
+import { Black, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
+import font from "../../Styles/Fonts";
 import { AuctionsList } from "../AuctionsList";
 
 interface AuctionsTabBarProps {

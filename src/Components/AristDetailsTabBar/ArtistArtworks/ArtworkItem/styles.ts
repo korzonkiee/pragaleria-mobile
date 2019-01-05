@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native'
-import { responsiveFontSize } from '../../Styles/Dimensions';
-import font from '../../Styles/Fonts';
-import { Black } from '../../Resources/Colors';
+import { StyleSheet } from 'react-native';
+import { Black } from '../../../../Resources/Colors';
+import { responsiveFontSize } from '../../../../Styles/Dimensions';
+import font from '../../../../Styles/Fonts';
 
 export default StyleSheet.create({
     artworkContainer: {
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     },
     artworkTitle: {
         fontSize: responsiveFontSize(1.8),
-        ...font({ weight: 'Medium'}),
+        ...font({ weight: 'Medium' }),
         color: Black
     },
     artworkSubTitle: {

@@ -199,6 +199,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-svg')
     implementation project(':react-native-mail')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: 'libs', include: ['*.jar'])

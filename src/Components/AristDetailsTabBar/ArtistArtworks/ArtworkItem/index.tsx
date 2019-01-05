@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, TouchableWithoutFeedback, View } from "react-native";
-import { l } from "../../Services/Language";
-import AppText from "../AppText";
+import { l } from "../../../../Services/Language";
+import AppText from "../../../AppText";
 import styles from "./styles";
 
 export interface ArtworkItemProps {
