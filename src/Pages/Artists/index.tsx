@@ -42,9 +42,6 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
     render() {
         const artistsData = this.props.artists.data;
 
-        console.log(`Loading: ${this.props.artists.loading}`);
-        console.log(`Page: ${this.props.artists.page}`);
-
         if (this.props.artists.loading && this.props.artists.page === 0) {
             return (
                 <ArtistsPlaceholder />
