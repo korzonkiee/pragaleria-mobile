@@ -56,49 +56,55 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         const { currentView } = this.state;
         return (
             <View style={{ flex: 1 }}>
-                <View style={styles.topContainer}>
-                    <Checkbox
-                        checked={this.state.isChecked}
-                        containerStyle={styles.checkboxStyle}
-                        labelStyle={styles.checkboxLabelStyle}
-                        label='Wyświetl sprzedane'
-                        onChange={this.displayAllArtworks.bind(this)}
-                    />
-                    {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
-                    {this.renderTopContainerIcon("grid", this.setGridView, (currentView === 'grid'))}
-                </View>
-                <View style={styles.topLinksContainer}>
-                    <TouchableOpacity
-                        style={styles.topLinksTouchable}
-                        onPress={() => {
-                            auction && auction.urls && auction.urls.bidding && Linking.openURL(auction.urls.bidding);
-                        }}>
-                        <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
-                            LICYTUJ ON-LINE
-                        </AppText>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.topLinksTouchable}
-                        onPress={() => {
-                            auction && auction.urls && auction.urls.virtual_tour && Linking.openURL(auction.urls.virtual_tour);
-                        }}>
-                        <AppText style={styles.topLinksContainerText} numberOfLines={1}>
-                            SPACER 3D
-                        </AppText>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flex: 1 }}>
-                    {currentView === 'slides' ?
-                        <CarouselWrapper
-                            auction={this.props.auction}
-                            catalogItems={this.catalogDataFiltered()}
-                            navigation={this.props.navigation} />
-                        : <FlatList
-                            data={this.catalogDataFiltered()}
-                            keyExtractor={(item, _) => item.id.toString()}
-                            numColumns={2}
-                            renderItem={this.renderGridItem} />}
-                </View>
+                {auction &&
+                    <View style={styles.topContainer}>
+                        <Checkbox
+                            checked={this.state.isChecked}
+                            containerStyle={styles.checkboxStyle}
+                            labelStyle={styles.checkboxLabelStyle}
+                            label='Wyświetl sprzedane'
+                            onChange={this.displayAllArtworks.bind(this)}
+                        />
+                        {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
+                        {this.renderTopContainerIcon("grid", this.setGridView, (currentView === 'grid'))}
+                    </View>
+                }
+                {auction && auction.urls &&
+                    <View style={styles.topLinksContainer}>
+                        {auction.urls.bidding &&
+                            <TouchableOpacity
+                                style={styles.topLinksTouchable}
+                                onPress={() => { Linking.openURL(auction.urls.bidding) }}>
+                                <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
+                                    LICYTUJ ON-LINE
+                                </AppText>
+                            </TouchableOpacity>
+                        }
+                        {auction.urls.virtual_tour &&
+                            <TouchableOpacity
+                                style={styles.topLinksTouchable}
+                                onPress={() => { Linking.openURL(auction.urls.virtual_tour) }}>
+                                <AppText style={styles.topLinksContainerText} numberOfLines={1}>
+                                    SPACER 3D
+                                </AppText>
+                            </TouchableOpacity>
+                        }
+                    </View>
+                }
+                {auction &&
+                    <View style={{ flex: 1 }}>
+                        {currentView === 'slides' ?
+                            <CarouselWrapper
+                                auction={this.props.auction}
+                                catalogItems={this.catalogDataFiltered()}
+                                navigation={this.props.navigation} />
+                            : <FlatList
+                                data={this.catalogDataFiltered()}
+                                keyExtractor={(item, _) => item.id.toString()}
+                                numColumns={2}
+                                renderItem={this.renderGridItem} />}
+                    </View>
+                }
             </View>
         )
     }

@@ -62,7 +62,7 @@ export class ExhibitionDetails extends Component<ExhibitionDetailsProps & Nav.Na
                             </ScrollView>
                         } />
                     {catalog.data.length > 0 ?
-                        <SwitchGridCarousel catalogItems={catalog.data} navigation={this.props.navigation} />
+                        <SwitchGridCarousel auction={exhibition} catalogItems={catalog.data} navigation={this.props.navigation} />
                         : <AppText style={{ color: Black, marginLeft: 10 }}>
                             Brak dzieł w katalogu tej wystawy, więcej informacji pod przyciskiem w prawym górnym rogu.
                     </AppText>}
