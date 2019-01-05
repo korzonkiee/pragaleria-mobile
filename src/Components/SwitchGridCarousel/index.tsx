@@ -146,7 +146,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                     <View style={styles.imageSubtitle}>
                         {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
                         {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
-                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), item.sold_price) :
+                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`) :
                             this.props.auction.is_current ? item.initial_price &&
                                 this.renderTitleBox(
                                     l("Auctions.CarouselItem.InitialPrice"),
@@ -154,7 +154,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 ) : (item.after_auction_price || item.initial_price) ?
                                     this.renderTitleBox(
                                         l("Auctions.CarouselItem.AfterAuctionPrice"),
-                                        item.after_auction_price || item.initial_price
+                                        `${item.after_auction_price || item.initial_price} PLN`
                                     ) : <></>}
                     </View>
                 </View>

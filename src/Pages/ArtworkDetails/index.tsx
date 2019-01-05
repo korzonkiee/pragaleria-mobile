@@ -27,7 +27,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     title={artwork.title}
                     modalContent={
                         <ScrollView style={{ margin: 8 }}>
-                            {artwork.year != "" && artwork.year.length > 0 &&
+                            {artwork.year !== undefined && artwork.year !== "" && artwork.year.length > 0 &&
                                 <AppText style={{ color: Black }}>
                                     Wyprodukowano w {artwork.year} roku
                                 </AppText>
@@ -39,7 +39,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                                 </AppText>
                             }
 
-                            {!artwork.sold && artwork.initial_price != "" &&
+                            {!artwork.sold && artwork.initial_price !== "" &&
                                 <AppText style={{ marginTop: 4, color: Black, }}>
                                     Cena wywoławcza: {artwork.initial_price} PLN
                                 </AppText>

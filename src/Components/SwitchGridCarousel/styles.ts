@@ -40,7 +40,7 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     itemTitleTextLeft: {
-        marginRight: 5,
+        marginRight: 3,
         color: LightBlack,
         flexGrow: 0,
         flexShrink: 0,
