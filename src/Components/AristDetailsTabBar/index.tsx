@@ -11,6 +11,7 @@ interface AristDetailsTabBarProps {
     readonly artist: ArtistDetails;
     readonly availableArtworks: Artwork[];
     readonly soldArtworks: Artwork[];
+    readonly statisticsArtworks: Artwork[];
 }
 
 export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarProps & Nav.NavigationInjectedProps> {
@@ -37,8 +38,8 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
             [l("ArtistDetails.Sold")]: () => <ArtistArtworks navigation={this.props.navigation} artworks={this.props.soldArtworks} />,
         };
 
-        if (this.props.soldArtworks.length > 1) {
-            pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artworks={this.props.soldArtworks} />
+        if (this.props.statisticsArtworks.length > 1) {
+            pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artworks={this.props.statisticsArtworks} />
         }
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));

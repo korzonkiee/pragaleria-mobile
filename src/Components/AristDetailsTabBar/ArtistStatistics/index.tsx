@@ -43,16 +43,7 @@ export class ArtistStatistics extends React.PureComponent<ArtistStatisticsProps 
             return <></>;
         }
 
-        let sortedArtworks = this.props.artworks.sort(
-            (a, b) => {
-                if (a.id < b.id)
-                    return -1;
-                if (b.id > a.id)
-                    return 1;
-                return 0;
-            });
-
-        let statisticsData = sortedArtworks.reduce(
+        let statisticsData = this.props.artworks.reduce(
             (aggregatedData, currentArtwork) => {
                 if (currentArtwork.sold && currentArtwork.sold_price && currentArtwork.sold_price != "0,00") {
                     const label = currentArtwork.title.slice(0, 10) + '.';
