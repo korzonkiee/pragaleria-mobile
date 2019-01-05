@@ -79,3 +79,6 @@
 # -dontwarn org.reactnative.camera.**
 # -dontwarn com.swmansion.gesturehandler.**
 #-keep,includedescriptorclasses class org.reactnative.camera.** { *; }
+
+# svg
+-keep class com.horcrux.svg.** { *; }
