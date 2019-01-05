@@ -8,9 +8,6 @@ import { DefaultAppFont } from '../../../Styles/Fonts';
 import AppText from "../../AppText";
 
 
-interface ArtistStatisticsProps {
-    readonly artist: ArtistDetails;
-}
 
 class CustomChart extends LineChart {
     renderVerticalLabels = config => {
@@ -36,9 +33,17 @@ class CustomChart extends LineChart {
     }
 }
 
+interface ArtistStatisticsProps {
+    readonly artworks: Artwork[];
+}
+
 export class ArtistStatistics extends React.PureComponent<ArtistStatisticsProps & Nav.NavigationInjectedProps> {
     render() {
-        let sortedArtworks = this.props.artist.artworks.sort(
+        if (!this.props.artworks || this.props.artworks.length < 1) {
+            return <></>;
+        }
+
+        let sortedArtworks = this.props.artworks.sort(
             (a, b) => {
                 if (a.id < b.id)
                     return -1;

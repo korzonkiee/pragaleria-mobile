@@ -38,7 +38,7 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
         };
 
         if (this.props.soldArtworks.length > 1) {
-            pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artist={this.props.artist} />
+            pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artworks={this.props.soldArtworks} />
         }
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));
