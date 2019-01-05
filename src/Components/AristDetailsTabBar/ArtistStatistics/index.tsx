@@ -60,6 +60,7 @@ export class ArtistStatistics extends React.PureComponent<ArtistStatisticsProps 
                 'labels': [],
                 'items': []
             }
+        );
 
         return <View style={{
             flex: 1,
