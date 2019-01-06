@@ -15,13 +15,26 @@ import styles from "./styles";
 
 
 export interface ArtworkDetailsProps {
-    readonly artwork: Artwork | null;
+    readonly authorId: number | null;
+    readonly authorName: string | null;
+    readonly artwork: Artwork | CatalogItem | null;
 }
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
     render() {
-        let { artwork } = this.props;
+        const { artwork } = this.props;
+
+        // TAK SIE ZASTANOWILEM TO NIE TRZEBA POBIERAC CALEGO ARTYSTY
+        // POTRZEBUJE ZROBIC TYLKO BUTTON KTORY PRZEKIEROWYWUJE NA ID ARTYSTY W NAWIGACJI
+        // CZYLI POTRZEBUJE NAZWE ARTYSTY I ID ARTYSTY - NIC WIECEJ
+
         if (artwork) {
+            if (artist == null || artist.data == null) {
+                return <DataNotFound retry={
+                    () => this.props.getArtistDetails(artwork.author_id)
+                } message={l("Common.GenericErrorMessageWithRetry")} />
+            }
+
             return (<AppContainer style={{ flex: 1 }}>
                 <AppHeader
                     title={artwork.title}
@@ -51,73 +64,10 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         </ScrollView>
                     }
                     withBackground />
-                <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
-                    <Image style={{ flex: 1 }} source={{ uri: artwork.image_medium_thumbnail || artwork.image_thumbnail }}
-                        blurRadius={2} />
-                )}>
-                    <ImageBackground style={styles.artworkFullImage}
-                        source={{
-                            uri: artwork.image_medium || artwork.image_large || artwork.image_original
-                        }}
-                        resizeMode="contain">
-                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-
-                            {artwork.meta.dimension.length < 3 ? <TouchableOpacity
-                                style={{
-                                    backgroundColor: LightGrayHidden,
-                                    alignSelf: 'flex-end',
-                                    margin: 8,
-                                    paddingVertical: 8,
-                                    paddingHorizontal: 24,
-                                    borderRadius: 10
-                                }}
-                                onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
-                                <View style={{
-                                    flexDirection: 'row'
-                                }}>
-                                    <AppText style={{
-                                        color: White,
-                                        fontSize: responsiveFontSize(2),
-                                        textAlign: 'right',
-                                    }}>
-                                        {l("Artwork.ImageHang")}
-                                    </AppText>
-                                    <View style={{ marginLeft: 8 }}>
-                                        <Icon name="camera" size={responsiveFontSize(2)} color={White} />
-                                    </View>
-                                </View>
-                            </TouchableOpacity> : <View />}
-                            {!artwork.sold ?
-                                <TouchableOpacity
-                                    style={{
-                                        backgroundColor: LightGrayHidden,
-                                        alignSelf: 'flex-end',
-                                        margin: 8,
-                                        paddingVertical: 8,
-                                        paddingHorizontal: 24,
-                                        borderRadius: 10,
-                                    }}
-                                    onPress={() => this.purchaseArtwork()}>
-                                    <View style={{
-                                        flexDirection: 'row'
-                                    }}>
-                                        <AppText style={{
-                                            color: White,
-                                            fontSize: responsiveFontSize(2),
-                                            textAlign: 'right',
-                                        }}>
-                                            {l("Artwork.ImageBuy")}
-                                        </AppText>
-                                        <View style={{ marginLeft: 8 }}>
-                                            <Icon name="price-tag" size={responsiveFontSize(2)} color={White} />
-                                        </View>
-                                    </View>
-                                </TouchableOpacity>
-                                : <View />}
-                        </View>
-
-                    </ImageBackground>
-                </FadeIn>
+                {artist.loading ?
+                    <View style={{ flex: 1, backgroundColor: 'blue' }}></View> :
+                    this.renderFullScreenImageView(artwork, artist.data)
+                }
             </AppContainer>
             )
         } else {
@@ -137,5 +87,73 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
         this.props.navigation.navigate(Routes.PurchaseArtwork, {
             artwork: this.props.artwork
         })
+    }
+
+    private renderFullScreenImageView = (artwork: Artwork, artist: Artist) => {
+        <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
+            <Image style={{ flex: 1 }} source={{ uri: artwork.image_medium_thumbnail || artwork.image_thumbnail }}
+                blurRadius={2} />
+        )}>
+            <ImageBackground style={styles.artworkFullImage}
+                source={{
+                    uri: artwork.image_medium || artwork.image_large || artwork.image_original
+                }}
+                resizeMode="contain">
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    {artwork.meta.dimension.length < 3 ? <TouchableOpacity
+                        style={{
+                            backgroundColor: LightGrayHidden,
+                            alignSelf: 'flex-end',
+                            margin: 8,
+                            paddingVertical: 8,
+                            paddingHorizontal: 24,
+                            borderRadius: 10
+                        }}
+                        onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
+                        <View style={{
+                            flexDirection: 'row'
+                        }}>
+                            <AppText style={{
+                                color: White,
+                                fontSize: responsiveFontSize(2),
+                                textAlign: 'right',
+                            }}>
+                                {l("Artwork.ImageHang")}
+                            </AppText>
+                            <View style={{ marginLeft: 8 }}>
+                                <Icon name="camera" size={responsiveFontSize(2)} color={White} />
+                            </View>
+                        </View>
+                    </TouchableOpacity> : <View />}
+                    {!artwork.sold ?
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: LightGrayHidden,
+                                alignSelf: 'flex-end',
+                                margin: 8,
+                                paddingVertical: 8,
+                                paddingHorizontal: 24,
+                                borderRadius: 10,
+                            }}
+                            onPress={() => this.purchaseArtwork()}>
+                            <View style={{
+                                flexDirection: 'row'
+                            }}>
+                                <AppText style={{
+                                    color: White,
+                                    fontSize: responsiveFontSize(2),
+                                    textAlign: 'right',
+                                }}>
+                                    {l("Artwork.ImageBuy")}
+                                </AppText>
+                                <View style={{ marginLeft: 8 }}>
+                                    <Icon name="price-tag" size={responsiveFontSize(2)} color={White} />
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                        : <View />}
+                </View>
+            </ImageBackground>
+        </FadeIn>
     }
 }

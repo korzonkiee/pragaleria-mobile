@@ -2,6 +2,7 @@ declare interface Artwork {
     readonly id: number;
     readonly title: string;
     readonly author: string;
+    readonly author_id: number;
     readonly description: string;
     readonly sold: boolean;
     readonly initial_price: string;

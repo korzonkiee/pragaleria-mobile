@@ -25,7 +25,7 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
     }
 
     render() {
-        const { artist, auction, catalog } = this.props;
+        const { auction, catalog } = this.props;
 
         if (!catalog) {
             return null;
