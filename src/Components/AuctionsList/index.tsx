@@ -68,7 +68,7 @@ export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.Na
     }
 
     private navigateToAuctionDetails = (auction: Auction) => {
-        this.props.navigation.navigate(Routes.AuctionDetails, {
+        this.props.navigation.push(Routes.AuctionDetails, {
             auction: auction
         });
     }

@@ -67,7 +67,7 @@ export class ExihibitionsList extends React.PureComponent<ExihibitionsListProps 
     }
 
     private navigateToExhibitionDetails = (exhibition: Exhibition) => {
-        this.props.navigation.navigate(Routes.ExhibitionDetails, {
+        this.props.navigation.push(Routes.ExhibitionDetails, {
             exhibition: exhibition
         });
     }

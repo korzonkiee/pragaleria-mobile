@@ -20,7 +20,7 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
         return (
             <TouchableNativeFeedback
                 onPress={() => {
-                    this.props.navigation.navigate(Routes.ArtworkDetails, {
+                    this.props.navigation.push(Routes.ArtworkDetails, {
                         artwork: item,
                         artistId: item.author_id
                     });

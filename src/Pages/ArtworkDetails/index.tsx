@@ -63,20 +63,20 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
     }
 
     private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
-        this.props.navigation.navigate(Routes.Camera, {
+        this.props.navigation.push(Routes.Camera, {
             imageUrl: imageUrl,
             imageDimension: imageDimension
         });
     }
 
     private purchaseArtwork = () => {
-        this.props.navigation.navigate(Routes.PurchaseArtwork, {
+        this.props.navigation.push(Routes.PurchaseArtwork, {
             artwork: this.props.artwork
         })
     }
 
     private navigateToArtist = () => {
-        this.props.navigation.navigate(Routes.ArtistDetails, {
+        this.props.navigation.push(Routes.ArtistDetails, {
             artistId: this.props.artistId
         });
     }

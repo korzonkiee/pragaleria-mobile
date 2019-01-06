@@ -55,7 +55,7 @@ export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Na
     private navigateToArtwork = (artwork: Artwork) => {
         console.log(`Navigating to artwork ${artwork.id}`);
 
-        this.props.navigation.navigate(Routes.ArtworkDetails, {
+        this.props.navigation.push(Routes.ArtworkDetails, {
             artwork: artwork
         });
     }
