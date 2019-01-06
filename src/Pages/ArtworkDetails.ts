@@ -13,15 +13,9 @@ export default connect(
             Logger.logError("ArtworkDetails", `Error while navigating to artwork ${artwork.id}. Artwork not found.`);
         }
 
-        const artistId = ownProps.navigation.getParam(Routes.NavParamAristId);
-
-        if (!artistId) {
-            Logger.logError("ArtworkDetails", `No artistId passed while navigating to artwork.`);
-        }
-
         return {
             artwork: artwork,
-            artistId: artistId
+            artistId: ownProps.navigation.getParam(Routes.NavParamAristId)
         }
     }
 )(ArtworkDetails);

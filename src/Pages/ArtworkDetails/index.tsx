@@ -22,9 +22,6 @@ export interface ArtworkDetailsProps {
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
     render() {
         const { artwork } = this.props;
-        // TAK SIE ZASTANOWILEM TO NIE TRZEBA POBIERAC CALEGO ARTYSTY
-        // POTRZEBUJE ZROBIC TYLKO BUTTON KTORY PRZEKIEROWYWUJE NA ID ARTYSTY W NAWIGACJI
-        // CZYLI POTRZEBUJE NAZWE ARTYSTY I ID ARTYSTY - NIC WIECEJ
 
         if (artwork) {
             return (<AppContainer style={{ flex: 1 }}>
@@ -94,17 +91,17 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     uri: artwork.image_medium || artwork.image_large || artwork.image_original
                 }}
                 resizeMode="contain">
-                <TouchableOpacity style={{
+                {this.props.artistId !== undefined && <View style={{
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'flex-start'
-                }} onPress={() => this.navigateToArtist()}>
-                    <View style={{
+                }}>
+                    <TouchableOpacity style={{
                         backgroundColor: White,
                         borderBottomColor: LightGray,
                         borderBottomWidth: 1,
                         alignItems: 'center'
-                    }}>
+                    }} onPress={() => this.navigateToArtist()}>
                         <AppText style={{
                             color: LightBlack,
                             textAlign: 'center',
@@ -113,8 +110,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         }}>
                             {artwork.author} <Icon name={"chevron-with-circle-right"} size={responsiveFontSize(2.4)} />
                         </AppText>
-                    </View>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>}
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                     {artwork.meta.dimension.length < 3 ? <TouchableOpacity
                         style={{
