@@ -9,6 +9,7 @@ import { ArtworkItem } from "./ArtworkItem";
 
 export interface ArtistArtworksProps {
     readonly artworks: Array<Artwork>;
+    readonly artist: Artist;
 }
 
 export class ArtistArtworks extends React.PureComponent<ArtistArtworksProps & Nav.NavigationInjectedProps> {

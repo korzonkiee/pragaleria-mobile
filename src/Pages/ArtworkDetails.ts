@@ -1,8 +1,9 @@
-import { connect } from "react-redux";
 import * as Nav from "react-navigation";
+import { connect } from "react-redux";
 import * as Routes from '../Routes';
-import { ArtworkDetailsProps, ArtworkDetails } from "./ArtworkDetails/index";
 import Logger from "../Services/Logger";
+import { ArtworkDetails, ArtworkDetailsProps } from "./ArtworkDetails/index";
+
 
 export default connect(
     (state: AppState, ownProps: Nav.NavigationInjectedProps): StateProps<ArtworkDetailsProps> => {
@@ -13,7 +14,8 @@ export default connect(
         }
 
         return {
-            artwork: artwork
+            artwork: artwork,
+            artistId: ownProps.navigation.getParam(Routes.NavParamAristId)
         }
     }
 )(ArtworkDetails);

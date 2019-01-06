@@ -131,7 +131,8 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     ) => <View key={item.id} style={styles.gridItem}>
             <TouchableOpacity style={{ flexDirection: 'column', flex: 1 }} onPress={() => {
                 this.props.navigation.navigate(Routes.ArtworkDetails, {
-                    artwork: item
+                    artwork: item,
+                    artistId: item.author_id
                 });
             }}>
                 <View style={{ flex: 1 }}>
