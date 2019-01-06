@@ -22,6 +22,7 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
                 onPress={() => {
                     this.props.navigation.navigate(Routes.ArtworkDetails, {
                         artwork: item,
+                        artistId: item.author_id
                     });
                 }}>
                 <View style={{ flex: 1, marginVertical: 10 }}>

@@ -7,7 +7,7 @@ import AppContainer from '../../Components/AppContainer';
 import AppHeader from '../../Components/AppHeader';
 import AppText from '../../Components/AppText';
 import DataNotFound from '../../Components/DataNotFound';
-import { Black, LightGrayHidden, White } from '../../Resources/Colors';
+import { Black, LightBlack, LightGray, LightGrayHidden, White } from '../../Resources/Colors';
 import * as Routes from "../../Routes";
 import { l } from '../../Services/Language';
 import { responsiveFontSize } from '../../Styles/Dimensions';
@@ -15,28 +15,20 @@ import styles from "./styles";
 
 
 export interface ArtworkDetailsProps {
-    readonly authorId: number | null;
-    readonly authorName: string | null;
+    readonly artistId: number | null;
     readonly artwork: Artwork | CatalogItem | null;
 }
 
 export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.NavigationInjectedProps> {
     render() {
         const { artwork } = this.props;
-
         // TAK SIE ZASTANOWILEM TO NIE TRZEBA POBIERAC CALEGO ARTYSTY
         // POTRZEBUJE ZROBIC TYLKO BUTTON KTORY PRZEKIEROWYWUJE NA ID ARTYSTY W NAWIGACJI
         // CZYLI POTRZEBUJE NAZWE ARTYSTY I ID ARTYSTY - NIC WIECEJ
 
         if (artwork) {
-            if (artist == null || artist.data == null) {
-                return <DataNotFound retry={
-                    () => this.props.getArtistDetails(artwork.author_id)
-                } message={l("Common.GenericErrorMessageWithRetry")} />
-            }
-
             return (<AppContainer style={{ flex: 1 }}>
-                <AppHeader
+                <AppHeader withBackground
                     title={artwork.title}
                     modalContent={
                         <ScrollView style={{ margin: 8 }}>
@@ -63,11 +55,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                             </AppText>}
                         </ScrollView>
                     }
-                    withBackground />
-                {artist.loading ?
-                    <View style={{ flex: 1, backgroundColor: 'blue' }}></View> :
-                    this.renderFullScreenImageView(artwork, artist.data)
-                }
+                />
+                {this.renderFullScreenImageView(artwork)}
             </AppContainer>
             )
         } else {
@@ -89,8 +78,14 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
         })
     }
 
-    private renderFullScreenImageView = (artwork: Artwork, artist: Artist) => {
-        <FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
+    private navigateToArtist = () => {
+        this.props.navigation.navigate(Routes.ArtistDetails, {
+            artistId: this.props.artistId
+        });
+    }
+
+    private renderFullScreenImageView = (artwork: Artwork) => {
+        return (<FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
             <Image style={{ flex: 1 }} source={{ uri: artwork.image_medium_thumbnail || artwork.image_thumbnail }}
                 blurRadius={2} />
         )}>
@@ -99,6 +94,27 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     uri: artwork.image_medium || artwork.image_large || artwork.image_original
                 }}
                 resizeMode="contain">
+                <TouchableOpacity style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start'
+                }} onPress={() => this.navigateToArtist()}>
+                    <View style={{
+                        backgroundColor: White,
+                        borderBottomColor: LightGray,
+                        borderBottomWidth: 1,
+                        alignItems: 'center'
+                    }}>
+                        <AppText style={{
+                            color: LightBlack,
+                            textAlign: 'center',
+                            marginVertical: 8,
+                            fontSize: responsiveFontSize(2.1),
+                        }}>
+                            {artwork.author} <Icon name={"chevron-with-circle-right"} size={responsiveFontSize(2.4)} />
+                        </AppText>
+                    </View>
+                </TouchableOpacity>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
                     {artwork.meta.dimension.length < 3 ? <TouchableOpacity
                         style={{
@@ -154,6 +170,6 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         : <View />}
                 </View>
             </ImageBackground>
-        </FadeIn>
+        </FadeIn>);
     }
 }
