@@ -3,7 +3,7 @@ import { FlatList, ImageBackground, Linking, TouchableOpacity, View } from 'reac
 import Checkbox from 'react-native-modest-checkbox';
 import Icon from "react-native-vector-icons/Entypo";
 import * as Nav from "react-navigation";
-import { Black, LightGray } from '../../Resources/Colors';
+import { Black } from '../../Resources/Colors';
 import * as Routes from "../../Routes";
 import { l } from "../../Services/Language";
 import { responsiveFontSize, responsiveHeight } from '../../Styles/Dimensions';
@@ -18,10 +18,12 @@ export interface SwitchGridCarouselProps {
 }
 
 interface SwitchGridCarouselState {
-    readonly currentView: string;
+    readonly currentView: ViewType;
     readonly isChecked: boolean;
     readonly catalogItemsFiltered: CatalogItem[];
 }
+
+type ViewType = 'grid' | 'slides'
 
 export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselProps & Nav.NavigationInjectedProps, SwitchGridCarouselState> {
     constructor(props: SwitchGridCarouselProps & Nav.NavigationInjectedProps) {
@@ -67,17 +69,16 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                             label={l("Auctions.ShowSold")}
                             onChange={this.displayAllArtworks.bind(this)}
                         />
-                        {this.renderTopContainerIcon("documents", this.setSlidesView, (currentView === 'slides'))}
-                        {this.renderTopContainerIcon("grid", this.setGridView, (currentView === 'grid'))}
+                        {this.renderTopContainerIcon(this.state.currentView === 'grid')}
                     </View>
                 }
                 {auction && auction.urls &&
                     <View style={styles.topLinksContainer}>
-                        {auction.urls.bidding &&
+                        {auction.is_current && auction.urls.bidding &&
                             <TouchableOpacity
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.bidding) }}>
-                                <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
+                                <AppText style={styles.topLinksContainerText} numberOfLines={1}>
                                     {l("Auctions.OnlineBid")}
                                 </AppText>
                             </TouchableOpacity>
@@ -116,14 +117,14 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         )
     }
 
-    private renderTopContainerIcon = (
-        iconName: string, onPress: any, isActive: boolean
-    ) => <TouchableOpacity style={styles.topContainerIcon} onPress={onPress} >
+    private renderTopContainerIcon = (isGrid: boolean) => (
+        <TouchableOpacity style={styles.topContainerIcon}
+            onPress={isGrid ? this.setSlidesView : this.setGridView}>
             <Icon
-                name={iconName}
+                name={isGrid ? "documents" : "grid"}
                 size={responsiveFontSize(3.3)}
-                color={isActive ? Black : LightGray} />
-        </TouchableOpacity>
+                color={Black} />
+        </TouchableOpacity>)
 
     private setGridView = () => {
         this.setState({ currentView: 'grid' })
