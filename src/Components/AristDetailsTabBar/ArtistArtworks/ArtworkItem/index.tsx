@@ -21,7 +21,8 @@ export class ArtworkItem extends React.PureComponent<ArtworkItemProps> {
                     <View style={styles.artworkDescContainer}>
                         <AppText style={styles.artworkTitle}>{this.props.artwork.title}</AppText>
                         {this.props.artwork.year.length > 0 && <AppText style={styles.artworkSubTitle}>{l("Artwork.Year")}: {this.props.artwork.year}</AppText>}
-                        {this.props.artwork.sold && this.props.artwork.sold_price !== "0,00" && <AppText style={styles.artworkSubTitle}>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText>}
+                        {(this.props.artwork.sold && this.props.artwork.sold_price && this.props.artwork.sold_price !== "0,00") ?
+                            <AppText style={styles.artworkSubTitle}>{l("Artwork.Price")}: {this.props.artwork.sold_price}</AppText> : <></>}
                     </View>
                 </View>
             </TouchableWithoutFeedback>
