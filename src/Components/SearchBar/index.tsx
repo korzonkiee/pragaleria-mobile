@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleProp, TextInput, View, ViewStyle } from "react-native";
 import * as Progress from "react-native-progress";
-import Icon from "react-native-vector-icons/Entypo";
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import * as colors from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
@@ -33,7 +33,7 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
             {(this.props.toolbarVisible === undefined || this.props.toolbarVisible === true) &&
                 <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.White }]}>
                     <View style={styles.leftButton}>
-                        <Icon name={"magnifying-glass"} size={responsiveFontSize(3.3)} style={styles.buttonContent} />
+                        <Icon name={"magnifier"} size={responsiveFontSize(2.2)} style={styles.buttonContent} />
                     </View>
                     <View style={styles.title}>
                         <TextInput style={[styles.titleText]}

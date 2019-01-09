@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
-
-import { responsiveHeight, responsiveFontSize } from "../../Styles/Dimensions";
 import { styleForIOS } from "../../Helpers/PhoneHelpers";
+import { Black, LightGray } from '../../Resources/Colors';
+import { responsiveFontSize, responsiveHeight } from "../../Styles/Dimensions";
 import font from "../../Styles/Fonts";
-import { Black, LightGray, DirtyWhite } from '../../Resources/Colors';
 
-export const headerHeight = Math.min(responsiveHeight(8.5), 56); // 56
+
+export const headerHeight = Math.min(responsiveHeight(8), 48); // 48
 const loaderHeight = 4;
 export const errorBarHeight = responsiveHeight(4.5);
 
@@ -46,7 +46,7 @@ export default StyleSheet.create({
     titleText: {
         color: Black,
         textAlign: "left",
-        fontSize: responsiveFontSize(2.3),
+        fontSize: responsiveFontSize(1.8),
         marginTop: 2,
         ...font(),
         ...styleForIOS({ lineHeight: headerHeight })
