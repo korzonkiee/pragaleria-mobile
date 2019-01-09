@@ -73,11 +73,11 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                 }
                 {auction && auction.urls &&
                     <View style={styles.topLinksContainer}>
-                        {auction.urls.bidding &&
+                        {auction.is_current && auction.urls.bidding &&
                             <TouchableOpacity
                                 style={styles.topLinksTouchable}
                                 onPress={() => { Linking.openURL(auction.urls.bidding) }}>
-                                <AppText style={styles.topLinksContainerTextLeft} numberOfLines={1}>
+                                <AppText style={styles.topLinksContainerText} numberOfLines={1}>
                                     {l("Auctions.OnlineBid")}
                                 </AppText>
                             </TouchableOpacity>

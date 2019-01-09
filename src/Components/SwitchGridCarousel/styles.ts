@@ -6,9 +6,6 @@ import font, { DefaultFontFamily } from '../../Styles/Fonts';
 export default StyleSheet.create({
     topLinksContainer: {
         backgroundColor: White,
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: 'auto',
         borderBottomColor: LightGray,
         borderBottomWidth: 1,
         flexDirection: 'row',
@@ -19,7 +16,6 @@ export default StyleSheet.create({
         marginVertical: 12
     },
     topLinksContainerText: {
-        flex: 1,
         color: LightBlack,
         textAlign: 'center',
         ...font({ family: DefaultFontFamily, weight: "Regular" }),
