@@ -1,19 +1,18 @@
 import * as React from "react";
-import * as Nav from "react-navigation";
+import { Animated, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from "react-native";
 import * as Progress from "react-native-progress";
-import { StyleProp, TextStyle, ViewStyle, View, TouchableWithoutFeedback, Animated } from "react-native";
-
-import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions"
-import { isIOS } from "../../Helpers/PhoneHelpers"
-import { l } from "../../Services/Language";
-
-import * as colors from "../../Resources/Colors";
-import styles, { errorBarHeight } from "./styles";
-import AppText from "../AppText";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SimpleIcon from "react-native-vector-icons/SimpleLineIcons";
-import { White, LightGray, LightBlack } from '../../Resources/Colors';
+import * as Nav from "react-navigation";
+import { isIOS } from "../../Helpers/PhoneHelpers";
+import * as colors from "../../Resources/Colors";
+import { l } from "../../Services/Language";
+import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
 import AppModal from '../AppModal';
+import AppText from "../AppText";
+import styles, { errorBarHeight } from "./styles";
+
+
 
 
 export interface AppHeaderStateProps {
@@ -78,36 +77,36 @@ export class AppHeader extends React.PureComponent<AppHeaderProps, AppHeaderStat
         const onPressRight = this.props.onPressRight;
 
         return <View style={styles.headerContainer}>
-            {(this.props.modalContent !== undefined && <AppModal modalContent={this.props.modalContent} modalVisible={this.state.modalVisible} onPress={this.hideModal}/>)}
+            {(this.props.modalContent !== undefined && <AppModal modalContent={this.props.modalContent} modalVisible={this.state.modalVisible} onPress={this.hideModal} />)}
             {(this.props.toolbarVisible === undefined || this.props.toolbarVisible === true) &&
-            <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.White }]}>
-                <View style={styles.leftButton}>
-                    {!this.props.leftButtonDisabled && <TouchableWithoutFeedback
-                        onPress={this.props.disableBackButtonWhenLoading ? (this.props.isLoading ? undefined : onPressLeft) : onPressLeft} >
-                        { <Icon name={"arrow-back"} size={responsiveFontSize(3.3)} style={styles.buttonContent} />}
-                    </TouchableWithoutFeedback>}
-                </View>
-                <View style={styles.title}>
-                    {this.props.showLogoAsTitle ? <Icon name={"logo"} style={[styles.titleIcon, this.props.titleStyle]} /> :
-                    <AppText style={[styles.titleText, this.props.titleStyle]}>{this.props.title}</AppText>}
-                </View>
-                <View style={styles.rightButton}>
-                    {!this.props.rightButtonDisabled && <TouchableWithoutFeedback onPress={this.showModal}>
-                        <AppText numberOfLines={1} style={[styles.buttonContent, { fontSize: responsiveFontSize(1.8) }]}>
-                            <SimpleIcon name={"info"} size={responsiveFontSize(3)} style={styles.buttonContent} />
-                        </AppText>
-                    </TouchableWithoutFeedback>}
-                </View>
-            </View>}
+                <View style={[this.props.style, styles.header, this.props.withBackground && { backgroundColor: colors.White }]}>
+                    <View style={styles.leftButton}>
+                        {!this.props.leftButtonDisabled && <TouchableWithoutFeedback
+                            onPress={this.props.disableBackButtonWhenLoading ? (this.props.isLoading ? undefined : onPressLeft) : onPressLeft} >
+                            {<Icon name={"arrow-back"} size={responsiveFontSize(3.3)} style={styles.buttonContent} />}
+                        </TouchableWithoutFeedback>}
+                    </View>
+                    <View style={styles.title}>
+                        {this.props.showLogoAsTitle ? <Icon name={"logo"} style={[styles.titleIcon, this.props.titleStyle]} /> :
+                            <AppText style={[styles.titleText, this.props.titleStyle]}>{this.props.title}</AppText>}
+                    </View>
+                    <View style={styles.rightButton}>
+                        {!this.props.rightButtonDisabled && <TouchableWithoutFeedback onPress={this.showModal}>
+                            <AppText numberOfLines={1} style={[styles.buttonContent, { fontSize: responsiveFontSize(1.8) }]}>
+                                <SimpleIcon name={"info"} size={responsiveFontSize(3)} style={styles.buttonContent} />
+                            </AppText>
+                        </TouchableWithoutFeedback>}
+                    </View>
+                </View>}
             {this.state.errorVisible &&
                 <Animated.View
                     style={[styles.errorBar, {
-                        height: this.state.errorAnimation.interpolate({ inputRange: [0, 1], outputRange: [0, errorBarHeight]})
+                        height: this.state.errorAnimation.interpolate({ inputRange: [0, 1], outputRange: [0, errorBarHeight] })
                     }]}>
-                <Animated.Text style={[styles.errorBarTitle, isIOS() && {
-                    lineHeight: this.state.errorAnimation.interpolate({ inputRange: [0, 1], outputRange: [0, errorBarHeight]})
-                }]}>{l("Common.NetworkError")}</Animated.Text>
-            </Animated.View>}
+                    <Animated.Text style={[styles.errorBarTitle, isIOS() && {
+                        lineHeight: this.state.errorAnimation.interpolate({ inputRange: [0, 1], outputRange: [0, errorBarHeight] })
+                    }]}>{l("Common.NetworkError")}</Animated.Text>
+                </Animated.View>}
             <View style={{ flex: 1 }}>
                 {this.props.isLoading && !this.state.errorVisible && (this.props.progressBarVisible === undefined || this.props.progressBarVisible === true) &&
                     <Progress.Bar

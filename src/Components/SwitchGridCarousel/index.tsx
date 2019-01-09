@@ -1,13 +1,13 @@
 import React from "react";
-import { FlatList, ImageBackground, Linking, TouchableOpacity, View } from 'react-native';
-import Checkbox from 'react-native-modest-checkbox';
-import Icon from "react-native-vector-icons/Entypo";
+import { FlatList, Linking, TouchableOpacity, View } from 'react-native';
+import { default as Icon } from "react-native-vector-icons/Entypo";
+import { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
 import * as Nav from "react-navigation";
 import { Black } from '../../Resources/Colors';
-import * as Routes from "../../Routes";
 import { l } from "../../Services/Language";
-import { responsiveFontSize, responsiveHeight } from '../../Styles/Dimensions';
+import { responsiveFontSize } from '../../Styles/Dimensions';
 import AppText from "../AppText";
+import { AuctionGridItem } from "./AuctionGridItem";
 import { CarouselWrapper } from "./CarouselWrapper";
 import styles from "./styles";
 
@@ -19,7 +19,7 @@ export interface SwitchGridCarouselProps {
 
 interface SwitchGridCarouselState {
     readonly currentView: ViewType;
-    readonly isChecked: boolean;
+    readonly showOnlyAvailable: boolean;
     readonly catalogItemsFiltered: CatalogItem[];
 }
 
@@ -30,23 +30,23 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
         super(props);
 
         const catalogItemsFiltered = this.props.catalogItems.filter(
-            (catalogItem: CatalogItem) => catalogItem.sold === false
+            (catalogItem) => catalogItem.sold === false
         );
         this.state = {
             currentView: 'grid',
-            isChecked: false,
+            showOnlyAvailable: false,
             catalogItemsFiltered: catalogItemsFiltered
         };
     }
 
     private displayAllArtworks() {
         this.setState({
-            isChecked: !this.state.isChecked
+            showOnlyAvailable: !this.state.showOnlyAvailable
         });
     }
 
     private catalogDataFiltered(): CatalogItem[] {
-        if (!this.state.isChecked) {
+        if (this.state.showOnlyAvailable) {
             return this.state.catalogItemsFiltered;
         } else {
             return this.props.catalogItems;
@@ -62,17 +62,26 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
             <View style={{ flex: 1 }}>
                 {auction &&
                     <View style={styles.topContainer}>
-                        <Checkbox
-                            checked={this.state.isChecked}
+                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
+                            onPress={() => this.setState({
+                                showOnlyAvailable: !this.state.showOnlyAvailable
+                            })}>
+                            {this.state.showOnlyAvailable ?
+                                <MaterialIcon name='check-circle' size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={Black} />
+                                : <MaterialIcon name='radio-button-unchecked' size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={Black} />}
+                            <AppText style={{ color: Black, marginLeft: 4 }}>{l("Auctions.ShowAvailable")}</AppText>
+                        </TouchableOpacity>
+                        {/* <Checkbox
+                            checked={this.state.showOnlyAvailable}
                             containerStyle={styles.checkboxStyle}
                             labelStyle={styles.checkboxLabelStyle}
-                            label={l("Auctions.ShowSold")}
+                            label={l("Auctions.ShowAvailable")}
                             onChange={this.displayAllArtworks.bind(this)}
-                        />
+                        /> */}
                         {this.renderTopContainerIcon(this.state.currentView === 'grid')}
                     </View>
                 }
-                {auction && auction.urls &&
+                {auction && auction.urls && (auction.urls.virtual_tour || (auction.is_current && auction.urls.bidding)) &&
                     <View style={styles.topLinksContainer}>
                         {auction.is_current && auction.urls.bidding &&
                             <TouchableOpacity
@@ -110,6 +119,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 data={catalogDataFiltered}
                                 keyExtractor={(item, _) => item.id.toString()}
                                 numColumns={2}
+                                initialNumToRender={6}
                                 renderItem={this.renderGridItem} />}
                     </View>
                 }
@@ -133,51 +143,10 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     private setSlidesView = () => {
         this.setState({ currentView: 'slides' })
     }
+    private renderGridItem = ({ item, index }: { item: CatalogItem, index: number }) =>
+        (<AuctionGridItem isAuctionCurrent={this.props.auction.is_current}
+            navigation={this.props.navigation}
+            item={item}
+            index={index} />)
 
-    private renderGridItem = (
-        { item, index }: { item: CatalogItem, index: number }
-    ) => <View key={item.id} style={styles.gridItem}>
-            <TouchableOpacity style={{ flexDirection: 'column', flex: 1 }} onPress={() => {
-                this.props.navigation.push(Routes.ArtworkDetails, {
-                    artwork: item,
-                    artistId: item.author_id
-                });
-            }}>
-                <View style={{ flex: 1 }}>
-                    <ImageBackground style={{ flex: 1, height: responsiveHeight(25) }} source={{
-                        uri: item.image_medium_thumbnail || item.image_thumbnail
-                    }}>
-                        <View style={{ flexDirection: "row" }}>
-                            <AppText style={styles.imageTopLabel}>{index + 1}.</AppText>
-                            {item.sold === true ? <AppText style={styles.imageTopLabel}>sprzedane</AppText> : <></>}
-                        </View>
-                    </ImageBackground>
-                    <View style={styles.imageSubtitle}>
-                        {this.renderTitleBox(l("Auctions.GridItem.Title"), item.title)}
-                        {this.renderTitleBox(l("Auctions.GridItem.Author"), item.author)}
-                        {item.sold ? this.renderTitleBox(l("Auctions.CarouselItem.SoldPrice"), `${item.sold_price} PLN`) :
-                            this.props.auction.is_current ? item.initial_price &&
-                                this.renderTitleBox(
-                                    l("Auctions.CarouselItem.InitialPrice"),
-                                    `${item.initial_price} PLN`
-                                ) : (item.after_auction_price || item.initial_price) ?
-                                    this.renderTitleBox(
-                                        l("Auctions.CarouselItem.AfterAuctionPrice"),
-                                        `${item.after_auction_price || item.initial_price} PLN`
-                                    ) : <></>}
-                    </View>
-                </View>
-            </TouchableOpacity>
-        </View>
-
-    private renderTitleBox = (textLeft: any, textRight: any) => {
-        return <View style={styles.itemTitleBox}>
-            <AppText style={styles.itemTitleTextLeft}>
-                {textLeft}
-            </AppText>
-            <AppText style={styles.itemTitleTextRight} numberOfLines={1}>
-                {textRight}
-            </AppText>
-        </View>
-    }
 }

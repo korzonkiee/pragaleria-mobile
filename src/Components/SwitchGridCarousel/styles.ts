@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Black, LightBlack, LightGray, White } from '../../Resources/Colors';
+import { LightBlack, LightGray, White } from '../../Resources/Colors';
 import { responsiveFontSize } from '../../Styles/Dimensions';
 import font, { DefaultFontFamily } from '../../Styles/Fonts';
 
@@ -65,35 +65,12 @@ export default StyleSheet.create({
     },
     topContainerIcon: {
         flex: 0.3,
-        marginHorizontal: 15,
+        marginRight: 20,
     },
     checkboxStyle: {
     },
     checkboxLabelStyle: {
         ...font({ family: DefaultFontFamily }),
         fontSize: responsiveFontSize(2)
-    },
-    gridItem: {
-        flex: 0.5,
-        backgroundColor: White,
-        borderColor: LightGray,
-        borderWidth: 1,
-        marginVertical: 10,
-        marginHorizontal: 5,
-    },
-    imageTopLabel: {
-        color: White,
-        backgroundColor: Black,
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: 'auto',
-        paddingVertical: 5,
-        paddingHorizontal: 10
-    },
-    imageSubtitle: {
-        backgroundColor: White,
-        padding: 5,
-        marginTop: 1,
-        flex: 1
-    },
+    }
 });
