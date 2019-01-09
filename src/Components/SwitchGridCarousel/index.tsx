@@ -54,6 +54,8 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     render() {
         const { auction } = this.props;
         const { currentView } = this.state;
+        const catalogDataFiltered = this.catalogDataFiltered();
+
         return (
             <View style={{ flex: 1 }}>
                 {auction &&
@@ -91,15 +93,20 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                         }
                     </View>
                 }
-                {auction &&
+                {catalogDataFiltered.length === 0 ?
                     <View style={{ flex: 1 }}>
+                        <AppText style={styles.topLinksContainerText}>
+                            Brak dzieł poaukcyjnych, kliknij "Wyświetl sprzedane" aby przeglądać dzieła które pojawiły się na tej aukcji.
+                        </AppText>
+                    </View>
+                    : <View style={{ flex: 1 }}>
                         {currentView === 'slides' ?
                             <CarouselWrapper
                                 auction={this.props.auction}
-                                catalogItems={this.catalogDataFiltered()}
+                                catalogItems={catalogDataFiltered}
                                 navigation={this.props.navigation} />
                             : <FlatList
-                                data={this.catalogDataFiltered()}
+                                data={catalogDataFiltered}
                                 keyExtractor={(item, _) => item.id.toString()}
                                 numColumns={2}
                                 renderItem={this.renderGridItem} />}
