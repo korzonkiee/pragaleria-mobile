@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import { ArtistItem } from '../../Components/ArtistItem';
@@ -94,10 +94,16 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
     }
 
     private renderArtist = ({ item, index }: { item: Artist, index: number }) =>
-        (<ArtistItem
-            index={index}
-            artist={item}
-            onPress={() => this.navigateToArtist(item.id.toString())} />)
+        (<TouchableOpacity style={{
+            flex: 1,
+            alignItems: 'stretch',
+            justifyContent: 'center',
+            marginBottom: 2
+        }} onPress={() => this.navigateToArtist(item.id.toString())}>
+            <ArtistItem
+                index={index}
+                artist={item} />
+        </TouchableOpacity>)
 
     private renderFooter = () => {
         if (this.props.artists.loading)

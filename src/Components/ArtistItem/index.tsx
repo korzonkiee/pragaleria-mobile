@@ -1,12 +1,11 @@
 import React from "react";
-import { ImageBackground, TouchableWithoutFeedback, View } from "react-native";
+import { ImageBackground, View } from "react-native";
 import AppText from "../AppText";
 import styles from "./styles";
 
 export interface ArtistItemProps {
     readonly index: number;
     readonly artist: Artist;
-    readonly onPress?: () => void;
 }
 
 export class ArtistItem extends React.PureComponent<ArtistItemProps> {
@@ -14,9 +13,7 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
         return this.props.artist.name.replace("/", "").split(' ').slice(1).join(' ');
     }
     render() {
-        return <TouchableWithoutFeedback
-            onPress={this.props.onPress}
-            style={styles.artistContainer}>
+        return (
             <View style={[styles.artistContainer, (this.props.index % 3) === 1 ? { marginLeft: 2, marginRight: 2 } : {}]}>
                 <ImageBackground
                     source={{
@@ -31,6 +28,6 @@ export class ArtistItem extends React.PureComponent<ArtistItemProps> {
                     </View>
                 </ImageBackground>
             </View>
-        </TouchableWithoutFeedback>
+        );
     }
 }
