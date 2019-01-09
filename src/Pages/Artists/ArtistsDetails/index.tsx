@@ -63,7 +63,15 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                     return 1;
                 return 0;
             }
-        ).filter(artwork => artwork.sold_price !== "0,00");
+        ).filter(artwork => {
+            if (artwork.title &&
+                artwork.sold_price &&
+                artwork.sold_price !== "0,00") {
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         const artistDescription = artist.data.description || "Brak opisu artysty";
 

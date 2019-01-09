@@ -5,7 +5,6 @@ import { Black, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import font from "../../Styles/Fonts";
 import { ArtistArtworks } from "./ArtistArtworks";
-import { ArtistStatistics } from "./ArtistStatistics";
 
 interface AristDetailsTabBarProps {
     readonly artist: ArtistDetails;
