@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions, View } from 'react-native';
-import { LineChart } from 'react-native-chart-kit';
+import { BarChart } from 'react-native-chart-kit';
 import { Text } from 'react-native-svg';
 import * as Nav from "react-navigation";
 import { DirtyWhite, LightBlack } from '../../../Resources/Colors';
@@ -9,7 +9,7 @@ import AppText from "../../AppText";
 
 
 
-class CustomChart extends LineChart {
+class CustomChart extends BarChart {
     renderVerticalLabels = config => {
         const { labels = [], width, height, paddingRight, paddingTop, horizontalOffset = 0 } = config
         const fontSize = 12
@@ -79,7 +79,6 @@ export class ArtistStatistics extends React.PureComponent<ArtistStatisticsProps 
                         borderRadius: 16,
                     }
                 }}
-                bezier
                 style={{
                     marginVertical: 16
                 }}
