@@ -14,7 +14,7 @@ interface CarouselState {
     readonly currentIndex: number;
 }
 
-export class CarouselWrapper extends React.PureComponent<CarouselProps & Nav.NavigationInjectedProps, CarouselState> {
+export class CarouselWrapper extends React.Component<CarouselProps & Nav.NavigationInjectedProps, CarouselState> {
     constructor(props: CarouselProps & Nav.NavigationInjectedProps) {
         super(props);
 
@@ -40,6 +40,7 @@ export class CarouselWrapper extends React.PureComponent<CarouselProps & Nav.Nav
                     }}
                     sliderWidth={width}
                     itemWidth={itemWidth}
+                    removeClippedSubviews={true}
                     onSnapToItem={(index) => this.setState({ currentIndex: index })}
                 />
             </View>
