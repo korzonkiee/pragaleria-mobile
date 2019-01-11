@@ -9,6 +9,7 @@ import About from './Pages/About';
 import Artists from './Pages/Artists';
 import ArtistDetails from './Pages/Artists/ArtistDetails';
 import ArtworkDetails from './Pages/ArtworkDetails';
+import Artworks from './Pages/Artworks';
 import Auctions from './Pages/Auctions';
 import AuctionDetails from './Pages/Auctions/AuctionsDetails';
 import Camera from './Pages/Camera';
@@ -24,6 +25,14 @@ import { responsiveFontSize } from './Styles/Dimensions';
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
+  [Routes.Artworks]: {
+    screen: Artworks,
+    navigationOptions: {
+      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Artworks")}</AppText>,
+      tabBarIcon: BottomIcon("picture"),
+      tabBarColor: colors.White
+    }
+  },
   [Routes.Artists]: {
     screen: Artists,
     navigationOptions: {
@@ -57,12 +66,13 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-    initialRouteName: Routes.Artists,
+    initialRouteName: Routes.Artworks,
     labeled: true
   });
 
 const AristsStackNavigator = createStackNavigator({
   ["Main"]: MainStack,
+  [Routes.Artworks]: Artworks,
   [Routes.ArtistDetails]: ArtistDetails,
   [Routes.AuctionDetails]: AuctionDetails,
   [Routes.ExhibitionDetails]: ExhibtionDetails,

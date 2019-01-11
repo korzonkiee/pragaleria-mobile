@@ -1,5 +1,6 @@
 export default {
     "BottomNavigation.Auctions": "Aukcje",
+    "BottomNavigation.Artworks": "Oferta",
     "BottomNavigation.Exhibitions": "Wystawy",
     "BottomNavigation.Artists": "Artyści",
     "BottomNavigation.About": "O nas",
