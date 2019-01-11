@@ -74,6 +74,7 @@ export default {
     "ArtistDetails.Available": "Dostępne",
     "ArtistDetails.Sold": "Sprzedane",
     "ArtistDetails.Statistics": "Statystyki",
+    "ArtistDetails.Auctions": "Aukcje",
     "ArtistDetails.NoArtworksAvailable": "Brak dostępnych dzieł",
 
     "Modal.Close": "ZAMKNIJ",

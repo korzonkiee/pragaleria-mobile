@@ -16,6 +16,7 @@ export class AuctionsTabBar extends React.PureComponent<AuctionsTabBarProps & Na
         const tabBarStyle = {
             backBehavior: 'none',
             tabBarOptions: {
+                upperCaseLabel: false,
                 labelStyle: {
                     ...font(),
                     color: Black

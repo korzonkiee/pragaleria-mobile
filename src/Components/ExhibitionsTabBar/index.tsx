@@ -17,6 +17,7 @@ export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProp
             backBehavior: 'none',
             optimizationsEnabled: true,
             tabBarOptions: {
+                upperCaseLabel: false,
                 labelStyle: {
                     ...font(),
                     color: Black

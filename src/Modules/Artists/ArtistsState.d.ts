@@ -35,6 +35,7 @@ declare interface ArtistDetails {
     readonly description: string;
     readonly slug: string;
     readonly artworks: Artwork[];
+    readonly catalogs: Auction[];
     readonly image_original: string;
     readonly image_thumbnail: string;
     readonly image_large: string;

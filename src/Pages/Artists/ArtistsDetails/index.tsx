@@ -73,6 +73,8 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
             }
         });
 
+        const fetauredCatalogs = artist.data.catalogs;
+
         const artistDescription = artist.data.description || "Brak opisu artysty";
 
         return (
@@ -92,6 +94,7 @@ export class ArtistDetails extends Component<ArtistsDetailsProps & Nav.Navigatio
                         artist={artist.data}
                         availableArtworks={availableArtworks}
                         soldArtworks={soldArtworks}
+                        fetauredCatalogs={fetauredCatalogs}
                         statisticsArtworks={statisticsArtworks} />
                 </>}
             </AppContainer>
