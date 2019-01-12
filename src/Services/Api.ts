@@ -1,8 +1,12 @@
-import Logger from "./Logger";
-import AxiosClient from "./AxiosClient";
 import AxiosMockAdapter from "axios-mock-adapter";
+import AxiosClient from "./AxiosClient";
+import Logger from "./Logger";
 
 const TAG: string = "API";
+
+export async function getArtworks(tag: Tag, page: number): Promise<Artwork[] | null> {
+    return await get<Artwork[]>(`artworks?page=${page}&tags=${tag === Tag.none ? "" : tag}`);
+}
 
 export async function getArtists(page?: number): Promise<Artist[] | null> {
     return await get<Artist[]>(`authors?page=${page ? page : 0}&size=40`);

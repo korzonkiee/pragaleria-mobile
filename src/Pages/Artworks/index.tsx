@@ -10,19 +10,12 @@ import { responsiveFontSize } from '../../Styles/Dimensions';
 import styles from './styles';
 
 export interface ArtworksProps {
+    readonly artworks: ArtworksData;
+    readonly getArtworks: (tag: Tag) => void;
 }
 
 export interface ArtworksState {
-    selectedTag: Tag | null;
-}
-
-enum Tag {
-    paint = 12,
-    sculpture = 145,
-    workshop = 231,
-    cyber = 233,
-    vector = 235,
-    ceramics = 1385
+    selectedTag: Tag;
 }
 
 interface Pill {
@@ -116,8 +109,14 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         super(props);
 
         this.state = {
-            selectedTag: null
+            selectedTag: Tag.none
         };
+    }
+
+    componentDidMount() {
+        this.props.getArtworks(
+            this.state.selectedTag
+        )
     }
 
     render() {
@@ -202,7 +201,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         let selectedTag = this.state.selectedTag;
 
         if (selectedTag === pill.key) {
-            selectedTag = null;
+            selectedTag = Tag.none;
         } else {
             selectedTag = pill.key;
         }
