@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { Black, DirtyWhite, GreyLight, White } from '../../Resources/Colors';
+import { Black, White } from '../../Resources/Colors';
 
 export default StyleSheet.create({
     container: {
-        backgroundColor: DirtyWhite,
+        backgroundColor: White,
         width: "100%",
         height: "100%"
     },
@@ -12,14 +12,15 @@ export default StyleSheet.create({
         flexBasis: 'auto',
         flexGrow: 0,
         flexShrink: 0,
+        elevation: 2,
         display: "flex",
         flexDirection: 'row'
     },
     pill: {
-        backgroundColor: GreyLight,
+        backgroundColor: White,
         shadowColor: Black,
         shadowRadius: 5,
-        elevation: 1,
+        elevation: 2,
         shadowOffset: { width: 0, height: 10 },
         marginVertical: 8,
         paddingVertical: 4,
