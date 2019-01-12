@@ -18,6 +18,7 @@
     "react-native-fade-in-image": "^1.4.1",
     "react-native-fade-in-view": "^1.0.5",
     "react-native-gesture-handler": "^1.0.10",
+    "react-native-image-progress": "^1.1.1",
     "react-native-mail": "^3.0.7",
     "react-native-maps": "^0.22.1",
     "react-native-material-textfield": "^0.12.0",

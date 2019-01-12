@@ -5,10 +5,10 @@
 
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {Animated, Dimensions, Image, PanResponder, Platform, TouchableOpacity, View} from 'react-native';
-import {Black, LightBlack} from '../../Resources/Colors';
+import {Animated, Dimensions, PanResponder, Platform, TouchableOpacity, View} from 'react-native';
 import {styles} from "./styles";
-
+import ProgressBar from 'react-native-progress/Bar';
+import Image from 'react-native-image-progress';
 
 export default class Draggable extends Component {
     static propTypes = {
@@ -117,7 +117,7 @@ export default class Draggable extends Component {
 
     render() {
         const {pressDrag, longPressDrag, pressInDrag, pressOutDrag, renderWidth, renderHeight, frame, imageSource} = this.props;
-        const touchableContent = <Image style={this._dragItemCss()} source={imageSource}/>
+        const touchableContent = <Image indicator={ProgressBar} style={this._dragItemCss()} source={imageSource}/>
         let currStyle = frame ? [
             styles.imageFrame, {
                 width: renderWidth + 2,

@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     frameContainer: {
         position: 'absolute',
         top: 0,
-        left: 20,
+        left: 40,
         right: 0,
         bottom: 40,
         justifyContent: 'flex-end',
@@ -54,12 +54,6 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
 
-    },
-    distanceText: {
-        position: 'absolute',
-        right: 10,
-        top: 500,
-        color: '#000'
     },
     imageFrame: {
         backgroundColor: LightBlack,
