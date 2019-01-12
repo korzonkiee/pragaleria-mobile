@@ -3,62 +3,53 @@ import { ScrollView, View } from 'react-native';
 import AppContainer from '../../Components/AppContainer';
 import AppText from '../../Components/AppText';
 import SearchBar from '../../Components/SearchBar';
-import { DirtyWhite } from '../../Resources/Colors';
+import { White } from '../../Resources/Colors';
+import styles from './styles';
 
 export interface ArtworksProps {
 }
 
-// # 12 malarstwo
-//         # 145 rzezba
-//         # 231 grafika-warsztatowa
-//         # 233 grafika-cyfrowa
-//         # 235 grafika-wektorowa
-//         # 1385 ceramika
-const tags = {
-    paint: [12, 'Malarstwo'],
-    sculpture: [145, 'Rzeźba'],
-    workshop: [233, 'Grafika Warsztatowa'],
-    cyber: [233, 'Grafika Cyfrowa'],
-    vector: [235, 'Grafika Wektorowa'],
-    ceramics: [1385, 'Ceramika'],
+enum Tag {
+    paint = 12,
+    sculpture = 145,
+    workshop = 231,
+    cyber = 233,
+    vector = 235,
+    ceramics = 1385
+}
+
+interface TagItem {
+    key: Tag,
+    value: string
 };
+
+var tags: TagItem[] = [
+    { key: Tag.paint, value: "Malarstwo" },
+    { key: Tag.sculpture, value: "Rzeźba" },
+    { key: Tag.workshop, value: "Grafika Warsztatowa" },
+    { key: Tag.cyber, value: "Grafika Cyfrowa" },
+    { key: Tag.vector, value: "Grafika Wektorwa" },
+    { key: Tag.ceramics, value: "Ceramika" },
+]
 
 export class Artworks extends Component<ArtworksProps> {
     render() {
         return (
-            <AppContainer style={{
-                backgroundColor: DirtyWhite,
-                width: "100%",
-                height: "100%"
-            }}>
+            <AppContainer style={styles.container}>
                 <SearchBar onTextChanged={() => { }} />
-                <ScrollView style={{
-                    backgroundColor: 'green',
-                    flexBasis: 'auto',
-                    flexGrow: 0,
-                    flexShrink: 0,
-                    display: "flex",
-                    flexDirection: 'row'
-                }} horizontal={true}>
-                    {Object.keys(tags).map(key => {
-                        return <View key={tags[key][0]} style={{
-                            backgroundColor: 'yellow',
-                            marginVertical: 8,
-                            paddingVertical: 4,
-                            marginHorizontal: 4,
-                            paddingHorizontal: 8,
-                            borderRadius: 20
-                        }}>
-                            <AppText style={{
-                                color: 'black'
-                            }}>
-                                {tags[key][1]}
+                <ScrollView style={styles.pillsContainer}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}>
+                    {tags.map(pill => {
+                        return <View key={pill.key} style={styles.pill}>
+                            <AppText style={styles.pillText}>
+                                {pill.value}
                             </AppText>
                         </View>
                     })}
                 </ScrollView>
                 <View style={{
-                    backgroundColor: 'blue',
+                    backgroundColor: White,
                     flex: 1
                 }}>
 
