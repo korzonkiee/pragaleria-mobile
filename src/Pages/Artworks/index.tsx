@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { ScrollView, TouchableWithoutFeedback, View } from 'react-native';
+import { ScrollView, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import AppText from '../../Components/AppText';
 import SearchBar from '../../Components/SearchBar';
-import { DirtyWhite } from '../../Resources/Colors';
+import { Black, DirtyWhite, LightGrayHidden, White } from '../../Resources/Colors';
 import styles from './styles';
 
 export interface ArtworksProps {
 }
 
 export interface ArtworksState {
-    selectedTags: Set<Tag>;
+    selectedTag: Tag | null;
 }
 
 enum Tag {
@@ -42,7 +42,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         super(props);
 
         this.state = {
-            selectedTags: new Set<Tag>()
+            selectedTag: null
         };
     }
 
@@ -55,8 +55,8 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                     showsHorizontalScrollIndicator={false}>
                     {tags.map(pill => {
                         return (<TouchableWithoutFeedback key={pill.key} onPress={() => this.handlePillPress(pill)}>
-                            <View style={styles.pill}>
-                                <AppText style={styles.pillText}>
+                            <View style={[styles.pill, this.getSelectedPillContainerStyle(pill)]}>
+                                <AppText style={[styles.pillText, this.getSelectedPillTextStyle(pill)]}>
                                     {pill.value}
                                 </AppText>
                             </View>
@@ -75,16 +75,46 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private handlePillPress(pill: Pill) {
-        const selectedTags = this.state.selectedTags;
+        let selectedTag = this.state.selectedTag;
 
-        if (selectedTags.has(pill.key)) {
-            selectedTags.delete(pill.key);
+        if (selectedTag === pill.key) {
+            selectedTag = null;
         } else {
-            selectedTags.add(pill.key);
+            selectedTag = pill.key;
         }
 
         this.setState({
-            selectedTags: selectedTags
+            selectedTag: selectedTag
         });
+    }
+
+    private getSelectedPillContainerStyle(pill: Pill): StyleProp<ViewStyle> {
+        const isSelected = this.state.selectedTag === pill.key;
+
+        if (isSelected) {
+            return {
+                backgroundColor: LightGrayHidden,
+                elevation: 0
+            };
+        } else {
+            return {
+                backgroundColor: White,
+                elevation: 2
+            };
+        }
+    }
+
+    private getSelectedPillTextStyle(pill: Pill): StyleProp<TextStyle> {
+        const isSelected = this.state.selectedTag === pill.key;
+
+        if (isSelected) {
+            return {
+                color: Black
+            };
+        } else {
+            return {
+                color: Black
+            };
+        }
     }
 }
