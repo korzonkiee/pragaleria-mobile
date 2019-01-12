@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Black, White } from '../../Resources/Colors';
+import { responsiveHeight } from '../../Styles/Dimensions';
 
 export default StyleSheet.create({
     container: {
@@ -30,5 +31,15 @@ export default StyleSheet.create({
     },
     pillText: {
         color: 'black'
-    }
+    },
+    artworkFullResImage: {
+        flex: 1,
+        height: responsiveHeight(15),
+        alignSelf: 'stretch'
+    },
+    artworkFullImage: {
+        flex: 1,
+        width: undefined,
+        height: undefined
+    },
 })
