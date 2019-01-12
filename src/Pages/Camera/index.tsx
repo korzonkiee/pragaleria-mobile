@@ -33,7 +33,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             displayingCameraPreview: true,
             appState: AppState.currentState,
             wallDistance: 200,
-            tutorial: true
+            tutorial: true,
+            frame: true
         }
     }
 
@@ -67,27 +68,34 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         // console.log("Area: ", imageWidth * imageHeight);
 
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
-            imageSource={{ uri: this.props.imageUrl }}
-            offsetX={imageWidth / 2} offsetY={imageHeight / 2}
+                               imageSource={{uri: this.props.imageUrl}} offsetX={imageWidth / 2}
+                               offsetY={imageHeight / 2} frame={this.state.frame}
         />;
+
 
         this.setState({ image: image })
     }
 
     render() {
-        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff" />;
-        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30}
-            color="#ffffff" />;
+        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
+        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30} color="#ffffff"/>;
+        let hideShowFrameIcon = <Icon name="document" size={30} color="#ffffff"/>;
+
         let takePhotoButton = <TouchableOpacity
-            hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
-            onPress={this.takePicture.bind(this)}
-        >
+            hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
+            onPress={this.takePicture.bind(this)}>
             {takePictureIcon}
         </TouchableOpacity>;
         let goBackButton = <TouchableOpacity
             onPress={() => this.goBackPreview()}>
             {takePictureAgainIcon}
         </TouchableOpacity>;
+
+        let hideShowFrameButton = <TouchableOpacity
+            onPress={() => this.hideShowFrame()}>
+            {hideShowFrameIcon}
+        </TouchableOpacity>;
+
         if (this.state.tutorial) {
             return (
                 <RNModal
@@ -205,6 +213,9 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         </AppText>
                     </View>
                     {!this.state.displayingCameraPreview && this.state.image}
+                    <View style={styles.frameContainer}>
+                        {!this.state.displayingCameraPreview && hideShowFrameButton}
+                    </View>
                     <View style={styles.captureContainer}>
                         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
                     </View>
@@ -255,6 +266,13 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         AppState.addEventListener('change', this._handleAppStateChange);
 
     };
+
+    hideShowFrame() {
+        this.setState(prevState => ({frame: !prevState.frame}));
+        Orientation.getOrientation((_, orientation) => {
+            this.setUpImage(orientation);
+        });
+    }
 
     getWindowSize(orientation: string) {
         let windowWidth: number;
