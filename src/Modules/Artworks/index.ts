@@ -4,6 +4,7 @@ import * as Api from "../../Services/Api";
 import Logger from "../../Services/Logger";
 import { endTask, startTask } from "../Async";
 
+const appendArtworksForTag = createAction("ARTWORKS/APPEND_ARTWORKS_FOR_TAG");
 const setArtworksForTag = createAction("ARTWORKS/SET_ARTWORKS_FOR_TAG");
 const setArtworksLoading = createAction("ARTWORKS/SET_ARTWORKS_LOADING");
 const setSelectedTag = createAction("ARTWORKS/SET_SELECTED_TAG");
@@ -37,7 +38,7 @@ export function searchArtworksForTag(keyword: string, tag: number) {
 
 export function clearFilteredArtworks() {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {
-        dispatch(setFilteredArtworks([]));
+        dispatch(setFilteredArtworks(null));
     }
 }
 
@@ -68,7 +69,7 @@ export function loadMoreArtworksForTag(tag: number) {
             const allLoaded = artworks && artworks.length === 0;
 
             console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
-            dispatch(setArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
+            dispatch(appendArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
         }
         catch (e) {
             console.log(e);
@@ -99,6 +100,7 @@ export function getArtworksForTag(tag: number) {
         }
 
         if (taggedArtworks && taggedArtworks.data) {
+            dispatch(setArtworksForTag({ tag: tag, page: taggedArtworks.page, data: taggedArtworks.data }));
             return;
         }
 
@@ -125,7 +127,7 @@ export function getArtworksForTag(tag: number) {
 }
 
 export const artworkReducers: ReducerMap<AppState, any> = {
-    [setArtworksForTag.toString()](state, { payload }) {
+    [appendArtworksForTag.toString()](state, { payload }) {
         if (payload) {
             return {
                 ...state,
@@ -144,6 +146,26 @@ export const artworkReducers: ReducerMap<AppState, any> = {
 
         return state;
     },
+    [setArtworksForTag.toString()](state, { payload }) {
+        if (payload) {
+            return {
+                ...state,
+                selectedTag: payload.tag,
+                taggedArtworks: {
+                    ...state.taggedArtworks,
+                    [payload.tag]: {
+                        page: payload.page,
+                        data: payload.data,
+                        loading: false,
+                        allLoaded: payload.allLoaded
+                    }
+                }
+            }
+        }
+
+        return state;
+    },
+
     [setSelectedTag.toString()](state, { payload }) {
         return {
             ...state,
