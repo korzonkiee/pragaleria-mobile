@@ -23,6 +23,7 @@ export function searchArtworksForTag(keyword: string, tag: number) {
             if (artworks === null) {
                 dispatch(setFilteredArtworksError(true));
             } else {
+                dispatch(setSelectedTag(tag));
                 dispatch(setFilteredArtworks(artworks));
             }
         }

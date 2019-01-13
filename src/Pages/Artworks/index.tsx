@@ -106,6 +106,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
 
     private renderContent() {
         let content = null;
+        console.log(this.state, this.props)
         if (this.state.searching && this.props.filteredArtworks.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
@@ -122,6 +123,9 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         }
         else if (this.props.artworks && !this.props.artworks.data && !this.props.artworks.loading) {
             content = <DataNotFound message={l("Artworks.NotFound")} />
+        }
+        else if (this.state.selectedTag && this.state.selectedTag !== 0 && this.state.selectedTag !== this.props.selectedTag) {
+            content = <ArtworksPlaceholder />
         }
         else if ((this.props.artworks && this.props.artworks.data) ||
             (this.state.searching && this.props.filteredArtworks.data)) {
