@@ -1,19 +1,22 @@
 import { connect } from "react-redux";
-import { AuctionsProps, Auctions } from "./Auctions/index";
 import { ThunkDispatch } from "../Helpers/StateHelpers";
-import { getAuctions } from "../Modules/Auctions";
+import { getAuctions, getAuctionsForCategory } from "../Modules/Auctions";
+import { Auctions, AuctionsProps } from "./Auctions/index";
 
 export default connect(
     (state: AppState): StateProps<AuctionsProps> => {
         return {
-            auctions: state.auctions
-        }
+            auctions: state.categorizedAuctions[state.selectedCategory]
+        };
     },
     (dispatch: ThunkDispatch): DispatchProps<AuctionsProps> => {
         return {
-            getAuctions () {
+            getAuctions() {
                 dispatch(getAuctions())
-            }
+            },
+            getAuctionsForCategory(category: number) {
+                dispatch(getAuctionsForCategory(category))
+            },
         };
     }
 )(Auctions);

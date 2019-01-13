@@ -28,6 +28,10 @@ export async function getExhibitions(): Promise<Exhibition[] | null> {
     return await get<Exhibition[]>("exhibitions");
 }
 
+export async function getAuctionsForCategory(category: number): Promise<Auction[] | null> {
+    return await get<Auction[]>(`auctions?category=${category}`);
+}
+
 export async function getAuctions(): Promise<Auction[] | null> {
     return await get<Auction[]>("auctions");
 }

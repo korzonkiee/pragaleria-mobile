@@ -66,7 +66,7 @@ const MainStack = createMaterialBottomTabNavigator({
     }
   },
 }, {
-    initialRouteName: Routes.Artworks,
+    initialRouteName: Routes.Auctions,
     labeled: true
   });
 

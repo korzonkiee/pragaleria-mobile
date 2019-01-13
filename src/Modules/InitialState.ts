@@ -20,6 +20,8 @@ export const initialState: AppState = {
         data: [],
         loading: false
     },
+    categorizedAuctions: {},
+    selectedCategory: 0,
     exhibitions: {
         data: [],
         loading: false
