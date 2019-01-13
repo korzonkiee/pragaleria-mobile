@@ -1,5 +1,6 @@
 import {StyleSheet} from "react-native";
 import {DefaultAppFont} from "../../Styles/Fonts";
+import {Black, LightBlack} from "../../Resources/Colors";
 
 
 export const styles = StyleSheet.create({
@@ -21,6 +22,15 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         alignSelf: 'center',
         margin: 20
+    },
+    frameContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 40,
+        right: 0,
+        bottom: 33,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
     },
     captureContainer: {
         position: 'absolute',
@@ -45,10 +55,12 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-    distanceText: {
-        position: 'absolute',
-        right: 10,
-        top: 500,
-        color: '#000'
-    },
+    imageFrame: {
+        backgroundColor: LightBlack,
+        elevation: 10,
+        shadowOffset: {width: 5, height: 15},
+        shadowColor: Black,
+        shadowOpacity: 0.8,
+        shadowRadius: 15
+    }
 });

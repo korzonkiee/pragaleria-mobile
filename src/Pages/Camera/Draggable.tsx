@@ -4,10 +4,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Animated, Dimensions, Image, PanResponder, Platform, TouchableOpacity, View } from 'react-native';
-import { Black, LightBlack } from '../../Resources/Colors';
-
+import React, {Component} from 'react';
+import {Animated, Dimensions, PanResponder, Platform, TouchableOpacity, View} from 'react-native';
+import {styles} from "./styles";
+import ProgressBar from 'react-native-progress/Bar';
+import Image from 'react-native-image-progress';
 
 export default class Draggable extends Component {
     static propTypes = {
@@ -33,8 +34,8 @@ export default class Draggable extends Component {
         pressOutDrag: PropTypes.func,
         z: PropTypes.number,
         x: PropTypes.number,
-        y: PropTypes.number
-
+        y: PropTypes.number,
+        frame: PropTypes.bool
     };
 
     componentWillMount() {
@@ -48,10 +49,10 @@ export default class Draggable extends Component {
 
     constructor(props, defaultProps) {
         super(props, defaultProps);
-        const { pressDragRelease, reverse, onMove } = props;
+        const {pressDragRelease, reverse, onMove} = props;
         this.state = {
             pan: new Animated.ValueXY(),
-            _value: { x: 0, y: 0 }
+            _value: {x: 0, y: 0}
         };
 
         this.panResponder = PanResponder.create({
@@ -59,14 +60,14 @@ export default class Draggable extends Component {
             onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
             onPanResponderGrant: (e, gestureState) => {
                 if (reverse == false) {
-                    this.state.pan.setOffset({ x: this.state._value.x, y: this.state._value.y });
-                    this.state.pan.setValue({ x: 0, y: 0 });
+                    this.state.pan.setOffset({x: this.state._value.x, y: this.state._value.y});
+                    this.state.pan.setValue({x: 0, y: 0});
                 }
             },
             onPanResponderMove: Animated.event([null, {
                 dx: this.state.pan.x,
                 dy: this.state.pan.y
-            }], { listener: onMove }),
+            }], {listener: onMove}),
             onPanResponderRelease: (e, gestureState) => {
                 if (pressDragRelease)
                     pressDragRelease(e, gestureState);
@@ -80,7 +81,7 @@ export default class Draggable extends Component {
 
     _positionCss = () => {
         let Window = Dimensions.get('window');
-        const { renderWidth, renderHeight, offsetX, offsetY, x, y, z } = this.props;
+        const {renderWidth, renderHeight, offsetX, offsetY, x, y, z} = this.props;
         return Platform.select({
             ios: {
                 zIndex: z != null ? z : 999,
@@ -98,7 +99,7 @@ export default class Draggable extends Component {
         });
     };
     _dragItemCss = () => {
-        const { renderWidth, renderHeight } = this.props;
+        const {renderWidth, renderHeight} = this.props;
         return {
             width: renderWidth,
             height: renderHeight,
@@ -106,38 +107,30 @@ export default class Draggable extends Component {
             marginTop: 1
         };
     };
-    _getTextOrImage = () => {
-        const { imageSource } = this.props;
-        return (<Image style={this._dragItemCss()} source={imageSource} />);
-    };
 
     reversePosition = () => {
         Animated.spring(
             this.state.pan,
-            { toValue: { x: 0, y: 0 } }
+            {toValue: {x: 0, y: 0}}
         ).start();
     };
 
     render() {
-        const touchableContent = this._getTextOrImage();
-        const { pressDrag, longPressDrag, pressInDrag, pressOutDrag, renderWidth, renderHeight } = this.props;
-
+        const {pressDrag, longPressDrag, pressInDrag, pressOutDrag, renderWidth, renderHeight, frame, imageSource} = this.props;
+        const touchableContent = <Image indicator={ProgressBar} style={this._dragItemCss()} source={imageSource}/>
+        let currStyle = frame ? [
+            styles.imageFrame, {
+                width: renderWidth + 2,
+                height: renderHeight + 2,
+            }
+        ] : {width: renderWidth + 2, height: renderHeight + 2};
         return (
             <View style={this._positionCss()}>
                 <Animated.View
                     {...this.panResponder.panHandlers}
                     style={[this.state.pan.getLayout()]}>
                     <TouchableOpacity
-                        style={{
-                            width: renderWidth + 2,
-                            height: renderHeight + 2,
-                            backgroundColor: LightBlack,
-                            elevation: 10,
-                            shadowOffset: { width: 5, height: 15 },
-                            shadowColor: Black,
-                            shadowOpacity: 0.8,
-                            shadowRadius: 15
-                        }}
+                        style={currStyle}
                         onPress={pressDrag}
                         onLongPress={longPressDrag}
                         onPressIn={pressInDrag}

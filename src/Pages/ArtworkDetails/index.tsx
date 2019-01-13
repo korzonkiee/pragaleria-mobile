@@ -62,7 +62,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
         }
     }
 
-    private navigateCamera = (imageUrl: string, imageDimension: [number, number]) => {
+    private navigateToCamera = (imageUrl: string, imageDimension: [number, number]) => {
         this.props.navigation.push(Routes.Camera, {
             imageUrl: imageUrl,
             imageDimension: imageDimension
@@ -122,7 +122,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                             paddingHorizontal: 24,
                             borderRadius: 10
                         }}
-                        onPress={() => this.navigateCamera(artwork!.image_original, artwork!.meta.dimension)}>
+                        onPress={() => this.navigateToCamera(artwork!.image_original, artwork!.meta.dimension)}>
                         <View style={{
                             flexDirection: 'row'
                         }}>
