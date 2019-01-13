@@ -5,6 +5,8 @@ export default {
     "BottomNavigation.Artists": "Artyści",
     "BottomNavigation.About": "O nas",
 
+    "Artworks.NotFound": "Nie znaleziono dzieł",
+
     "Auctions.Incoming": "Przyszłe",
     "Auctions.Closed": "Zamknięte",
     "Auctions.NoIncomingAuctions": "Brak nadchodzących aukcji",

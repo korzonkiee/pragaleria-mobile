@@ -19,7 +19,7 @@ export interface ArtistsProps {
 }
 
 interface ArtistsState {
-    readonly filtering: boolean;
+    readonly searching: boolean;
     readonly keyword: string;
 }
 
@@ -28,7 +28,7 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
         super(props);
 
         this.state = {
-            filtering: false,
+            searching: false,
             keyword: "",
         };
     }
@@ -54,22 +54,22 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
             content = (<DataNotFound
                 message={l("Common.GenericErrorMessageWithRetry")}
                 retry={this.props.getArtists} />);
-        } else if (this.state.filtering && this.props.filteredArtists.errorOccured) {
+        } else if (this.state.searching && this.props.filteredArtists.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
                 retry={() => this.searchForArtists(this.state.keyword)} />);
-        } else if (this.state.filtering && this.props.filteredArtists.data.length === 0) {
+        } else if (this.state.searching && this.props.filteredArtists.data.length === 0) {
             content = (<DataNotFound
                 message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)}
                 retry={() => { }} />);
         } else {
             content = (<FlatList
-                data={this.state.filtering ? this.props.filteredArtists.data : artistsData}
+                data={this.state.searching ? this.props.filteredArtists.data : artistsData}
                 keyExtractor={(item, _) => item.id.toString()}
                 renderItem={this.renderArtist}
                 numColumns={3}
                 ListFooterComponent={this.renderFooter()}
-                onEndReached={this.state.filtering ? undefined : this.props.getArtists}
+                onEndReached={this.state.searching ? undefined : this.props.getArtists}
                 onEndReachedThreshold={3} />);
         }
 
@@ -82,13 +82,13 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
     private searchForArtists = (text: string) => {
         if (text.length > 0) {
             this.setState({
-                filtering: true,
+                searching: true,
                 keyword: text
             });
             this.props.searchArists(text);
         } else {
             this.setState({
-                filtering: false
+                searching: false
             });
         }
     }

@@ -7,8 +7,40 @@ import { endTask, startTask } from "../Async";
 const setArtworksForTag = createAction("ARTWORKS/SET_ARTWORKS_FOR_TAG");
 const setArtworksLoading = createAction("ARTWORKS/SET_ARTWORKS_LOADING");
 const setSelectedTag = createAction("ARTWORKS/SET_SELECTED_TAG");
+const setFilteredArtworks = createAction("ARTWORKS/SET_FILTERED_ARTWORKS");
+const setFilteredArtworksError = createAction("ARTWORKS/SET_FILTERED_ARTWORKS_ERROR");
 
 const TAG = "ARTWORKS";
+export function searchArtworksForTag(keyword: string, tag: number) {
+    return async (dispatch: Dispatch<any>, getState: () => AppState) => {
+        dispatch(startTask());
+
+        try {
+            console.log(`Searching artworks for keyword: ${keyword} for tag ${tag}.`);
+
+            const artworks = await Api.searchArtistsForTag(keyword, tag);
+            if (artworks === null) {
+                dispatch(setFilteredArtworksError(true));
+            } else {
+                dispatch(setFilteredArtworks(artworks));
+            }
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't search for artworks for tag ${tag} by keyword ${keyword}. ` +
+                `Error: ${e}`);
+        }
+        finally {
+            dispatch(endTask());
+        }
+    }
+}
+
+export function clearFilteredArtworks() {
+    return (dispatch: Dispatch<any>, getState: () => AppState) => {
+        dispatch(setFilteredArtworks([]));
+    }
+}
+
 export function loadMoreArtworksForTag(tag: number) {
     return async (dispatch: Dispatch<any>, getState: () => AppState) => {
         const taggedArtworks = getState().taggedArtworks[tag];
@@ -113,6 +145,24 @@ export const artworkReducers: ReducerMap<AppState, any> = {
         return {
             ...state,
             selectedTag: payload
+        }
+    },
+    [setFilteredArtworks.toString()](state, { payload }) {
+        return {
+            ...state,
+            filteredArtworks: {
+                data: payload,
+                errorOccured: false
+            }
+        }
+    },
+    [setFilteredArtworksError.toString()](state, { payload }) {
+        return {
+            ...state,
+            filteredArtworks: {
+                data: [],
+                errorOccured: payload
+            }
         }
     },
     [setArtworksLoading.toString()](state, { payload }) {
