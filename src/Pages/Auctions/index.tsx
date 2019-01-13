@@ -12,6 +12,7 @@ import { l } from '../../Services/Language';
 export interface AuctionsProps {
     readonly auctions: AuctionsData;
     readonly getAuctions: () => void;
+    readonly getAuctionsForCategory: (category: number) => void;
 }
 
 interface AuctionsState {
@@ -21,8 +22,8 @@ interface AuctionsState {
 
 const pills: Pill[] = [
     { key: 1, value: "Sztuka Młoda" },
-    { key: 2, value: "Sztuka Młoda" },
-    { key: 3, value: "Sztuka Współczesnej" },
+    { key: 2, value: "Sztuka Aktualna" },
+    { key: 3, value: "Sztuka Współczesna" },
     { key: 4, value: "Design" },
     { key: 5, value: "Malarstwo i Design" },
     { key: 6, value: "Wakacyjna" },
@@ -34,12 +35,14 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
     }
 
     componentDidMount() {
-        if (!this.props.auctions.loading) {
-            this.props.getAuctions();
-        }
+        this.props.getAuctionsForCategory(0);
     }
 
     render() {
+        if (!this.props.auctions) {
+            return null;
+        }
+
         const auctionsData = this.props.auctions.data;
 
         // Placeholder
@@ -76,6 +79,6 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
     }
 
     private onPillPressed = (pill: Pill) => {
-        console.log(pill);
+        this.props.getAuctionsForCategory(pill.key);
     }
 }

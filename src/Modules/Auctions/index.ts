@@ -5,9 +5,23 @@ import Logger from "../../Services/Logger";
 import { endTask, startTask } from "../Async";
 
 const setAuctions = createAction("AUCTIONS/SET_AUCTIONS");
+const setAuctionsForCategory = createAction("AUCTIONS/SET_AUCTIONS_FOR_CATEGORY");
 const setAuctionsLoading = createAction("AUCTIONS/SET_AUCTIONS_LOADING");
 
 const TAG = "AUCTIONS";
+
+export function getAuctionsForCategory(category: number) {
+    return async (dispatch: Dispatch<any>, _: any) => {
+        try {
+            const auctions = await Api.getAuctionsForCategory(category);
+            dispatch(setAuctionsForCategory({ category: category, data: auctions }));
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't fetch auctions for category ${category}. ` +
+                `Error: ${e}`);
+        }
+    }
+}
 
 export function getAuctions() {
     return async (dispatch: Dispatch<any>, getState: () => AppState) => {
@@ -47,6 +61,19 @@ export const auctionsReducers: ReducerMap<AppState, any> = {
         }
 
         return state;
+    },
+    [setAuctionsForCategory.toString()](state, { payload }) {
+        return {
+            ...state,
+            selectedCategory: [payload.category],
+            categorizedAuctions: {
+                ...state.categorizedAuctions,
+                [payload.category]: {
+                    data: payload.data,
+                    loading: false
+                }
+            }
+        }
     },
     [setAuctionsLoading.toString()](state, action) {
         if (action.payload !== undefined) {
