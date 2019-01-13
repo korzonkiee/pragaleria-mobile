@@ -21,9 +21,8 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
         const tabBarStyle = {
             backBehavior: 'none',
             optimizationsEnabled: true,
-            scrollEnabled: true,
             tabBarOptions: {
-                scrollEnabled: true,
+                scrollEnabled: false,
                 upperCaseLabel: false,
                 labelStyle: {
                     ...font(),
@@ -55,6 +54,10 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
 
         if (this.props.fetauredCatalogs.length > 1) {
             pages[l("ArtistDetails.Auctions")] = () => <ArtistAuctions navigation={this.props.navigation} auctions={this.props.fetauredCatalogs} />;
+        }
+
+        if (Object.keys(pages).length > 2) {
+            tabBarStyle.tabBarOptions.scrollEnabled = true;
         }
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));

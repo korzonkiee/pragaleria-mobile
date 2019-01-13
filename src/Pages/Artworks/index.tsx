@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList, Image, ScrollView, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
-import FadeIn from "react-native-fade-in-image";
+import FadeIn from 'react-native-fade-in-image';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import AppText from '../../Components/AppText';
@@ -73,8 +73,6 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     render() {
-        console.log("Render");
-
         return (
             <AppContainer style={styles.container}>
                 <SearchBar onTextChanged={this.searchForArtworks}
@@ -106,19 +104,26 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
 
     private renderContent() {
         let content = null;
+
         if (this.state.searching && this.props.filteredArtworks.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
-                retry={() => this.props.searchForArtworks(this.state.keyword, this.props.selectedTag)} />);
+                retry={() => this.props.searchForArtworks(this.state.keyword, this.state.selectedTag)} />);
+        }
+        else if (this.state.searching && this.props.filteredArtworks.data === null) {
+            content = <ArtworksPlaceholder />
         }
         else if (this.state.searching && this.props.filteredArtworks.data.length === 0) {
-            content = <ArtworksPlaceholder />
+            content = <DataNotFound message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)} />
         }
         else if (this.props.artworks && !this.props.artworks.data && this.props.artworks.loading) {
             content = <ArtworksPlaceholder />
         }
         else if (this.props.artworks && !this.props.artworks.data && !this.props.artworks.loading) {
             content = <DataNotFound message={l("Artworks.NotFound")} />
+        }
+        else if (this.state.selectedTag && this.state.selectedTag !== 0 && this.state.selectedTag !== this.props.selectedTag) {
+            content = <ArtworksPlaceholder />
         }
         else if ((this.props.artworks && this.props.artworks.data) ||
             (this.state.searching && this.props.filteredArtworks.data)) {
@@ -180,7 +185,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private navigateToArtwork = (artwork: Artwork) => {
-        console.log(`Navigating to artwork ${artwork.id}`);
+        // console.log(`Navigating to artwork ${artwork.id}`);
 
         this.props.navigation.push(Routes.ArtworkDetails, {
             artwork: artwork,
@@ -202,15 +207,19 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                 searching: true,
                 keyword: text
             });
-        } else {
-            this.setState({
-                searching: false,
-            });
         }
     }
 
     private searchForArtworks = (text: string) => {
-        this.props.searchForArtworks(text, this.props.selectedTag);
+        if (text.length > 2) {
+            this.props.searchForArtworks(text, this.state.selectedTag);
+        } else {
+            this.setState({
+                searching: false,
+            }, () => {
+                this.props.getArtworks(this.state.selectedTag);
+            });
+        }
     }
 
     private loadMoreArtworks = () => {
@@ -221,14 +230,14 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
             this.props.artworks.allLoaded)
             return;
 
-        console.log(`Loading more artworks for tag ${this.props.selectedTag}`);
-        this.props.loadMoreArtworksForTag(this.props.selectedTag);
+        // console.log(`Loading more artworks for tag ${this.state.selectedTag}`);
+        this.props.loadMoreArtworksForTag(this.state.selectedTag);
     }
 
     private handlePillPress(pill: Pill) {
-        console.log(`Tag ${pill.key} selected`);
+        // console.log(`Tag ${pill.key} selected`);
 
-        let selectedTag = this.props.selectedTag;
+        let selectedTag = this.state.selectedTag;
 
         if (selectedTag === pill.key) {
             selectedTag = 0;
@@ -236,20 +245,19 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
             selectedTag = pill.key;
         }
 
-        this.props.selectTag(selectedTag);
-        console.log("Tag has been selected.")
-
-        if (this.state.searching) {
-            console.log("About to call searchForArtworks");
-            this.props.searchForArtworks(this.state.keyword, selectedTag);
-        } else {
-            console.log("About to call getArtworks.");
-            this.props.getArtworks(selectedTag);
-        }
+        this.setState({
+            selectedTag: selectedTag
+        }, () => {
+            if (this.state.searching) {
+                this.props.searchForArtworks(this.state.keyword, selectedTag);
+            } else {
+                this.props.getArtworks(selectedTag);
+            }
+        });
     }
 
     private getSelectedPillContainerStyle(pill: Pill): StyleProp<ViewStyle> {
-        const isSelected = this.props.selectedTag === pill.key;
+        const isSelected = this.state.selectedTag === pill.key;
 
         if (isSelected) {
             return {
@@ -265,7 +273,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private getSelectedPillTextStyle(pill: Pill): StyleProp<TextStyle> {
-        const isSelected = this.props.selectedTag === pill.key;
+        const isSelected = this.state.selectedTag === pill.key;
 
         if (isSelected) {
             return {

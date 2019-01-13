@@ -4,6 +4,7 @@ import * as Api from "../../Services/Api";
 import Logger from "../../Services/Logger";
 import { endTask, startTask } from "../Async";
 
+const appendArtworksForTag = createAction("ARTWORKS/APPEND_ARTWORKS_FOR_TAG");
 const setArtworksForTag = createAction("ARTWORKS/SET_ARTWORKS_FOR_TAG");
 const setArtworksLoading = createAction("ARTWORKS/SET_ARTWORKS_LOADING");
 const setSelectedTag = createAction("ARTWORKS/SET_SELECTED_TAG");
@@ -16,12 +17,13 @@ export function searchArtworksForTag(keyword: string, tag: number) {
         dispatch(startTask());
 
         try {
-            console.log(`Searching artworks for keyword: ${keyword} for tag ${tag}.`);
+            // console.log(`Searching artworks for keyword: ${keyword} for tag ${tag}.`);
 
             const artworks = await Api.searchArtistsForTag(keyword, tag);
             if (artworks === null) {
                 dispatch(setFilteredArtworksError(true));
             } else {
+                dispatch(setSelectedTag(tag));
                 dispatch(setFilteredArtworks(artworks));
             }
         }
@@ -37,7 +39,7 @@ export function searchArtworksForTag(keyword: string, tag: number) {
 
 export function clearFilteredArtworks() {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {
-        dispatch(setFilteredArtworks([]));
+        dispatch(setFilteredArtworks(null));
     }
 }
 
@@ -62,13 +64,13 @@ export function loadMoreArtworksForTag(tag: number) {
 
         try {
 
-            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
+            // console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
             const artworks = await Api.getArtworksForTag(tag, nextPage);
 
             const allLoaded = artworks && artworks.length === 0;
 
-            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
-            dispatch(setArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
+            // console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
+            dispatch(appendArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
         }
         catch (e) {
             console.log(e);
@@ -99,6 +101,7 @@ export function getArtworksForTag(tag: number) {
         }
 
         if (taggedArtworks && taggedArtworks.data) {
+            dispatch(setArtworksForTag({ tag: tag, page: taggedArtworks.page, data: taggedArtworks.data }));
             return;
         }
 
@@ -106,9 +109,9 @@ export function getArtworksForTag(tag: number) {
         dispatch(setArtworksLoading({ tag: tag, loading: true }));
 
         try {
-            console.log(`Getting artworks for tag: ${tag}`);
+            // console.log(`Getting artworks for tag: ${tag}`);
             const artworks = await Api.getArtworksForTag(tag, 0);
-            console.log(`Getting artworks for tag: ${tag}. Found ${artworks && artworks.length} artworks.`);
+            // console.log(`Getting artworks for tag: ${tag}. Found ${artworks && artworks.length} artworks.`);
             dispatch(setArtworksForTag({ tag: tag, page: 0, data: artworks }));
         }
         catch (e) {
@@ -125,7 +128,7 @@ export function getArtworksForTag(tag: number) {
 }
 
 export const artworkReducers: ReducerMap<AppState, any> = {
-    [setArtworksForTag.toString()](state, { payload }) {
+    [appendArtworksForTag.toString()](state, { payload }) {
         if (payload) {
             return {
                 ...state,
@@ -144,6 +147,26 @@ export const artworkReducers: ReducerMap<AppState, any> = {
 
         return state;
     },
+    [setArtworksForTag.toString()](state, { payload }) {
+        if (payload) {
+            return {
+                ...state,
+                selectedTag: payload.tag,
+                taggedArtworks: {
+                    ...state.taggedArtworks,
+                    [payload.tag]: {
+                        page: payload.page,
+                        data: payload.data,
+                        loading: false,
+                        allLoaded: payload.allLoaded
+                    }
+                }
+            }
+        }
+
+        return state;
+    },
+
     [setSelectedTag.toString()](state, { payload }) {
         return {
             ...state,

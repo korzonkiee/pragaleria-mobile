@@ -52,7 +52,7 @@ export class ArtistAuctions extends React.PureComponent<ArtistAuctionsProps & Na
     }
 
     private navigateToAuction = (auction: Auction) => {
-        console.log(`Navigating to auction ${auction.id}`);
+        // console.log(`Navigating to auction ${auction.id}`);
 
         this.props.navigation.push(Routes.AuctionDetails, {
             auction: auction
