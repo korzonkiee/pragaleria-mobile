@@ -13,6 +13,10 @@ export interface SearchBarStateProps {
     readonly isLoading: boolean;
 }
 
+interface SearchBarState {
+    readonly textChangedTimeoutMs: number | null;
+}
+
 interface SearchBarOwnProps {
     readonly style?: StyleProp<ViewStyle>;
     readonly textInputStyle?: StyleProp<ViewStyle>;
@@ -20,12 +24,21 @@ interface SearchBarOwnProps {
     readonly withBackground?: boolean;
     readonly rightButtonDisabled?: boolean;
     readonly onTextChanged: (text: string) => void;
+    readonly onSearchingStarted?: (text: string) => void;
     readonly onPressRight?: () => void;
     readonly toolbarVisible?: boolean; // Visible by default
     readonly progressBarVisible?: boolean; // Visible by default
 }
 
-export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBarStateProps> {
+export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBarStateProps, SearchBarState> {
+    constructor(props: SearchBarOwnProps & SearchBarStateProps) {
+        super(props);
+
+        this.state = {
+            textChangedTimeoutMs: null
+        };
+    }
+
     render() {
         const onPressRight = this.props.onPressRight;
 
@@ -37,7 +50,7 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
                     </View>
                     <View style={styles.title}>
                         <TextInput style={[styles.titleText]}
-                            onChangeText={this.props.onTextChanged}
+                            onChangeText={(text: string) => { this.onTextChangeWrapper(text) }}
                             value={this.props.value}
                             placeholder={l("Artists.Search.Placeholder")} />
                     </View>
@@ -55,5 +68,21 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
                         style={styles.loadingBar} />}
             </View>
         </View>;
+    }
+
+    private onTextChangeWrapper(text: string) {
+        this.props.onSearchingStarted(text);
+
+        if (this.state.textChangedTimeoutMs)
+            clearTimeout(this.state.textChangedTimeoutMs);
+
+        this.setState({
+            textChangedTimeoutMs: setTimeout(
+                () => {
+                    console.log(text);
+                    this.props.onTextChanged(text);
+                }, 500
+            )
+        });
     }
 }

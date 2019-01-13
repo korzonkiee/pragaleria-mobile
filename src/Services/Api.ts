@@ -1,8 +1,16 @@
-import Logger from "./Logger";
-import AxiosClient from "./AxiosClient";
 import AxiosMockAdapter from "axios-mock-adapter";
+import AxiosClient from "./AxiosClient";
+import Logger from "./Logger";
 
 const TAG: string = "API";
+
+export async function searchArtistsForTag(keyword: string, tag: number): Promise<Artwork[] | null> {
+    return await get<Artwork[]>(`artworks?search=${keyword}&tags=${tag === 0 ? "" : tag}`);
+}
+
+export async function getArtworksForTag(tag: number, page: number): Promise<Artwork[] | null> {
+    return await get<Artwork[]>(`artworks?page=${page}&tags=${tag === 0 ? "" : tag}`);
+}
 
 export async function getArtists(page?: number): Promise<Artist[] | null> {
     return await get<Artist[]>(`authors?page=${page ? page : 0}&size=40`);

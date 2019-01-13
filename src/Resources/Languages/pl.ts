@@ -1,8 +1,11 @@
 export default {
     "BottomNavigation.Auctions": "Aukcje",
+    "BottomNavigation.Artworks": "Oferta",
     "BottomNavigation.Exhibitions": "Wystawy",
     "BottomNavigation.Artists": "Artyści",
     "BottomNavigation.About": "O nas",
+
+    "Artworks.NotFound": "Nie znaleziono dzieł",
 
     "Auctions.Incoming": "Przyszłe",
     "Auctions.Closed": "Zamknięte",

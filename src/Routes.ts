@@ -1,6 +1,7 @@
 export const Menu = "Menu";
 export const About = "About";
 export const Auctions = "Auctions";
+export const Artworks = "Artworks";
 export const Artists = "Artists";
 export const Camera = "Camera";
 export const ArtistDetails = "ArtistDetails";
