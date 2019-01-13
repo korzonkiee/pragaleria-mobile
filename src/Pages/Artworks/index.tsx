@@ -4,6 +4,7 @@ import FadeIn from "react-native-fade-in-image";
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import AppText from '../../Components/AppText';
+import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import SearchBar from '../../Components/SearchBar';
 import { Black, DirtyWhite, LightBlack, LightGray, LightGrayHidden, White } from '../../Resources/Colors';
 import { responsiveFontSize } from '../../Styles/Dimensions';
@@ -140,6 +141,9 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                     backgroundColor: DirtyWhite,
                     flex: 1
                 }}>
+                    {this.props.artworks && this.props.artworks.loading ?
+                        <ArtworksPlaceholder /> : null}
+                    {this.props.artworks && this.props.artworks.data ?
                     <FlatList
                         data={searchResults}
                         keyExtractor={(item, _) => item.id.toString()}
@@ -153,7 +157,8 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         )
     }
 
-    private renderArtwork({ item, index }: { item: any, index: number }) {
+    private renderArtwork({ item, index }: { item: Artwork, index: number }) {
+        if (item.title && item.image_thumbnail)
         return (
             <View style={{
                 margin: 5,
@@ -179,16 +184,19 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                         }} numberOfLines={2}>
                             {item.title}
                         </AppText>
+                            {item.author && Number.isNaN(Number(item.author)) ?
                         <AppText style={{
                             fontSize: responsiveFontSize(1.8),
                             color: LightBlack
                         }} numberOfLines={1}>
                             {item.author}
-                        </AppText>
+                                </AppText> : null}
                     </View>
                 </TouchableWithoutFeedback>
             </View >
         );
+        else
+            return null;
     }
 
     private renderFooter = () => {
