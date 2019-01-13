@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
         top: 0,
         left: 40,
         right: 0,
-        bottom: 40,
+        bottom: 33,
         justifyContent: 'flex-end',
         alignItems: 'flex-start',
     },

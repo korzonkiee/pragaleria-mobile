@@ -6,9 +6,10 @@ import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-
 import Image from 'react-native-scalable-image';
 import Icon from "react-native-vector-icons/Entypo";
 import * as Nav from "react-navigation";
-import images from "../../Assets/Images";
 import AppText from "../../Components/AppText";
-import { Black, DirtyWhite, LightBlack, LightGrayVisible } from "../../Resources/Colors";
+import {Black, White, DirtyWhite, LightBlack, LightGrayVisible} from "../../Resources/Colors";
+import images from "../../Assets/Images";
+import {default as MaterialIcon} from "react-native-vector-icons/MaterialIcons";
 import { l } from "../../Services/Language";
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import Draggable from './Draggable';
@@ -78,8 +79,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
     render() {
         let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
-        let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30} color="#ffffff"/>;
-        let hideShowFrameIcon = <Icon name="document" size={30} color="#ffffff"/>;
+        let takePictureAgainIcon = <Icon name="ccw" size={30} color="#ffffff"/>;
 
         let takePhotoButton = <TouchableOpacity
             hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
@@ -93,7 +93,12 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
         let hideShowFrameButton = <TouchableOpacity
             onPress={() => this.hideShowFrame()}>
-            {hideShowFrameIcon}
+            {this.state.frame ?
+                <MaterialIcon name='check-circle' style={{marginLeft: 16}} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White}/>
+                : <MaterialIcon name='radio-button-unchecked' style={{marginLeft: 16}} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White}/>
+            }
+            <AppText style={{ color: DirtyWhite}}>{l("Camera.ShowFrame")}</AppText>
+
         </TouchableOpacity>;
 
         if (this.state.tutorial) {
