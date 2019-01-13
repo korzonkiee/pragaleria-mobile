@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { ThunkDispatch } from "../Helpers/StateHelpers";
-import { getArtworksForTag, selectTag } from "../Modules/Artworks";
+import { getArtworksForTag, loadMoreArtworksForTag, selectTag } from "../Modules/Artworks";
 import { Artworks, ArtworksProps } from "./Artworks/index";
 
 export default connect(
@@ -17,6 +17,9 @@ export default connect(
             },
             selectTag(tag: number) {
                 dispatch(selectTag(tag))
+            },
+            loadMoreArtworksForTag(tag: number) {
+                dispatch(loadMoreArtworksForTag(tag))
             }
         };
     }

@@ -9,6 +9,46 @@ const setArtworksLoading = createAction("ARTWORKS/SET_ARTWORKS_LOADING");
 const setSelectedTag = createAction("ARTWORKS/SET_SELECTED_TAG");
 
 const TAG = "ARTWORKS";
+export function loadMoreArtworksForTag(tag: number) {
+    return async (dispatch: Dispatch<any>, getState: () => AppState) => {
+        const taggedArtworks = getState().taggedArtworks[tag];
+
+        if (taggedArtworks && taggedArtworks.loading) {
+            Logger.logDebug(TAG, `Artworks under tag: ${tag} are still loading.`);
+            return;
+        }
+
+        if (!taggedArtworks) {
+            Logger.logDebug(TAG, `Artworks under tag: ${tag} do not exist.`);
+            return;
+        }
+
+        dispatch(startTask());
+        dispatch(setArtworksLoading({ tag: tag, loading: true }));
+
+        const nextPage = taggedArtworks.page + 1;
+
+        try {
+
+            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
+            const artworks = await Api.getArtworksForTag(tag, nextPage);
+
+            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
+            dispatch(setArtworksForTag({ tag: tag, page: nextPage, data: artworks }));
+        }
+        catch (e) {
+            console.log(e);
+            Logger.logError(TAG, `Couldn't load more artworks for tag: ${tag} at page: ${nextPage}. ` +
+                `Error: ${e}`);
+
+            dispatch(setArtworksLoading({ tag: tag, loading: false }));
+        }
+        finally {
+            dispatch(endTask());
+        }
+    }
+}
+
 export function selectTag(tag: number) {
     return (dispatch: Dispatch<any>, getState: () => AppState) => {
         dispatch(setSelectedTag(tag));
@@ -96,7 +136,7 @@ export const artworkReducers: ReducerMap<AppState, any> = {
 function appendTaggedArtworks(state: AppState, payload: any): Artwork[] {
     if (state.taggedArtworks[payload.tag] &&
         state.taggedArtworks[payload.tag].data) {
-        return [...state.taggedArtworks[payload.tag].data, payload.data]
+        return [...state.taggedArtworks[payload.tag].data, ...payload.data]
     }
     else {
         return payload.data;

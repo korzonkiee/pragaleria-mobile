@@ -26,6 +26,7 @@ export interface ArtworksProps {
     readonly selectedTag: number;
     readonly selectTag: (tag: number) => void;
     readonly getArtworks: (tag: number) => void;
+    readonly loadMoreArtworksForTag: (tag: number) => void;
 }
 
 export interface ArtworksState {
@@ -76,7 +77,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                     backgroundColor: DirtyWhite,
                     flex: 1
                 }}>
-                    {this.props.artworks && this.props.artworks.loading ?
+                    {this.props.artworks && !this.props.artworks.data && this.props.artworks.loading ?
                         <ArtworksPlaceholder /> : null}
                     {this.props.artworks && this.props.artworks.data ?
                         <FlatList
@@ -85,7 +86,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                             renderItem={this.renderArtwork}
                             numColumns={1}
                             ListFooterComponent={this.renderFooter()}
-                            onEndReached={() => { }}
+                            onEndReached={this.loadMoreArtworks}
                             onEndReachedThreshold={3} /> : null
                     }
                 </View>
@@ -139,6 +140,11 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         if (this.props.artworks && this.props.artworks.loading)
             return <FooterActivityIndicator />;
         return null;
+    }
+
+    private loadMoreArtworks = () => {
+        console.log(`Loading more artworks for tag ${this.props.selectedTag}`);
+        this.props.loadMoreArtworksForTag(this.props.selectedTag);
     }
 
     private handlePillPress(pill: Pill) {
