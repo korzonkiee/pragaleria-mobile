@@ -1,18 +1,18 @@
-import React, {Component} from 'react'
-import {AppState, Dimensions, Modal as RNModal, Slider, TouchableOpacity, View, Platform} from 'react-native'
-import {RNCamera} from "react-native-camera";
-import * as Nav from "react-navigation";
-import Icon from "react-native-vector-icons/Entypo";
-import {styles} from "./styles";
-import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
+import React, { Component } from 'react';
+import { AppState, Dimensions, Modal as RNModal, Platform, Slider, TouchableOpacity, View } from 'react-native';
+import { RNCamera } from "react-native-camera";
 import Orientation from 'react-native-orientation';
-import Draggable from './Draggable'
-import {l} from "../../Services/Language";
+import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import Image from 'react-native-scalable-image';
-import {responsiveFontSize} from "../../Styles/Dimensions";
-import AppText from "../../Components/AppText";
-import {Black, DirtyWhite, LightBlack, LightGrayVisible} from "../../Resources/Colors";
+import Icon from "react-native-vector-icons/Entypo";
+import * as Nav from "react-navigation";
 import images from "../../Assets/Images";
+import AppText from "../../Components/AppText";
+import { Black, DirtyWhite, LightBlack, LightGrayVisible } from "../../Resources/Colors";
+import { l } from "../../Services/Language";
+import { responsiveFontSize } from "../../Styles/Dimensions";
+import Draggable from './Draggable';
+import { styles } from "./styles";
 
 export interface CameraProps {
     imageUrl: string,
@@ -42,7 +42,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     _orientationDidChange = (orientation: string) => {
-        this.setState({displayingCameraPreview: true});
+        this.setState({ displayingCameraPreview: true });
         this.setUpImage(orientation);
     };
 
@@ -57,29 +57,29 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let imageHeight = imageWidth * imageRatio;
 
 
-        console.log("Orientation: ", orientation);
-        console.log("Image org px: ", this.props.imageDimension);
-        console.log("oppositePOV: ", oppositePOVCm);
-        console.log("Image height:", imageHeight, "/", windowLonger);
-        console.log("Image width:", imageWidth, "/", windowShorter);
-        console.log("Window width: ", windowShorter);
-        console.log("Window height: ", windowLonger);
-        console.log("Area: ", imageWidth * imageHeight);
+        // console.log("Orientation: ", orientation);
+        // console.log("Image org px: ", this.props.imageDimension);
+        // console.log("oppositePOV: ", oppositePOVCm);
+        // console.log("Image height:", imageHeight, "/", windowLonger);
+        // console.log("Image width:", imageWidth, "/", windowShorter);
+        // console.log("Window width: ", windowShorter);
+        // console.log("Window height: ", windowLonger);
+        // console.log("Area: ", imageWidth * imageHeight);
 
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
-                               imageSource={{uri: this.props.imageUrl}}
-                               offsetX={imageWidth / 2} offsetY={imageHeight / 2}
+            imageSource={{ uri: this.props.imageUrl }}
+            offsetX={imageWidth / 2} offsetY={imageHeight / 2}
         />;
 
-        this.setState({image: image})
+        this.setState({ image: image })
     }
 
     render() {
-        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
+        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff" />;
         let takePictureAgainIcon = <Icon name="chevron-with-circle-left" size={30}
-                                         color="#ffffff"/>;
+            color="#ffffff" />;
         let takePhotoButton = <TouchableOpacity
-            hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
+            hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
             onPress={this.takePicture.bind(this)}
         >
             {takePictureIcon}
@@ -104,11 +104,11 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <Image source={images.tutorialImg} width={330}/>
+                        <Image source={images.tutorialImg} width={330} />
                         <Slider
                             style={{
                                 width: 260, left: 40, transform: [
-                                    {rotateZ: '-180deg'},
+                                    { rotateZ: '-180deg' },
                                 ]
                             }}
                             minimumTrackTintColor={DirtyWhite}
@@ -118,7 +118,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                             minimumValue={50}
                             maximumValue={500}
                             value={this.state.wallDistance}
-                            onSlidingComplete={val => this.setState({wallDistance: val})}
+                            onSlidingComplete={val => this.setState({ wallDistance: val })}
                         />
                         <AppText style={{
                             color: Black,
@@ -147,7 +147,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                                 borderRadius: 10,
                                 marginTop: 30,
                             }}
-                            onPress={() => this.setState({tutorial: false})}>
+                            onPress={() => this.setState({ tutorial: false })}>
                             <View style={{
                                 flexDirection: 'row',
                             }}>
@@ -185,7 +185,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     }
                     <View style={styles.slider}>
                         <Slider
-                            style={{width: 255, transform: [{rotateZ: '-180deg'}]}}
+                            style={{ width: 255, transform: [{ rotateZ: '-180deg' }] }}
                             minimumTrackTintColor={DirtyWhite}
                             maximumTrackTintColor={LightBlack}
                             thumbTintColor={LightBlack}
@@ -214,7 +214,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     sliderOnValueChange(val: number) {
-        this.setState({wallDistance: val});
+        this.setState({ wallDistance: val });
         if (!this.displayingCameraPreview) {
             Orientation.getOrientation((_, orientation) => {
                 this.setUpImage(orientation);
@@ -235,7 +235,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
     goBackPreview() {
         this.cameraInstance.resumePreview();
-        this.setState({displayingCameraPreview: true, image: null});
+        this.setState({ displayingCameraPreview: true, image: null });
         Orientation.removeOrientationListener(this._orientationDidChange);
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
@@ -245,9 +245,9 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
             pauseAfterCapture: true,
             exif: true
         };
-        this.setState({displayingCameraPreview: false});
+        this.setState({ displayingCameraPreview: false });
         const image = await this.cameraInstance.takePictureAsync(options);
-        console.log(image);
+        // console.log(image);
         Orientation.getOrientation((_, orientation) => {
             this.setUpImage(orientation);
         });
@@ -273,7 +273,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
             this.goBackPreview();
         }
-        this.setState({appState: nextAppState});
+        this.setState({ appState: nextAppState });
     };
 
     componentWillUnmount() {

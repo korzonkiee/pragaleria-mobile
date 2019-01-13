@@ -17,7 +17,7 @@ export function searchArtworksForTag(keyword: string, tag: number) {
         dispatch(startTask());
 
         try {
-            console.log(`Searching artworks for keyword: ${keyword} for tag ${tag}.`);
+            // console.log(`Searching artworks for keyword: ${keyword} for tag ${tag}.`);
 
             const artworks = await Api.searchArtistsForTag(keyword, tag);
             if (artworks === null) {
@@ -64,12 +64,12 @@ export function loadMoreArtworksForTag(tag: number) {
 
         try {
 
-            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
+            // console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
             const artworks = await Api.getArtworksForTag(tag, nextPage);
 
             const allLoaded = artworks && artworks.length === 0;
 
-            console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
+            // console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
             dispatch(appendArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
         }
         catch (e) {
@@ -109,9 +109,9 @@ export function getArtworksForTag(tag: number) {
         dispatch(setArtworksLoading({ tag: tag, loading: true }));
 
         try {
-            console.log(`Getting artworks for tag: ${tag}`);
+            // console.log(`Getting artworks for tag: ${tag}`);
             const artworks = await Api.getArtworksForTag(tag, 0);
-            console.log(`Getting artworks for tag: ${tag}. Found ${artworks && artworks.length} artworks.`);
+            // console.log(`Getting artworks for tag: ${tag}. Found ${artworks && artworks.length} artworks.`);
             dispatch(setArtworksForTag({ tag: tag, page: 0, data: artworks }));
         }
         catch (e) {

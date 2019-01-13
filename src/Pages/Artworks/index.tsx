@@ -73,8 +73,6 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     render() {
-        console.log("Render");
-
         return (
             <AppContainer style={styles.container}>
                 <SearchBar onTextChanged={this.searchForArtworks}
@@ -106,7 +104,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
 
     private renderContent() {
         let content = null;
-        console.log(this.state, this.props)
+
         if (this.state.searching && this.props.filteredArtworks.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
@@ -187,7 +185,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private navigateToArtwork = (artwork: Artwork) => {
-        console.log(`Navigating to artwork ${artwork.id}`);
+        // console.log(`Navigating to artwork ${artwork.id}`);
 
         this.props.navigation.push(Routes.ArtworkDetails, {
             artwork: artwork,
@@ -232,12 +230,12 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
             this.props.artworks.allLoaded)
             return;
 
-        console.log(`Loading more artworks for tag ${this.state.selectedTag}`);
+        // console.log(`Loading more artworks for tag ${this.state.selectedTag}`);
         this.props.loadMoreArtworksForTag(this.state.selectedTag);
     }
 
     private handlePillPress(pill: Pill) {
-        console.log(`Tag ${pill.key} selected`);
+        // console.log(`Tag ${pill.key} selected`);
 
         let selectedTag = this.state.selectedTag;
 

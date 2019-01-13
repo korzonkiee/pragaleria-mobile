@@ -80,7 +80,6 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
         this.setState({
             textChangedTimeoutMs: setTimeout(
                 () => {
-                    console.log(text);
                     this.props.onTextChanged(text);
                 }, 500
             )
