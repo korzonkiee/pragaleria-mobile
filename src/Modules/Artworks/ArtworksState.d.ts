@@ -31,6 +31,7 @@ declare interface Artwork {
 declare interface ArtworksData {
     readonly data: Artwork[];
     readonly page: number;
+    readonly allLoaded: boolean;
     readonly loading: boolean;
 }
 

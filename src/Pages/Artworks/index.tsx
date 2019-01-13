@@ -73,6 +73,8 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     render() {
+        console.log("Render");
+
         return (
             <AppContainer style={styles.container}>
                 <SearchBar onTextChanged={this.searchForArtworks}
@@ -104,10 +106,6 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
 
     private renderContent() {
         let content = null;
-
-        console.log(this.state);
-        console.log(this.props.filteredArtworks);
-
         if (this.state.searching && this.props.filteredArtworks.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
@@ -219,6 +217,10 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         if (this.state.searching)
             return;
 
+        if (this.props.artworks &&
+            this.props.artworks.allLoaded)
+            return;
+
         console.log(`Loading more artworks for tag ${this.props.selectedTag}`);
         this.props.loadMoreArtworksForTag(this.props.selectedTag);
     }
@@ -235,9 +237,13 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         }
 
         this.props.selectTag(selectedTag);
+        console.log("Tag has been selected.")
+
         if (this.state.searching) {
+            console.log("About to call searchForArtworks");
             this.props.searchForArtworks(this.state.keyword, selectedTag);
         } else {
+            console.log("About to call getArtworks.");
             this.props.getArtworks(selectedTag);
         }
     }

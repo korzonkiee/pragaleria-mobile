@@ -65,8 +65,10 @@ export function loadMoreArtworksForTag(tag: number) {
             console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}.`);
             const artworks = await Api.getArtworksForTag(tag, nextPage);
 
+            const allLoaded = artworks && artworks.length === 0;
+
             console.log(`Getting more artworks for tag: ${tag} at page: ${nextPage}. Found ${artworks && artworks.length} artworks.`);
-            dispatch(setArtworksForTag({ tag: tag, page: nextPage, data: artworks }));
+            dispatch(setArtworksForTag({ tag: tag, page: nextPage, allLoaded: allLoaded, data: artworks }));
         }
         catch (e) {
             console.log(e);
@@ -82,7 +84,7 @@ export function loadMoreArtworksForTag(tag: number) {
 }
 
 export function selectTag(tag: number) {
-    return (dispatch: Dispatch<any>, getState: () => AppState) => {
+    return async (dispatch: Dispatch<any>, getState: () => AppState) => {
         dispatch(setSelectedTag(tag));
     }
 }
@@ -133,7 +135,8 @@ export const artworkReducers: ReducerMap<AppState, any> = {
                     [payload.tag]: {
                         page: payload.page,
                         data: appendTaggedArtworks(state, payload),
-                        loading: false
+                        loading: false,
+                        allLoaded: payload.allLoaded
                     }
                 }
             }
