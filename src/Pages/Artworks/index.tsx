@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Image, ScrollView, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import { FlatList, Image, ScrollView, TouchableWithoutFeedback, View } from 'react-native';
 import FadeIn from "react-native-fade-in-image";
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
@@ -8,7 +8,7 @@ import DataNotFound from '../../Components/DataNotFound';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import ArtworksPlaceholder from '../../Components/Placeholders/ArtworksPlaceholder';
 import SearchBar from '../../Components/SearchBar';
-import { Black, DirtyWhite, LightBlack, LightGray, White } from '../../Resources/Colors';
+import { DirtyWhite, LightBlack, LightGray } from '../../Resources/Colors';
 import { l, lp } from '../../Services/Language';
 import { responsiveFontSize } from '../../Styles/Dimensions';
 import styles from './styles';
@@ -75,7 +75,9 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         return (
             <AppContainer style={styles.container}>
                 <SearchBar onTextChanged={this.searchForArtworks}
-                    onSearchingStarted={this.onSearchingStarted} />
+                    onSearchingStarted={this.onSearchingStarted}
+                    placeholder={l("Artworks.Search.Placeholder")}
+                />
                 <ScrollView style={styles.pillsContainer}
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}>
@@ -110,11 +112,6 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
                 retry={() => this.props.searchForArtworks(this.state.keyword, this.props.selectedTag)} />);
         }
-        // else if (this.state.searching && this.props.filteredArtworks.data.length === 0) {
-        //     content = (<DataNotFound
-        //         message={lp("Artists.Search.ErrorForKeyword", this.state.keyword)}
-        //         retry={() => { }} />);
-        // }
         else if (this.state.searching && this.props.filteredArtworks.data.length === 0) {
             content = <ArtworksPlaceholder />
         }

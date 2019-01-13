@@ -3,7 +3,6 @@ import { StyleProp, TextInput, View, ViewStyle } from "react-native";
 import * as Progress from "react-native-progress";
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import * as colors from "../../Resources/Colors";
-import { l } from "../../Services/Language";
 import { responsiveFontSize, responsiveWidth } from "../../Styles/Dimensions";
 import styles from "./styles";
 
@@ -21,6 +20,7 @@ interface SearchBarOwnProps {
     readonly style?: StyleProp<ViewStyle>;
     readonly textInputStyle?: StyleProp<ViewStyle>;
     readonly value?: string;
+    readonly placeholder?: string;
     readonly withBackground?: boolean;
     readonly rightButtonDisabled?: boolean;
     readonly onTextChanged: (text: string) => void;
@@ -52,7 +52,7 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
                         <TextInput style={[styles.titleText]}
                             onChangeText={(text: string) => { this.onTextChangeWrapper(text) }}
                             value={this.props.value}
-                            placeholder={l("Artists.Search.Placeholder")} />
+                            placeholder={this.props.placeholder} />
                     </View>
                 </View>}
             <View style={{ flex: 1 }}>

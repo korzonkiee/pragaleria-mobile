@@ -6,6 +6,7 @@ export default {
     "BottomNavigation.About": "O nas",
 
     "Artworks.NotFound": "Nie znaleziono dzieł",
+    "Artworks.Search.Placeholder": "Szukaj dzieł...",
 
     "Auctions.Incoming": "Przyszłe",
     "Auctions.Closed": "Zamknięte",

@@ -74,7 +74,8 @@ export class Artists extends Component<ArtistsProps & Nav.NavigationInjectedProp
         }
 
         return (<AppContainer style={{ flex: 1 }}>
-            <SearchBar onTextChanged={this.searchForArtists} />
+            <SearchBar onTextChanged={this.searchForArtists}
+                placeholder={l("Artists.Search.Placeholder")} />
             {content}
         </AppContainer>)
     }
