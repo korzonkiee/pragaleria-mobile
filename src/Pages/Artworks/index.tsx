@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Image, ScrollView, TouchableWithoutFeedback, View } from 'react-native';
+import { FlatList, Image, ScrollView, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
 import FadeIn from "react-native-fade-in-image";
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
@@ -8,7 +8,8 @@ import DataNotFound from '../../Components/DataNotFound';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
 import ArtworksPlaceholder from '../../Components/Placeholders/ArtworksPlaceholder';
 import SearchBar from '../../Components/SearchBar';
-import { DirtyWhite, LightBlack, LightGray } from '../../Resources/Colors';
+import { Black, DirtyWhite, LightBlack, LightGray, White } from '../../Resources/Colors';
+import * as Routes from "../../Routes";
 import { l, lp } from '../../Services/Language';
 import { responsiveFontSize } from '../../Styles/Dimensions';
 import styles from './styles';
@@ -127,7 +128,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
             content = <FlatList
                 data={data}
                 keyExtractor={(item, _) => item.id.toString()}
-                renderItem={this.renderArtwork}
+                renderItem={this.renderArtwork.bind(this)}
                 numColumns={1}
                 ListFooterComponent={this.renderFooter()}
                 onEndReached={this.loadMoreArtworks}
@@ -140,17 +141,18 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     private renderArtwork({ item, index }: { item: Artwork, index: number }) {
         if (item.title && item.image_thumbnail)
             return (
-                <View style={{
-                    margin: 5,
-                    flexDirection: 'row',
-                }}>
-                    <FadeIn style={styles.artworkFullResImage}
-                        renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
-                        <Image style={styles.artworkFullImage} source={{
-                            uri: item.image_medium_thumbnail || item.image_thumbnail
-                        }} />
-                    </FadeIn>
-                    <TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.navigateToArtwork(item)}>
+                    <View style={{
+                        margin: 5,
+                        flexDirection: 'row',
+                    }}>
+                        <FadeIn style={styles.artworkFullResImage}
+                            renderPlaceholderContent={(<Image style={{ flex: 1 }} source={{ uri: item.image_thumbnail }} blurRadius={2} />)}>
+                            <Image style={styles.artworkFullImage} source={{
+                                uri: item.image_medium_thumbnail || item.image_thumbnail
+                            }} />
+                        </FadeIn>
+
                         <View style={{
                             flex: 1,
                             paddingLeft: 4,
@@ -172,11 +174,20 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                                     {item.author}
                                 </AppText> : null}
                         </View>
-                    </TouchableWithoutFeedback>
-                </View >
+                    </View>
+                </TouchableWithoutFeedback>
             );
         else
             return null;
+    }
+
+    private navigateToArtwork = (artwork: Artwork) => {
+        console.log(`Navigating to artwork ${artwork.id}`);
+
+        this.props.navigation.push(Routes.ArtworkDetails, {
+            artwork: artwork,
+            artistId: artwork.author_id
+        });
     }
 
     private renderFooter = () => {

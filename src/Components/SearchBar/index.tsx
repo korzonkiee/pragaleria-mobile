@@ -71,7 +71,8 @@ export class SearchBar extends React.PureComponent<SearchBarOwnProps & SearchBar
     }
 
     private onTextChangeWrapper(text: string) {
-        this.props.onSearchingStarted(text);
+        if (this.props.onSearchingStarted)
+            this.props.onSearchingStarted(text);
 
         if (this.state.textChangedTimeoutMs)
             clearTimeout(this.state.textChangedTimeoutMs);
