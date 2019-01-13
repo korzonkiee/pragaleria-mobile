@@ -1,13 +1,15 @@
 import { handleActions } from "redux-actions";
-import { initialState } from "./InitialState";
+import { artistsReducers } from "./Artists";
+import { artworkReducers } from "./Artworks";
 import { asyncActionsReducers } from "./Async";
-import {artistsReducers} from "./Artists";
 import { auctionsReducers } from './Auctions/index';
-import { exhibitionsReducers } from './Exhibitions/index';
 import { catalogReducers } from "./Catalogs";
+import { exhibitionsReducers } from './Exhibitions/index';
+import { initialState } from "./InitialState";
 
 export const appReducer = handleActions({
     ...asyncActionsReducers,
+    ...artworkReducers,
     ...artistsReducers,
     ...auctionsReducers,
     ...exhibitionsReducers,

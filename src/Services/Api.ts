@@ -4,8 +4,8 @@ import Logger from "./Logger";
 
 const TAG: string = "API";
 
-export async function getArtworks(tag: Tag, page: number): Promise<Artwork[] | null> {
-    return await get<Artwork[]>(`artworks?page=${page}&tags=${tag === Tag.none ? "" : tag}`);
+export async function getArtworksForTag(tag: number, page: number): Promise<Artwork[] | null> {
+    return await get<Artwork[]>(`artworks?page=${page}&tags=${tag === 0 ? "" : tag}`);
 }
 
 export async function getArtists(page?: number): Promise<Artist[] | null> {

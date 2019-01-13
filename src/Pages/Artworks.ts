@@ -1,18 +1,22 @@
 import { connect } from "react-redux";
 import { ThunkDispatch } from "../Helpers/StateHelpers";
-import { getArtworks } from "../Modules/Artworks";
+import { getArtworksForTag, selectTag } from "../Modules/Artworks";
 import { Artworks, ArtworksProps } from "./Artworks/index";
 
 export default connect(
     (state: AppState): StateProps<ArtworksProps> => {
         return {
-            artworks: state.artworks
+            artworks: state.taggedArtworks[state.selectedTag],
+            selectedTag: state.selectedTag,
         };
     },
     (dispatch: ThunkDispatch): DispatchProps<ArtworksProps> => {
         return {
-            getArtworks(tag: Tag) {
-                dispatch(getArtworks(tag))
+            getArtworks(tag: number) {
+                dispatch(getArtworksForTag(tag))
+            },
+            selectTag(tag: number) {
+                dispatch(selectTag(tag))
             }
         };
     }

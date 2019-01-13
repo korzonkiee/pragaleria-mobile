@@ -4,31 +4,45 @@ import * as Api from "../../Services/Api";
 import Logger from "../../Services/Logger";
 import { endTask, startTask } from "../Async";
 
-const setArtworks = createAction("ARTWORKS/SET_ARTWORKS");
+const setArtworksForTag = createAction("ARTWORKS/SET_ARTWORKS_FOR_TAG");
 const setArtworksLoading = createAction("ARTWORKS/SET_ARTWORKS_LOADING");
+const setSelectedTag = createAction("ARTWORKS/SET_SELECTED_TAG");
 
 const TAG = "ARTWORKS";
+export function selectTag(tag: number) {
+    return (dispatch: Dispatch<any>, getState: () => AppState) => {
+        dispatch(setSelectedTag(tag));
+    }
+}
 
-export function getArtworks(tag: Tag) {
+export function getArtworksForTag(tag: number) {
     return async (dispatch: Dispatch<any>, getState: () => AppState) => {
-        if (getState().artworks.loading) {
+        const taggedArtworks = getState().taggedArtworks[tag];
+
+        if (taggedArtworks && taggedArtworks.loading) {
+            Logger.logDebug(TAG, `Artworks under tag: ${tag} are still loading.`);
             return;
         }
 
-        const currentPage = getState().artworks.page;
+        if (taggedArtworks && taggedArtworks.data) {
+            return;
+        }
 
         dispatch(startTask());
-        dispatch(setArtworksLoading(true));
+        dispatch(setArtworksLoading({ tag: tag, loading: true }));
 
         try {
-            const artworks = await Api.getArtworks(tag, currentPage);
-            dispatch(setArtworks(artworks));
+            console.log(`Getting artworks for tag: ${tag}`);
+            const artworks = await Api.getArtworksForTag(tag, 0);
+            console.log(`Getting artworks for tag: ${tag}. Found ${artworks && artworks.length} artworks.`);
+            dispatch(setArtworksForTag({ tag: tag, page: 0, data: artworks }));
         }
         catch (e) {
-            Logger.logError(TAG, `Couldn't fetch artists. ` +
+            console.log(e);
+            Logger.logError(TAG, `Couldn't fetch artworks. ` +
                 `Error: ${e}`);
 
-            dispatch(setArtworksLoading(false));
+            dispatch(setArtworksLoading({ tag: tag, loading: false }));
         }
         finally {
             dispatch(endTask());
@@ -37,31 +51,61 @@ export function getArtworks(tag: Tag) {
 }
 
 export const artworkReducers: ReducerMap<AppState, any> = {
-    [setArtworks.toString()](state, { payload }) {
+    [setArtworksForTag.toString()](state, { payload }) {
         if (payload) {
             return {
                 ...state,
-                artworks: {
-                    data: [...state.artworks.data, ...payload],
-                    loading: false,
-                    page: state.artworks.page + 1
+                selectedTag: payload.tag,
+                taggedArtworks: {
+                    ...state.taggedArtworks,
+                    [payload.tag]: {
+                        page: payload.page,
+                        data: appendTaggedArtworks(state, payload),
+                        loading: false
+                    }
                 }
             }
         }
 
         return state;
     },
-    [setArtworksLoading.toString()](state, action) {
-        if (action.payload !== undefined) {
+    [setSelectedTag.toString()](state, { payload }) {
+        return {
+            ...state,
+            selectedTag: payload
+        }
+    },
+    [setArtworksLoading.toString()](state, { payload }) {
+        if (payload) {
             return {
                 ...state,
-                artworks: {
-                    ...state.artworks,
-                    loading: action.payload
+                taggedArtworks: {
+                    ...state.taggedArtworks,
+                    [payload.tag]: {
+                        ...state.taggedArtworks[payload.tag],
+                        loading: payload.loading
+                    }
                 }
             }
         }
 
         return state;
     }
+}
+
+function appendTaggedArtworks(state: AppState, payload: any): Artwork[] {
+    if (state.taggedArtworks[payload.tag] &&
+        state.taggedArtworks[payload.tag].data) {
+        return [...state.taggedArtworks[payload.tag].data, payload.data]
+    }
+    else {
+        return payload.data;
+    }
+
+}
+
+function delay(ms: number) {
+    return new Promise<void>(function (resolve) {
+        setTimeout(resolve, ms);
+    });
 }
