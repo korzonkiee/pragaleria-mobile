@@ -3,6 +3,7 @@ import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import { AuctionsTabBar } from '../../Components/AuctionsTabBar';
 import DataNotFound from '../../Components/DataNotFound';
+import { Pill, Pills } from '../../Components/Pills';
 import AuctionsPlaceholder from '../../Components/Placeholders/AuctionsPlaceholder';
 import { DirtyWhite } from '../../Resources/Colors';
 import { l } from '../../Services/Language';
@@ -17,6 +18,15 @@ interface AuctionsState {
     readonly index: number;
     readonly routes: Array<any>;
 }
+
+const pills: Pill[] = [
+    { key: 1, value: "Sztuka Młoda" },
+    { key: 2, value: "Sztuka Młoda" },
+    { key: 3, value: "Sztuka Współczesnej" },
+    { key: 4, value: "Design" },
+    { key: 5, value: "Malarstwo i Design" },
+    { key: 6, value: "Wakacyjna" },
+]
 
 export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedProps, AuctionsState> {
     constructor(props: AuctionsProps & Nav.NavigationInjectedProps) {
@@ -57,10 +67,15 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 flex: 1,
                 backgroundColor: DirtyWhite,
             }}>
+                <Pills pills={pills} onPillPressed={this.onPillPressed} />
                 <AuctionsTabBar navigation={this.props.navigation}
                     incomingAuctions={currentAuctions}
                     closedAuctions={closedAuctions} />
             </AppContainer>
         )
+    }
+
+    private onPillPressed = (pill: Pill) => {
+        console.log(pill);
     }
 }
