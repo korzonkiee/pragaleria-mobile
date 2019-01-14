@@ -13,19 +13,19 @@ export default StyleSheet.create({
     },
     topLinksTouchable: {
         flex: 1,
-        marginVertical: 12
+        marginVertical: 8
     },
     topLinksContainerText: {
         color: LightBlack,
         textAlign: 'center',
         ...font({ family: DefaultFontFamily, weight: "Regular" }),
-        fontSize: responsiveFontSize(2.2),
+        fontSize: responsiveFontSize(2),
     },
     topLinksContainerTextLeft: {
         color: LightBlack,
         textAlign: 'center',
         ...font({ family: DefaultFontFamily, weight: "Regular" }),
-        fontSize: responsiveFontSize(2.2),
+        fontSize: responsiveFontSize(2),
         borderRightColor: LightBlack,
         borderRightWidth: 1
     },
@@ -59,7 +59,8 @@ export default StyleSheet.create({
         flexBasis: 'auto',
         borderBottomColor: LightGray,
         borderBottomWidth: 1,
-        padding: 10,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

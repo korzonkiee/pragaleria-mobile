@@ -6,6 +6,7 @@ import AppHeader from '../../../Components/AppHeader';
 import AppText from '../../../Components/AppText';
 import DataNotFound from '../../../Components/DataNotFound';
 import ArtistDetailsPlaceholder from '../../../Components/Placeholders/ArtistDetailsPlaceholder';
+import SearchBar from '../../../Components/SearchBar';
 import { SwitchGridCarousel } from '../../../Components/SwitchGridCarousel';
 import { Black } from '../../../Resources/Colors';
 import { l } from '../../../Services/Language';
@@ -14,10 +15,26 @@ import { l } from '../../../Services/Language';
 export interface AuctionDetailsProps {
     readonly auction: Auction;
     readonly catalog: CatalogData;
+    readonly catalogDataOnlySold: CatalogItem[] | [];
     readonly getAuctionsDetails: () => void;
+    readonly searchArtistInCatalog: (catalog: CatalogData, query: string) => Promise<CatalogItem[] | undefined>;
 }
 
-export class AuctionDetails extends Component<AuctionDetailsProps & Nav.NavigationInjectedProps> {
+export interface AuctionDetailsState {
+    readonly searchResults: CatalogItem[] | null;
+    readonly catalogItemsFiltered: CatalogItem[];
+}
+
+export class AuctionDetails extends Component<AuctionDetailsProps & Nav.NavigationInjectedProps, AuctionDetailsState> {
+    constructor(props: AuctionDetailsProps & Nav.NavigationInjectedProps) {
+        super(props);
+
+        this.state = {
+            searchResults: null,
+            catalogItemsFiltered: []
+        };
+    }
+
     componentDidMount() {
         if (!this.props.catalog) {
             this.props.getAuctionsDetails();
@@ -37,6 +54,13 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
 
         if (catalog.data == null) {
             return <DataNotFound retry={this.props.getAuctionsDetails} message={l("Common.GenericErrorMessageWithRetry")} />
+        }
+
+        let filtered = [];
+        if (this.state.catalogItemsFiltered.length > 0) {
+            filtered = this.state.catalogItemsFiltered;
+        } else {
+            filtered = this.props.catalogDataOnlySold;
         }
 
         return (
@@ -61,7 +85,28 @@ export class AuctionDetails extends Component<AuctionDetailsProps & Nav.Navigati
                                 </AppText>
                             </ScrollView>
                         } />
-                    <SwitchGridCarousel auction={auction} catalogItems={catalog.data} navigation={this.props.navigation} />
+                    {this.props.catalog.data ? <SearchBar onTextChanged={() => { }}
+                        onSearchingStarted={async (text: string) => {
+                            let searchResults = await this.props.searchArtistInCatalog(
+                                this.props.catalog,
+                                text
+                            );
+                            if (!searchResults) { searchResults = [] }
+                            let catalogItemsFiltered: CatalogItem[] | never[] = [];
+                            if (searchResults.length > 0) {
+                                catalogItemsFiltered = searchResults.filter(
+                                    (catalogItem) => catalogItem.sold === false
+                                );
+                            }
+                            this.setState({ searchResults, catalogItemsFiltered });
+                        }}
+                        placeholder={l("Artists.Search.Placeholder")}
+                    /> : <></>}
+                    <SwitchGridCarousel
+                        auction={auction}
+                        catalogItemsFiltered={filtered}
+                        catalogItems={this.state.searchResults || catalog.data}
+                        navigation={this.props.navigation} />
                 </>}
             </AppContainer>
         )

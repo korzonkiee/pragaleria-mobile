@@ -15,12 +15,12 @@ import styles from "./styles";
 export interface SwitchGridCarouselProps {
     readonly auction: Auction;
     readonly catalogItems: CatalogItem[];
+    readonly catalogItemsFiltered: CatalogItem[];
 }
 
 interface SwitchGridCarouselState {
     readonly currentView: ViewType;
     readonly showOnlyAvailable: boolean;
-    readonly catalogItemsFiltered: CatalogItem[];
 }
 
 type ViewType = 'grid' | 'slides'
@@ -29,25 +29,15 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
     constructor(props: SwitchGridCarouselProps & Nav.NavigationInjectedProps) {
         super(props);
 
-        const catalogItemsFiltered = this.props.catalogItems.filter(
-            (catalogItem) => catalogItem.sold === false
-        );
         this.state = {
             currentView: 'grid',
             showOnlyAvailable: false,
-            catalogItemsFiltered: catalogItemsFiltered
         };
-    }
-
-    private displayAllArtworks() {
-        this.setState({
-            showOnlyAvailable: !this.state.showOnlyAvailable
-        });
     }
 
     private catalogDataFiltered(): CatalogItem[] {
         if (this.state.showOnlyAvailable) {
-            return this.state.catalogItemsFiltered;
+            return this.props.catalogItemsFiltered;
         } else {
             return this.props.catalogItems;
         }
@@ -67,17 +57,10 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                                 showOnlyAvailable: !this.state.showOnlyAvailable
                             })}>
                             {this.state.showOnlyAvailable ?
-                                <MaterialIcon name='check-circle' size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={Black} />
-                                : <MaterialIcon name='radio-button-unchecked' size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={Black} />}
-                            <AppText style={{ color: Black, marginLeft: 4 }}>{l("Auctions.ShowAvailable")}</AppText>
+                                <MaterialIcon name='check-circle' size={responsiveFontSize(2.2)} color={Black} />
+                                : <MaterialIcon name='radio-button-unchecked' size={responsiveFontSize(2.2)} color={Black} />}
+                            <AppText style={{ fontSize: responsiveFontSize(1.8), color: Black, marginLeft: 4 }}>{l("Auctions.ShowAvailable")}</AppText>
                         </TouchableOpacity>
-                        {/* <Checkbox
-                            checked={this.state.showOnlyAvailable}
-                            containerStyle={styles.checkboxStyle}
-                            labelStyle={styles.checkboxLabelStyle}
-                            label={l("Auctions.ShowAvailable")}
-                            onChange={this.displayAllArtworks.bind(this)}
-                        /> */}
                         {this.renderTopContainerIcon(this.state.currentView === 'grid')}
                     </View>
                 }
@@ -106,7 +89,7 @@ export class SwitchGridCarousel extends React.PureComponent<SwitchGridCarouselPr
                 {catalogDataFiltered.length === 0 ?
                     <View style={{ flex: 1 }}>
                         <AppText style={styles.topLinksContainerText}>
-                            Brak dzieł poaukcyjnych, kliknij "Wyświetl sprzedane" aby przeglądać dzieła które pojawiły się na tej aukcji.
+                            Przepraszamy, brak dostępnych dzieł.
                         </AppText>
                     </View>
                     : <View style={{ flex: 1 }}>

@@ -30,6 +30,24 @@ export function getCatalog(id: number) {
     }
 }
 
+export function searchArtistInCatalog(catalog: CatalogData, query: string) {
+    return async (dispatch: Dispatch<any>) => {
+        dispatch(startTask());
+        try {
+            return catalog.data.filter(
+                (catalogItem: CatalogItem) => catalogItem.author.toLowerCase().includes(query.toLowerCase())
+            )
+        }
+        catch (e) {
+            Logger.logError(TAG, `Couldn't search in catalog. ` +
+                `Error: ${e}`);
+        }
+        finally {
+            dispatch(endTask());
+        }
+    }
+}
+
 export const
     catalogReducers: ReducerMap<AppState, any> = {
         [setCatalog.toString()](state, action) {

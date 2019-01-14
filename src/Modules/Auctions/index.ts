@@ -1,8 +1,8 @@
-import { createAction, ReducerMap } from "redux-actions";
 import { Dispatch } from "redux";
-import { endTask, startTask } from "../Async";
-import Logger from "../../Services/Logger"
+import { createAction, ReducerMap } from "redux-actions";
 import * as Api from "../../Services/Api";
+import Logger from "../../Services/Logger";
+import { endTask, startTask } from "../Async";
 
 const setAuctions = createAction("AUCTIONS/SET_AUCTIONS");
 const setAuctionsLoading = createAction("AUCTIONS/SET_AUCTIONS_LOADING");
@@ -32,6 +32,7 @@ export function getAuctions() {
         }
     }
 }
+
 
 export const auctionsReducers: ReducerMap<AppState, any> = {
     [setAuctions.toString()](state, action) {
