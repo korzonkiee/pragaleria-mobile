@@ -29,6 +29,7 @@ declare interface AuctionsState {
     readonly auctions: AuctionsData;
     readonly categorizedAuctions: { readonly [category: number]: AuctionsData }
     readonly selectedCategory: number;
+    readonly dateFilter: number;
 }
 
 declare interface AppState extends AuctionsState {

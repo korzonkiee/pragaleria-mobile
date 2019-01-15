@@ -12,10 +12,11 @@ export interface Pill {
 interface PillsProps {
     readonly pills: Pill[];
     readonly onPillPressed: (pill: Pill) => void;
+    readonly selectedPill?: number;
 }
 
 interface PillsState {
-    readonly selectedPill: Pill | null;
+    readonly selectedPill: number | undefined;
 }
 
 export class Pills extends React.PureComponent<PillsProps, PillsState> {
@@ -23,7 +24,7 @@ export class Pills extends React.PureComponent<PillsProps, PillsState> {
         super(props);
 
         this.state = {
-            selectedPill: null
+            selectedPill: props.selectedPill,
         };
     }
 
@@ -45,7 +46,7 @@ export class Pills extends React.PureComponent<PillsProps, PillsState> {
 
     private onPillPressed(pill: Pill) {
         this.setState({
-            selectedPill: pill
+            selectedPill: pill.key === this.state.selectedPill ? 0 : pill.key
         }, () => this.props.onPillPressed(pill))
     }
 
@@ -77,7 +78,7 @@ export class Pills extends React.PureComponent<PillsProps, PillsState> {
 
     private isPillSelected(pill: Pill) {
         return this.state.selectedPill ?
-            this.state.selectedPill.key === pill.key :
+            this.state.selectedPill === pill.key :
             false;
     }
 }

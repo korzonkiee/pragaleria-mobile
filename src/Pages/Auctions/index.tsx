@@ -11,15 +11,17 @@ import { l } from '../../Services/Language';
 
 export interface AuctionsProps {
     readonly auctions: AuctionsData;
+    readonly dateFilter: number;
     readonly getAuctions: () => void;
     readonly getAuctionsForCategory: (category: number) => void;
+    readonly setAuctionsDateFilter: (dateFilter: number) => void;
 }
 
 interface AuctionsState {
     readonly changingPill: boolean;
 }
 
-const pills: Pill[] = [
+const categoryPills: Pill[] = [
     { key: 1, value: "Sztuka Młoda" },
     { key: 2, value: "Sztuka Aktualna" },
     { key: 3, value: "Sztuka Współczesna" },
@@ -28,8 +30,18 @@ const pills: Pill[] = [
     { key: 6, value: "Wakacyjna" },
 ]
 
+const datePills: Pill[] = [
+    { key: 1, value: "Ten miesiąc" },
+    { key: 2, value: "Poprzedni miesiąć" },
+    { key: 3, value: "Ten rok" },
+    { key: 4, value: "Poprzedni rok" },
+    { key: 5, value: "Starsze" }
+]
+
 
 export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedProps, AuctionsState> {
+    private selectedCategory: number = 0;
+
     constructor(props: AuctionsProps & Nav.NavigationInjectedProps) {
         super(props);
 
@@ -66,14 +78,19 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 flex: 1,
                 backgroundColor: DirtyWhite,
             }}>
-                <Pills pills={pills} onPillPressed={this.onPillPressed} />
+                <Pills pills={categoryPills} onPillPressed={this.onCategoryPillPressed} />
+                <Pills pills={datePills} onPillPressed={this.onDatePillPressed} />
                 <AuctionsTabBar navigation={this.props.navigation} />
             </AppContainer>
         )
     }
 
-    private onPillPressed = (pill: Pill) => {
-        this.props.getAuctionsForCategory(pill.key);
-        this.setState({});
+    private onCategoryPillPressed = (pill: Pill) => {
+        this.props.getAuctionsForCategory(this.selectedCategory === pill.key ? 0 : pill.key);
+        this.selectedCategory = pill.key;
+    }
+
+    private onDatePillPressed = (pill: Pill) => {
+        this.props.setAuctionsDateFilter(this.props.dateFilter === pill.key ? Infinity : pill.key);
     }
 }

@@ -4,11 +4,18 @@ import * as Api from "../../Services/Api";
 import Logger from "../../Services/Logger";
 import { endTask, startTask } from "../Async";
 
+const setAuctionsDateFilterAction = createAction("AUCTIONS/SET_AUCTIONS_DATE_FILTER");
 const setAuctions = createAction("AUCTIONS/SET_AUCTIONS");
 const setAuctionsForCategory = createAction("AUCTIONS/SET_AUCTIONS_FOR_CATEGORY");
 const setAuctionsLoading = createAction("AUCTIONS/SET_AUCTIONS_LOADING");
 
 const TAG = "AUCTIONS";
+
+export function setAuctionsDateFilter(dateFilter: number) {
+    return async (dispatch: Dispatch<any>, _: any) => {
+        dispatch(setAuctionsDateFilterAction(dateFilter));
+    };
+}
 
 export function getAuctionsForCategory(category: number) {
     return async (dispatch: Dispatch<any>, _: any) => {
@@ -62,10 +69,16 @@ export const auctionsReducers: ReducerMap<AppState, any> = {
 
         return state;
     },
+    [setAuctionsDateFilterAction.toString()](state, { payload }) {
+        return {
+            ...state,
+            dateFilter: payload
+        }
+    },
     [setAuctionsForCategory.toString()](state, { payload }) {
         return {
             ...state,
-            selectedCategory: [payload.category],
+            selectedCategory: payload.category,
             categorizedAuctions: {
                 ...state.categorizedAuctions,
                 [payload.category]: {

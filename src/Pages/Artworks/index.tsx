@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { FlatList, Image, ScrollView, StyleProp, TextStyle, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import { FlatList, Image, TouchableWithoutFeedback, View } from 'react-native';
 import FadeIn from 'react-native-fade-in-image';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import AppText from '../../Components/AppText';
 import DataNotFound from '../../Components/DataNotFound';
 import FooterActivityIndicator from '../../Components/FooterActivityIndicator';
+import { Pills } from '../../Components/Pills';
 import ArtworksPlaceholder from '../../Components/Placeholders/ArtworksPlaceholder';
 import SearchBar from '../../Components/SearchBar';
-import { Black, DirtyWhite, LightBlack, LightGray, White } from '../../Resources/Colors';
+import { DirtyWhite, LightBlack, LightGray } from '../../Resources/Colors';
 import * as Routes from "../../Routes";
 import { l, lp } from '../../Services/Language';
 import { responsiveFontSize } from '../../Styles/Dimensions';
@@ -38,13 +39,12 @@ export interface ArtworksProps {
 }
 
 export interface ArtworksState {
-    readonly selectedTag: number;
     readonly searching: boolean;
     readonly keyword: string;
 }
 
 interface Pill {
-    key: Tag,
+    key: number,
     value: string
 };
 
@@ -58,11 +58,12 @@ const tags: Pill[] = [
 ]
 
 export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedProps, ArtworksState> {
+    private selectedTag: number = 0;
+
     constructor(props: ArtworksProps & Nav.NavigationInjectedProps) {
         super(props);
 
         this.state = {
-            selectedTag: 0,
             searching: false,
             keyword: ""
         };
@@ -79,19 +80,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
                     onSearchingStarted={this.onSearchingStarted}
                     placeholder={l("Artworks.Search.Placeholder")}
                 />
-                <ScrollView style={styles.pillsContainer}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}>
-                    {tags.map(pill => {
-                        return (<TouchableWithoutFeedback key={pill.key} onPress={() => this.handlePillPress(pill)}>
-                            <View style={[styles.pill, this.getSelectedPillContainerStyle(pill)]}>
-                                <AppText style={[styles.pillText, this.getSelectedPillTextStyle(pill)]}>
-                                    {pill.value}
-                                </AppText>
-                            </View>
-                        </TouchableWithoutFeedback>)
-                    })}
-                </ScrollView>
+                <Pills pills={tags} onPillPressed={this.handlePillPress} />
                 <View style={{
                     backgroundColor: DirtyWhite,
                     flex: 1
@@ -108,7 +97,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         if (this.state.searching && this.props.filteredArtworks.errorOccured) {
             content = (<DataNotFound
                 message={lp("Artists.Search.OfflineErrorForKeyword", this.state.keyword)}
-                retry={() => this.props.searchForArtworks(this.state.keyword, this.state.selectedTag)} />);
+                retry={() => this.props.searchForArtworks(this.state.keyword, this.selectedTag)} />);
         }
         else if (this.state.searching && this.props.filteredArtworks.data === null) {
             content = <ArtworksPlaceholder />
@@ -122,7 +111,7 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
         else if (this.props.artworks && !this.props.artworks.data && !this.props.artworks.loading) {
             content = <DataNotFound message={l("Artworks.NotFound")} />
         }
-        else if (this.state.selectedTag && this.state.selectedTag !== 0 && this.state.selectedTag !== this.props.selectedTag) {
+        else if (this.selectedTag && this.selectedTag !== 0 && this.selectedTag !== this.props.selectedTag) {
             content = <ArtworksPlaceholder />
         }
         else if ((this.props.artworks && this.props.artworks.data) ||
@@ -185,8 +174,6 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private navigateToArtwork = (artwork: Artwork) => {
-        // console.log(`Navigating to artwork ${artwork.id}`);
-
         this.props.navigation.push(Routes.ArtworkDetails, {
             artwork: artwork,
             artistId: artwork.author_id
@@ -212,12 +199,12 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
 
     private searchForArtworks = (text: string) => {
         if (text.length > 2) {
-            this.props.searchForArtworks(text, this.state.selectedTag);
+            this.props.searchForArtworks(text, this.selectedTag);
         } else {
             this.setState({
                 searching: false,
             }, () => {
-                this.props.getArtworks(this.state.selectedTag);
+                this.props.getArtworks(this.selectedTag);
             });
         }
     }
@@ -230,59 +217,16 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
             this.props.artworks.allLoaded)
             return;
 
-        // console.log(`Loading more artworks for tag ${this.state.selectedTag}`);
-        this.props.loadMoreArtworksForTag(this.state.selectedTag);
+        this.props.loadMoreArtworksForTag(this.selectedTag);
     }
 
-    private handlePillPress(pill: Pill) {
-        // console.log(`Tag ${pill.key} selected`);
+    private handlePillPress = (pill: Pill) => {
+        this.selectedTag = pill.key;
 
-        let selectedTag = this.state.selectedTag;
-
-        if (selectedTag === pill.key) {
-            selectedTag = 0;
+        if (this.state.searching) {
+            this.props.searchForArtworks(this.state.keyword, pill.key);
         } else {
-            selectedTag = pill.key;
-        }
-
-        this.setState({
-            selectedTag: selectedTag
-        }, () => {
-            if (this.state.searching) {
-                this.props.searchForArtworks(this.state.keyword, selectedTag);
-            } else {
-                this.props.getArtworks(selectedTag);
-            }
-        });
-    }
-
-    private getSelectedPillContainerStyle(pill: Pill): StyleProp<ViewStyle> {
-        const isSelected = this.state.selectedTag === pill.key;
-
-        if (isSelected) {
-            return {
-                backgroundColor: LightBlack,
-                elevation: 0
-            };
-        } else {
-            return {
-                backgroundColor: White,
-                elevation: 2
-            };
-        }
-    }
-
-    private getSelectedPillTextStyle(pill: Pill): StyleProp<TextStyle> {
-        const isSelected = this.state.selectedTag === pill.key;
-
-        if (isSelected) {
-            return {
-                color: White
-            };
-        } else {
-            return {
-                color: Black
-            };
+            this.props.getArtworks(pill.key);
         }
     }
 }
