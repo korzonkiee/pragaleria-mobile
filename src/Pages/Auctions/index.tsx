@@ -16,8 +16,7 @@ export interface AuctionsProps {
 }
 
 interface AuctionsState {
-    readonly index: number;
-    readonly routes: Array<any>;
+    readonly changingPill: boolean;
 }
 
 const pills: Pill[] = [
@@ -29,9 +28,14 @@ const pills: Pill[] = [
     { key: 6, value: "Wakacyjna" },
 ]
 
+
 export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedProps, AuctionsState> {
     constructor(props: AuctionsProps & Nav.NavigationInjectedProps) {
         super(props);
+
+        this.state = {
+            changingPill: false
+        };
     }
 
     componentDidMount() {
@@ -57,28 +61,19 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 retry={this.props.getAuctions} />)
         }
 
-        const currentAuctions = auctionsData.filter(auction => {
-            return auction.is_current;
-        });
-
-        const closedAuctions = auctionsData.filter(auction => {
-            return !auction.is_current;
-        });
-
         return (
             <AppContainer style={{
                 flex: 1,
                 backgroundColor: DirtyWhite,
             }}>
                 <Pills pills={pills} onPillPressed={this.onPillPressed} />
-                <AuctionsTabBar navigation={this.props.navigation}
-                    incomingAuctions={currentAuctions}
-                    closedAuctions={closedAuctions} />
+                <AuctionsTabBar navigation={this.props.navigation} />
             </AppContainer>
         )
     }
 
     private onPillPressed = (pill: Pill) => {
         this.props.getAuctionsForCategory(pill.key);
+        this.setState({});
     }
 }

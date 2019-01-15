@@ -4,14 +4,10 @@ import { createAppContainer, createMaterialTopTabNavigator } from "react-navigat
 import { Black, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import font from "../../Styles/Fonts";
-import { AuctionsList } from "../AuctionsList";
+import ClosedAuctionsList from "../ClosedAuctionsList";
+import IncomingAuctionsList from "../IncomingAuctionsList";
 
-interface AuctionsTabBarProps {
-    readonly incomingAuctions: Array<Auction>;
-    readonly closedAuctions: Array<Auction>;
-}
-
-export class AuctionsTabBar extends React.PureComponent<AuctionsTabBarProps & Nav.NavigationInjectedProps> {
+export class AuctionsTabBar extends React.PureComponent<Nav.NavigationInjectedProps> {
     render() {
         const tabBarStyle = {
             backBehavior: 'none',
@@ -31,12 +27,8 @@ export class AuctionsTabBar extends React.PureComponent<AuctionsTabBarProps & Na
         };
 
         const pages = {
-            [l("Auctions.Incoming")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.incomingAuctions}
-                artworksNotFoundMessage={l("Auctions.NoIncomingAuctions")} />,
-            [l("Auctions.Closed")]: () => <AuctionsList navigation={this.props.navigation}
-                artworks={this.props.closedAuctions}
-                artworksNotFoundMessage={l("Auctions.NoClosedAuctions")} />,
+            [l("Auctions.Incoming")]: () => <IncomingAuctionsList navigation={this.props.navigation} />,
+            [l("Auctions.Closed")]: () => <ClosedAuctionsList navigation={this.props.navigation} />,
         };
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));

@@ -13,16 +13,15 @@ import styles from './styles';
 
 
 export interface AuctionsListProps {
-    readonly artworks: Auction[];
-    readonly artworksNotFoundMessage: string;
+    readonly auctions: Auction[];
 }
 
 export class AuctionsList extends React.PureComponent<AuctionsListProps & Nav.NavigationInjectedProps> {
     render() {
-        if (this.props.artworks.length === 0) {
-            return (<DataNotFound message={this.props.artworksNotFoundMessage} />);
+        if (this.props.auctions.length === 0) {
+            return (<DataNotFound message={"Nie znaleziono"} />);
         } else {
-            return this.renderAuctions(this.props.artworks);
+            return this.renderAuctions(this.props.auctions);
         }
     }
 
