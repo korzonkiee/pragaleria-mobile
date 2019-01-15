@@ -33,6 +33,10 @@ class CustomChart extends LineChart {
     }
 }
 
+interface ArtworkSalesGraph {
+    [labels: string]: {}
+}
+
 interface ArtistStatisticsProps {
     readonly artworks: Artwork[];
 }
@@ -45,18 +49,19 @@ export class ArtistStatistics extends React.PureComponent<ArtistStatisticsProps 
 
         let statisticsData = this.props.artworks.reduce(
             (aggregatedData, currentArtwork) => {
-                if (currentArtwork.sold && currentArtwork.sold_price && currentArtwork.sold_price != "0,00") {
-                    const label = currentArtwork.title.slice(0, 10) + '.';
-                    const item = Number(currentArtwork.sold_price.replace(',', '.'));
-                    aggregatedData['labels'].push(label);
-                    aggregatedData['items'].push(item);
-                }
+                console.log(currentArtwork);
+                const label = currentArtwork.title.slice(0, 10) + '.';
+                let item = Number(currentArtwork.sold_price.replace(' ', '').replace(',', '.'));
+                aggregatedData['labels'].push(label);
+                aggregatedData['items'].push(item);
                 return aggregatedData;
             }, {
                 'labels': [],
                 'items': []
             }
         );
+
+        console.log(statisticsData);
 
         return <View style={{
             flex: 1,

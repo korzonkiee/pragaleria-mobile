@@ -49,7 +49,12 @@ export class AristDetailsTabBar extends React.PureComponent<AristDetailsTabBarPr
         };
 
         if (this.props.statisticsArtworks.length > 1) {
-            pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artworks={this.props.statisticsArtworks} />
+            const filtered = this.props.statisticsArtworks.filter(auction => {
+                return auction.sold && auction.sold_price && auction.sold_price != "0,00"
+            });
+            if (filtered.length > 1) {
+                pages[l("ArtistDetails.Statistics")] = () => <ArtistStatistics navigation={this.props.navigation} artworks={filtered} />
+            }
         }
 
         if (this.props.fetauredCatalogs.length > 1) {
