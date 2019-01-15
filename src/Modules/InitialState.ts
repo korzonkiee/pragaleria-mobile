@@ -22,6 +22,7 @@ export const initialState: AppState = {
     },
     categorizedAuctions: {},
     selectedCategory: 0,
+    dateFilter: 0,
     exhibitions: {
         data: [],
         loading: false

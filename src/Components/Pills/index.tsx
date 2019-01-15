@@ -46,7 +46,7 @@ export class Pills extends React.PureComponent<PillsProps, PillsState> {
 
     private onPillPressed(pill: Pill) {
         this.setState({
-            selectedPill: pill.key
+            selectedPill: pill.key === this.state.selectedPill ? 0 : pill.key
         }, () => this.props.onPillPressed(pill))
     }
 
