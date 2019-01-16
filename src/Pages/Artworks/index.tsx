@@ -221,12 +221,16 @@ export class Artworks extends Component<ArtworksProps & Nav.NavigationInjectedPr
     }
 
     private handlePillPress = (pill: Pill) => {
-        this.selectedTag = pill.key;
+        if (this.selectedTag === pill.key) {
+            this.selectedTag = 0;
+        } else {
+            this.selectedTag = pill.key;
+        }
 
         if (this.state.searching) {
-            this.props.searchForArtworks(this.state.keyword, pill.key);
+            this.props.searchForArtworks(this.state.keyword, this.selectedTag);
         } else {
-            this.props.getArtworks(pill.key);
+            this.props.getArtworks(this.selectedTag);
         }
     }
 }
