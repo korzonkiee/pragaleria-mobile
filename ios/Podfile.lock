@@ -67,6 +67,10 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - RNGestureHandler (1.0.10):
+    - React
+  - RNSVG (8.0.10):
+    - React
   - yoga (0.56.1.React)
 
 DEPENDENCIES:
@@ -86,6 +90,8 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler/ios`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -102,6 +108,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-maps/"
   react-native-maps:
     :path: "../node_modules/react-native-maps/"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler/ios"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -112,8 +122,10 @@ SPEC CHECKSUMS:
   react-native-camera: eac1e8cc7523273a2a11956d0e5dac08296cf4b0
   react-native-google-maps: b946d62e25dc66097921ed82520e45b0b081768a
   react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
+  RNGestureHandler: 968e4453152673aedcbbb7c1ada6700c214cea7a
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 99fd5c593f0ba37c1ea981e6d9a429835dd42346
+PODFILE CHECKSUM: ba97ae05f03bcdb7670d41e42cc7af3350753116
 
 COCOAPODS: 1.5.3
