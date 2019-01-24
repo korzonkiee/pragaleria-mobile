@@ -1,4 +1,7 @@
 PODS:
+  - BugfenderSDK (1.6.2):
+    - BugfenderSDK/Swift (= 1.6.2)
+  - BugfenderSDK/Swift (1.6.2)
   - Google-Maps-iOS-Utils (2.1.0):
     - Google-Maps-iOS-Utils/Clustering (= 2.1.0)
     - Google-Maps-iOS-Utils/Geometry (= 2.1.0)
@@ -74,6 +77,7 @@ PODS:
   - yoga (0.56.1.React)
 
 DEPENDENCIES:
+  - BugfenderSDK (~> 1.6)
   - GoogleMaps
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-google-maps (from `../node_modules/react-native-maps/`)
@@ -96,6 +100,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BugfenderSDK
     - Google-Maps-iOS-Utils
     - GoogleMaps
 
@@ -116,6 +121,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  BugfenderSDK: 4cf788204d45c2a343af624a23713f5febc3db20
   Google-Maps-iOS-Utils: c32891ff472eaaa1fca032beedafa1a013af7875
   GoogleMaps: c087b8e5dfe87ca6ebf59adb9b4894a4146bec4f
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
@@ -126,6 +132,6 @@ SPEC CHECKSUMS:
   RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: ba97ae05f03bcdb7670d41e42cc7af3350753116
+PODFILE CHECKSUM: 50e19a61fb0a2a6e8f61f53f0a093c762c7e9c05
 
 COCOAPODS: 1.5.3

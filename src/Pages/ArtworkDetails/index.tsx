@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Image, ImageBackground, ScrollView, TouchableOpacity, View } from 'react-native';
-import FadeIn from 'react-native-fade-in-image';
+import { ImageBackground, ScrollView, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
@@ -82,10 +81,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
     }
 
     private renderFullScreenImageView = (artwork: Artwork) => {
-        return (<FadeIn style={styles.artworkFullResImage} renderPlaceholderContent={(
-            <Image style={{ flex: 1 }} source={{ uri: artwork.image_medium_thumbnail || artwork.image_thumbnail }}
-                blurRadius={2} />
-        )}>
+        return (<ImageBackground style={{ flex: 1 }} source={{ uri: artwork.image_medium_thumbnail || artwork.image_thumbnail }}
+            blurRadius={2}>
             <ImageBackground style={styles.artworkFullImage}
                 source={{
                     uri: artwork.image_medium || artwork.image_large || artwork.image_original
@@ -100,7 +97,8 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         backgroundColor: White,
                         borderBottomColor: LightGray,
                         borderBottomWidth: 1,
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        zIndex: 999,
                     }} onPress={() => this.navigateToArtist()}>
                         <AppText style={{
                             color: LightBlack,
@@ -167,6 +165,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                         : <View />}
                 </View>
             </ImageBackground>
-        </FadeIn>);
+        </ImageBackground>
+        );
     }
 }

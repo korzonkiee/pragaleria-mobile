@@ -49,7 +49,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		95D8D069194A4451B488EED8 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAEF03CB8B0F4EF38C89E114 /* MaterialIcons.ttf */; };
 		9A913A3CE09F4D3F99D32039 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */; };
-		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		BFDD82A421FA53C5004B7E7C /* BugfenderModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD82A321FA53C5004B7E7C /* BugfenderModule.m */; };
 		C0F0DA9F27E64B409A67DDE5 /* libRNRearCameraCharacteristicsDisplayMetrics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51F4E572391B4785A9AF74A1 /* libRNRearCameraCharacteristicsDisplayMetrics.a */; };
 		C774C6D544284960B520DA4A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */; };
 		E1979E96277E41D7A15DA6B3 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */; };
@@ -410,6 +410,9 @@
 		8A0FA9A8E0E84DF58A2E51DD /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BB665B2CB1DC4A38B7DB7C0D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		BFDD827621FA5164004B7E7C /* libBugfenderSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBugfenderSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFDD82A221FA53C5004B7E7C /* BugfenderModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BugfenderModule.h; path = pragaleria/BugfenderModule.h; sourceTree = "<group>"; };
+		BFDD82A321FA53C5004B7E7C /* BugfenderModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BugfenderModule.m; path = pragaleria/BugfenderModule.m; sourceTree = "<group>"; };
 		C13D8E3E8B9F4DF7BCA52D0A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		DAEF03CB8B0F4EF38C89E114 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -432,7 +435,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -605,6 +607,8 @@
 		13B07FAE1A68108700A75B9A /* pragaleria */ = {
 			isa = PBXGroup;
 			children = (
+				BFDD82A221FA53C5004B7E7C /* BugfenderModule.h */,
+				BFDD82A321FA53C5004B7E7C /* BugfenderModule.m */,
 				0F9551AA21B5EDFE0023D62C /* ConfigModule.h */,
 				0F9551A821B5EDEA0023D62C /* ConfigModule.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -644,6 +648,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFDD827621FA5164004B7E7C /* libBugfenderSDK.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				3350CE07B4B44A3C226A258C /* libPods-pragaleria.a */,
 			);
@@ -854,7 +859,8 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = C2W2TN8355;
+						DevelopmentTeam = WVC9B34MTU;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1375,6 +1381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDD82A421FA53C5004B7E7C /* BugfenderModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				0F9551A921B5EDEA0023D62C /* ConfigModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -1490,9 +1497,11 @@
 			baseConfigurationReference = 1D43893C6A2B93D3699011F1 /* Pods-pragaleria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = C2W2TN8355;
+				DEVELOPMENT_TEAM = WVC9B34MTU;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1507,7 +1516,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.123;
 				PRODUCT_NAME = pragaleria;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1517,8 +1528,10 @@
 			baseConfigurationReference = 3F3B168F85B510BBE16F00F2 /* Pods-pragaleria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C2W2TN8355;
+				DEVELOPMENT_TEAM = WVC9B34MTU;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
@@ -1533,7 +1546,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.123;
 				PRODUCT_NAME = pragaleria;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

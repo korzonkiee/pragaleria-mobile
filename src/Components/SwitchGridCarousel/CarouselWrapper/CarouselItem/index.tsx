@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ImageBackground, TouchableNativeFeedback, View } from 'react-native';
+import { Image, ImageBackground, TouchableWithoutFeedback, View } from 'react-native';
 import FadeIn from "react-native-fade-in-image";
 import * as Nav from "react-navigation";
 import getSmallestImageSize from '../../../../Helpers/ImageHelpers';
@@ -18,7 +18,7 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
     render() {
         const { catalogItem: item } = this.props;
         return (
-            <TouchableNativeFeedback
+            <TouchableWithoutFeedback
                 onPress={() => {
                     this.props.navigation.push(Routes.ArtworkDetails, {
                         artwork: item,
@@ -45,7 +45,7 @@ export class CarouselItem extends React.PureComponent<CarouselItemProps & Nav.Na
                                 this.renderTitleBox(l("Auctions.CarouselItem.AfterAuctionPrice"), `${item.after_auction_price || item.initial_price} PLN`)}
                     </View>
                 </View>
-            </TouchableNativeFeedback>
+            </TouchableWithoutFeedback>
         )
     }
 

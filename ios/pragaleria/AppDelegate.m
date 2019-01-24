@@ -9,6 +9,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <BugfenderSDK/BugfenderSDK.h>
 #import "RNSplashScreen.h"
 
 #import <GoogleMaps/GoogleMaps.h>
@@ -18,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [GMSServices provideAPIKey:@"AIzaSyApbUtgXkxuCvR29d7nCYtpeqXeJAsz4G8"];
+
+  [Bugfender activateLogger:@"0996ERklnGG9OTj1URFERTBl6EOVKsjK"];
+  [Bugfender enableUIEventLogging];
+  [Bugfender enableCrashReporting];
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
