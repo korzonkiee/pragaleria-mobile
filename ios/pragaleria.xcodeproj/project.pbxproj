@@ -1516,7 +1516,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.debug;
 				PRODUCT_NAME = pragaleria;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1546,7 +1546,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pragaleria.debug;
 				PRODUCT_NAME = pragaleria;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
