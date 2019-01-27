@@ -5,11 +5,11 @@ import Orientation from 'react-native-orientation';
 import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import Image from 'react-native-scalable-image';
 import Icon from "react-native-vector-icons/Entypo";
+import { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
 import * as Nav from "react-navigation";
-import AppText from "../../Components/AppText";
-import {Black, White, DirtyWhite, LightBlack, LightGrayVisible} from "../../Resources/Colors";
 import images from "../../Assets/Images";
-import {default as MaterialIcon} from "react-native-vector-icons/MaterialIcons";
+import AppText from "../../Components/AppText";
+import { Black, DirtyWhite, LightBlack, LightGrayVisible, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import Draggable from './Draggable';
@@ -69,8 +69,8 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         // console.log("Area: ", imageWidth * imageHeight);
 
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
-                               imageSource={{uri: this.props.imageUrl}} offsetX={imageWidth / 2}
-                               offsetY={imageHeight / 2} frame={this.state.frame}
+            imageSource={{ uri: this.props.imageUrl }} offsetX={imageWidth / 2}
+            offsetY={imageHeight / 2} frame={this.state.frame}
         />;
 
 
@@ -78,11 +78,11 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     render() {
-        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff"/>;
-        let takePictureAgainIcon = <Icon name="ccw" size={30} color="#ffffff"/>;
+        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff" />;
+        let takePictureAgainIcon = <Icon name="ccw" size={30} color="#ffffff" />;
 
         let takePhotoButton = <TouchableOpacity
-            hitSlop={{top: 50, bottom: 50, left: 50, right: 50}}
+            hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
             onPress={this.takePicture.bind(this)}>
             {takePictureIcon}
         </TouchableOpacity>;
@@ -92,12 +92,13 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         </TouchableOpacity>;
 
         let hideShowFrameButton = <TouchableOpacity
+            style={{ padding: 16 }}
             onPress={() => this.hideShowFrame()}>
             {this.state.frame ?
-                <MaterialIcon name='check-circle' style={{marginLeft: 16}} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White}/>
-                : <MaterialIcon name='radio-button-unchecked' style={{marginLeft: 16}} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White}/>
+                <MaterialIcon name='check-circle' style={{ marginLeft: 16 }} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White} />
+                : <MaterialIcon name='radio-button-unchecked' style={{ marginLeft: 16 }} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White} />
             }
-            <AppText style={{ color: DirtyWhite}}>{l("Camera.ShowFrame")}</AppText>
+            <AppText style={{ color: DirtyWhite }}>{l("Camera.ShowFrame")}</AppText>
 
         </TouchableOpacity>;
 
@@ -219,7 +220,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
                     </View>
                     {!this.state.displayingCameraPreview && this.state.image}
                     <View style={styles.frameContainer}>
-                        {!this.state.displayingCameraPreview && hideShowFrameButton}
+                        {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
                     </View>
                     <View style={styles.captureContainer}>
                         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
@@ -273,7 +274,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     };
 
     hideShowFrame() {
-        this.setState(prevState => ({frame: !prevState.frame}));
+        this.setState(prevState => ({ frame: !prevState.frame }));
         Orientation.getOrientation((_, orientation) => {
             this.setUpImage(orientation);
         });

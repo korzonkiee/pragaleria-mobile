@@ -11,10 +11,15 @@
 #import <React/RCTRootView.h>
 #import <BugfenderSDK/BugfenderSDK.h>
 #import "RNSplashScreen.h"
+#import "Orientation.h" 
 
 #import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

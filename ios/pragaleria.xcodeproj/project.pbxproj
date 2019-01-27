@@ -50,6 +50,7 @@
 		95D8D069194A4451B488EED8 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DAEF03CB8B0F4EF38C89E114 /* MaterialIcons.ttf */; };
 		9A913A3CE09F4D3F99D32039 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */; };
 		BFDD82A421FA53C5004B7E7C /* BugfenderModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BFDD82A321FA53C5004B7E7C /* BugfenderModule.m */; };
+		BFDD920121FA5B17007B55FF /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDD91E221FA5B00007B55FF /* libRCTOrientation.a */; };
 		C0F0DA9F27E64B409A67DDE5 /* libRNRearCameraCharacteristicsDisplayMetrics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51F4E572391B4785A9AF74A1 /* libRNRearCameraCharacteristicsDisplayMetrics.a */; };
 		C774C6D544284960B520DA4A /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD3A626D1EB4EDE9AB253D4 /* Montserrat-Light.ttf */; };
 		E1979E96277E41D7A15DA6B3 /* Montserrat-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AF296166B7D418A9B3EE0ED /* Montserrat-Thin.ttf */; };
@@ -365,6 +366,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		BFDD91E121FA5B00007B55FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDD91D121FA5B00007B55FF /* RCTOrientation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTOrientation;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -413,6 +421,7 @@
 		BFDD827621FA5164004B7E7C /* libBugfenderSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBugfenderSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFDD82A221FA53C5004B7E7C /* BugfenderModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BugfenderModule.h; path = pragaleria/BugfenderModule.h; sourceTree = "<group>"; };
 		BFDD82A321FA53C5004B7E7C /* BugfenderModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BugfenderModule.m; path = pragaleria/BugfenderModule.m; sourceTree = "<group>"; };
+		BFDD91D121FA5B00007B55FF /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
 		C13D8E3E8B9F4DF7BCA52D0A /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		DAEF03CB8B0F4EF38C89E114 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		DB3678C1F58A4B7D91A54BAC /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -435,6 +444,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDD920121FA5B17007B55FF /* libRCTOrientation.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -648,6 +658,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFDD91D121FA5B00007B55FF /* RCTOrientation.xcodeproj */,
 				BFDD827621FA5164004B7E7C /* libBugfenderSDK.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				3350CE07B4B44A3C226A258C /* libPods-pragaleria.a */,
@@ -755,6 +766,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFDD91D221FA5B00007B55FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFDD91E221FA5B00007B55FF /* libRCTOrientation.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -912,6 +931,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = BFDD91D221FA5B00007B55FF /* Products */;
+					ProjectRef = BFDD91D121FA5B00007B55FF /* RCTOrientation.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1255,6 +1278,13 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		BFDD91E221FA5B00007B55FF /* libRCTOrientation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTOrientation.a;
+			remoteRef = BFDD91E121FA5B00007B55FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1508,6 +1538,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
+					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/",
 				);
 				INFOPLIST_FILE = pragaleria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1538,6 +1569,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-rear-camera-characteristics-display-metrics/ios",
+					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/",
 				);
 				INFOPLIST_FILE = pragaleria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
