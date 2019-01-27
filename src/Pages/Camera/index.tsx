@@ -20,15 +20,29 @@ export interface CameraProps {
     imageDimension: [number, number]
 }
 
+interface CameraState {
+    readonly image: any;
+    readonly displayingCameraPreview: boolean;
+    readonly appState: any;
+    readonly wallDistance: number;
+    readonly tutorial: boolean;
+    readonly frame: boolean;
+}
+
 const PORTRAIT = 'PORTRAIT';
 const LANDSCAPE = 'LANDSCAPE';
 
-export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps> {
+export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps, CameraState> {
     private cameraInstance: RNCamera | null;
+    private oppositePOV: number;
     private windowDimension = Dimensions.get('window');
 
-    constructor(CameraProps) {
-        super(CameraProps);
+    constructor(props: CameraProps & Nav.NavigationInjectedProps) {
+        super(props);
+
+        this.cameraInstance = null;
+        this.oppositePOV = 0;
+
         this.state = {
             image: null,
             displayingCameraPreview: true,
@@ -58,21 +72,10 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         let imageWidth = windowShorter / oppositePOVCm * this.props.imageDimension[1];
         let imageHeight = imageWidth * imageRatio;
 
-
-        // console.log("Orientation: ", orientation);
-        // console.log("Image org px: ", this.props.imageDimension);
-        // console.log("oppositePOV: ", oppositePOVCm);
-        // console.log("Image height:", imageHeight, "/", windowLonger);
-        // console.log("Image width:", imageWidth, "/", windowShorter);
-        // console.log("Window width: ", windowShorter);
-        // console.log("Window height: ", windowLonger);
-        // console.log("Area: ", imageWidth * imageHeight);
-
         let image = <Draggable renderWidth={imageWidth} renderHeight={imageHeight} renderShape='image' reverse={false}
             imageSource={{ uri: this.props.imageUrl }} offsetX={imageWidth / 2}
             offsetY={imageHeight / 2} frame={this.state.frame}
         />;
-
 
         this.setState({ image: image })
     }
@@ -232,7 +235,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
 
     sliderOnValueChange(val: number) {
         this.setState({ wallDistance: val });
-        if (!this.displayingCameraPreview) {
+        if (!this.state.displayingCameraPreview) {
             Orientation.getOrientation((_, orientation) => {
                 this.setUpImage(orientation);
             });
@@ -251,19 +254,19 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
     }
 
     goBackPreview() {
-        this.cameraInstance.resumePreview();
+        this.cameraInstance!.resumePreview();
         this.setState({ displayingCameraPreview: true, image: null });
         Orientation.removeOrientationListener(this._orientationDidChange);
         AppState.removeEventListener('change', this._handleAppStateChange);
     }
 
-    takePicture = async function () {
+    private takePicture = async () => {
         const options = {
             pauseAfterCapture: true,
             exif: true
         };
         this.setState({ displayingCameraPreview: false });
-        const image = await this.cameraInstance.takePictureAsync(options);
+        const image = await this.cameraInstance!.takePictureAsync(options);
         // console.log(image);
         Orientation.getOrientation((_, orientation) => {
             this.setUpImage(orientation);
@@ -293,7 +296,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps>
         return [windowHeight, windowWidth]
     }
 
-    _handleAppStateChange = (nextAppState) => {
+    _handleAppStateChange = (nextAppState: any) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
             this.goBackPreview();
         }
