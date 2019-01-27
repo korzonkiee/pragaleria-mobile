@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { AppState, Dimensions, Platform, TouchableOpacity, View } from 'react-native';
+import { AppState, Dimensions, Platform, View } from 'react-native';
 import { RNCamera } from "react-native-camera";
 import Orientation from 'react-native-orientation';
-import Image from 'react-native-scalable-image';
-import Icon from "react-native-vector-icons/Entypo";
-import { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
+import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import * as Nav from "react-navigation";
-import images from "../../Assets/Images";
 import AppSlider from '../../Components/AppSlider';
-import AppText from "../../Components/AppText";
-import { Black, DirtyWhite, LightGrayVisible, White } from "../../Resources/Colors";
+import CameraButton from '../../Components/CameraButton';
+import CameraTutorial from '../../Components/CameraTutorial';
 import { l } from "../../Services/Language";
-import { responsiveFontSize } from "../../Styles/Dimensions";
 import Draggable from './Draggable';
 
 export interface CameraProps {
@@ -80,83 +76,19 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
     }
 
     render() {
-        let takePictureIcon = <Icon name="camera" size={30} color="#ffffff" />;
-        let takePictureAgainIcon = <Icon name="ccw" size={30} color="#ffffff" />;
+        let takePhotoButton = <CameraButton onPress={this.takePicture} title={"Zdjęcie"} icon={"camera-alt"} />;
+        let goBackButton = <CameraButton onPress={this.goBackPreview} title={"Ponów"} icon={"refresh"} />;
 
-        let takePhotoButton = <TouchableOpacity
-            hitSlop={{ top: 50, bottom: 50, left: 50, right: 50 }}
-            onPress={this.takePicture.bind(this)}>
-            {takePictureIcon}
-        </TouchableOpacity>;
-        let goBackButton = <TouchableOpacity
-            onPress={() => this.goBackPreview()}>
-            {takePictureAgainIcon}
-        </TouchableOpacity>;
-
-        let hideShowFrameButton = <TouchableOpacity
-            style={{ padding: 16 }}
-            onPress={() => this.hideShowFrame()}>
-            {this.state.frame ?
-                <MaterialIcon name='check-circle' style={{ marginLeft: 16 }} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White} />
-                : <MaterialIcon name='radio-button-unchecked' style={{ marginLeft: 16 }} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={White} />
-            }
-            <AppText style={{ color: DirtyWhite }}>{l("Camera.ShowFrame")}</AppText>
-
-        </TouchableOpacity>;
+        let hideShowFrameButton = this.state.frame ?
+            <CameraButton icon={'check-circle'} title={l("Camera.ShowFrame")} onPress={this.hideShowFrame} /> :
+            <CameraButton icon={'radio-button-unchecked'} title={l("Camera.ShowFrame")} onPress={this.hideShowFrame} />
 
         if (this.state.tutorial) {
-            return (<View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <Image source={images.tutorialImg} width={330} />
-                <AppSlider step={10} min={50} max={500}
-                    initialValue={this.state.wallDistance}
-                    onSlidingComplete={this.sliderOnValueChange} />
-                <AppText style={{
-                    color: Black,
-                    fontSize: responsiveFontSize(2),
-                    textAlign: 'auto',
-                    marginBottom: 10
-                }}>
-                    {this.state.wallDistance}cm
-                        </AppText>
-                <AppText style={{
-                    color: Black,
-                    fontSize: responsiveFontSize(2),
-                    textAlign: 'center',
-                    marginLeft: 20,
-                    marginRight: 20,
-                }}>
-                    {l("Camera.SelectDistance")}
-                </AppText>
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: LightGrayVisible,
-                        alignSelf: 'center',
-                        margin: 8,
-                        paddingVertical: 8,
-                        paddingHorizontal: 24,
-                        borderRadius: 10,
-                        marginTop: 30,
-                    }}
-                    onPress={() => this.setState({ tutorial: false })}>
-                    <View style={{
-                        flexDirection: 'row',
-                    }}>
-                        <AppText style={{
-                            color: Black,
-                            fontSize: responsiveFontSize(2),
-                            textAlign: 'center',
-                            width: 80,
-                        }}>
-                            Ok
-                                </AppText>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            )
+            return (<CameraTutorial initialWallDistance={this.state.wallDistance}
+                onTutorialCompleted={wallDistance => this.setState({
+                    tutorial: false,
+                    wallDistance: wallDistance
+                })} />)
         }
         else {
             return (
@@ -164,7 +96,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
                     ref={ref => {
                         this.cameraInstance = ref;
                     }}
-                    style={{ flex: 1, alignItems: 'center' }}
+                    style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}
                     type={RNCamera.Constants.Type.back}
                     permissionDialogTitle={'Permission to use camera'}
                     permissionDialogMessage={'We need your permission to use your camera phone'}
@@ -172,33 +104,17 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
                     <AppSlider style={{ marginTop: 32 }} step={10} min={50} max={500}
                         initialValue={this.state.wallDistance}
                         onSlidingComplete={this.sliderOnValueChange} />
+
+                    {!this.state.displayingCameraPreview && this.state.image}
+                    <View style={{ margin: 16, flexDirection: 'row', width: '100%' }}>
+                        <CameraButton style={{ flex: 1 }} icon={'arrow-back'} title={'Wróć'} onPress={this.goBack} />
+                        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
+                            {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
+                            {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
+                        </View>
+                        <View style={{ flex: 1, alignSelf: 'flex-end' }} />
+                    </View>
                 </RNCamera>
-                // <View
-                //     style={{ flex: 1 }}
-                //     animationType="fade"
-                //     transparent={false}
-                //     visible={true}
-                //     onRequestClose={() => this.props.navigation.goBack()}>
-                //     {
-                //     }
-                //     <View style={styles.slider}>
-                //
-                //         <AppText style={{
-                //             color: Black,
-                //             fontSize: responsiveFontSize(2),
-                //             textAlign: 'auto',
-                //             marginBottom: 10
-                //         }}>
-                //             {this.state.wallDistance}cm
-                //         </AppText>
-                //     </View>
-                //     <View style={styles.captureContainer}>
-                //         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
-                //     </View>
-                //     {/* <View style={styles.frameContainer}>
-                //         {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
-                //     </View> */}
-                // </View>
             )
         }
     }
@@ -223,7 +139,11 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
         return oppositvePOV
     }
 
-    goBackPreview() {
+    private goBack = () => {
+        this.props.navigation.goBack();
+    }
+
+    private goBackPreview = () => {
         this.cameraInstance!.resumePreview();
         this.setState({ displayingCameraPreview: true, image: null });
         Orientation.removeOrientationListener(this._orientationDidChange);
@@ -246,7 +166,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
 
     };
 
-    hideShowFrame() {
+    private hideShowFrame = () => {
         this.setState(prevState => ({ frame: !prevState.frame }));
         Orientation.getOrientation((_, orientation) => {
             this.setUpImage(orientation);
