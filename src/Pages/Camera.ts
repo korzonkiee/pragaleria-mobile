@@ -1,9 +1,8 @@
-import {connect} from "react-redux";
-import {ThunkDispatch} from "../Helpers/StateHelpers";
-import {Camera, CameraProps} from "./Camera/index";
-import {AppState} from "../Modules/Async/AsyncStat";
-import * as Routes from "../Routes";
 import * as Nav from "react-navigation";
+import { connect } from "react-redux";
+import { ThunkDispatch } from "../Helpers/StateHelpers";
+import * as Routes from "../Routes";
+import { Camera, CameraProps } from "./Camera/index";
 
 export default connect(
     (state: AppState, ownProps: Nav.NavigationInjectedProps): StateProps<CameraProps> => {

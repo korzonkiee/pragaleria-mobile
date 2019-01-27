@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { AppState, Dimensions, Modal as RNModal, Platform, Slider, TouchableOpacity, View } from 'react-native';
+import { AppState, Dimensions, Platform, TouchableOpacity, View } from 'react-native';
 import { RNCamera } from "react-native-camera";
 import Orientation from 'react-native-orientation';
-import RNRearCameraCharacteristicsDisplayMetrics from 'react-native-rear-camera-characteristics-display-metrics';
 import Image from 'react-native-scalable-image';
 import Icon from "react-native-vector-icons/Entypo";
 import { default as MaterialIcon } from "react-native-vector-icons/MaterialIcons";
 import * as Nav from "react-navigation";
 import images from "../../Assets/Images";
+import AppSlider from '../../Components/AppSlider';
 import AppText from "../../Components/AppText";
-import { Black, DirtyWhite, LightBlack, LightGrayVisible, White } from "../../Resources/Colors";
+import { Black, DirtyWhite, LightGrayVisible, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import { responsiveFontSize } from "../../Styles/Dimensions";
 import Draggable from './Draggable';
-import { styles } from "./styles";
 
 export interface CameraProps {
     imageUrl: string,
@@ -106,134 +105,105 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
         </TouchableOpacity>;
 
         if (this.state.tutorial) {
-            return (
-                <RNModal
-                    animationType="fade"
-                    transparent={false}
-                    visible={true}
-                    onRequestClose={() => this.props.navigation.goBack()}>
-                    {<View style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
-                        <Image source={images.tutorialImg} width={330} />
-                        <Slider
-                            style={{
-                                width: 260, left: 40, transform: [
-                                    { rotateZ: '-180deg' },
-                                ]
-                            }}
-                            minimumTrackTintColor={DirtyWhite}
-                            maximumTrackTintColor={LightBlack}
-                            thumbTintColor={LightBlack}
-                            step={10}
-                            minimumValue={50}
-                            maximumValue={500}
-                            value={this.state.wallDistance}
-                            onSlidingComplete={val => this.setState({ wallDistance: val })}
-                        />
-                        <AppText style={{
-                            color: Black,
-                            fontSize: responsiveFontSize(2),
-                            textAlign: 'auto',
-                            marginBottom: 10
-                        }}>
-                            {this.state.wallDistance}cm
+            return (<View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Image source={images.tutorialImg} width={330} />
+                <AppSlider step={10} min={50} max={500}
+                    initialValue={this.state.wallDistance}
+                    onSlidingComplete={this.sliderOnValueChange} />
+                <AppText style={{
+                    color: Black,
+                    fontSize: responsiveFontSize(2),
+                    textAlign: 'auto',
+                    marginBottom: 10
+                }}>
+                    {this.state.wallDistance}cm
                         </AppText>
+                <AppText style={{
+                    color: Black,
+                    fontSize: responsiveFontSize(2),
+                    textAlign: 'center',
+                    marginLeft: 20,
+                    marginRight: 20,
+                }}>
+                    {l("Camera.SelectDistance")}
+                </AppText>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: LightGrayVisible,
+                        alignSelf: 'center',
+                        margin: 8,
+                        paddingVertical: 8,
+                        paddingHorizontal: 24,
+                        borderRadius: 10,
+                        marginTop: 30,
+                    }}
+                    onPress={() => this.setState({ tutorial: false })}>
+                    <View style={{
+                        flexDirection: 'row',
+                    }}>
                         <AppText style={{
                             color: Black,
                             fontSize: responsiveFontSize(2),
                             textAlign: 'center',
-                            marginLeft: 20,
-                            marginRight: 20,
+                            width: 80,
                         }}>
-                            {l("Camera.SelectDistance")}
-                        </AppText>
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: LightGrayVisible,
-                                alignSelf: 'center',
-                                margin: 8,
-                                paddingVertical: 8,
-                                paddingHorizontal: 24,
-                                borderRadius: 10,
-                                marginTop: 30,
-                            }}
-                            onPress={() => this.setState({ tutorial: false })}>
-                            <View style={{
-                                flexDirection: 'row',
-                            }}>
-                                <AppText style={{
-                                    color: Black,
-                                    fontSize: responsiveFontSize(2),
-                                    textAlign: 'center',
-                                    width: 80,
-                                }}>
-                                    Ok
+                            Ok
                                 </AppText>
-                            </View>
-                        </TouchableOpacity>
                     </View>
-                    }
-                </RNModal>
+                </TouchableOpacity>
+            </View>
             )
         }
         else {
             return (
-                <RNModal
-                    animationType="fade"
-                    transparent={false}
-                    visible={true}
-                    onRequestClose={() => this.props.navigation.goBack()}>
-                    {<RNCamera
-                        ref={ref => {
-                            this.cameraInstance = ref;
-                        }}
-                        style={styles.preview}
-                        type={RNCamera.Constants.Type.back}
-                        permissionDialogTitle={'Permission to use camera'}
-                        permissionDialogMessage={'We need your permission to use your camera phone'}
-                    />
-                    }
-                    <View style={styles.slider}>
-                        <Slider
-                            style={{ width: 255, transform: [{ rotateZ: '-180deg' }] }}
-                            minimumTrackTintColor={DirtyWhite}
-                            maximumTrackTintColor={LightBlack}
-                            thumbTintColor={LightBlack}
-                            step={10}
-                            minimumValue={50}
-                            maximumValue={500}
-                            value={this.state.wallDistance}
-                            onSlidingComplete={val => this.sliderOnValueChange(val)}
-                        />
-                        <AppText style={{
-                            color: Black,
-                            fontSize: responsiveFontSize(2),
-                            textAlign: 'auto',
-                            marginBottom: 10
-                        }}>
-                            {this.state.wallDistance}cm
-                        </AppText>
-                    </View>
-                    {!this.state.displayingCameraPreview && this.state.image}
-                    <View style={styles.frameContainer}>
-                        {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
-                    </View>
-                    <View style={styles.captureContainer}>
-                        {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
-                    </View>
-                </RNModal>
+                <RNCamera
+                    ref={ref => {
+                        this.cameraInstance = ref;
+                    }}
+                    style={{ flex: 1, alignItems: 'center' }}
+                    type={RNCamera.Constants.Type.back}
+                    permissionDialogTitle={'Permission to use camera'}
+                    permissionDialogMessage={'We need your permission to use your camera phone'}
+                >
+                    <AppSlider style={{ marginTop: 32 }} step={10} min={50} max={500}
+                        initialValue={this.state.wallDistance}
+                        onSlidingComplete={this.sliderOnValueChange} />
+                </RNCamera>
+                // <View
+                //     style={{ flex: 1 }}
+                //     animationType="fade"
+                //     transparent={false}
+                //     visible={true}
+                //     onRequestClose={() => this.props.navigation.goBack()}>
+                //     {
+                //     }
+                //     <View style={styles.slider}>
+                //
+                //         <AppText style={{
+                //             color: Black,
+                //             fontSize: responsiveFontSize(2),
+                //             textAlign: 'auto',
+                //             marginBottom: 10
+                //         }}>
+                //             {this.state.wallDistance}cm
+                //         </AppText>
+                //     </View>
+                //     <View style={styles.captureContainer}>
+                //         {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
+                //     </View>
+                //     {/* <View style={styles.frameContainer}>
+                //         {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
+                //     </View> */}
+                // </View>
             )
         }
     }
 
-    sliderOnValueChange(val: number) {
+    private sliderOnValueChange = (val: number) => {
         this.setState({ wallDistance: val });
         if (!this.state.displayingCameraPreview) {
             Orientation.getOrientation((_, orientation) => {
