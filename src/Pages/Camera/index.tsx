@@ -17,6 +17,7 @@ export interface CameraProps {
 
 interface CameraState {
     readonly image: any;
+    readonly backgroundImage: string | null;
     readonly displayingCameraPreview: boolean;
     readonly appState: any;
     readonly wallDistance: number;
@@ -39,6 +40,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
         this.oppositePOV = 0;
 
         this.state = {
+            backgroundImage: null,
             image: null,
             displayingCameraPreview: true,
             appState: AppState.currentState,
@@ -76,6 +78,7 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
     }
 
     render() {
+        console.log("Render");
         let takePhotoButton = <CameraButton onPress={this.takePicture} title={"Zdjęcie"} icon={"camera-alt"} />;
         let goBackButton = <CameraButton onPress={this.goBackPreview} title={"Ponów"} icon={"refresh"} />;
 
@@ -92,29 +95,33 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
         }
         else {
             return (
-                <RNCamera
-                    ref={ref => {
-                        this.cameraInstance = ref;
-                    }}
-                    style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}
-                    type={RNCamera.Constants.Type.back}
-                    permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}
-                >
-                    <AppSlider style={{ marginTop: 32 }} step={10} min={50} max={500}
-                        initialValue={this.state.wallDistance}
-                        onSlidingComplete={this.sliderOnValueChange} />
+                <View style={{ flex: 1 }}>
+                    <RNCamera
+                        ref={ref => {
+                            this.cameraInstance = ref;
+                        }}
+                        style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+                        type={RNCamera.Constants.Type.back}
+                        permissionDialogTitle={'Permission to use camera'}
+                        permissionDialogMessage={'We need your permission to use your camera phone'} />
+                    <View
+                        style={{ flex: 1, alignItems: 'center', justifyContent: 'space-between' }}>
+                        <AppSlider style={{ marginTop: 32 }} step={10} min={50} max={500}
+                            initialValue={this.state.wallDistance}
+                            onSlidingComplete={this.sliderOnValueChange} />
 
-                    {!this.state.displayingCameraPreview && this.state.image}
-                    <View style={{ margin: 16, flexDirection: 'row', width: '100%' }}>
-                        <CameraButton style={{ flex: 1 }} icon={'arrow-back'} title={'Wróć'} onPress={this.goBack} />
-                        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
-                            {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
-                            {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
+                        {!this.state.displayingCameraPreview && this.state.image}
+                        <View style={{ margin: 16, flexDirection: 'row', width: '100%' }}>
+                            <CameraButton style={{ flex: 1 }} icon={'arrow-back'} title={'Wróć'} onPress={this.goBack} />
+                            <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row' }}>
+                                {!this.state.displayingCameraPreview ? hideShowFrameButton : null}
+                                {this.state.displayingCameraPreview ? takePhotoButton : goBackButton}
+                            </View>
+                            <View style={{ flex: 1, alignSelf: 'flex-end' }} />
                         </View>
-                        <View style={{ flex: 1, alignSelf: 'flex-end' }} />
                     </View>
-                </RNCamera>
+                </View>
+
             )
         }
     }
@@ -157,7 +164,6 @@ export class Camera extends Component<CameraProps & Nav.NavigationInjectedProps,
         };
         this.setState({ displayingCameraPreview: false });
         const image = await this.cameraInstance!.takePictureAsync(options);
-        // console.log(image);
         Orientation.getOrientation((_, orientation) => {
             this.setUpImage(orientation);
         });
