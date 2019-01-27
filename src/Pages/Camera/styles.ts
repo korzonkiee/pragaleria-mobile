@@ -1,6 +1,5 @@
-import {StyleSheet} from "react-native";
-import {DefaultAppFont} from "../../Styles/Fonts";
-import {Black, LightBlack} from "../../Resources/Colors";
+import { StyleSheet } from "react-native";
+import { Black, LightBlack } from "../../Resources/Colors";
 
 
 export const styles = StyleSheet.create({
@@ -10,9 +9,7 @@ export const styles = StyleSheet.create({
         backgroundColor: 'black'
     },
     preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        flex: 1
     },
     capture: {
         flex: 0,
@@ -38,8 +35,6 @@ export const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 40,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
     },
     image: {
         position: 'absolute',
@@ -58,7 +53,7 @@ export const styles = StyleSheet.create({
     imageFrame: {
         backgroundColor: LightBlack,
         elevation: 10,
-        shadowOffset: {width: 5, height: 15},
+        shadowOffset: { width: 5, height: 15 },
         shadowColor: Black,
         shadowOpacity: 0.8,
         shadowRadius: 15

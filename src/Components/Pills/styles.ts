@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { Black } from '../../Resources/Colors';
 import { responsiveHeight, White } from "../../Styles/Dimensions";
 
 
@@ -15,14 +14,18 @@ export default StyleSheet.create({
         flexShrink: 0,
         elevation: 2,
         display: "flex",
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     pill: {
         backgroundColor: White,
-        shadowColor: Black,
-        shadowRadius: 5,
+        shadowColor: "#000000",
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        shadowOffset: {
+            height: 1,
+            width: 0
+        },
         elevation: 2,
-        shadowOffset: { width: 0, height: 10 },
         marginVertical: 8,
         paddingVertical: 4,
         marginHorizontal: 4,

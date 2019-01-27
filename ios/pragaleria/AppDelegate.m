@@ -9,11 +9,26 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <BugfenderSDK/BugfenderSDK.h>
+#import "RNSplashScreen.h"
+#import "Orientation.h" 
+
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyApbUtgXkxuCvR29d7nCYtpeqXeJAsz4G8"];
+
+  [Bugfender activateLogger:@"0996ERklnGG9OTj1URFERTBl6EOVKsjK"];
+  [Bugfender enableUIEventLogging];
+  [Bugfender enableCrashReporting];
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -29,6 +44,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNSplashScreen show];
   return YES;
 }
 
