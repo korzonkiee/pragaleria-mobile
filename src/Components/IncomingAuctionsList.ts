@@ -12,13 +12,33 @@ export default connect(
 )(AuctionsList);
 
 function filterAuctions(state: AppState) {
+    const now = TimeProvider.now().clone();
     if (state.categorizedAuctions[state.selectedCategory]) {
         return state.categorizedAuctions[state.selectedCategory]
             .data.filter(auction => {
                 const auctionDate = moment(auction.auction_end);
-                return auctionDate.isAfter(TimeProvider.now());
+                let dateCondition = null;
+                if (state.dateFilter === 1) {
+                    dateCondition = isCurrentMonth(auctionDate, now);
+                } else if (state.dateFilter === 3) {
+                    dateCondition = isCurrentYear(auctionDate, now);
+                }
+
+                if (dateCondition !== null) {
+                    return dateCondition;
+                } else {
+                    return auctionDate.isAfter(now);
+                }
             });
     } else {
         return [];
     }
+}
+
+function isCurrentMonth(date1: moment.Moment, now: moment.Moment) {
+    return date1.month() === now.month() &&
+        date1.year() === now.year();
+}
+function isCurrentYear(date1: moment.Moment, now: moment.Moment) {
+    return date1.year() === now.year();
 }
