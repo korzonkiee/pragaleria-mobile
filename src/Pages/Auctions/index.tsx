@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
-import { AuctionsTabBar } from '../../Components/AuctionsTabBar';
+import AuctionsTabBar from '../../Components/AuctionsTabBar';
 import DataNotFound from '../../Components/DataNotFound';
 import { Pill } from '../../Components/Pills';
 import AuctionsPlaceholder from '../../Components/Placeholders/AuctionsPlaceholder';
