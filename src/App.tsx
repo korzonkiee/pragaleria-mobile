@@ -25,14 +25,6 @@ import { responsiveFontSize } from './Styles/Dimensions';
 const BottomIcon = (name: string) => <Icon name={name} size={responsiveFontSize(3.3 * 9.5 / 10.3)} color={colors.Black} />;
 
 const MainStack = createMaterialBottomTabNavigator({
-  [Routes.Artworks]: {
-    screen: Artworks,
-    navigationOptions: {
-      tabBarLabel: <AppText style={{ fontSize: responsiveFontSize(1.5), color: colors.Black }} >{l("BottomNavigation.Artworks")}</AppText>,
-      tabBarIcon: BottomIcon("picture"),
-      tabBarColor: colors.White
-    }
-  },
   [Routes.Artists]: {
     screen: Artists,
     navigationOptions: {
