@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pragaleria (Staging)</string>
+    <bool name="is_debug">false</bool>
+    <string name="app_base">UNKNOWN</string>
+</resources>
