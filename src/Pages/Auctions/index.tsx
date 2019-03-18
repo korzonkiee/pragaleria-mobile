@@ -3,7 +3,7 @@ import * as Nav from "react-navigation";
 import AppContainer from '../../Components/AppContainer';
 import { AuctionsTabBar } from '../../Components/AuctionsTabBar';
 import DataNotFound from '../../Components/DataNotFound';
-import { Pill, Pills } from '../../Components/Pills';
+import { Pill } from '../../Components/Pills';
 import AuctionsPlaceholder from '../../Components/Placeholders/AuctionsPlaceholder';
 import { DirtyWhite } from '../../Resources/Colors';
 import { l } from '../../Services/Language';
@@ -78,8 +78,8 @@ export class Auctions extends Component<AuctionsProps & Nav.NavigationInjectedPr
                 flex: 1,
                 backgroundColor: DirtyWhite,
             }}>
-                <Pills pills={categoryPills} onPillPressed={this.onCategoryPillPressed} />
-                <Pills pills={datePills} onPillPressed={this.onDatePillPressed} />
+                {/* <Pills pills={categoryPills} onPillPressed={this.onCategoryPillPressed} />
+                <Pills pills={datePills} onPillPressed={this.onDatePillPressed} /> */}
                 <AuctionsTabBar navigation={this.props.navigation} />
             </AppContainer>
         )
