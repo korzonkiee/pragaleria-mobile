@@ -8,8 +8,8 @@ export default {
     "Artworks.NotFound": "Nie znaleziono dzieł",
     "Artworks.Search.Placeholder": "Szukaj dzieł...",
 
-    "Auctions.Incoming": "Przyszłe",
-    "Auctions.Closed": "Zamknięte",
+    "Auctions.Incoming": "Aktualne",
+    "Auctions.Closed": "Zakończone",
     "Auctions.NoIncomingAuctions": "Brak nadchodzących aukcji",
     "Auctions.NoClosedAuctions": "Brak zamkniętych aukcji",
     "Auctions.ShowAvailable": "Wyświetl tylko dostępne",
@@ -28,8 +28,8 @@ export default {
     "Auctions.GridItem.SoldPrice": "Cena sprzedaży: ",
     "Auctions.GridItem.InitialPrice": "Cena wywoławcza: ",
 
-    "Exhibitions.Incoming": "Przyszłe",
-    "Exhibitions.Closed": "Zamknięte",
+    "Exhibitions.Incoming": "Aktualne",
+    "Exhibitions.Closed": "Zakończone",
     "Exhibitions.NoIncomingExhibitions": "Brak nadchodzących wystaw",
     "Exhibitions.NoClosedExhibitions": "Brak zamkniętych wystaw",
 
