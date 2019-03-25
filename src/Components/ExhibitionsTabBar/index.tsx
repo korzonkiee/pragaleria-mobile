@@ -1,6 +1,6 @@
 import React from "react";
 import * as Nav from "react-navigation";
-import { createAppContainer, createMaterialTopTabNavigator } from "react-navigation";
+import { createAppContainer, createMaterialTopTabNavigator, TabNavigatorConfig } from "react-navigation";
 import { Black, White } from "../../Resources/Colors";
 import { l } from "../../Services/Language";
 import font from "../../Styles/Fonts";
@@ -11,11 +11,14 @@ interface ExhibitionsTabBarProps {
     readonly closedExhibitions: Array<Exhibition>;
 }
 
+const incomingTab = l("Exhibitions.Incoming");
+const closedTab = l("Exhibitions.Closed");
+
 export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProps & Nav.NavigationInjectedProps> {
     render() {
-        const tabBarStyle = {
+        const tabBarStyle: TabNavigatorConfig = {
             backBehavior: 'none',
-            optimizationsEnabled: true,
+            initialRouteName: this.getInitialTab(),
             tabBarOptions: {
                 upperCaseLabel: false,
                 labelStyle: {
@@ -32,15 +35,23 @@ export class ExhibitionsTabBar extends React.PureComponent<ExhibitionsTabBarProp
         };
 
         const pages = {
-            [l("Exhibitions.Incoming")]: () => <ExihibitionsList navigation={this.props.navigation}
+            [incomingTab]: () => <ExihibitionsList navigation={this.props.navigation}
                 exhibitions={this.props.incomingExhibitions}
                 artworksNotFoundMessage={l("Exhibitions.NoIncomingExhibitions")} />,
-            [l("Exhibitions.Closed")]: () => <ExihibitionsList navigation={this.props.navigation}
+            [closedTab]: () => <ExihibitionsList navigation={this.props.navigation}
                 exhibitions={this.props.closedExhibitions}
                 artworksNotFoundMessage={l("Exhibitions.NoClosedExhibitions")} />,
         };
 
         const Tab = createAppContainer(createMaterialTopTabNavigator(pages, tabBarStyle));
         return <Tab />
+    }
+
+    private getInitialTab() {
+        if (this.props.incomingExhibitions.length === 0) {
+            return closedTab;
+        } else {
+            return incomingTab;
+        }
     }
 }

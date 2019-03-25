@@ -111,7 +111,7 @@ export class ArtworkDetails extends Component<ArtworkDetailsProps & Nav.Navigati
                     </TouchableOpacity>
                 </View>}
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    {artwork.meta.dimension.length < 3 ? <TouchableOpacity
+                    {artwork.meta.dimension.length < 3 && !artwork.sold ? <TouchableOpacity
                         style={{
                             backgroundColor: LightGrayHidden,
                             alignSelf: 'flex-end',

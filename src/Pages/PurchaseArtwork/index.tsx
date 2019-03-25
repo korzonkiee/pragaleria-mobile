@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import { l } from '../../Services/Language';
-import AppText from '../../Components/AppText';
+import React, { Component } from 'react';
+import { AsyncStorage, TouchableWithoutFeedback, View } from 'react-native';
+import Mailer from 'react-native-mail';
 import * as Nav from "react-navigation";
 import AppHeader from '../../Components/AppHeader';
-import { TextField } from 'react-native-material-textfield';
-import { View, Button, TouchableWithoutFeedback } from 'react-native';
-import { Black, White } from '../../Resources/Colors';
+import AppText from '../../Components/AppText';
 import { AppTextField, AppTextFieldComponent } from '../../Components/AppTextField';
-import Mailer from 'react-native-mail';
+import { Black, White } from '../../Resources/Colors';
+import { l } from '../../Services/Language';
 
 export interface PurchaseArtworkProps {
     readonly artwork: Artwork;
@@ -26,6 +25,20 @@ interface PurchaseArtworkState {
 export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.NavigationInjectedProps, PurchaseArtworkState> {
     private lastNameField: AppTextFieldComponent | null = null;
     private phoneNumberField: AppTextFieldComponent | null = null;
+
+    async componentDidMount() {
+        const firstName = await AsyncStorage.getItem("firstName");
+        const lastName = await AsyncStorage.getItem("lastName");
+        const phoneNumber = await AsyncStorage.getItem("phoneNumber");
+
+        if (firstName && lastName && phoneNumber) {
+            this.setState({
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber
+            });
+        }
+    }
 
     constructor(props: PurchaseArtworkProps & Nav.NavigationInjectedProps) {
         super(props);
@@ -99,6 +112,10 @@ export class PurchaseArtwork extends Component<PurchaseArtworkProps & Nav.Naviga
         if (!this.validate("firstName", "lastName", "phoneNumber")) {
             return;
         }
+
+        AsyncStorage.setItem("firstName", this.state.firstName);
+        AsyncStorage.setItem("lastName", this.state.lastName);
+        AsyncStorage.setItem("phoneNumber", this.state.phoneNumber);
 
         Mailer.mail({
             subject: `Oferta kupna obrazu "${this.props.artwork.title}" ${this.props.artwork.author}`,
