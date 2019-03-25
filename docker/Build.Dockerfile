@@ -5,6 +5,8 @@ ENV VERSION_CODE=${VERSION_CODE}
 
 WORKDIR /app
 
+RUN yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+
 COPY package.json .
 COPY yarn.lock .
 COPY android/gradle android/gradle
